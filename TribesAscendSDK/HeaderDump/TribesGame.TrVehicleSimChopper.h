@@ -1,40 +1,40 @@
 #pragma once
-#include "UDKBase.UDKVehicleSimChopper.AnglePID.h"
 #include "UDKBase.UDKVehicleSimChopper.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicleSimChopper." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrVehicleSimChopper." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrVehicleSimChopper : public UDKVehicleSimChopper
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<AnglePID>, RollGain, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<AnglePID>, PitchGain, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bShouldStabilizeRotation, 0x2)
-		ADD_VAR(::BoolProperty, m_bInvertFlight, 0x1)
-		ADD_VAR(::IntProperty, m_nLastYawInput, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nLastPitchInput, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ReverseSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HoverHeight, 0xFFFFFFFF)
+		ADD_STRUCT(UDKVehicleSimChopper::AnglePID, RollGain, 348)
+		ADD_STRUCT(UDKVehicleSimChopper::AnglePID, PitchGain, 328)
+		ADD_BOOL(bShouldStabilizeRotation, 324, 0x2)
+		ADD_BOOL(m_bInvertFlight, 324, 0x1)
+		ADD_STRUCT(int, m_nLastYawInput, 320)
+		ADD_STRUCT(int, m_nLastPitchInput, 316)
+		ADD_STRUCT(float, ReverseSpeed, 312)
+		ADD_STRUCT(float, HoverHeight, 308)
 		void SetVehicleControls(bool bInvert)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleSimChopper.SetVehicleControls");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bInvert;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bInvert;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

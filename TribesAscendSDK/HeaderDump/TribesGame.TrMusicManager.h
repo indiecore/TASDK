@@ -2,29 +2,38 @@
 #include "Engine.Info.h"
 #include "Engine.SoundCue.h"
 #include "TribesGame.TrPlayerController.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrMusicManager." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrMusicManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrMusicManager : public Info
 	{
 	public:
-		ADD_OBJECT(TrPlayerController, m_PlayerOwner)
-		ADD_VAR(::FloatProperty, m_fMusicVolume, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, m_CurrentState, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, m_PendingState, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fStingerVolumeMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_CTFTeamScores, 0xFFFFFFFF)
+		enum ETgMusicState : byte
+		{
+			MUSICSTATE_BattleLow = 0,
+			MUSICSTATE_BattleMed = 1,
+			MUSICSTATE_BattleHigh = 2,
+			MUSICSTATE_FlagPossession = 3,
+			MUSICSTATE_DeathDirge = 4,
+			MUSICSTATE_TeamWonMatch = 5,
+			MUSICSTATE_TeamLostMatch = 6,
+			MUSICSTATE_NoMusic = 7,
+			MUSICSTATE_Ambient = 8,
+			MUSICSTATE_MAX = 9,
+		};
+		ADD_OBJECT(TrPlayerController, m_PlayerOwner, 476)
+		ADD_STRUCT(float, m_fMusicVolume, 480)
+		ADD_STRUCT(TrMusicManager::ETgMusicState, m_CurrentState, 488)
+		ADD_STRUCT(TrMusicManager::ETgMusicState, m_PendingState, 489)
+		ADD_STRUCT(float, m_fStingerVolumeMultiplier, 484)
+		ADD_STRUCT(float, m_CTFTeamScores, 532)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.PostBeginPlay");
@@ -35,14 +44,12 @@ namespace UnrealScript
 void* CreateNewTrack(class SoundCue* MusicCue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.CreateNewTrack");
-			byte* params = (byte*)malloc(8);
-			*(class SoundCue**)params = MusicCue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
+			byte params[8] = { NULL };
+			*(class SoundCue**)&params[0] = MusicCue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4);
-			free(params);
-			return returnVal;
+void**)&params[4];
 		}
 		void StartMusic()
 		{
@@ -57,34 +64,30 @@ void**)(params + 4);
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MusicEvent(int NewEventIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.MusicEvent");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = NewEventIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = NewEventIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetPendingState(byte NewState)
+		void SetPendingState(TrMusicManager::ETgMusicState NewState)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetPendingState");
-			byte* params = (byte*)malloc(1);
-			*params = NewState;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(TrMusicManager::ETgMusicState*)&params[0] = NewState;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetCurrentState(byte NewState)
+		void SetCurrentState(TrMusicManager::ETgMusicState NewState)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetCurrentState");
-			byte* params = (byte*)malloc(1);
-			*params = NewState;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(TrMusicManager::ETgMusicState*)&params[0] = NewState;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerScoredFlag()
 		{
@@ -93,5 +96,5 @@ void**)(params + 4);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

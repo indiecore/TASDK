@@ -1,41 +1,42 @@
 #pragma once
 #include "Engine.SkelControlSingleBone.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSkelControl_Oscillate." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTSkelControl_Oscillate." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTSkelControl_Oscillate : public SkelControlSingleBone
 	{
 	public:
-		ADD_VAR(::BoolProperty, bReverseDirection, 0x1)
-		ADD_VAR(::FloatProperty, CurrentTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Period, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MaxDelta, 0xFFFFFFFF)
+		ADD_BOOL(bReverseDirection, 256, 0x1)
+		ADD_STRUCT(float, CurrentTime, 252)
+		ADD_STRUCT(float, Period, 248)
+		ADD_STRUCT(Object::Vector, MaxDelta, 236)
 		void TickSkelControl(float DeltaTime, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_Oscillate.TickSkelControl");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = DeltaTime;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = DeltaTime;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

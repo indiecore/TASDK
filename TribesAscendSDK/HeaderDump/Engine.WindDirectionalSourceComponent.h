@@ -1,29 +1,20 @@
 #pragma once
 #include "Engine.ActorComponent.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.WindDirectionalSourceComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.WindDirectionalSourceComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class WindDirectionalSourceComponent : public ActorComponent
 	{
 	public:
-		ADD_VAR(::FloatProperty, Speed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Frequency, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Phase, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Strength, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SceneProxy, 0xFFFFFFFF)
+		ADD_STRUCT(float, Speed, 104)
+		ADD_STRUCT(float, Frequency, 100)
+		ADD_STRUCT(float, Phase, 96)
+		ADD_STRUCT(float, Strength, 92)
+		ADD_STRUCT(Object::Pointer, SceneProxy, 88)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

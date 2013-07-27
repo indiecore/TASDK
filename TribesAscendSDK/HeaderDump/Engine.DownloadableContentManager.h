@@ -1,108 +1,92 @@
 #pragma once
 #include "Engine.GameEngine.h"
 #include "Core.Object.h"
-#include "Core.Object.Map_Mirror.h"
-#include "Engine.OnlineSubsystem.OnlineContent.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.DownloadableContentManager." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.DownloadableContentManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Engine.OnlineSubsystem.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class DownloadableContentManager : public Object
 	{
 	public:
-		ADD_OBJECT(GameEngine, GameEngine)
-		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, TextureCachePathMap, 0xFFFFFFFF)
-		bool InstallDLC(OnlineContent& DLCBundle)
+		ADD_STRUCT(ScriptArray<Object::Pointer>, DLCConfigCacheChanges, 60)
+		ADD_STRUCT(ScriptArray<ScriptString*>, InstalledDLC, 72)
+		ADD_STRUCT(ScriptArray<ScriptClass*>, ClassesToReload, 144)
+		ADD_STRUCT(ScriptArray<class Object*>, ObjectsToReload, 156)
+		ADD_OBJECT(GameEngine, GameEngine, 168)
+		ADD_STRUCT(Object::Map_Mirror, TextureCachePathMap, 84)
+		bool InstallDLC(OnlineSubsystem::OnlineContent& DLCBundle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLC");
-			byte* params = (byte*)malloc(72);
-			*(OnlineContent*)params = DLCBundle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundle = *(OnlineContent*)params;
-			auto returnVal = *(bool*)(params + 68);
-			free(params);
-			return returnVal;
+			byte params[72] = { NULL };
+			*(OnlineSubsystem::OnlineContent*)&params[0] = DLCBundle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DLCBundle = *(OnlineSubsystem::OnlineContent*)&params[0];
+			return *(bool*)&params[68];
 		}
-		void InstallDLCs(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& DLCBundles)
+		void InstallDLCs(ScriptArray<OnlineSubsystem::OnlineContent>& DLCBundles)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLCs");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = DLCBundles;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundles = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<OnlineSubsystem::OnlineContent>*)&params[0] = DLCBundles;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DLCBundles = *(ScriptArray<OnlineSubsystem::OnlineContent>*)&params[0];
 		}
 		void ClearDLC()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.ClearDLC");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool GetDLCTextureCachePath(ScriptName TextureCacheName, ScriptArray<wchar_t>& Path)
+		bool GetDLCTextureCachePath(ScriptName TextureCacheName, ScriptString*& Path)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.GetDLCTextureCachePath");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = TextureCacheName;
-			*(ScriptArray<wchar_t>*)(params + 8) = Path;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Path = *(ScriptArray<wchar_t>*)(params + 8);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = TextureCacheName;
+			*(ScriptString**)&params[8] = Path;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Path = *(ScriptString**)&params[8];
+			return *(bool*)&params[20];
 		}
-		void AddSectionToObjectList(ScriptArray<wchar_t> Section)
+		void AddSectionToObjectList(ScriptString* Section)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.AddSectionToObjectList");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Section;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Section;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void MarkPerObjectConfigPendingKill(ScriptArray<wchar_t> Section)
+		void MarkPerObjectConfigPendingKill(ScriptString* Section)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.MarkPerObjectConfigPendingKill");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Section;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Section;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateObjectLists()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.UpdateObjectLists");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void InstallPackages(OnlineContent& DLCBundle)
+		void InstallPackages(OnlineSubsystem::OnlineContent& DLCBundle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallPackages");
-			byte* params = (byte*)malloc(68);
-			*(OnlineContent*)params = DLCBundle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundle = *(OnlineContent*)params;
-			free(params);
+			byte params[68] = { NULL };
+			*(OnlineSubsystem::OnlineContent*)&params[0] = DLCBundle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DLCBundle = *(OnlineSubsystem::OnlineContent*)&params[0];
 		}
-		void InstallNonPackageFiles(OnlineContent& DLCBundle)
+		void InstallNonPackageFiles(OnlineSubsystem::OnlineContent& DLCBundle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallNonPackageFiles");
-			byte* params = (byte*)malloc(68);
-			*(OnlineContent*)params = DLCBundle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundle = *(OnlineContent*)params;
-			free(params);
+			byte params[68] = { NULL };
+			*(OnlineSubsystem::OnlineContent*)&params[0] = DLCBundle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DLCBundle = *(OnlineSubsystem::OnlineContent*)&params[0];
 		}
 		void Init()
 		{
@@ -112,10 +96,9 @@ void**)params;
 		void OnLoginChange(byte LocalUserNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnLoginChange");
-			byte* params = (byte*)malloc(1);
-			*params = LocalUserNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnStorageDeviceChange()
 		{
@@ -137,13 +120,12 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.RefreshDLCEnumComplete");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AddPackagesToFullyLoad(ScriptArray<wchar_t> Filename)
+		void AddPackagesToFullyLoad(ScriptString* Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.AddPackagesToFullyLoad");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Filename;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

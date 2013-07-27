@@ -1,18 +1,16 @@
 #pragma once
 #include "Engine.AnimationCompressionAlgorithm.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimationCompressionAlgorithm_RemoveTrivialKeys." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class AnimationCompressionAlgorithm_RemoveTrivialKeys : public AnimationCompressionAlgorithm
 	{
 	public:
-		ADD_VAR(::FloatProperty, MaxAngleDiff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxPosDiff, 0xFFFFFFFF)
+		ADD_STRUCT(float, MaxAngleDiff, 84)
+		ADD_STRUCT(float, MaxPosDiff, 80)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

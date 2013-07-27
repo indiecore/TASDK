@@ -1,45 +1,54 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.PostProcessEffect.h"
-#include "Core.Object.LinearColor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AmbientOcclusionEffect." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.AmbientOcclusionEffect." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class AmbientOcclusionEffect : public PostProcessEffect
 	{
 	public:
-		ADD_VAR(::FloatProperty, HistoryWeightConvergenceTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HistoryConvergenceTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, FilterSize, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FilterDistanceScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EdgeDistanceScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EdgeDistanceThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HaloOcclusion, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HaloDistanceScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HaloDistanceThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionFadeoutMaxDistance, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionFadeoutMinDistance, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, OcclusionQuality, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, OcclusionColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionAttenuation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionRadius, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAngleBasedSSAO, 0x2)
-		ADD_VAR(::BoolProperty, SSAO2, 0x1)
-		ADD_VAR(::FloatProperty, MinOcclusion, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionBias, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionPower, 0xFFFFFFFF)
+		enum EAmbientOcclusionQuality : byte
+		{
+			AO_High = 0,
+			AO_Medium = 1,
+			AO_Low = 2,
+			AO_MAX = 3,
+		};
+		ADD_STRUCT(float, HistoryWeightConvergenceTime, 188)
+		ADD_STRUCT(float, HistoryConvergenceTime, 184)
+		ADD_STRUCT(int, FilterSize, 180)
+		ADD_STRUCT(float, FilterDistanceScale, 176)
+		ADD_STRUCT(float, EdgeDistanceScale, 172)
+		ADD_STRUCT(float, EdgeDistanceThreshold, 168)
+		ADD_STRUCT(float, HaloOcclusion, 164)
+		ADD_STRUCT(float, HaloDistanceScale, 160)
+		ADD_STRUCT(float, HaloDistanceThreshold, 156)
+		ADD_STRUCT(float, OcclusionFadeoutMaxDistance, 152)
+		ADD_STRUCT(float, OcclusionFadeoutMinDistance, 148)
+		ADD_STRUCT(AmbientOcclusionEffect::EAmbientOcclusionQuality, OcclusionQuality, 144)
+		ADD_STRUCT(Object::LinearColor, OcclusionColor, 100)
+		ADD_STRUCT(float, OcclusionAttenuation, 140)
+		ADD_STRUCT(float, OcclusionRadius, 136)
+		ADD_BOOL(bAngleBasedSSAO, 132, 0x2)
+		ADD_BOOL(SSAO2, 132, 0x1)
+		ADD_STRUCT(float, MinOcclusion, 128)
+		ADD_STRUCT(float, OcclusionBias, 124)
+		ADD_STRUCT(float, OcclusionScale, 120)
+		ADD_STRUCT(float, OcclusionPower, 116)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

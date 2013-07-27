@@ -3,76 +3,76 @@
 #include "UTGame.UTCarriedObject.h"
 #include "Engine.Canvas.h"
 #include "TribesGame.TrCollisionProxy.h"
-#include "Core.Object.Vector.h"
-#include "Engine.ParticleSystem.h"
-#include "Engine.PlayerController.h"
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
+#include "Core.Object.h"
+#include "Engine.ParticleSystem.h"
+#include "Engine.PlayerController.h"
 #include "Engine.HUD.h"
 #include "TribesGame.TrPawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrFlagBase." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrFlagBase." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrFlagBase." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrFlagBase : public UTCarriedObject
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fRageRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fDamageMomentumDampingWhileFalling, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nDropFlagPingThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTeammatePassMaxDistanceSq, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nNumBounces, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nNumBouncesBeforeSlide, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fIgnoreSameTeamTouch, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, m_MarkerMIC)
-		ADD_OBJECT(TrCollisionProxy, m_CollisionProxyLevel3)
-		ADD_OBJECT(TrCollisionProxy, m_CollisionProxyLevel2)
-		ADD_OBJECT(TrCollisionProxy, m_CollisionProxyLevel1)
-		ADD_VAR(::FloatProperty, m_fBounceDampingPercent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fForwardThrowVelocity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fInheritVelocityPct, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_TimeAwaySeconds, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_FlagIconAlpha, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fFriction, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fMass, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastLocationPingTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HoverboardingClothVelClamp, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, RunningClothVelClamp, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bPassToTeammatesEnabled, 0x80)
-		ADD_VAR(::BoolProperty, m_bBounceSlideEnabled, 0x40)
-		ADD_VAR(::BoolProperty, bWasFlagReturned, 0x20)
-		ADD_VAR(::BoolProperty, bWasClothEnabled, 0x10)
-		ADD_VAR(::BoolProperty, bRespawning, 0x8)
-		ADD_VAR(::BoolProperty, bFadingOut, 0x4)
-		ADD_VAR(::BoolProperty, bBringDownFromBright, 0x2)
-		ADD_VAR(::BoolProperty, bBringUpBright, 0x1)
-		ADD_OBJECT(ParticleSystem, RespawnEffect)
+		ADD_STRUCT(ScriptArray<class MaterialInstanceConstant*>, MICArray, 776)
+		ADD_STRUCT(float, m_fRageRadius, 928)
+		ADD_STRUCT(float, m_fDamageMomentumDampingWhileFalling, 924)
+		ADD_STRUCT(int, m_nDropFlagPingThreshold, 920)
+		ADD_STRUCT(float, m_fTeammatePassMaxDistanceSq, 916)
+		ADD_STRUCT(int, m_nNumBounces, 912)
+		ADD_STRUCT(int, m_nNumBouncesBeforeSlide, 908)
+		ADD_STRUCT(float, m_fIgnoreSameTeamTouch, 904)
+		ADD_OBJECT(MaterialInstanceConstant, m_MarkerMIC, 900)
+		ADD_OBJECT(TrCollisionProxy, m_CollisionProxyLevel3, 896)
+		ADD_OBJECT(TrCollisionProxy, m_CollisionProxyLevel2, 892)
+		ADD_OBJECT(TrCollisionProxy, m_CollisionProxyLevel1, 888)
+		ADD_STRUCT(float, m_fBounceDampingPercent, 884)
+		ADD_STRUCT(float, m_fForwardThrowVelocity, 880)
+		ADD_STRUCT(float, m_fInheritVelocityPct, 876)
+		ADD_STRUCT(int, m_TimeAwaySeconds, 872)
+		ADD_STRUCT(Object::Vector, LastCameraPos, 860)
+		ADD_STRUCT(Object::Vector, LastCameraDir, 848)
+		ADD_STRUCT(Object::Vector, LastScreenLoc, 836)
+		ADD_STRUCT(float, m_FlagIconAlpha, 832)
+		ADD_STRUCT(float, m_fFriction, 828)
+		ADD_STRUCT(float, m_fMass, 824)
+		ADD_STRUCT(float, LastLocationPingTime, 820)
+		ADD_STRUCT(Object::Vector, HoverboardingClothVelClamp, 800)
+		ADD_STRUCT(Object::Vector, RunningClothVelClamp, 788)
+		ADD_BOOL(m_bPassToTeammatesEnabled, 772, 0x80)
+		ADD_BOOL(m_bBounceSlideEnabled, 772, 0x40)
+		ADD_BOOL(bWasFlagReturned, 772, 0x20)
+		ADD_BOOL(bWasClothEnabled, 772, 0x10)
+		ADD_BOOL(bRespawning, 772, 0x8)
+		ADD_BOOL(bFadingOut, 772, 0x4)
+		ADD_BOOL(bBringDownFromBright, 772, 0x2)
+		ADD_BOOL(bBringUpBright, 772, 0x1)
+		ADD_OBJECT(ParticleSystem, RespawnEffect, 768)
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
@@ -82,10 +82,9 @@ namespace UnrealScript
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnBaseChainChanged()
 		{
@@ -95,12 +94,10 @@ namespace UnrealScript
 		bool ShouldMinimapRenderFor(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ShouldMinimapRenderFor");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void ClientReturnedHome()
 		{
@@ -110,28 +107,24 @@ namespace UnrealScript
 		void SetHolder(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.SetHolder");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ValidHolder(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ValidHolder");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void SameTeamTouch(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.SameTeamTouch");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CustomRespawnEffects()
 		{
@@ -148,31 +141,28 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.CustomFadeOutEffects");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Landed(Vector HitNormal, class Actor* FloorActor)
+		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Landed");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitNormal;
-			*(class Actor**)(params + 12) = FloorActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitNormal;
+			*(class Actor**)&params[12] = FloorActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EncroachedBy(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.EncroachedBy");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Drop(class Controller* Killer, bool bNoThrow)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Drop");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = Killer;
-			*(bool*)(params + 4) = bNoThrow;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(bool*)&params[4] = bNoThrow;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFlagPropertiesToStationaryFlagState()
 		{
@@ -189,57 +179,50 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Destroyed");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.DisplayDebug");
-			byte* params = (byte*)malloc(12);
-			*(class HUD**)params = HUD;
-			*(float*)(params + 4) = out_YL;
-			*(float*)(params + 8) = out_YPos;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_YL = *(float*)(params + 4);
-			out_YPos = *(float*)(params + 8);
-			free(params);
+			byte params[12] = { NULL };
+			*(class HUD**)&params[0] = HUD;
+			*(float*)&params[4] = out_YL;
+			*(float*)&params[8] = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_YL = *(float*)&params[4];
+			out_YPos = *(float*)&params[8];
 		}
-		ScriptArray<wchar_t> GetSpectatorName()
+		ScriptString* GetSpectatorName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.GetSpectatorName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		ScriptArray<wchar_t> GetSpectatorDescription()
+		ScriptString* GetSpectatorDescription()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.GetSpectatorDescription");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void OnCollisionProxyTouched(class TrPawn* TRP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.OnCollisionProxyTouched");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = TRP;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = TRP;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

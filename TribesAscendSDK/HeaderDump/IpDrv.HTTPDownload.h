@@ -1,22 +1,31 @@
 #pragma once
 #include "Engine.Download.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.HTTPDownload." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class HTTPDownload : public Download
 	{
 	public:
-		ADD_VAR(::StrProperty, ProxyServerHost, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ProxyServerPort, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RedirectToURL, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, UseCompression, 0x1)
-		ADD_VAR(::BoolProperty, MaxRedirection, 0x1)
-		ADD_VAR(::FloatProperty, ConnectionTimeout, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, ProxyServerHost, 2672)
+		ADD_STRUCT(int, ProxyServerPort, 2684)
+		ADD_STRUCT(ScriptString*, RedirectToURL, 72)
+		ADD_BOOL(UseCompression, 84, 0x1)
+		ADD_BOOL(MaxRedirection, 2688, 0x1)
+		ADD_STRUCT(float, ConnectionTimeout, 2692)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

@@ -1,42 +1,57 @@
 #pragma once
-#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TextureFlipBook." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.TextureFlipBook." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TextureFlipBook : public Texture2D
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseResourcesFence, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RenderOffsetV, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RenderOffsetU, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, CurrentColumn, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, CurrentRow, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FrameTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FrameRate, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, FBMethod, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FTickableObject, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, VerticalImages, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, HorizontalImages, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAutoPlay, 0x8)
-		ADD_VAR(::BoolProperty, bLooping, 0x4)
-		ADD_VAR(::BoolProperty, bStopped, 0x2)
-		ADD_VAR(::BoolProperty, bPaused, 0x1)
-		ADD_VAR(::FloatProperty, VerticalScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HorizontalScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TimeSinceLastFrame, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TimeIntoMovie, 0xFFFFFFFF)
+		enum TextureFlipBookMethod : byte
+		{
+			TFBM_UL_ROW = 0,
+			TFBM_UL_COL = 1,
+			TFBM_UR_ROW = 2,
+			TFBM_UR_COL = 3,
+			TFBM_LL_ROW = 4,
+			TFBM_LL_COL = 5,
+			TFBM_LR_ROW = 6,
+			TFBM_LR_COL = 7,
+			TFBM_RANDOM = 8,
+			TFBM_MAX = 9,
+		};
+		ADD_STRUCT(Object::Pointer, ReleaseResourcesFence, 428)
+		ADD_STRUCT(float, RenderOffsetV, 424)
+		ADD_STRUCT(float, RenderOffsetU, 420)
+		ADD_STRUCT(int, CurrentColumn, 416)
+		ADD_STRUCT(int, CurrentRow, 412)
+		ADD_STRUCT(float, FrameTime, 408)
+		ADD_STRUCT(float, FrameRate, 404)
+		ADD_STRUCT(TextureFlipBook::TextureFlipBookMethod, FBMethod, 400)
+		ADD_STRUCT(Object::Pointer, VfTable_FTickableObject, 368)
+		ADD_STRUCT(int, VerticalImages, 396)
+		ADD_STRUCT(int, HorizontalImages, 392)
+		ADD_BOOL(bAutoPlay, 388, 0x8)
+		ADD_BOOL(bLooping, 388, 0x4)
+		ADD_BOOL(bStopped, 388, 0x2)
+		ADD_BOOL(bPaused, 388, 0x1)
+		ADD_STRUCT(float, VerticalScale, 384)
+		ADD_STRUCT(float, HorizontalScale, 380)
+		ADD_STRUCT(float, TimeSinceLastFrame, 376)
+		ADD_STRUCT(float, TimeIntoMovie, 372)
 		void Play()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Play");
@@ -55,13 +70,12 @@ namespace UnrealScript
 		void SetCurrentFrame(int Row, int Col)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.SetCurrentFrame");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Row;
-			*(int*)(params + 4) = Col;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Row;
+			*(int*)&params[4] = Col;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

@@ -3,68 +3,69 @@
 #include "Engine.PlayerInput.h"
 #include "TribesGame.TrVGSCommandList.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPlayerInput." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrPlayerInput." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrPlayerInput : public PlayerInput
 	{
 	public:
-		ADD_OBJECT(ScriptClass, m_CurrentVGSNode)
-		ADD_OBJECT(TrVGSCommandList, m_VGSCommandList)
-		ADD_VAR(::StrProperty, m_CurrentVGSKeySequence, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bInVGSLoadoutMode, 0x4)
-		ADD_VAR(::BoolProperty, m_bInVGSClassMode, 0x2)
-		ADD_VAR(::BoolProperty, m_bInVGSCaptureMode, 0x1)
-		ADD_OBJECT(TrHUD, m_HUD)
-		ADD_VAR(::FloatProperty, m_RightJoystickLastValue, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_LeftJoystickLastValue, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_VGSClassId, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, m_CurrentVGSNode, 436)
+		ADD_OBJECT(TrVGSCommandList, m_VGSCommandList, 440)
+		ADD_STRUCT(ScriptArray<ScriptName>, m_VGSPassThroughKeys, 400)
+		ADD_STRUCT(ScriptArray<ScriptName>, m_VGSNumKeys, 412)
+		ADD_STRUCT(ScriptArray<ScriptName>, m_VGSPadKeys, 424)
+		ADD_STRUCT(ScriptString*, m_CurrentVGSKeySequence, 444)
+		ADD_BOOL(m_bInVGSLoadoutMode, 396, 0x4)
+		ADD_BOOL(m_bInVGSClassMode, 396, 0x2)
+		ADD_BOOL(m_bInVGSCaptureMode, 396, 0x1)
+		ADD_OBJECT(TrHUD, m_HUD, 392)
+		ADD_STRUCT(float, m_RightJoystickLastValue, 388)
+		ADD_STRUCT(float, m_LeftJoystickLastValue, 384)
+		ADD_STRUCT(int, m_VGSClassId, 380)
 		bool InVGSClassMode()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.InVGSClassMode");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool InVGSLoadoutMode()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.InVGSLoadoutMode");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		int GetVGSClassId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.GetVGSClassId");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		bool PlaySpottedCommand()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PlaySpottedCommand");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void InitInputSystem()
 		{
@@ -74,53 +75,45 @@ namespace UnrealScript
 		void AdjustMouseSensitivity(float FOVScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.AdjustMouseSensitivity");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = FOVScale;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = FOVScale;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsMouseSmoothEnabled()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.IsMouseSmoothEnabled");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void OnVGSKeyPressed(ScriptName KeyPressed)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.OnVGSKeyPressed");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = KeyPressed;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = KeyPressed;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnVGSNumKeyPressed(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.OnVGSNumKeyPressed");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayVGSCommand(byte VGSCommandIndex)
+		void PlayVGSCommand(TrVGSCommandList::VGSCommandType VGSCommandIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PlayVGSCommand");
-			byte* params = (byte*)malloc(1);
-			*params = VGSCommandIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(TrVGSCommandList::VGSCommandType*)&params[0] = VGSCommandIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsValidVGSTarget(class Actor* ActorUnderReticule)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.IsValidVGSTarget");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = ActorUnderReticule;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = ActorUnderReticule;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void StartVGS()
 		{
@@ -135,10 +128,9 @@ namespace UnrealScript
 		void StartVGSLoadouts(int ClassId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.StartVGSLoadouts");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = ClassId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = ClassId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndVGS()
 		{
@@ -148,21 +140,18 @@ namespace UnrealScript
 		void SetHUDTarget(class TrHUD* TrH)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.SetHUDTarget");
-			byte* params = (byte*)malloc(4);
-			*(class TrHUD**)params = TrH;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrHUD**)&params[0] = TrH;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetStickAngle(float UpDown, float LeftRight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.GetStickAngle");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = UpDown;
-			*(float*)(params + 4) = LeftRight;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(float*)&params[0] = UpDown;
+			*(float*)&params[4] = LeftRight;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		void PushAnalogJoysticksToScaleform()
 		{
@@ -172,36 +161,33 @@ namespace UnrealScript
 		void PreProcessInput(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PreProcessInput");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerInput(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PlayerInput");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFlyingPitchSensitivity(float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.SetFlyingPitchSensitivity");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFlyingYawSensitivity(float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.SetFlyingYawSensitivity");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

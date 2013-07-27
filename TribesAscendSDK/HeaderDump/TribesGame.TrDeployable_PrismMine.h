@@ -1,108 +1,89 @@
 #pragma once
 #include "TribesGame.TrDeployable.h"
-#include "Engine.SoundCue.h"
-#include "TribesGame.TrTripActor.h"
 #include "Engine.ParticleSystem.h"
+#include "TribesGame.TrTripActor.h"
+#include "Engine.SoundCue.h"
+#include "Core.Object.h"
 #include "Engine.Pawn.h"
-#include "Core.Object.Pointer.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployable_PrismMine." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrDeployable_PrismMine." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDeployable_PrismMine." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDeployable_PrismMine : public TrDeployable
 	{
 	public:
-		ADD_OBJECT(SoundCue, m_HitSound)
-		ADD_OBJECT(SoundCue, m_DeactivateSound)
-		ADD_OBJECT(SoundCue, m_ActivateSound)
-		ADD_OBJECT(ParticleSystem, m_LaserTemplate)
-		ADD_VAR(::IntProperty, m_DamageAmount, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fSleepTimeAfterHit, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, m_DamageType)
-		ADD_VAR(::NameProperty, m_nSocketTraceName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPrismRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_TrTripNotifier, 0xFFFFFFFF)
-		void CreateTripActor(class TrDeployable_PrismMine* Right, Vector LeftLocation, Vector RightLocation)
+		ADD_STRUCT(ScriptArray<class TrTripActor*>, m_aTripActors, 1528)
+		ADD_OBJECT(SoundCue, m_HitSound, 1576)
+		ADD_OBJECT(SoundCue, m_DeactivateSound, 1572)
+		ADD_OBJECT(SoundCue, m_ActivateSound, 1568)
+		ADD_OBJECT(ParticleSystem, m_LaserTemplate, 1564)
+		ADD_STRUCT(int, m_DamageAmount, 1560)
+		ADD_STRUCT(float, m_fSleepTimeAfterHit, 1556)
+		ADD_OBJECT(ScriptClass, m_DamageType, 1552)
+		ADD_STRUCT(ScriptName, m_nSocketTraceName, 1544)
+		ADD_STRUCT(float, m_fPrismRadius, 1540)
+		ADD_STRUCT(Object::Pointer, VfTable_IInterface_TrTripNotifier, 1524)
+		void CreateTripActor(class TrDeployable_PrismMine* Right, Object::Vector LeftLocation, Object::Vector RightLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.CreateTripActor");
-			byte* params = (byte*)malloc(28);
-			*(class TrDeployable_PrismMine**)params = Right;
-			*(Vector*)(params + 4) = LeftLocation;
-			*(Vector*)(params + 16) = RightLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class TrDeployable_PrismMine**)&params[0] = Right;
+			*(Object::Vector*)&params[4] = LeftLocation;
+			*(Object::Vector*)&params[16] = RightLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyTripActor(class TrTripActor* DestroyTrip)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.DestroyTripActor");
-			byte* params = (byte*)malloc(4);
-			*(class TrTripActor**)params = DestroyTrip;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrTripActor**)&params[0] = DestroyTrip;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddTripActor(class TrTripActor* NewTrip)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.AddTripActor");
-			byte* params = (byte*)malloc(4);
-			*(class TrTripActor**)params = NewTrip;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrTripActor**)&params[0] = NewTrip;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveTripActor(class TrTripActor* RemoveTrip)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.RemoveTripActor");
-			byte* params = (byte*)malloc(4);
-			*(class TrTripActor**)params = RemoveTrip;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrTripActor**)&params[0] = RemoveTrip;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TripActivated(class Pawn* Other, Vector ActivateLocation, class TrTripActor* TripActor)
+		void TripActivated(class Pawn* Other, Object::Vector ActivateLocation, class TrTripActor* TripActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.TripActivated");
-			byte* params = (byte*)malloc(20);
-			*(class Pawn**)params = Other;
-			*(Vector*)(params + 4) = ActivateLocation;
-			*(class TrTripActor**)(params + 16) = TripActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = ActivateLocation;
+			*(class TrTripActor**)&params[16] = TripActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class ParticleSystem* GetParticleSystemName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.GetParticleSystemName");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class ParticleSystem**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class ParticleSystem**)&params[0];
 		}
-		bool GetTripSocketPosition(bool bIsLeft, Vector& SocketPosition)
+		bool GetTripSocketPosition(bool bIsLeft, Object::Vector& SocketPosition)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.GetTripSocketPosition");
-			byte* params = (byte*)malloc(20);
-			*(bool*)params = bIsLeft;
-			*(Vector*)(params + 4) = SocketPosition;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			SocketPosition = *(Vector*)(params + 4);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(bool*)&params[0] = bIsLeft;
+			*(Object::Vector*)&params[4] = SocketPosition;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			SocketPosition = *(Object::Vector*)&params[4];
+			return *(bool*)&params[16];
 		}
 		void OnTripAwake()
 		{
@@ -122,12 +103,10 @@ namespace UnrealScript
 		bool NoConnectionExists(class TrDeployable_PrismMine* AdjacentMine)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.NoConnectionExists");
-			byte* params = (byte*)malloc(8);
-			*(class TrDeployable_PrismMine**)params = AdjacentMine;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class TrDeployable_PrismMine**)&params[0] = AdjacentMine;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void OnPowerStatusChanged()
 		{
@@ -136,6 +115,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

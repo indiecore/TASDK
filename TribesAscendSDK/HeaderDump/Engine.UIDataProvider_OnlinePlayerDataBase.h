@@ -1,25 +1,22 @@
 #pragma once
 #include "Engine.LocalPlayer.h"
 #include "Engine.UIDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_OnlinePlayerDataBase." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UIDataProvider_OnlinePlayerDataBase : public UIDataProvider
 	{
 	public:
-		ADD_VAR(::IntProperty, PlayerControllerId, 0xFFFFFFFF)
+		ADD_STRUCT(int, PlayerControllerId, 88)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerDataBase.OnRegister");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = InPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
@@ -28,4 +25,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

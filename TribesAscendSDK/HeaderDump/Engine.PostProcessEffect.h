@@ -1,28 +1,38 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.Scene.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PostProcessEffect." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class PostProcessEffect : public Object
 	{
 	public:
-		ADD_VAR(::ByteProperty, SceneDPG, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, InDrawY, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, OutDrawY, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DrawHeight, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DrawWidth, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NodePosX, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NodePosY, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, EffectName, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAffectsLightingOnly, 0x8)
-		ADD_VAR(::BoolProperty, bUseWorldSettings, 0x4)
-		ADD_VAR(::BoolProperty, bShowInGame, 0x2)
-		ADD_VAR(::BoolProperty, bShowInEditor, 0x1)
+		ADD_STRUCT(Scene::ESceneDepthPriorityGroup, SceneDPG, 96)
+		ADD_STRUCT(int, InDrawY, 92)
+		ADD_STRUCT(int, OutDrawY, 88)
+		ADD_STRUCT(int, DrawHeight, 84)
+		ADD_STRUCT(int, DrawWidth, 80)
+		ADD_STRUCT(int, NodePosX, 76)
+		ADD_STRUCT(int, NodePosY, 72)
+		ADD_STRUCT(ScriptName, EffectName, 64)
+		ADD_BOOL(bAffectsLightingOnly, 60, 0x8)
+		ADD_BOOL(bUseWorldSettings, 60, 0x4)
+		ADD_BOOL(bShowInGame, 60, 0x2)
+		ADD_BOOL(bShowInEditor, 60, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

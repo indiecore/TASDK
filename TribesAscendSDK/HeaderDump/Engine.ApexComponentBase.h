@@ -1,39 +1,37 @@
 #pragma once
 #include "Engine.MeshComponent.h"
-#include "Core.Object.Color.h"
+#include "Core.Object.h"
 #include "Engine.ApexAsset.h"
-#include "Core.Object.RenderCommandFence_Mirror.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ApexComponentBase." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ApexComponentBase." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.ApexComponentBase." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class ApexComponentBase : public MeshComponent
 	{
 	public:
-		ADD_VAR(::BoolProperty, bAssetChanged, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, WireframeColor, 0xFFFFFFFF)
-		ADD_OBJECT(ApexAsset, Asset)
-		ADD_STRUCT(::NonArithmeticProperty<RenderCommandFence_Mirror>, ReleaseResourcesFence, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ComponentBaseResources, 0xFFFFFFFF)
+		ADD_BOOL(bAssetChanged, 516, 0x1)
+		ADD_STRUCT(Object::Color, WireframeColor, 512)
+		ADD_OBJECT(ApexAsset, Asset, 508)
+		ADD_STRUCT(Object::RenderCommandFence_Mirror, ReleaseResourcesFence, 504)
+		ADD_STRUCT(Object::Pointer, ComponentBaseResources, 500)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

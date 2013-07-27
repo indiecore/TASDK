@@ -1,94 +1,91 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "Engine.SkelControlBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkelControlLookAt." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SkelControlLookAt." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SkelControlLookAt : public SkelControlBase
 	{
 	public:
-		ADD_VAR(::IntProperty, ControlBoneIndex, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastCalcTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BaseBonePos, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BaseLookDir, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LimitLookDir, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookAtAlphaBlendTimeToGo, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookAtAlphaTarget, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookAtAlpha, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, AllowRotationOtherBoneName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DeadZoneAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OuterMaxAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxAngle, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ActorSpaceLookAtTarget, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, DesiredTargetLocation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TargetLocationInterpSpeed, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAllowRotationZ, 0x400)
-		ADD_VAR(::BoolProperty, bAllowRotationY, 0x200)
-		ADD_VAR(::BoolProperty, bAllowRotationX, 0x100)
-		ADD_VAR(::BoolProperty, bShowLimit, 0x80)
-		ADD_VAR(::BoolProperty, bNotifyBeyondLimit, 0x40)
-		ADD_VAR(::BoolProperty, bDisableBeyondLimit, 0x20)
-		ADD_VAR(::BoolProperty, bLimitBasedOnRefPose, 0x10)
-		ADD_VAR(::BoolProperty, bEnableLimit, 0x8)
-		ADD_VAR(::BoolProperty, bInvertUpAxis, 0x4)
-		ADD_VAR(::BoolProperty, bDefineUpAxis, 0x2)
-		ADD_VAR(::BoolProperty, bInvertLookAtAxis, 0x1)
-		ADD_VAR(::NameProperty, TargetSpaceBoneName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, AllowRotationSpace, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, UpAxis, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, LookAtAxis, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, TargetLocationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetLocation, 0xFFFFFFFF)
-		void SetTargetLocation(Vector NewTargetLocation)
+		ADD_STRUCT(int, ControlBoneIndex, 316)
+		ADD_STRUCT(float, LastCalcTime, 312)
+		ADD_STRUCT(Object::Vector, BaseBonePos, 300)
+		ADD_STRUCT(Object::Vector, BaseLookDir, 288)
+		ADD_STRUCT(Object::Vector, LimitLookDir, 276)
+		ADD_STRUCT(float, LookAtAlphaBlendTimeToGo, 272)
+		ADD_STRUCT(float, LookAtAlphaTarget, 268)
+		ADD_STRUCT(float, LookAtAlpha, 264)
+		ADD_STRUCT(ScriptName, AllowRotationOtherBoneName, 256)
+		ADD_STRUCT(float, DeadZoneAngle, 252)
+		ADD_STRUCT(float, OuterMaxAngle, 248)
+		ADD_STRUCT(float, MaxAngle, 244)
+		ADD_STRUCT(Object::Vector, ActorSpaceLookAtTarget, 232)
+		ADD_STRUCT(Object::Vector, DesiredTargetLocation, 220)
+		ADD_STRUCT(float, TargetLocationInterpSpeed, 216)
+		ADD_BOOL(bAllowRotationZ, 212, 0x400)
+		ADD_BOOL(bAllowRotationY, 212, 0x200)
+		ADD_BOOL(bAllowRotationX, 212, 0x100)
+		ADD_BOOL(bShowLimit, 212, 0x80)
+		ADD_BOOL(bNotifyBeyondLimit, 212, 0x40)
+		ADD_BOOL(bDisableBeyondLimit, 212, 0x20)
+		ADD_BOOL(bLimitBasedOnRefPose, 212, 0x10)
+		ADD_BOOL(bEnableLimit, 212, 0x8)
+		ADD_BOOL(bInvertUpAxis, 212, 0x4)
+		ADD_BOOL(bDefineUpAxis, 212, 0x2)
+		ADD_BOOL(bInvertLookAtAxis, 212, 0x1)
+		ADD_STRUCT(ScriptName, TargetSpaceBoneName, 204)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, AllowRotationSpace, 203)
+		ADD_STRUCT(Object::EAxis, UpAxis, 202)
+		ADD_STRUCT(Object::EAxis, LookAtAxis, 201)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, TargetLocationSpace, 200)
+		ADD_STRUCT(Object::Vector, TargetLocation, 188)
+		void SetTargetLocation(Object::Vector NewTargetLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetTargetLocation");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = NewTargetLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = NewTargetLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InterpolateTargetLocation(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.InterpolateTargetLocation");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLookAtAlpha(float DesiredAlpha, float DesiredBlendTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetLookAtAlpha");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = DesiredAlpha;
-			*(float*)(params + 4) = DesiredBlendTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(float*)&params[0] = DesiredAlpha;
+			*(float*)&params[4] = DesiredBlendTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CanLookAtPoint(Vector PointLoc, bool bDrawDebugInfo, bool bDebugUsePersistentLines, bool bDebugFlushLinesFirst)
+		bool CanLookAtPoint(Object::Vector PointLoc, bool bDrawDebugInfo, bool bDebugUsePersistentLines, bool bDebugFlushLinesFirst)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.CanLookAtPoint");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = PointLoc;
-			*(bool*)(params + 12) = bDrawDebugInfo;
-			*(bool*)(params + 16) = bDebugUsePersistentLines;
-			*(bool*)(params + 20) = bDebugFlushLinesFirst;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = PointLoc;
+			*(bool*)&params[12] = bDrawDebugInfo;
+			*(bool*)&params[16] = bDebugUsePersistentLines;
+			*(bool*)&params[20] = bDebugFlushLinesFirst;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

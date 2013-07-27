@@ -3,47 +3,40 @@
 #include "UTGame.UTDroppedPickup.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Controller.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDroppedItemPickup." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTDroppedItemPickup." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTDroppedItemPickup : public UTDroppedPickup
 	{
 	public:
-		ADD_OBJECT(SoundCue, PickupSound)
-		ADD_VAR(::FloatProperty, MaxDesireability, 0xFFFFFFFF)
+		ADD_OBJECT(SoundCue, PickupSound, 516)
+		ADD_STRUCT(float, MaxDesireability, 512)
 		float BotDesireability(class Pawn* Bot, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.BotDesireability");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = Bot;
-			*(class Controller**)(params + 4) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = Bot;
+			*(class Controller**)&params[4] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[8];
 		}
 		void SetPickupMesh(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewPickupMesh)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.SetPickupMesh");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = NewPickupMesh;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = NewPickupMesh;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
@@ -58,20 +51,18 @@ void**)params = NewPickupMesh;
 		void DroppedFrom(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.DroppedFrom");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PickedUpBy(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.PickedUpBy");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

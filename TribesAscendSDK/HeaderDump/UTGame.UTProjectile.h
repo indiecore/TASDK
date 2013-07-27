@@ -1,75 +1,77 @@
 #pragma once
 #include "UDKBase.UDKProjectile.h"
 #include "Engine.MaterialInterface.h"
-#include "Core.Object.Rotator.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.SoundCue.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
+#include "Core.Object.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTProjectile." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTProjectile." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTProjectile : public UDKProjectile
 	{
 	public:
-		ADD_VAR(::FloatProperty, GlobalCheckRadiusTweak, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TossZ, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxExplosionLightDistance, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, ExplosionLightClass)
-		ADD_OBJECT(ScriptClass, ProjectileLightClass)
-		ADD_VAR(::FloatProperty, MaxEffectDistance, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, DecalDissolveParamName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DurationOfDecal, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DecalHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DecalWidth, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInterface, ExplosionDecal)
-		ADD_OBJECT(ParticleSystem, ProjExplosionTemplate)
-		ADD_OBJECT(ParticleSystem, ProjFlightTemplate)
-		ADD_OBJECT(SoundCue, ExplosionSound)
-		ADD_OBJECT(SoundCue, AmbientSound)
-		ADD_VAR(::BoolProperty, bAttachExplosionToVehicles, 0x40)
-		ADD_VAR(::BoolProperty, bWaitForEffects, 0x20)
-		ADD_VAR(::BoolProperty, bSuppressExplosionFX, 0x10)
-		ADD_VAR(::BoolProperty, bAdvanceExplosionEffect, 0x8)
-		ADD_VAR(::BoolProperty, m_bDestroyProjEffects, 0x4)
-		ADD_VAR(::BoolProperty, bImportantAmbientSound, 0x2)
-		ADD_VAR(::BoolProperty, bSuppressSounds, 0x1)
+		ADD_STRUCT(float, GlobalCheckRadiusTweak, 656)
+		ADD_STRUCT(float, TossZ, 652)
+		ADD_STRUCT(float, MaxExplosionLightDistance, 672)
+		ADD_OBJECT(ScriptClass, ExplosionLightClass, 668)
+		ADD_OBJECT(ScriptClass, ProjectileLightClass, 660)
+		ADD_STRUCT(float, MaxEffectDistance, 648)
+		ADD_STRUCT(ScriptName, DecalDissolveParamName, 640)
+		ADD_STRUCT(float, DurationOfDecal, 636)
+		ADD_STRUCT(float, DecalHeight, 632)
+		ADD_STRUCT(float, DecalWidth, 628)
+		ADD_OBJECT(MaterialInterface, ExplosionDecal, 624)
+		ADD_OBJECT(ParticleSystem, ProjExplosionTemplate, 620)
+		ADD_OBJECT(ParticleSystem, ProjFlightTemplate, 616)
+		ADD_OBJECT(SoundCue, ExplosionSound, 604)
+		ADD_OBJECT(SoundCue, AmbientSound, 600)
+		ADD_BOOL(bAttachExplosionToVehicles, 596, 0x40)
+		ADD_BOOL(bWaitForEffects, 596, 0x20)
+		ADD_BOOL(bSuppressExplosionFX, 596, 0x10)
+		ADD_BOOL(bAdvanceExplosionEffect, 596, 0x8)
+		ADD_BOOL(m_bDestroyProjEffects, 596, 0x4)
+		ADD_BOOL(bImportantAmbientSound, 596, 0x2)
+		ADD_BOOL(bSuppressSounds, 596, 0x1)
 		void CreateProjectileLight()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.CreateProjectileLight");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Landed(Vector HitNormal, class Actor* FloorActor)
+		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.Landed");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitNormal;
-			*(class Actor**)(params + 12) = FloorActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitNormal;
+			*(class Actor**)&params[12] = FloorActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanSplash()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.CanSplash");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void PreBeginPlay()
 		{
@@ -86,32 +88,29 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.SetInitialState");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Init(Vector Direction)
+		void Init(Object::Vector Direction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.Init");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = Direction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = Direction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.ProcessTouch");
-			byte* params = (byte*)malloc(28);
-			*(class Actor**)params = Other;
-			*(Vector*)(params + 4) = HitLocation;
-			*(Vector*)(params + 16) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(Object::Vector*)&params[16] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Vector HitLocation, Vector HitNormal)
+		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.Explode");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnFlightEffects()
 		{
@@ -123,43 +122,37 @@ namespace UnrealScript
 void* ProjExplosion)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.SetExplosionEffectParameters");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = ProjExplosion;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = ProjExplosion;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class SoundCue* GetExplosionSound(class PhysicalMaterial* HitMaterial, class Actor* HitActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.GetExplosionSound");
-			byte* params = (byte*)malloc(12);
-			*(class PhysicalMaterial**)params = HitMaterial;
-			*(class Actor**)(params + 4) = HitActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SoundCue**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class PhysicalMaterial**)&params[0] = HitMaterial;
+			*(class Actor**)&params[4] = HitActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SoundCue**)&params[8];
 		}
-		void SpawnExplosionEffects(Vector HitLocation, Vector HitNormal)
+		void SpawnExplosionEffects(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.SpawnExplosionEffects");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool ShouldSpawnExplosionLight(Vector HitLocation, Vector HitNormal)
+		bool ShouldSpawnExplosionLight(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.ShouldSpawnExplosionLight");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
 		void ShutDown()
 		{
@@ -186,94 +179,80 @@ void**)params = ProjExplosion;
 void* PSC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.MyOnParticleSystemFinished");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = PSC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = PSC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		bool CalcCamera(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.CalcCamera");
-			byte* params = (byte*)malloc(36);
-			*(float*)params = fDeltaTime;
-			*(Vector*)(params + 4) = out_CamLoc;
-			*(Rotator*)(params + 16) = out_CamRot;
-			*(float*)(params + 28) = out_FOV;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 4);
-			out_CamRot = *(Rotator*)(params + 16);
-			out_FOV = *(float*)(params + 28);
-			auto returnVal = *(bool*)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(float*)&params[0] = fDeltaTime;
+			*(Object::Vector*)&params[4] = out_CamLoc;
+			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)&params[28] = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[4];
+			out_CamRot = *(Object::Rotator*)&params[16];
+			out_FOV = *(float*)&params[28];
+			return *(bool*)&params[32];
 		}
 		class Actor* GetHomingTarget(class UTProjectile* Seeker, class Controller* InstigatedBy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.GetHomingTarget");
-			byte* params = (byte*)malloc(12);
-			*(class UTProjectile**)params = Seeker;
-			*(class Controller**)(params + 4) = InstigatedBy;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Actor**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class UTProjectile**)&params[0] = Seeker;
+			*(class Controller**)&params[4] = InstigatedBy;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Actor**)&params[8];
 		}
 		class Pawn* GetPawnOwner()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.GetPawnOwner");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Pawn**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Pawn**)&params[0];
 		}
 		float CalculateTravelTime(float Dist, float MoveSpeed, float MaxMoveSpeed, float AccelMag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.CalculateTravelTime");
-			byte* params = (byte*)malloc(20);
-			*(float*)params = Dist;
-			*(float*)(params + 4) = MoveSpeed;
-			*(float*)(params + 8) = MaxMoveSpeed;
-			*(float*)(params + 12) = AccelMag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(float*)&params[0] = Dist;
+			*(float*)&params[4] = MoveSpeed;
+			*(float*)&params[8] = MaxMoveSpeed;
+			*(float*)&params[12] = AccelMag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[16];
 		}
-		float StaticGetTimeToLocation(Vector TargetLoc, Vector StartLoc, class Controller* RequestedBy)
+		float StaticGetTimeToLocation(Object::Vector TargetLoc, Object::Vector StartLoc, class Controller* RequestedBy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.StaticGetTimeToLocation");
-			byte* params = (byte*)malloc(32);
-			*(Vector*)params = TargetLoc;
-			*(Vector*)(params + 12) = StartLoc;
-			*(class Controller**)(params + 24) = RequestedBy;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(Object::Vector*)&params[0] = TargetLoc;
+			*(Object::Vector*)&params[12] = StartLoc;
+			*(class Controller**)&params[24] = RequestedBy;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[28];
 		}
-		float GetTimeToLocation(Vector TargetLoc)
+		float GetTimeToLocation(Object::Vector TargetLoc)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.GetTimeToLocation");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = TargetLoc;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = TargetLoc;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
 		float GetRange()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTProjectile.GetRange");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

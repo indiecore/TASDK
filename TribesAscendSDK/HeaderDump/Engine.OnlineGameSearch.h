@@ -1,64 +1,127 @@
 #pragma once
 #include "Engine.Settings.h"
-#include "Engine.OnlineGameSearch.OverrideSkill.h"
-#include "Engine.Settings.LocalizedStringSetting.h"
-#include "Engine.OnlineGameSearch.OnlineGameSearchQuery.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.OnlineSubsystem.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineGameSearch." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.OnlineGameSearch." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.OnlineGameSearch." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class OnlineGameSearch : public Settings
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<OverrideSkill>, ManualSkillOverride, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxSearchResults, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LocalizedStringSetting>, Query, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bIsLanQuery, 0x1)
-		ADD_VAR(::BoolProperty, bUsesArbitration, 0x2)
-		ADD_VAR(::BoolProperty, bIsSearchInProgress, 0x4)
-		ADD_OBJECT(ScriptClass, GameSettingsClass)
-		ADD_STRUCT(::NonArithmeticProperty<OnlineGameSearchQuery>, FilterQuery, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, AdditionalSearchCriteria, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PingBucketSize, 0xFFFFFFFF)
+		enum EOnlineGameSearchComparisonType : byte
+		{
+			OGSCT_Equals = 0,
+			OGSCT_NotEquals = 1,
+			OGSCT_GreaterThan = 2,
+			OGSCT_GreaterThanEquals = 3,
+			OGSCT_LessThan = 4,
+			OGSCT_LessThanEquals = 5,
+			OGSCT_MAX = 6,
+		};
+		enum EOnlineGameSearchEntryType : byte
+		{
+			OGSET_Property = 0,
+			OGSET_LocalizedSetting = 1,
+			OGSET_ObjectProperty = 2,
+			OGSET_MAX = 3,
+		};
+		enum EOnlineGameSearchSortType : byte
+		{
+			OGSSO_Ascending = 0,
+			OGSSO_Descending = 1,
+			OGSSO_MAX = 2,
+		};
+		class OverrideSkill
+		{
+		public:
+			ADD_STRUCT(int, LeaderboardId, 0)
+			ADD_STRUCT(ScriptArray<OnlineSubsystem::UniqueNetId>, Players, 4)
+			ADD_STRUCT(ScriptArray<Object::Double>, Mus, 16)
+			ADD_STRUCT(ScriptArray<Object::Double>, Sigmas, 28)
+		};
+		class NamedObjectProperty
+		{
+		public:
+			ADD_STRUCT(ScriptName, ObjectPropertyName, 0)
+			ADD_STRUCT(ScriptString*, ObjectPropertyValue, 8)
+		};
+		class OnlineGameSearchResult
+		{
+		public:
+			ADD_OBJECT(OnlineGameSettings, GameSettings, 0)
+			ADD_STRUCT(Object::Pointer, PlatformData, 4)
+		};
+		class OnlineGameSearchSortClause
+		{
+		public:
+			ADD_STRUCT(int, EntryId, 0)
+			ADD_STRUCT(ScriptName, ObjectPropertyName, 4)
+			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchEntryType, EntryType, 12)
+			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchSortType, SortType, 13)
+		};
+		class OnlineGameSearchParameter
+		{
+		public:
+			ADD_STRUCT(int, EntryId, 0)
+			ADD_STRUCT(ScriptName, ObjectPropertyName, 4)
+			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchEntryType, EntryType, 12)
+			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchComparisonType, ComparisonType, 13)
+		};
+		class OnlineGameSearchORClause
+		{
+		public:
+			ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchParameter>, OrParams, 0)
+		};
+		class OnlineGameSearchQuery
+		{
+		public:
+			ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchORClause>, OrClauses, 0)
+			ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchSortClause>, SortClauses, 12)
+		};
+		ADD_STRUCT(OnlineGameSearch::OverrideSkill, ManualSkillOverride, 144)
+		ADD_STRUCT(int, MaxSearchResults, 108)
+		ADD_STRUCT(Settings::LocalizedStringSetting, Query, 112)
+		ADD_BOOL(bIsLanQuery, 124, 0x1)
+		ADD_BOOL(bUsesArbitration, 124, 0x2)
+		ADD_BOOL(bIsSearchInProgress, 124, 0x4)
+		ADD_OBJECT(ScriptClass, GameSettingsClass, 128)
+		ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchResult>, Results, 132)
+		ADD_STRUCT(ScriptArray<OnlineGameSearch::NamedObjectProperty>, NamedProperties, 184)
+		ADD_STRUCT(OnlineGameSearch::OnlineGameSearchQuery, FilterQuery, 196)
+		ADD_STRUCT(ScriptString*, AdditionalSearchCriteria, 220)
+		ADD_STRUCT(int, PingBucketSize, 232)
 		void SortSearchResults()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineGameSearch.SortSearchResults");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetSkillOverride(int LeaderboardId, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Players)
+		void SetSkillOverride(int LeaderboardId, ScriptArray<OnlineSubsystem::UniqueNetId>& Players)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineGameSearch.SetSkillOverride");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = LeaderboardId;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4) = Players;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Players = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4);
-			free(params);
+			byte params[16] = { NULL };
+			*(int*)&params[0] = LeaderboardId;
+			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[4] = Players;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Players = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,30 +1,22 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.DistributionVectorConstant.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DistributionVectorParameterBase." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.DistributionVectorParameterBase." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.DistributionFloatParameterBase.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class DistributionVectorParameterBase : public DistributionVectorConstant
 	{
 	public:
-		ADD_VAR(::ByteProperty, ParamModes, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MaxOutput, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MinOutput, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MaxInput, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MinInput, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, ParameterName, 0xFFFFFFFF)
+		ADD_STRUCT(DistributionFloatParameterBase::DistributionParamMode, ParamModes, 156)
+		ADD_STRUCT(Object::Vector, MaxOutput, 144)
+		ADD_STRUCT(Object::Vector, MinOutput, 132)
+		ADD_STRUCT(Object::Vector, MaxInput, 120)
+		ADD_STRUCT(Object::Vector, MinInput, 108)
+		ADD_STRUCT(ScriptName, ParameterName, 100)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

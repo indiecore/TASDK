@@ -1,42 +1,35 @@
 #pragma once
 #include "Engine.SequenceVariable.h"
-#include "Core.Object.Vector.h"
 #include "Core.Object.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SeqVar_Object." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SeqVar_Object." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SeqVar_Object : public SequenceVariable
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ActorLocation, 0xFFFFFFFF)
-		ADD_OBJECT(Object, ObjValue)
+		ADD_STRUCT(ScriptArray<ScriptClass*>, SupportedClasses, 164)
+		ADD_STRUCT(Object::Vector, ActorLocation, 152)
+		ADD_OBJECT(Object, ObjValue, 148)
 		class Object* GetObjectValue()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_Object.GetObjectValue");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Object**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Object**)&params[0];
 		}
 		void SetObjectValue(class Object* NewValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_Object.SetObjectValue");
-			byte* params = (byte*)malloc(4);
-			*(class Object**)params = NewValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Object**)&params[0] = NewValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

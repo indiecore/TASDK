@@ -1,60 +1,60 @@
 #pragma once
 #include "GameFramework.SeqEvent_HudRender.h"
 #include "Engine.HUD.h"
-#include "GameFramework.MobileInputZone.TextureUVs.h"
-#include "GameFramework.MobileInputZone.h"
 #include "Engine.Font.h"
 #include "Engine.Texture2D.h"
-#include "Core.Object.Color.h"
+#include "GameFramework.MobileInputZone.h"
+#include "Core.Object.h"
 #include "GameFramework.MobilePlayerInput.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileHUD." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.MobileHUD." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.MobileHUD." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MobileHUD : public HUD
 	{
 	public:
-		ADD_VAR(::FloatProperty, MobileTiltSize, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileTiltY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileTiltX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, SliderUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, SliderImages)
-		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, TrackballTouchIndicatorUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, TrackballTouchIndicator)
-		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, TrackballBackgroundUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, TrackballBackground)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, ButtonCaptionColor, 0xFFFFFFFF)
-		ADD_OBJECT(Font, ButtonFont)
-		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, ButtonUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, ButtonImages)
-		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, JoystickHatUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, JoystickHat)
-		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, JoystickBackgroundUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, JoystickBackground)
-		ADD_VAR(::BoolProperty, bShowMotionDebug, 0x80)
-		ADD_VAR(::BoolProperty, bDebugZonePresses, 0x40)
-		ADD_VAR(::BoolProperty, bDebugZones, 0x20)
-		ADD_VAR(::BoolProperty, bDebugTouches, 0x10)
-		ADD_VAR(::BoolProperty, bShowMobileTilt, 0x8)
-		ADD_VAR(::BoolProperty, bForceMobileHUD, 0x4)
-		ADD_VAR(::BoolProperty, bShowMobileHud, 0x2)
-		ADD_VAR(::BoolProperty, bShowGameHud, 0x1)
+		ADD_STRUCT(ScriptArray<class SeqEvent_HudRender*>, KismetRenderEvents, 1348)
+		ADD_STRUCT(float, MobileTiltSize, 1344)
+		ADD_STRUCT(float, MobileTiltY, 1340)
+		ADD_STRUCT(float, MobileTiltX, 1336)
+		ADD_STRUCT(MobileInputZone::TextureUVs, SliderUVs, 1272)
+		ADD_OBJECT(Texture2D, SliderImages, 1256)
+		ADD_STRUCT(MobileInputZone::TextureUVs, TrackballTouchIndicatorUVs, 1240)
+		ADD_OBJECT(Texture2D, TrackballTouchIndicator, 1236)
+		ADD_STRUCT(MobileInputZone::TextureUVs, TrackballBackgroundUVs, 1220)
+		ADD_OBJECT(Texture2D, TrackballBackground, 1216)
+		ADD_STRUCT(Object::Color, ButtonCaptionColor, 1212)
+		ADD_OBJECT(Font, ButtonFont, 1208)
+		ADD_STRUCT(MobileInputZone::TextureUVs, ButtonUVs, 1176)
+		ADD_OBJECT(Texture2D, ButtonImages, 1168)
+		ADD_STRUCT(MobileInputZone::TextureUVs, JoystickHatUVs, 1152)
+		ADD_OBJECT(Texture2D, JoystickHat, 1148)
+		ADD_STRUCT(MobileInputZone::TextureUVs, JoystickBackgroundUVs, 1132)
+		ADD_OBJECT(Texture2D, JoystickBackground, 1128)
+		ADD_BOOL(bShowMotionDebug, 1124, 0x80)
+		ADD_BOOL(bDebugZonePresses, 1124, 0x40)
+		ADD_BOOL(bDebugZones, 1124, 0x20)
+		ADD_BOOL(bDebugTouches, 1124, 0x10)
+		ADD_BOOL(bShowMobileTilt, 1124, 0x8)
+		ADD_BOOL(bForceMobileHUD, 1124, 0x4)
+		ADD_BOOL(bShowMobileHud, 1124, 0x2)
+		ADD_BOOL(bShowGameHud, 1124, 0x1)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.PostBeginPlay");
@@ -65,24 +65,21 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.PostRender");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DrawMobileDebugString(float XPos, float YPos, ScriptArray<wchar_t> Str)
+		void DrawMobileDebugString(float XPos, float YPos, ScriptString* Str)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.DrawMobileDebugString");
-			byte* params = (byte*)malloc(20);
-			*(float*)params = XPos;
-			*(float*)(params + 4) = YPos;
-			*(ScriptArray<wchar_t>*)(params + 8) = Str;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(float*)&params[0] = XPos;
+			*(float*)&params[4] = YPos;
+			*(ScriptString**)&params[8] = Str;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShowMobileHud()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.ShowMobileHud");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void RenderMobileMenu()
 		{
@@ -97,42 +94,37 @@ namespace UnrealScript
 		void DrawMobileZone_Button(class MobileInputZone* Zone)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.DrawMobileZone_Button");
-			byte* params = (byte*)malloc(4);
-			*(class MobileInputZone**)params = Zone;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MobileInputZone**)&params[0] = Zone;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawMobileZone_Joystick(class MobileInputZone* Zone)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.DrawMobileZone_Joystick");
-			byte* params = (byte*)malloc(4);
-			*(class MobileInputZone**)params = Zone;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MobileInputZone**)&params[0] = Zone;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawMobileZone_Trackball(class MobileInputZone* Zone)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.DrawMobileZone_Trackball");
-			byte* params = (byte*)malloc(4);
-			*(class MobileInputZone**)params = Zone;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MobileInputZone**)&params[0] = Zone;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawMobileTilt(class MobilePlayerInput* MobileInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.DrawMobileTilt");
-			byte* params = (byte*)malloc(4);
-			*(class MobilePlayerInput**)params = MobileInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MobilePlayerInput**)&params[0] = MobileInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawMobileZone_Slider(class MobileInputZone* Zone)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.DrawMobileZone_Slider");
-			byte* params = (byte*)malloc(4);
-			*(class MobileInputZone**)params = Zone;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MobileInputZone**)&params[0] = Zone;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshKismetLinks()
 		{
@@ -142,10 +134,9 @@ namespace UnrealScript
 		void AddKismetRenderEvent(class SeqEvent_HudRender* NewEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileHUD.AddKismetRenderEvent");
-			byte* params = (byte*)malloc(4);
-			*(class SeqEvent_HudRender**)params = NewEvent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqEvent_HudRender**)&params[0] = NewEvent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderKismetHud()
 		{
@@ -154,6 +145,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

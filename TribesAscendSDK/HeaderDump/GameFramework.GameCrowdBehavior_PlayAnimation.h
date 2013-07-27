@@ -4,41 +4,47 @@
 #include "Engine.Actor.h"
 #include "GameFramework.GameCrowdAgent.h"
 #include "Engine.AnimNodeSequence.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdBehavior_PlayAnimation." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.GameCrowdBehavior_PlayAnimation." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GameCrowdBehavior_PlayAnimation : public GameCrowdAgentBehavior
 	{
 	public:
-		ADD_VAR(::IntProperty, AnimationIndex, 0xFFFFFFFF)
-		ADD_OBJECT(SeqAct_PlayAgentAnimation, AnimSequence)
-		ADD_VAR(::FloatProperty, LoopTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LoopIndex, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, CustomActionTarget)
-		ADD_VAR(::BoolProperty, bBlendBetweenAnims, 0x8)
-		ADD_VAR(::BoolProperty, bLooping, 0x4)
-		ADD_VAR(::BoolProperty, bLookAtPlayer, 0x2)
-		ADD_VAR(::BoolProperty, bUseRootMotion, 0x1)
-		ADD_VAR(::FloatProperty, BlendOutTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BlendInTime, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<ScriptName>, AnimationList, 84)
+		ADD_STRUCT(int, AnimationIndex, 124)
+		ADD_OBJECT(SeqAct_PlayAgentAnimation, AnimSequence, 120)
+		ADD_STRUCT(float, LoopTime, 116)
+		ADD_STRUCT(int, LoopIndex, 112)
+		ADD_OBJECT(Actor, CustomActionTarget, 108)
+		ADD_BOOL(bBlendBetweenAnims, 104, 0x8)
+		ADD_BOOL(bLooping, 104, 0x4)
+		ADD_BOOL(bLookAtPlayer, 104, 0x2)
+		ADD_BOOL(bUseRootMotion, 104, 0x1)
+		ADD_STRUCT(float, BlendOutTime, 100)
+		ADD_STRUCT(float, BlendInTime, 96)
 		void InitBehavior(class GameCrowdAgent* Agent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.InitBehavior");
-			byte* params = (byte*)malloc(4);
-			*(class GameCrowdAgent**)params = Agent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GameCrowdAgent**)&params[0] = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FinishedTargetRotation()
 		{
@@ -53,12 +59,11 @@ namespace UnrealScript
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.OnAnimEnd");
-			byte* params = (byte*)malloc(12);
-			*(class AnimNodeSequence**)params = SeqNode;
-			*(float*)(params + 4) = PlayedTime;
-			*(float*)(params + 8) = ExcessTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(float*)&params[4] = PlayedTime;
+			*(float*)&params[8] = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAgentAnimationNow()
 		{
@@ -70,16 +75,15 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.StopBehavior");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetBehaviorString()
+		ScriptString* GetBehaviorString()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.GetBehaviorString");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

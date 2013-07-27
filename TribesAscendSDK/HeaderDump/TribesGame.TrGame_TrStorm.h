@@ -1,40 +1,44 @@
 #pragma once
 #include "TribesGame.TrGame.h"
-#include "TribesGame.TrGame_TrStorm.Carrier.h"
 #include "TribesGame.TrStormCarrierShield.h"
 #include "TribesGame.TrStormCore.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "TribesGame.TrStormControlPoint.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGame_TrStorm." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrGame_TrStorm." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrGame_TrStorm." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrGame_TrStorm : public TrGame
 	{
 	public:
-		ADD_VAR(::FloatProperty, MatchEndingTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nMaxCoreHealth, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nMaxShieldHealth, 0xFFFFFFFF)
-		ADD_OBJECT(TrStormCore, m_CarrierCore)
-		ADD_OBJECT(TrStormCarrierShield, m_CarrierShields)
-		ADD_VAR(::FloatProperty, m_fMissileDamageAmount, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Carrier>, m_Carriers, 0xFFFFFFFF)
+		class Missile
+		{
+		public:
+			ADD_STRUCT(byte, TargetTeam, 8)
+			ADD_STRUCT(float, RemainingFlightTime, 4)
+			ADD_OBJECT(TrStormControlPoint, FiredFrom, 0)
+		};
+		class Carrier
+		{
+		public:
+			ADD_STRUCT(byte, TeamNum, 8)
+			ADD_STRUCT(int, CoreHealth, 4)
+			ADD_STRUCT(int, ShieldHealth, 0)
+		};
+		ADD_STRUCT(ScriptArray<TrGame_TrStorm::Missile>, m_fActiveMissiles, 1480)
+		ADD_STRUCT(float, MatchEndingTime, 1520)
+		ADD_STRUCT(int, m_nMaxCoreHealth, 1516)
+		ADD_STRUCT(int, m_nMaxShieldHealth, 1512)
+		ADD_OBJECT(TrStormCore, m_CarrierCore, 1504)
+		ADD_OBJECT(TrStormCarrierShield, m_CarrierShields, 1496)
+		ADD_STRUCT(float, m_fMissileDamageAmount, 1492)
+		ADD_STRUCT(TrGame_TrStorm::Carrier, m_Carriers, 1456)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.PostBeginPlay");
@@ -43,86 +47,74 @@ namespace UnrealScript
 		void MissileFired(class TrStormControlPoint* FiredFrom, float TimeTillExplosion, byte TargetTeam)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.MissileFired");
-			byte* params = (byte*)malloc(9);
-			*(class TrStormControlPoint**)params = FiredFrom;
-			*(float*)(params + 4) = TimeTillExplosion;
-			*(params + 8) = TargetTeam;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[9] = { NULL };
+			*(class TrStormControlPoint**)&params[0] = FiredFrom;
+			*(float*)&params[4] = TimeTillExplosion;
+			params[8] = TargetTeam;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ExplodeMissile(byte TeamNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.ExplodeMissile");
-			byte* params = (byte*)malloc(1);
-			*params = TeamNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TakeHealthDamage(byte TeamNum, int DamageAmount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.TakeHealthDamage");
-			byte* params = (byte*)malloc(5);
-			*params = TeamNum;
-			*(int*)(params + 4) = DamageAmount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			params[0] = TeamNum;
+			*(int*)&params[4] = DamageAmount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CarrierDestroyed(byte TeamNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.CarrierDestroyed");
-			byte* params = (byte*)malloc(1);
-			*params = TeamNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TakeDamageFromCore(byte TeamNum, int DamageAmount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.TakeDamageFromCore");
-			byte* params = (byte*)malloc(5);
-			*params = TeamNum;
-			*(int*)(params + 4) = DamageAmount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			params[0] = TeamNum;
+			*(int*)&params[4] = DamageAmount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.CheckEndGame");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
-		void EndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		void EndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.EndGame");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int DetermineWinningTeam()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.DetermineWinningTeam");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

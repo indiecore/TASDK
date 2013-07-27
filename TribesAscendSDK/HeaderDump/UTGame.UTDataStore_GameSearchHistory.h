@@ -2,36 +2,31 @@
 #include "UTGame.UTDataStore_GameSearchPersonal.h"
 #include "UTGame.UTDataStore_GameSearchFavorites.h"
 #include "Engine.LocalPlayer.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTDataStore_GameSearchHistory." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTDataStore_GameSearchHistory : public UTDataStore_GameSearchPersonal
 	{
 	public:
-		ADD_OBJECT(UTDataStore_GameSearchFavorites, FavoritesGameSearchDataStore)
-		ADD_OBJECT(ScriptClass, FavoritesGameSearchDataStoreClass)
+		ADD_OBJECT(UTDataStore_GameSearchFavorites, FavoritesGameSearchDataStore, 360)
+		ADD_OBJECT(ScriptClass, FavoritesGameSearchDataStoreClass, 356)
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchHistory.HasOutstandingQueries");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bRestrictCheckToSelf;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bRestrictCheckToSelf;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void Registered(class LocalPlayer* PlayerOwner)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchHistory.Registered");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = PlayerOwner;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

@@ -1,43 +1,37 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_View.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_Screen." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_Screen." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxUDKFrontEnd_Screen : public GFxUDKFrontEnd_View
 	{
 	public:
-		ADD_VAR(::StrProperty, CancelButtonImage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, AcceptButtonImage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, CancelButtonHelpText, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, AcceptButtonHelpText, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, InfoTxt)
-		ADD_OBJECT(GFxObject, HelpTxt)
-		ADD_OBJECT(GFxObject, LogoMC)
-		ADD_OBJECT(GFxObject, FooterMC)
-		ADD_OBJECT(GFxObject, TitleMC)
-		ADD_OBJECT(GFxClikWidget, BackBtn)
-		ADD_VAR(::StrProperty, ViewTitle, 0xFFFFFFFF)
-		void FocusIn_BackButton(EventData ev)
+		ADD_STRUCT(ScriptString*, CancelButtonImage, 208)
+		ADD_STRUCT(ScriptString*, AcceptButtonImage, 196)
+		ADD_STRUCT(ScriptString*, CancelButtonHelpText, 184)
+		ADD_STRUCT(ScriptString*, AcceptButtonHelpText, 172)
+		ADD_OBJECT(GFxObject, InfoTxt, 168)
+		ADD_OBJECT(GFxObject, HelpTxt, 164)
+		ADD_OBJECT(GFxObject, LogoMC, 160)
+		ADD_OBJECT(GFxObject, FooterMC, 156)
+		ADD_OBJECT(GFxObject, TitleMC, 152)
+		ADD_OBJECT(GFxClikWidget, BackBtn, 148)
+		ADD_STRUCT(ScriptString*, ViewTitle, 136)
+		void FocusIn_BackButton(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Screen.FocusIn_BackButton");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateHelpButtonImages()
 		{
@@ -47,16 +41,14 @@ namespace UnrealScript
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Screen.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

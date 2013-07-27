@@ -1,31 +1,33 @@
 #pragma once
 #include "Engine.SkelControlBase.h"
-#include "Core.Object.Rotator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_LockRotation." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKSkelControl_LockRotation." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKSkelControl_LockRotation : public SkelControlBase
 	{
 	public:
-		ADD_VAR(::NameProperty, RotationSpaceBoneName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, LockRotationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, MaxDelta, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, LockRotation, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bLockRoll, 0x4)
-		ADD_VAR(::BoolProperty, bLockYaw, 0x2)
-		ADD_VAR(::BoolProperty, bLockPitch, 0x1)
+		ADD_STRUCT(ScriptName, RotationSpaceBoneName, 220)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, LockRotationSpace, 216)
+		ADD_STRUCT(Object::Rotator, MaxDelta, 204)
+		ADD_STRUCT(Object::Rotator, LockRotation, 192)
+		ADD_BOOL(bLockRoll, 188, 0x4)
+		ADD_BOOL(bLockYaw, 188, 0x2)
+		ADD_BOOL(bLockPitch, 188, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

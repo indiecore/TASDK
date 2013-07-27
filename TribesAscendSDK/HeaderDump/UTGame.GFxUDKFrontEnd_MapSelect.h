@@ -1,39 +1,34 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
+#include "UTGame.UTUIDataProvider_MapInfo.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_MapSelect." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_MapSelect." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxUDKFrontEnd_MapSelect : public GFxUDKFrontEnd_Screen
 	{
 	public:
-		ADD_VAR(::IntProperty, LastSelectedItem, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, MenuMC)
-		ADD_OBJECT(GFxClikWidget, ImgScrollerMC)
-		ADD_OBJECT(GFxObject, ListDataProvider)
-		ADD_OBJECT(GFxClikWidget, ListMC)
-		ScriptArray<wchar_t> GetImageMarkupByMapName(ScriptArray<wchar_t> InMapName)
+		ADD_STRUCT(ScriptArray<class UTUIDataProvider_MapInfo*>, MapList, 236)
+		ADD_STRUCT(int, LastSelectedItem, 248)
+		ADD_OBJECT(GFxObject, MenuMC, 232)
+		ADD_OBJECT(GFxClikWidget, ImgScrollerMC, 228)
+		ADD_OBJECT(GFxObject, ListDataProvider, 224)
+		ADD_OBJECT(GFxClikWidget, ListMC, 220)
+		ScriptString* GetImageMarkupByMapName(ScriptString* InMapName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.GetImageMarkupByMapName");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = InMapName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = InMapName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
 		void OnViewLoaded()
 		{
@@ -43,106 +38,91 @@ namespace UnrealScript
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnMapList_ValueChanged(ScriptArray<wchar_t> InMapSelected, ScriptArray<wchar_t> InMapImageSelected)
+		void OnMapList_ValueChanged(ScriptString* InMapSelected, ScriptString* InMapImageSelected)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.OnMapList_ValueChanged");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = InMapSelected;
-			*(ScriptArray<wchar_t>*)(params + 12) = InMapImageSelected;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = InMapSelected;
+			*(ScriptString**)&params[12] = InMapImageSelected;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetList(class GFxObject* List)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.SetList");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = List;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = List;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnListItemPress(EventData ev)
+		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.OnListItemPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateListDataProvider()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.UpdateListDataProvider");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetMapFriendlyName(ScriptArray<wchar_t> Map)
+		ScriptString* GetMapFriendlyName(ScriptString* Map)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.GetMapFriendlyName");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Map;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Map;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
 		void SetImgScroller(class GFxClikWidget* InImgScroller)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.SetImgScroller");
-			byte* params = (byte*)malloc(4);
-			*(class GFxClikWidget**)params = InImgScroller;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxClikWidget**)&params[0] = InImgScroller;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptName GetCurrentGameMode()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.GetCurrentGameMode");
-			byte* params = (byte*)malloc(8);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptName*)params;
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptName*)&params[0];
 		}
-		void SetupMapCycle(ScriptArray<wchar_t> SelectedMap)
+		void SetupMapCycle(ScriptString* SelectedMap)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.SetupMapCycle");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = SelectedMap;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = SelectedMap;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetSelectedMap()
+		ScriptString* GetSelectedMap()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.GetSelectedMap");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MapSelect.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

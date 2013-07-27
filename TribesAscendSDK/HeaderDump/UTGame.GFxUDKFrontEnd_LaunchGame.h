@@ -1,65 +1,67 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
 #include "Engine.UIDataStore_OnlineGameSettings.h"
 #include "UTGame.UTUIDataStore_MenuItems.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
 #include "UTGame.UTUIDataStore_StringList.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_LaunchGame." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_LaunchGame." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxUDKFrontEnd_LaunchGame : public GFxUDKFrontEnd_Screen
 	{
 	public:
-		ADD_OBJECT(GFxObject, MutatorsLabelTxt)
-		ADD_OBJECT(GFxObject, RespawnLabelTxt)
-		ADD_OBJECT(GFxObject, TimeLabelTxt)
-		ADD_OBJECT(GFxObject, ScoreLabelTxt)
-		ADD_OBJECT(GFxObject, OpponentsLabelTxt)
-		ADD_OBJECT(GFxObject, BotLvlLabelTxt)
-		ADD_OBJECT(GFxObject, MapLabelTxt)
-		ADD_OBJECT(GFxObject, MutatorsTxt)
-		ADD_OBJECT(GFxObject, RespawnTxt)
-		ADD_OBJECT(GFxObject, MapTxt)
-		ADD_OBJECT(GFxObject, TimeTxt)
-		ADD_OBJECT(GFxObject, ScoreTxt)
-		ADD_OBJECT(GFxObject, OpponentsTxt)
-		ADD_OBJECT(GFxObject, BotLvlTxt)
-		ADD_OBJECT(GFxObject, GameTitleTxt)
-		ADD_OBJECT(GFxObject, MapNameTxt)
-		ADD_OBJECT(GFxObject, MapImageMC)
-		ADD_OBJECT(GFxObject, MenuMC)
-		ADD_OBJECT(GFxObject, ListDataProvider)
-		ADD_OBJECT(GFxClikWidget, ListMC)
-		ADD_VAR(::StrProperty, DefaultGameModePrefixes, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DefaultMapImage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DefaultGameModeSettings, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DefaultGameMode, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DefaultMapName, 0xFFFFFFFF)
-		ADD_OBJECT(UTUIDataStore_MenuItems, MenuDataStore)
-		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore)
-		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore)
-		ScriptArray<wchar_t> GetGameModeFriendlyString(ScriptArray<wchar_t> InGameMode)
+		static const float MarkupForNoMapImage;
+		class Option
+		{
+		public:
+			ADD_STRUCT(ScriptString*, OptionDesc, 24)
+			ADD_STRUCT(ScriptString*, OptionLabel, 12)
+			ADD_STRUCT(ScriptString*, OptionName, 0)
+		};
+		ADD_STRUCT(ScriptArray<GFxUDKFrontEnd_LaunchGame::Option>, ListOptions, 292)
+		ADD_OBJECT(GFxObject, MutatorsLabelTxt, 380)
+		ADD_OBJECT(GFxObject, RespawnLabelTxt, 376)
+		ADD_OBJECT(GFxObject, TimeLabelTxt, 372)
+		ADD_OBJECT(GFxObject, ScoreLabelTxt, 368)
+		ADD_OBJECT(GFxObject, OpponentsLabelTxt, 364)
+		ADD_OBJECT(GFxObject, BotLvlLabelTxt, 360)
+		ADD_OBJECT(GFxObject, MapLabelTxt, 356)
+		ADD_OBJECT(GFxObject, MutatorsTxt, 352)
+		ADD_OBJECT(GFxObject, RespawnTxt, 348)
+		ADD_OBJECT(GFxObject, MapTxt, 344)
+		ADD_OBJECT(GFxObject, TimeTxt, 340)
+		ADD_OBJECT(GFxObject, ScoreTxt, 336)
+		ADD_OBJECT(GFxObject, OpponentsTxt, 332)
+		ADD_OBJECT(GFxObject, BotLvlTxt, 328)
+		ADD_OBJECT(GFxObject, GameTitleTxt, 324)
+		ADD_OBJECT(GFxObject, MapNameTxt, 320)
+		ADD_OBJECT(GFxObject, MapImageMC, 316)
+		ADD_OBJECT(GFxObject, MenuMC, 312)
+		ADD_OBJECT(GFxObject, ListDataProvider, 308)
+		ADD_OBJECT(GFxClikWidget, ListMC, 304)
+		ADD_STRUCT(ScriptString*, DefaultGameModePrefixes, 280)
+		ADD_STRUCT(ScriptString*, DefaultMapImage, 268)
+		ADD_STRUCT(ScriptString*, DefaultGameModeSettings, 256)
+		ADD_STRUCT(ScriptString*, DefaultGameMode, 244)
+		ADD_STRUCT(ScriptString*, DefaultMapName, 232)
+		ADD_OBJECT(UTUIDataStore_MenuItems, MenuDataStore, 228)
+		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore, 224)
+		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore, 220)
+		ScriptString* GetGameModeFriendlyString(ScriptString* InGameMode)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.GetGameModeFriendlyString");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = InGameMode;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = InGameMode;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
 		void OnViewLoaded()
 		{
@@ -74,18 +76,16 @@ namespace UnrealScript
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameSettingsPanel()
 		{
@@ -107,21 +107,19 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnStartGame_Confirm");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnListItemPress(EventData ev)
+		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListItemPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnListChange(EventData ev)
+		void OnListChange(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListChange");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
@@ -136,26 +134,23 @@ namespace UnrealScript
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
-		ScriptArray<wchar_t> GetStringFromMarkup(ScriptArray<wchar_t> MarkupString)
+		ScriptString* GetStringFromMarkup(ScriptString* MarkupString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.GetStringFromMarkup");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = MarkupString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = MarkupString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
 	};
+	const float GFxUDKFrontEnd_LaunchGame::MarkupForNoMapImage = "UDKFrontEnd.gm_map_none"f;
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

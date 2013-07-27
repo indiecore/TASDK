@@ -1,86 +1,87 @@
 #pragma once
 #include "TribesGame.TrDevice.h"
 #include "Engine.SoundCue.h"
+#include "TribesGame.TrProj_RemoteArxBuster.h"
 #include "Engine.AnimNodeAdditiveBlending.h"
 #include "Engine.SkelControlSingleBone.h"
 #include "Engine.AnimNodeSequence.h"
 #include "Engine.Projectile.h"
 #include "TribesGame.TrProjectile.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_RemoteArxBuster." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDevice_RemoteArxBuster." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDevice_RemoteArxBuster : public TrDevice
 	{
 	public:
-		ADD_OBJECT(SoundCue, m_ArxIdleSound)
-		ADD_OBJECT(AnimNodeAdditiveBlending, DetReadyAdditiveAnimNode)
-		ADD_VAR(::BoolProperty, r_bIsLeftArmVisible, 0x1)
-		ADD_OBJECT(SkelControlSingleBone, DetonatorChild)
-		ADD_OBJECT(SkelControlSingleBone, DetonatorControl)
+		ADD_STRUCT(ScriptArray<class TrProj_RemoteArxBuster*>, RemoteArxRounds, 2160)
+		ADD_OBJECT(SoundCue, m_ArxIdleSound, 2176)
+		ADD_OBJECT(AnimNodeAdditiveBlending, DetReadyAdditiveAnimNode, 2172)
+		ADD_BOOL(r_bIsLeftArmVisible, 2156, 0x1)
+		ADD_OBJECT(SkelControlSingleBone, DetonatorChild, 2152)
+		ADD_OBJECT(SkelControlSingleBone, DetonatorControl, 2148)
 		void SetArxIdle(bool bEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.SetArxIdle");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLeftArmVisible(bool bVisible)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.SetLeftArmVisible");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bVisible;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetPoseActive(bool bActive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.DetPoseActive");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bActive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int AddAmmo(int Amount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.AddAmmo");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Amount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void PerformInactiveReload()
 		{
@@ -95,19 +96,16 @@ void**)params = SkelComp;
 		bool CanClientRequestReloadNow()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.CanClientRequestReloadNow");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void StartFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.StartFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FireAmmunition()
 		{
@@ -117,19 +115,16 @@ void**)params = SkelComp;
 		class Projectile* ProjectileFire()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.ProjectileFire");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Projectile**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Projectile**)&params[0];
 		}
 		void ActivateRemoteRounds(bool bDoNoDamage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.ActivateRemoteRounds");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDoNoDamage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDoNoDamage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HideArmTimer()
 		{
@@ -144,28 +139,25 @@ void**)params = SkelComp;
 		void OnRemoteProjectileDestroyedByOther(class TrProjectile* DestroyedProjectile)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.OnRemoteProjectileDestroyedByOther");
-			byte* params = (byte*)malloc(4);
-			*(class TrProjectile**)params = DestroyedProjectile;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrProjectile**)&params[0] = DestroyedProjectile;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimPlay(class AnimNodeSequence* SeqNode)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.OnAnimPlay");
-			byte* params = (byte*)malloc(4);
-			*(class AnimNodeSequence**)params = SeqNode;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RemoteArxBuster.OnAnimEnd");
-			byte* params = (byte*)malloc(12);
-			*(class AnimNodeSequence**)params = SeqNode;
-			*(float*)(params + 4) = PlayedTime;
-			*(float*)(params + 8) = ExcessTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(float*)&params[4] = PlayedTime;
+			*(float*)&params[8] = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayRetrieveAnim()
 		{
@@ -194,5 +186,6 @@ void**)params = SkelComp;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

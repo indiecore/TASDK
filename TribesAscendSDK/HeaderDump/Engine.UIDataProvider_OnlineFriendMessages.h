@@ -1,39 +1,31 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlinePlayerDataBase.h"
-#include "Core.Object.Pointer.h"
+#include "Engine.OnlineSubsystem.h"
+#include "Core.Object.h"
 #include "Engine.LocalPlayer.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_OnlineFriendMessages." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataProvider_OnlineFriendMessages." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UIDataProvider_OnlineFriendMessages : public UIDataProvider_OnlinePlayerDataBase
 	{
 	public:
-		ADD_VAR(::StrProperty, LastInviteFrom, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, MessageCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bWasDeniedCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bWasAcceptedCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bIsFriendInviteCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, SendingPlayerNameCol, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<OnlineSubsystem::OnlineFriendMessage>, Messages, 96)
+		ADD_STRUCT(ScriptString*, LastInviteFrom, 168)
+		ADD_STRUCT(ScriptString*, MessageCol, 156)
+		ADD_STRUCT(ScriptString*, bWasDeniedCol, 144)
+		ADD_STRUCT(ScriptString*, bWasAcceptedCol, 132)
+		ADD_STRUCT(ScriptString*, bIsFriendInviteCol, 120)
+		ADD_STRUCT(ScriptString*, SendingPlayerNameCol, 108)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 92)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnRegister");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = InPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
@@ -45,46 +37,41 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.ReadMessages");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer, ScriptString* RequestingNick, ScriptString* Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnFriendInviteReceived");
-			byte* params = (byte*)malloc(33);
-			*params = LocalUserNum;
-			*(UniqueNetId*)(params + 4) = RequestingPlayer;
-			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
-			*(ScriptArray<wchar_t>*)(params + 24) = Message;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[33] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
+			*(ScriptString**)&params[12] = RequestingNick;
+			*(ScriptString**)&params[24] = Message;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId SendingPlayer, ScriptString* SendingNick, ScriptString* Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnFriendMessageReceived");
-			byte* params = (byte*)malloc(33);
-			*params = LocalUserNum;
-			*(UniqueNetId*)(params + 4) = SendingPlayer;
-			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
-			*(ScriptArray<wchar_t>*)(params + 24) = Message;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[33] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::UniqueNetId*)&params[4] = SendingPlayer;
+			*(ScriptString**)&params[12] = SendingNick;
+			*(ScriptString**)&params[24] = Message;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnLoginChange");
-			byte* params = (byte*)malloc(1);
-			*params = LocalUserNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnGameInviteReceived(byte LocalUserNum, ScriptArray<wchar_t> InviterName)
+		void OnGameInviteReceived(byte LocalUserNum, ScriptString* InviterName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnGameInviteReceived");
-			byte* params = (byte*)malloc(13);
-			*params = LocalUserNum;
-			*(ScriptArray<wchar_t>*)(params + 4) = InviterName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[13] = { NULL };
+			params[0] = LocalUserNum;
+			*(ScriptString**)&params[4] = InviterName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

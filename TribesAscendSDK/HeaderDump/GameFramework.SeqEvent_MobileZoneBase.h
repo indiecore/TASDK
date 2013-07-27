@@ -1,26 +1,23 @@
 #pragma once
 #include "GameFramework.SeqEvent_MobileBase.h"
 #include "GameFramework.MobilePlayerInput.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileZoneBase." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqEvent_MobileZoneBase : public SeqEvent_MobileBase
 	{
 	public:
-		ADD_VAR(::StrProperty, TargetZoneName, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, TargetZoneName, 256)
 		void AddToMobileInput(class MobilePlayerInput* MPI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileZoneBase.AddToMobileInput");
-			byte* params = (byte*)malloc(4);
-			*(class MobilePlayerInput**)params = MPI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MobilePlayerInput**)&params[0] = MPI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

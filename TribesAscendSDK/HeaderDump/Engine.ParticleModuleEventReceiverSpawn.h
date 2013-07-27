@@ -1,30 +1,32 @@
 #pragma once
 #include "Engine.ParticleModuleEventReceiverBase.h"
-#include "Core.DistributionVector.RawDistributionVector.h"
-#include "Core.DistributionFloat.RawDistributionFloat.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.DistributionFloat.h"
+#include "Core.DistributionVector.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleEventReceiverSpawn." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleEventReceiverSpawn." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleEventReceiverSpawn : public ParticleModuleEventReceiverBase
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, InheritVelocityScale, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bInheritVelocity, 0x4)
-		ADD_VAR(::BoolProperty, bUsePSysLocation, 0x2)
-		ADD_VAR(::BoolProperty, bUseParticleTime, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, SpawnCount, 0xFFFFFFFF)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, InheritVelocityScale, 116)
+		ADD_BOOL(bInheritVelocity, 112, 0x4)
+		ADD_BOOL(bUsePSysLocation, 112, 0x2)
+		ADD_BOOL(bUseParticleTime, 112, 0x1)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, SpawnCount, 84)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

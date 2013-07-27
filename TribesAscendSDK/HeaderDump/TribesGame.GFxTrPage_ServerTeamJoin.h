@@ -15,46 +15,39 @@ namespace UnrealScript
 		void SpecialAction(class GFxTrAction* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerTeamJoin.SpecialAction");
-			byte* params = (byte*)malloc(4);
-			*(class GFxTrAction**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxTrAction**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerTeamJoin.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerTeamJoin.FillOption");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void CheckDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerTeamJoin.CheckDescription");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerTeamJoin.FillDescription");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void ShowModel()
 		{

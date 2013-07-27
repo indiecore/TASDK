@@ -1,17 +1,15 @@
 #pragma once
 #include "Engine.SequenceVariable.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqVar_Float." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqVar_Float : public SequenceVariable
 	{
 	public:
-		ADD_VAR(::FloatProperty, FloatValue, 0xFFFFFFFF)
+		ADD_STRUCT(float, FloatValue, 148)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

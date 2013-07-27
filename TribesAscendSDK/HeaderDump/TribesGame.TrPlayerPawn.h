@@ -3,159 +3,150 @@
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.SoundCue.h"
 #include "TribesGame.TrAnimNodeBlendBy3pDevice.h"
+#include "Engine.AnimNodeSequence.h"
+#include "Core.Object.h"
 #include "Engine.Actor.h"
 #include "Engine.ParticleSystem.h"
-#include "Core.Object.Rotator.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPlayerPawn." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrPlayerPawn." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrPlayerPawn." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "TribesGame.TrObject.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrPlayerPawn : public TrPawn
 	{
 	public:
-		ADD_VAR(::ByteProperty, r_nFlashReloadPrimaryWeapon, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, r_nFlashReloadSecondaryWeapon, 0xFFFFFFFF)
-		ADD_OBJECT(TrAnimNodeBlendBy3pDevice, m_3pDeviceAnimNode)
-		ADD_OBJECT(TrAnimNodeBlendBy3pDevice, m_1pBodyMeshDeviceAnimNode)
-		ADD_VAR(::FloatProperty, BobGroundSpeedMultiplier2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BobGroundSpeedMultiplier1, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BobTimeMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_WeaponBobMultiplier2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_WeaponBobMultiplier1, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_BobFootstepMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_JumpBob5, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_JumpBob4, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_JumpBob3, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_JumpBob2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_JumpBob1, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingSkiingMultiplier2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingSkiingMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingSpeedSqThresholdSkiing, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingSpeedSqThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMultiplier5, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMultiplier4, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMultiplier3, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMultiplier2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMultiplier1, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandingMinSmoothing, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandRecoveryMultiplier2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandRecoveryMultiplier1, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandRecoveryMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightLandRecoveryMinSmoothing, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightWalkingMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_EyeHeightWalkingMinSmoothing, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_Cam3pZoomInSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_Cam3pZoomOutSpeed, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, m_DeathCamFocus)
-		ADD_STRUCT(::RotatorProperty, m_CamRotOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fRibbonZVelocity, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect3p)
-		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect1p)
-		ADD_OBJECT(SoundCue, m_SonicPunch3p)
-		ADD_OBJECT(SoundCue, m_SonicPunch1p)
-		ADD_OBJECT(ParticleSystem, m_DefaultSkiJetParticle)
-		ADD_VAR(::FloatProperty, m_fJetpackSoundFadeOutTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fRemainingJetpackSoundFadeOutTime, 0xFFFFFFFF)
+		ADD_STRUCT(byte, r_nFlashReloadPrimaryWeapon, 3212)
+		ADD_STRUCT(byte, r_nFlashReloadSecondaryWeapon, 3213)
+		ADD_OBJECT(TrAnimNodeBlendBy3pDevice, m_3pDeviceAnimNode, 3204)
+		ADD_OBJECT(TrAnimNodeBlendBy3pDevice, m_1pBodyMeshDeviceAnimNode, 3208)
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void*>, m_JetpackPSCs, 3216)
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void*>, m_JetpackRibbonPSCs, 3228)
+		ADD_STRUCT(ScriptArray<TrPawn::FootstepParticleInfo>, m_HardLandingParticles, 3240)
+		ADD_STRUCT(ScriptArray<TrPawn::FootstepParticleInfo>, m_StepParticles, 3252)
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void*>, m_FootThrusterPSCs, 3268)
+		ADD_STRUCT(ScriptArray<class AnimNodeSequence*>, m_MeshAnimSequenceNodes, 3436)
+		ADD_STRUCT(float, BobGroundSpeedMultiplier2, 3432)
+		ADD_STRUCT(float, BobGroundSpeedMultiplier1, 3428)
+		ADD_STRUCT(float, BobTimeMultiplier, 3424)
+		ADD_STRUCT(float, m_WeaponBobMultiplier2, 3420)
+		ADD_STRUCT(float, m_WeaponBobMultiplier1, 3416)
+		ADD_STRUCT(float, m_BobFootstepMultiplier, 3412)
+		ADD_STRUCT(float, m_JumpBob5, 3408)
+		ADD_STRUCT(float, m_JumpBob4, 3404)
+		ADD_STRUCT(float, m_JumpBob3, 3400)
+		ADD_STRUCT(float, m_JumpBob2, 3396)
+		ADD_STRUCT(float, m_JumpBob1, 3392)
+		ADD_STRUCT(float, m_EyeHeightLandingSkiingMultiplier2, 3388)
+		ADD_STRUCT(float, m_EyeHeightLandingSkiingMultiplier, 3384)
+		ADD_STRUCT(float, m_EyeHeightLandingSpeedSqThresholdSkiing, 3380)
+		ADD_STRUCT(float, m_EyeHeightLandingSpeedSqThreshold, 3376)
+		ADD_STRUCT(float, m_EyeHeightLandingMultiplier5, 3372)
+		ADD_STRUCT(float, m_EyeHeightLandingMultiplier4, 3368)
+		ADD_STRUCT(float, m_EyeHeightLandingMultiplier3, 3364)
+		ADD_STRUCT(float, m_EyeHeightLandingMultiplier2, 3360)
+		ADD_STRUCT(float, m_EyeHeightLandingMultiplier1, 3356)
+		ADD_STRUCT(float, m_EyeHeightLandingMultiplier, 3352)
+		ADD_STRUCT(float, m_EyeHeightLandingMinSmoothing, 3348)
+		ADD_STRUCT(float, m_EyeHeightLandRecoveryMultiplier2, 3344)
+		ADD_STRUCT(float, m_EyeHeightLandRecoveryMultiplier1, 3340)
+		ADD_STRUCT(float, m_EyeHeightLandRecoveryMultiplier, 3336)
+		ADD_STRUCT(float, m_EyeHeightLandRecoveryMinSmoothing, 3332)
+		ADD_STRUCT(float, m_EyeHeightWalkingMultiplier, 3328)
+		ADD_STRUCT(float, m_EyeHeightWalkingMinSmoothing, 3324)
+		ADD_STRUCT(float, m_Cam3pZoomInSpeed, 3320)
+		ADD_STRUCT(float, m_Cam3pZoomOutSpeed, 3316)
+		ADD_OBJECT(Actor, m_DeathCamFocus, 3312)
+		ADD_STRUCT(Object::Rotator, m_CamRotOffset, 3300)
+		ADD_STRUCT(float, m_fRibbonZVelocity, 3296)
+		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect3p, 3292)
+		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect1p, 3288)
+		ADD_OBJECT(SoundCue, m_SonicPunch3p, 3284)
+		ADD_OBJECT(SoundCue, m_SonicPunch1p, 3280)
+		ADD_OBJECT(ParticleSystem, m_DefaultSkiJetParticle, 3264)
+		ADD_STRUCT(float, m_fJetpackSoundFadeOutTime, 3200)
+		ADD_STRUCT(float, m_fRemainingJetpackSoundFadeOutTime, 3196)
 		void SetCharacterClassFromInfo(ScriptClass* Info, bool bForce)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.SetCharacterClassFromInfo");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = Info;
-			*(bool*)(params + 4) = bForce;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = Info;
+			*(bool*)&params[4] = bForce;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateEyeHeight(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.UpdateEyeHeight");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptName GetMaterialBelowFeetByLoc(Vector TestLocation)
+		ScriptName GetMaterialBelowFeetByLoc(Object::Vector TestLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.GetMaterialBelowFeetByLoc");
-			byte* params = (byte*)malloc(20);
-			*(Vector*)params = TestLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptName*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(Object::Vector*)&params[0] = TestLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptName*)&params[12];
 		}
 		ScriptName GetMaterialBelowFeet()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.GetMaterialBelowFeet");
-			byte* params = (byte*)malloc(8);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptName*)params;
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptName*)&params[0];
 		}
 		void ActuallyPlayFootstepSound(int FootDown)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ActuallyPlayFootstepSound");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = FootDown;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = FootDown;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Vector WeaponBob(float BobDamping, float JumpDamping)
+		Object::Vector WeaponBob(float BobDamping, float JumpDamping)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.WeaponBob");
-			byte* params = (byte*)malloc(20);
-			*(float*)params = BobDamping;
-			*(float*)(params + 4) = JumpDamping;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(float*)&params[0] = BobDamping;
+			*(float*)&params[4] = JumpDamping;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[8];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayHardLandingEffect(Vector HitLocation)
+		void PlayHardLandingEffect(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlayHardLandingEffect");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlaySonicPunchEffect()
 		{
@@ -207,78 +198,69 @@ void**)params = SkelComp;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.StopJetpackEffects");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayReload(byte EquipPoint)
+		void PlayReload(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlayReload");
-			byte* params = (byte*)malloc(1);
-			*params = EquipPoint;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		bool CalcCamera(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CalcCamera");
-			byte* params = (byte*)malloc(36);
-			*(float*)params = fDeltaTime;
-			*(Vector*)(params + 4) = out_CamLoc;
-			*(Rotator*)(params + 16) = out_CamRot;
-			*(float*)(params + 28) = out_FOV;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 4);
-			out_CamRot = *(Rotator*)(params + 16);
-			out_FOV = *(float*)(params + 28);
-			auto returnVal = *(bool*)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(float*)&params[0] = fDeltaTime;
+			*(Object::Vector*)&params[4] = out_CamLoc;
+			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)&params[28] = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[4];
+			out_CamRot = *(Object::Rotator*)&params[16];
+			out_FOV = *(float*)&params[28];
+			return *(bool*)&params[32];
 		}
 		void SetThirdPersonCamera(bool bNewBehindView)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.SetThirdPersonCamera");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bNewBehindView;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bNewBehindView;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CalcThirdPersonCam(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		bool CalcThirdPersonCam(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CalcThirdPersonCam");
-			byte* params = (byte*)malloc(36);
-			*(float*)params = fDeltaTime;
-			*(Vector*)(params + 4) = out_CamLoc;
-			*(Rotator*)(params + 16) = out_CamRot;
-			*(float*)(params + 28) = out_FOV;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 4);
-			out_CamRot = *(Rotator*)(params + 16);
-			out_FOV = *(float*)(params + 28);
-			auto returnVal = *(bool*)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(float*)&params[0] = fDeltaTime;
+			*(Object::Vector*)&params[4] = out_CamLoc;
+			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)&params[28] = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[4];
+			out_CamRot = *(Object::Rotator*)&params[16];
+			out_FOV = *(float*)&params[28];
+			return *(bool*)&params[32];
 		}
-		bool CalcOtherWatchingCam(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV, class TrPlayerController* WatcherController)
+		bool CalcOtherWatchingCam(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV, class TrPlayerController* WatcherController)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CalcOtherWatchingCam");
-			byte* params = (byte*)malloc(40);
-			*(float*)params = fDeltaTime;
-			*(Vector*)(params + 4) = out_CamLoc;
-			*(Rotator*)(params + 16) = out_CamRot;
-			*(float*)(params + 28) = out_FOV;
-			*(class TrPlayerController**)(params + 32) = WatcherController;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 4);
-			out_CamRot = *(Rotator*)(params + 16);
-			out_FOV = *(float*)(params + 28);
-			auto returnVal = *(bool*)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(float*)&params[0] = fDeltaTime;
+			*(Object::Vector*)&params[4] = out_CamLoc;
+			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)&params[28] = out_FOV;
+			*(class TrPlayerController**)&params[32] = WatcherController;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[4];
+			out_CamRot = *(Object::Rotator*)&params[16];
+			out_FOV = *(float*)&params[28];
+			return *(bool*)&params[36];
 		}
 		void ClearMeshAnimSeqNodes()
 		{
@@ -293,13 +275,11 @@ void**)params = SkelComp;
 		void SuppressAnimNotifies(bool bSuppress)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.SuppressAnimNotifies");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bSuppress;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bSuppress;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

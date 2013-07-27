@@ -1,28 +1,25 @@
 #pragma once
 #include "TribesGame.TrDevice_Pack.h"
 #include "TribesGame.TrDevice.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_AmmoPack." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrDevice_AmmoPack : public TrDevice_Pack
 	{
 	public:
-		ADD_VAR(::IntProperty, m_nAmmoPackMultBelt, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nAmmoPackMultSecondary, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nAmmoPackMultPrimary, 0xFFFFFFFF)
+		ADD_STRUCT(int, m_nAmmoPackMultBelt, 2176)
+		ADD_STRUCT(int, m_nAmmoPackMultSecondary, 2172)
+		ADD_STRUCT(int, m_nAmmoPackMultPrimary, 2168)
 		void AddAmmoBuff(class TrDevice* Dev, float Mult)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_AmmoPack.AddAmmoBuff");
-			byte* params = (byte*)malloc(8);
-			*(class TrDevice**)params = Dev;
-			*(float*)(params + 4) = Mult;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class TrDevice**)&params[0] = Dev;
+			*(float*)&params[4] = Mult;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyAmmoBuff()
 		{
@@ -31,4 +28,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

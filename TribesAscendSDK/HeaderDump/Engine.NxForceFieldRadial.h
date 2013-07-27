@@ -1,36 +1,27 @@
 #pragma once
 #include "Engine.NxForceField.h"
-#include "Core.Object.Pointer.h"
+#include "Core.Object.h"
+#include "Engine.PrimitiveComponent.h"
 #include "Engine.ForceFieldShape.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxForceFieldRadial." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NxForceFieldRadial." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.NxForceFieldRadial." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class NxForceFieldRadial : public NxForceField
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Kernel, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ForceFalloff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SelfRotationStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ForceRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ForceStrength, 0xFFFFFFFF)
-		ADD_OBJECT(ForceFieldShape, Shape)
+		ADD_STRUCT(Object::Pointer, Kernel, 564)
+		ADD_STRUCT(PrimitiveComponent::ERadialImpulseFalloff, ForceFalloff, 560)
+		ADD_STRUCT(float, SelfRotationStrength, 556)
+		ADD_STRUCT(float, ForceRadius, 552)
+		ADD_STRUCT(float, ForceStrength, 548)
+		ADD_OBJECT(ForceFieldShape, Shape, 540)
 		void DoInitRBPhys()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceFieldRadial.DoInitRBPhys");
@@ -38,6 +29,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

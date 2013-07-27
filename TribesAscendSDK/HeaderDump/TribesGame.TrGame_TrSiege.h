@@ -2,20 +2,29 @@
 #include "TribesGame.TrGame.h"
 #include "TribesGame.TrPowerGenerator_Siege.h"
 #include "Engine.PlayerReplicationInfo.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGame_TrSiege." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrGame_TrSiege : public TrGame
 	{
 	public:
-		ADD_VAR(::IntProperty, m_CurrentPhase, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bWasCoreDestroyedInRoundOne, 0x1)
-		ADD_VAR(::FloatProperty, m_bRoundOneTimeSecs, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<class TrPowerGenerator_Siege*>, m_Phase1OnlineGenerators, 1456)
+		ADD_STRUCT(int, m_CurrentPhase, 1476)
+		ADD_BOOL(m_bWasCoreDestroyedInRoundOne, 1472, 0x1)
+		ADD_STRUCT(float, m_bRoundOneTimeSecs, 1468)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.PostBeginPlay");
@@ -24,10 +33,9 @@ namespace UnrealScript
 		void OnGeneratorBlownUp(class TrPowerGenerator_Siege* G)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.OnGeneratorBlownUp");
-			byte* params = (byte*)malloc(4);
-			*(class TrPowerGenerator_Siege**)params = G;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPowerGenerator_Siege**)&params[0] = G;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCoreBlownUp()
 		{
@@ -37,19 +45,16 @@ namespace UnrealScript
 		bool IsInRoundOne()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.IsInRoundOne");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void RoundOneOver(bool bDestroyedCore)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.RoundOneOver");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDestroyedCore;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDestroyedCore;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetGame()
 		{
@@ -59,25 +64,24 @@ namespace UnrealScript
 		void SetPhase(int PhaseNumber)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.SetPhase");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = PhaseNumber;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = PhaseNumber;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SwapTeams()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.SwapTeams");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void EndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		void EndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.EndGame");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

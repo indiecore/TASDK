@@ -15,10 +15,9 @@ namespace UnrealScript
 		void SpecialAction(class GFxTrAction* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageProfiles.SpecialAction");
-			byte* params = (byte*)malloc(4);
-			*(class GFxTrAction**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxTrAction**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowModel()
 		{
@@ -28,21 +27,18 @@ namespace UnrealScript
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageProfiles.TakeFocus");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageProfiles.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

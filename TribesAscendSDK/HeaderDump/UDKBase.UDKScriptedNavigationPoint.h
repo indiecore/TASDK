@@ -1,39 +1,40 @@
 #pragma once
 #include "Engine.NavigationPoint.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKScriptedNavigationPoint." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class UDKScriptedNavigationPoint : public NavigationPoint
 	{
 	public:
-		ADD_VAR(::BoolProperty, bAnchorMustBeReachable, 0x4)
-		ADD_VAR(::BoolProperty, bScriptNotifyAnchorFindingResult, 0x2)
-		ADD_VAR(::BoolProperty, bScriptSpecifyEndAnchor, 0x1)
+		ADD_BOOL(bAnchorMustBeReachable, 692, 0x4)
+		ADD_BOOL(bScriptNotifyAnchorFindingResult, 692, 0x2)
+		ADD_BOOL(bScriptSpecifyEndAnchor, 692, 0x1)
 		class NavigationPoint* SpecifyEndAnchor(class Pawn* RouteFinder)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScriptedNavigationPoint.SpecifyEndAnchor");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = RouteFinder;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class NavigationPoint**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class NavigationPoint**)&params[4];
 		}
 		void NotifyAnchorFindingResult(class NavigationPoint* EndAnchor, class Pawn* RouteFinder)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScriptedNavigationPoint.NotifyAnchorFindingResult");
-			byte* params = (byte*)malloc(8);
-			*(class NavigationPoint**)params = EndAnchor;
-			*(class Pawn**)(params + 4) = RouteFinder;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class NavigationPoint**)&params[0] = EndAnchor;
+			*(class Pawn**)&params[4] = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

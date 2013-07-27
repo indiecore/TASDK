@@ -1,65 +1,86 @@
 #pragma once
-#include "UTGame.GFxUDKFrontEnd_JoinDialog.h"
 #include "Engine.OnlineSubsystem.h"
 #include "UDKBase.UDKDataStore_GameSearchBase.h"
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
 #include "UTGame.UTUIDataStore_StringList.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 #include "UTGame.UTUIDataStore_MenuItems.h"
 #include "GFxUI.GFxClikWidget.h"
 #include "UTGame.GFxUDKFrontEnd_PasswordDialog.h"
+#include "Engine.OnlineGameSearch.h"
+#include "UTGame.GFxUDKFrontEnd_JoinDialog.h"
 #include "UTGame.UTDataStore_GameSearchDM.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "UDKBase.UDKUIDataProvider_SearchResult.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_JoinGame." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_JoinGame." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxUDKFrontEnd_JoinGame : public GFxUDKFrontEnd_Screen
 	{
 	public:
-		ADD_OBJECT(UDKDataStore_GameSearchBase, SearchDataStore)
-		ADD_VAR(::NameProperty, SearchDSName, 0xFFFFFFFF)
-		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore)
-		ADD_OBJECT(UTUIDataStore_MenuItems, MenuItemDataStore)
-		ADD_OBJECT(OnlineSubsystem, OnlineSub)
-		ADD_OBJECT(GFxClikWidget, FlagsHeaderBtn)
-		ADD_OBJECT(GFxClikWidget, ServerHeaderBtn)
-		ADD_OBJECT(GFxClikWidget, MapHeaderBtn)
-		ADD_OBJECT(GFxClikWidget, PlayersHeaderBtn)
-		ADD_OBJECT(GFxClikWidget, PingHeaderBtn)
-		ADD_VAR(::BoolProperty, bGametypeOutdated, 0x1)
-		ADD_VAR(::BoolProperty, bIssuedInitialQuery, 0x4)
-		ADD_OBJECT(GFxClikWidget, RefreshBtn)
-		ADD_OBJECT(GFxClikWidget, ServerListMC)
-		ADD_OBJECT(GFxObject, FilterMatchTypeTxt)
-		ADD_OBJECT(GFxObject, FilterGameModeTxt)
-		ADD_OBJECT(GFxUDKFrontEnd_PasswordDialog, PasswordDialog)
-		ADD_VAR(::StrProperty, ServerPassword, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, StatusTxt)
-		ADD_OBJECT(GFxObject, ServerCountTxt)
-		ADD_VAR(::BoolProperty, bSpectate, 0x2)
-		ADD_VAR(::ByteProperty, QueryCompletionAction, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bQueryDialogShowing, 0x8)
-		ADD_OBJECT(GFxObject, HeaderBarMC)
-		ADD_VAR(::IntProperty, SelectedIndex, 0xFFFFFFFF)
-		ADD_OBJECT(GFxUDKFrontEnd_JoinDialog, JoinDialogMC)
-		ADD_VAR(::BoolProperty, bJoinDialogShowing, 0x10)
-		ADD_VAR(::BoolProperty, bProcessingJoin, 0x20)
-		ADD_OBJECT(GFxObject, LoadingTickerMC)
-		ADD_OBJECT(GFxObject, MenuMC)
-		ADD_OBJECT(GFxClikWidget, FilterBtn)
-		ADD_OBJECT(UTDataStore_GameSearchDM, SearchDMDataStore)
-		ADD_VAR(::IntProperty, LastServerAdded, 0xFFFFFFFF)
+		static const auto SERVERBROWSER_SERVERTYPE_RANKED = 2;
+		static const auto SERVERBROWSER_SERVERTYPE_UNRANKED = 1;
+		static const auto SERVERBROWSER_SERVERTYPE_LAN = 0;
+		enum EQueryCompletionAction : byte
+		{
+			QUERYACTION_None = 0,
+			QUERYACTION_Default = 1,
+			QUERYACTION_CloseScene = 2,
+			QUERYACTION_JoinServer = 3,
+			QUERYACTION_RefreshAll = 4,
+			QUERYACTION_MAX = 5,
+		};
+		ADD_OBJECT(UDKDataStore_GameSearchBase, SearchDataStore, 220)
+		ADD_STRUCT(ScriptName, SearchDSName, 264)
+		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore, 224)
+		ADD_OBJECT(UTUIDataStore_MenuItems, MenuItemDataStore, 244)
+		ADD_OBJECT(OnlineSubsystem, OnlineSub, 248)
+		ADD_OBJECT(GFxClikWidget, FlagsHeaderBtn, 328)
+		ADD_OBJECT(GFxClikWidget, ServerHeaderBtn, 332)
+		ADD_OBJECT(GFxClikWidget, MapHeaderBtn, 336)
+		ADD_OBJECT(GFxClikWidget, PlayersHeaderBtn, 340)
+		ADD_OBJECT(GFxClikWidget, PingHeaderBtn, 344)
+		ADD_BOOL(bGametypeOutdated, 260, 0x1)
+		ADD_BOOL(bIssuedInitialQuery, 260, 0x4)
+		ADD_OBJECT(GFxClikWidget, RefreshBtn, 320)
+		ADD_OBJECT(GFxClikWidget, ServerListMC, 316)
+		ADD_OBJECT(GFxObject, FilterMatchTypeTxt, 348)
+		ADD_OBJECT(GFxObject, FilterGameModeTxt, 352)
+		ADD_OBJECT(GFxUDKFrontEnd_PasswordDialog, PasswordDialog, 272)
+		ADD_STRUCT(ScriptString*, ServerPassword, 284)
+		ADD_OBJECT(GFxObject, StatusTxt, 356)
+		ADD_OBJECT(GFxObject, ServerCountTxt, 364)
+		ADD_BOOL(bSpectate, 260, 0x2)
+		ADD_STRUCT(GFxUDKFrontEnd_JoinGame::EQueryCompletionAction, QueryCompletionAction, 280)
+		ADD_BOOL(bQueryDialogShowing, 260, 0x8)
+		ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchResult>, ServerInfoList, 232)
+		ADD_OBJECT(GFxObject, HeaderBarMC, 324)
+		ADD_STRUCT(int, SelectedIndex, 372)
+		ADD_OBJECT(GFxUDKFrontEnd_JoinDialog, JoinDialogMC, 276)
+		ADD_BOOL(bJoinDialogShowing, 260, 0x10)
+		ADD_BOOL(bProcessingJoin, 260, 0x20)
+		ADD_OBJECT(GFxObject, LoadingTickerMC, 360)
+		ADD_OBJECT(GFxObject, MenuMC, 312)
+		ADD_OBJECT(GFxClikWidget, FilterBtn, 368)
+		ADD_OBJECT(UTDataStore_GameSearchDM, SearchDMDataStore, 228)
+		ADD_STRUCT(int, LastServerAdded, 296)
+		ADD_STRUCT(ScriptArray<class UDKUIDataProvider_SearchResult*>, ServerListData, 300)
 		void OnViewLoaded()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnViewLoaded");
@@ -73,10 +94,9 @@ namespace UnrealScript
 		void ForceLANOption(int PlayerIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ForceLANOption");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = PlayerIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateFilterButton()
 		{
@@ -86,10 +106,9 @@ namespace UnrealScript
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnViewClosed()
 		{
@@ -99,10 +118,9 @@ namespace UnrealScript
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ValidateServerType()
 		{
@@ -114,31 +132,27 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.Cleanup");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		int GetGameTypeSearchProviderIndex(ScriptArray<wchar_t> GameClassName)
+		int GetGameTypeSearchProviderIndex(ScriptString* GameClassName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.GetGameTypeSearchProviderIndex");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = GameClassName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = GameClassName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
 		void OnGameTypeChanged(int PlayerIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnGameTypeChanged");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = PlayerIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConditionalRefreshServerList(int PlayerIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ConditionalRefreshServerList");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = PlayerIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UseLANMode()
 		{
@@ -155,24 +169,21 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.PromptForServerPassword");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> StripInvalidPasswordCharacters(ScriptArray<wchar_t> PasswordString, ScriptArray<wchar_t> InvalidChars)
+		ScriptString* StripInvalidPasswordCharacters(ScriptString* PasswordString, ScriptString* InvalidChars)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.StripInvalidPasswordCharacters");
-			byte* params = (byte*)malloc(36);
-			*(ScriptArray<wchar_t>*)params = PasswordString;
-			*(ScriptArray<wchar_t>*)(params + 12) = InvalidChars;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(ScriptString**)&params[0] = PasswordString;
+			*(ScriptString**)&params[12] = InvalidChars;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[24];
 		}
-		void OnPasswordDialog_OK(EventData ev)
+		void OnPasswordDialog_OK(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnPasswordDialog_OK");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessJoin()
 		{
@@ -184,73 +195,63 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UpdateServerCount");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> BuildJoinURL(ScriptArray<wchar_t> ResolvedConnectionURL)
+		ScriptString* BuildJoinURL(ScriptString* ResolvedConnectionURL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.BuildJoinURL");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = ResolvedConnectionURL;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = ResolvedConnectionURL;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
 		void RefreshServerList(int InPlayerIndex, int MaxResults)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.RefreshServerList");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = InPlayerIndex;
-			*(int*)(params + 4) = MaxResults;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = InPlayerIndex;
+			*(int*)&params[4] = MaxResults;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SubmitServerListQuery(int PlayerIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.SubmitServerListQuery");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = PlayerIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFindOnlineGamesCompleteDelegate(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnFindOnlineGamesCompleteDelegate");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFindOnlineGamesComplete(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnFindOnlineGamesComplete");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetDesiredMatchType()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.GetDesiredMatchType");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		void OnRefreshButtonPress(EventData ev)
+		void OnRefreshButtonPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnRefreshButtonPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFilterButtonPress(EventData ev)
+		void OnFilterButtonPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnFilterButtonPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerFilterChangedGameType()
 		{
@@ -262,61 +263,54 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UpdateListDataProvider");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnServerHeaderPress(EventData ev)
+		void OnServerHeaderPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnServerHeaderPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnMapHeaderPress(EventData ev)
+		void OnMapHeaderPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnMapHeaderPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnPlayersHeaderPress(EventData ev)
+		void OnPlayersHeaderPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnPlayersHeaderPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnPingHeaderPress(EventData ev)
+		void OnPingHeaderPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnPingHeaderPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnServerListItemPress(EventData ev)
+		void OnServerListItemPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnServerListItemPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SpectateServer(EventData ev)
+		void SpectateServer(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.SpectateServer");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void JoinServerClikListener(EventData ev)
+		void JoinServerClikListener(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.JoinServerClikListener");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinServer()
 		{
@@ -326,44 +320,38 @@ namespace UnrealScript
 		void OnJoinGameComplete(ScriptName SessionName, bool bSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnJoinGameComplete");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = SessionName;
-			*(bool*)(params + 8) = bSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(bool*)&params[8] = bSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowJoinServer()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.AllowJoinServer");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		void CancelQuery(byte DesiredCancelAction)
+		void CancelQuery(GFxUDKFrontEnd_JoinGame::EQueryCompletionAction DesiredCancelAction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.CancelQuery");
-			byte* params = (byte*)malloc(1);
-			*params = DesiredCancelAction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(GFxUDKFrontEnd_JoinGame::EQueryCompletionAction*)&params[0] = DesiredCancelAction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRefreshing(bool IsRefreshing)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.SetRefreshing");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = IsRefreshing;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = IsRefreshing;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCancelSearchComplete(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnCancelSearchComplete");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyGameTypeChanged()
 		{
@@ -373,16 +361,15 @@ namespace UnrealScript
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

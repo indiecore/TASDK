@@ -9,12 +9,10 @@ namespace UnrealScript
 		bool CheckCanPawnUseStationNow(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStationCollision.CheckCanPawnUseStationNow");
-			byte* params = (byte*)malloc(8);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 	};
 }

@@ -1,23 +1,31 @@
 #pragma once
 #include "TribesGame.GFxTrPage.h"
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_RegionSettings." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GFxTrPage_RegionSettings : public GFxTrPage
 	{
 	public:
-		ADD_VAR(::BoolProperty, bFilter, 0x1)
-		ADD_VAR(::BoolProperty, bForceChoose, 0x4)
-		ADD_VAR(::BoolProperty, bServer, 0x2)
-		ADD_VAR(::IntProperty, CurrFilterIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, CurrFilterSite, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, CurrRegion, 0xFFFFFFFF)
+		ADD_BOOL(bFilter, 368, 0x1)
+		ADD_BOOL(bForceChoose, 368, 0x4)
+		ADD_BOOL(bServer, 368, 0x2)
+		ADD_STRUCT(int, CurrFilterIndex, 364)
+		ADD_STRUCT(int, CurrFilterSite, 360)
+		ADD_STRUCT(int, CurrRegion, 356)
 		void Initialize()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RegionSettings.Initialize");
@@ -26,32 +34,28 @@ namespace UnrealScript
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RegionSettings.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int TakeAction(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RegionSettings.TakeAction");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RegionSettings.FillOption");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

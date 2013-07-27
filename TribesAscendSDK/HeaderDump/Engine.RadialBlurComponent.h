@@ -1,79 +1,75 @@
 #pragma once
 #include "Engine.ActorComponent.h"
+#include "Core.Object.h"
+#include "Engine.Scene.h"
 #include "Engine.MaterialInterface.h"
-#include "Core.Object.Matrix.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RadialBlurComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.RadialBlurComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.RadialBlurComponent." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class RadialBlurComponent : public ActorComponent
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LocalToWorld, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bEnabled, 0x2)
-		ADD_VAR(::BoolProperty, bRenderAsVelocity, 0x1)
-		ADD_VAR(::FloatProperty, DistanceFalloffExponent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxCullDistance, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BlurOpacity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BlurFalloffExponent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BlurScale, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, DepthPriorityGroup, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInterface, Material)
+		ADD_STRUCT(Object::Matrix, LocalToWorld, 128)
+		ADD_BOOL(bEnabled, 116, 0x2)
+		ADD_BOOL(bRenderAsVelocity, 116, 0x1)
+		ADD_STRUCT(float, DistanceFalloffExponent, 112)
+		ADD_STRUCT(float, MaxCullDistance, 108)
+		ADD_STRUCT(float, BlurOpacity, 104)
+		ADD_STRUCT(float, BlurFalloffExponent, 100)
+		ADD_STRUCT(float, BlurScale, 96)
+		ADD_STRUCT(Scene::ESceneDepthPriorityGroup, DepthPriorityGroup, 92)
+		ADD_OBJECT(MaterialInterface, Material, 88)
 		void SetMaterial(class MaterialInterface* InMaterial)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetMaterial");
-			byte* params = (byte*)malloc(4);
-			*(class MaterialInterface**)params = InMaterial;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MaterialInterface**)&params[0] = InMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlurScale(float InBlurScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetBlurScale");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = InBlurScale;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = InBlurScale;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlurFalloffExponent(float InBlurFalloffExponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetBlurFalloffExponent");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = InBlurFalloffExponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = InBlurFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlurOpacity(float InBlurOpacity)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetBlurOpacity");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = InBlurOpacity;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = InBlurOpacity;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEnabled(bool bInEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetEnabled");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bInEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bInEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUpdatePropertyBlurScale()
 		{
@@ -92,6 +88,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

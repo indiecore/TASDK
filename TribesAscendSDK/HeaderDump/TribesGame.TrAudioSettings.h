@@ -1,38 +1,38 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAudioSettings." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrAudioSettings." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "TribesGame.TrObject.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrAudioSettings : public GFxObject
 	{
 	public:
-		ADD_VAR(::IntProperty, m_nVolumeMaster, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nVolumeMusic, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nVolumeVoice, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nVolumeVGS, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nVolumeEffects, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, m_SettingsList)
-		ADD_VAR(::IntProperty, m_SettingsCount, 0xFFFFFFFF)
-		int GetCurrentSettingValue(byte Type)
+		ADD_STRUCT(ScriptArray<ScriptString*>, MasterSoundClassNames, 148)
+		ADD_STRUCT(ScriptArray<ScriptString*>, EffectsSoundClassNames, 160)
+		ADD_STRUCT(ScriptArray<ScriptString*>, MusicSoundClassNames, 172)
+		ADD_STRUCT(ScriptArray<ScriptString*>, VGSSoundClassNames, 184)
+		ADD_STRUCT(ScriptArray<ScriptString*>, VoiceSoundClassNames, 196)
+		ADD_STRUCT(int, m_nVolumeMaster, 144)
+		ADD_STRUCT(int, m_nVolumeMusic, 140)
+		ADD_STRUCT(int, m_nVolumeVoice, 136)
+		ADD_STRUCT(int, m_nVolumeVGS, 132)
+		ADD_STRUCT(int, m_nVolumeEffects, 128)
+		ADD_OBJECT(GFxObject, m_SettingsList, 124)
+		ADD_STRUCT(int, m_SettingsCount, 120)
+		int GetCurrentSettingValue(TrObject::ESettingsList Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.GetCurrentSettingValue");
-			byte* params = (byte*)malloc(5);
-			*params = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(TrObject::ESettingsList*)&params[0] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void FlushSettings()
 		{
@@ -42,21 +42,18 @@ namespace UnrealScript
 		void StoreSetting(int SettingId, int val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.StoreSetting");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SettingId;
-			*(int*)(params + 4) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SettingId;
+			*(int*)&params[4] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int ReadSetting(int SettingId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.ReadSetting");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SettingId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SettingId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void ReadSettings()
 		{
@@ -71,98 +68,85 @@ namespace UnrealScript
 		void LoadAudioSettings(class GFxObject* List)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.LoadAudioSettings");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = List;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = List;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyAudioSetting(int Type, int val, bool bStore)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.ApplyAudioSetting");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = Type;
-			*(int*)(params + 4) = val;
-			*(bool*)(params + 8) = bStore;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(int*)&params[0] = Type;
+			*(int*)&params[4] = val;
+			*(bool*)&params[8] = bStore;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddSettingToList(ScriptArray<wchar_t> SettingName, int val)
+		void AddSettingToList(ScriptString* SettingName, int val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.AddSettingToList");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = SettingName;
-			*(int*)(params + 12) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = SettingName;
+			*(int*)&params[12] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMasterVolume(float NewVolume)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.SetMasterVolume");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewVolume;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEffectsVolume(float NewVolume)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.SetEffectsVolume");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewVolume;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMusicVolume(float NewVolume)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.SetMusicVolume");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewVolume;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVGSVolume(float NewVolume)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.SetVGSVolume");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewVolume;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVoiceVolume(float NewVolume)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.SetVoiceVolume");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewVolume;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetBassBoost()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.GetBassBoost");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void SetBassBoost(bool NewBassBoost)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.SetBassBoost");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = NewBassBoost;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = NewBassBoost;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetSettingNameFromType(byte Type)
+		ScriptString* GetSettingNameFromType(TrObject::ESettingsList Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAudioSettings.GetSettingNameFromType");
-			byte* params = (byte*)malloc(13);
-			*params = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(TrObject::ESettingsList*)&params[0] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

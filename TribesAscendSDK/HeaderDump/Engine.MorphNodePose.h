@@ -1,35 +1,30 @@
 #pragma once
 #include "Engine.MorphNodeBase.h"
 #include "Engine.MorphTarget.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MorphNodePose." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.MorphNodePose." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MorphNodePose : public MorphNodeBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, Weight, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, MorphName, 0xFFFFFFFF)
-		ADD_OBJECT(MorphTarget, Target)
+		ADD_STRUCT(float, Weight, 120)
+		ADD_STRUCT(ScriptName, MorphName, 112)
+		ADD_OBJECT(MorphTarget, Target, 108)
 		void SetMorphTarget(ScriptName MorphTargetName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MorphNodePose.SetMorphTarget");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = MorphTargetName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = MorphTargetName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

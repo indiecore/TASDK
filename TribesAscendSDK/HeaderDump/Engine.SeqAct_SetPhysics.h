@@ -1,17 +1,16 @@
 #pragma once
 #include "Engine.SequenceAction.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_SetPhysics." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.Actor.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqAct_SetPhysics : public SequenceAction
 	{
 	public:
-		ADD_VAR(::ByteProperty, newPhysics, 0xFFFFFFFF)
+		ADD_STRUCT(Actor::EPhysics, newPhysics, 232)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

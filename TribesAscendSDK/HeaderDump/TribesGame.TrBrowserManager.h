@@ -1,53 +1,47 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrBrowserManager." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrBrowserManager : public Object
 	{
 	public:
-		ADD_VAR(::StrProperty, URLCreateSteamAccount, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLRecoverUsername, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLRecoverPassword, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLCreateAccount, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLActivateKey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLClassVideo, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLRedirect, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLProfile, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLSupport, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLBooster, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLStore, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLAlert, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URLGold, 0xFFFFFFFF)
-		void OpenURL(ScriptArray<wchar_t> URL)
+		ADD_STRUCT(ScriptString*, URLCreateSteamAccount, 204)
+		ADD_STRUCT(ScriptString*, URLRecoverUsername, 192)
+		ADD_STRUCT(ScriptString*, URLRecoverPassword, 180)
+		ADD_STRUCT(ScriptString*, URLCreateAccount, 168)
+		ADD_STRUCT(ScriptString*, URLActivateKey, 156)
+		ADD_STRUCT(ScriptString*, URLClassVideo, 144)
+		ADD_STRUCT(ScriptString*, URLRedirect, 132)
+		ADD_STRUCT(ScriptString*, URLProfile, 120)
+		ADD_STRUCT(ScriptString*, URLSupport, 108)
+		ADD_STRUCT(ScriptString*, URLBooster, 96)
+		ADD_STRUCT(ScriptString*, URLStore, 84)
+		ADD_STRUCT(ScriptString*, URLAlert, 72)
+		ADD_STRUCT(ScriptString*, URLGold, 60)
+		void OpenURL(ScriptString* URL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.OpenURL");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = URL;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = URL;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OpenVideo(ScriptArray<wchar_t> URL)
+		void OpenVideo(ScriptString* URL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.OpenVideo");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = URL;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = URL;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetLanguageString()
+		ScriptString* GetLanguageString()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.GetLanguageString");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void Alert()
 		{
@@ -97,28 +91,24 @@ namespace UnrealScript
 		void ClassVideo(int Id)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.ClassVideo");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Id;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Id;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateAccount(bool bUsingSteam)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.CreateAccount");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bUsingSteam;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bUsingSteam;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetLangParam()
+		ScriptString* GetLangParam()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.GetLangParam");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

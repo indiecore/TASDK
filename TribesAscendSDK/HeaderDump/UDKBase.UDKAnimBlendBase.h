@@ -1,47 +1,52 @@
 #pragma once
 #include "Engine.AnimNodeBlendList.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimBlendBase." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKAnimBlendBase : public AnimNodeBlendList
 	{
 	public:
-		ADD_VAR(::BoolProperty, bTickAnimInScript, 0x1)
-		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<float>, ChildBlendTimes, 280)
+		ADD_BOOL(bTickAnimInScript, 292, 0x1)
+		ADD_STRUCT(float, BlendTime, 276)
 		float GetBlendTime(int ChildIndex, bool bGetDefault)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendBase.GetBlendTime");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ChildIndex;
-			*(bool*)(params + 4) = bGetDefault;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ChildIndex;
+			*(bool*)&params[4] = bGetDefault;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[8];
 		}
 		float GetAnimDuration(int ChildIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendBase.GetAnimDuration");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ChildIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ChildIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		void TickAnim(float DeltaSeconds)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendBase.TickAnim");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaSeconds;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

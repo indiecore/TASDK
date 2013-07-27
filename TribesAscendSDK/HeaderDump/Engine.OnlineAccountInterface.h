@@ -1,105 +1,87 @@
 #pragma once
 #include "Core.Interface.h"
+#include "Engine.OnlineSubsystem.h"
 namespace UnrealScript
 {
 	class OnlineAccountInterface : public Interface
 	{
 	public:
-		bool CreateOnlineAccount(ScriptArray<wchar_t> UserName, ScriptArray<wchar_t> Password, ScriptArray<wchar_t> EmailAddress, ScriptArray<wchar_t> ProductKey)
+		bool CreateOnlineAccount(ScriptString* UserName, ScriptString* Password, ScriptString* EmailAddress, ScriptString* ProductKey)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.CreateOnlineAccount");
-			byte* params = (byte*)malloc(52);
-			*(ScriptArray<wchar_t>*)params = UserName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Password;
-			*(ScriptArray<wchar_t>*)(params + 24) = EmailAddress;
-			*(ScriptArray<wchar_t>*)(params + 36) = ProductKey;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 48);
-			free(params);
-			return returnVal;
+			byte params[52] = { NULL };
+			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)&params[12] = Password;
+			*(ScriptString**)&params[24] = EmailAddress;
+			*(ScriptString**)&params[36] = ProductKey;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[48];
 		}
-		void OnCreateOnlineAccountCompleted(byte ErrorStatus)
+		void OnCreateOnlineAccountCompleted(OnlineSubsystem::EOnlineAccountCreateStatus ErrorStatus)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.OnCreateOnlineAccountCompleted");
-			byte* params = (byte*)malloc(1);
-			*params = ErrorStatus;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(OnlineSubsystem::EOnlineAccountCreateStatus*)&params[0] = ErrorStatus;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddCreateOnlineAccountCompletedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* AccountCreateDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.AddCreateOnlineAccountCompletedDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = AccountCreateDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = AccountCreateDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearCreateOnlineAccountCompletedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* AccountCreateDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.ClearCreateOnlineAccountCompletedDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = AccountCreateDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = AccountCreateDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CreateLocalAccount(ScriptArray<wchar_t> UserName, ScriptArray<wchar_t> Password)
+		bool CreateLocalAccount(ScriptString* UserName, ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.CreateLocalAccount");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = UserName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)&params[12] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
-		bool RenameLocalAccount(ScriptArray<wchar_t> NewUserName, ScriptArray<wchar_t> OldUserName, ScriptArray<wchar_t> Password)
+		bool RenameLocalAccount(ScriptString* NewUserName, ScriptString* OldUserName, ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.RenameLocalAccount");
-			byte* params = (byte*)malloc(40);
-			*(ScriptArray<wchar_t>*)params = NewUserName;
-			*(ScriptArray<wchar_t>*)(params + 12) = OldUserName;
-			*(ScriptArray<wchar_t>*)(params + 24) = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(ScriptString**)&params[0] = NewUserName;
+			*(ScriptString**)&params[12] = OldUserName;
+			*(ScriptString**)&params[24] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[36];
 		}
-		bool DeleteLocalAccount(ScriptArray<wchar_t> UserName, ScriptArray<wchar_t> Password)
+		bool DeleteLocalAccount(ScriptString* UserName, ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.DeleteLocalAccount");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = UserName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)&params[12] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
-		bool GetLocalAccountNames(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Accounts)
+		bool GetLocalAccountNames(ScriptArray<ScriptString*>& Accounts)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineAccountInterface.GetLocalAccountNames");
-			byte* params = (byte*)malloc(16);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = Accounts;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Accounts = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptArray<ScriptString*>*)&params[0] = Accounts;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Accounts = *(ScriptArray<ScriptString*>*)&params[0];
+			return *(bool*)&params[12];
 		}
 	};
 }

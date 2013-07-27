@@ -1,62 +1,79 @@
 #pragma once
 #include "Engine.SequenceOp.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.SequenceObject.h"
+#include "Engine.SequenceEvent.h"
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Sequence." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.Sequence." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class Sequence : public SequenceOp
 	{
 	public:
-		ADD_VAR(::FloatProperty, DefaultViewZoom, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DefaultViewY, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DefaultViewX, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LogFile, 0xFFFFFFFF)
-		void FindSeqObjectsByClass(ScriptClass* DesiredClass, bool bRecursive, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& OutputObjects)
+		class ActivateOp
+		{
+		public:
+			ADD_STRUCT(float, RemainingDelay, 12)
+			ADD_STRUCT(int, InputIdx, 8)
+			ADD_OBJECT(SequenceOp, Op, 4)
+			ADD_OBJECT(SequenceOp, ActivatorOp, 0)
+		};
+		class QueuedActivationInfo
+		{
+		public:
+			ADD_STRUCT(ScriptArray<int>, ActivateIndices, 12)
+			ADD_BOOL(bPushTop, 24, 0x1)
+			ADD_OBJECT(Actor, InInstigator, 8)
+			ADD_OBJECT(Actor, InOriginator, 4)
+			ADD_OBJECT(SequenceEvent, ActivatedEvent, 0)
+		};
+		ADD_STRUCT(ScriptArray<class SequenceObject*>, SequenceObjects, 212)
+		ADD_STRUCT(ScriptArray<class SequenceOp*>, ActiveSequenceOps, 224)
+		ADD_STRUCT(ScriptArray<class Sequence*>, NestedSequences, 236)
+		ADD_STRUCT(ScriptArray<class SequenceEvent*>, UnregisteredEvents, 248)
+		ADD_STRUCT(ScriptArray<Sequence::ActivateOp>, DelayedActivatedOps, 260)
+		ADD_STRUCT(ScriptArray<Sequence::QueuedActivationInfo>, QueuedActivations, 276)
+		ADD_STRUCT(float, DefaultViewZoom, 296)
+		ADD_STRUCT(int, DefaultViewY, 292)
+		ADD_STRUCT(int, DefaultViewX, 288)
+		ADD_BOOL(bEnabled, 272, 0x1)
+		ADD_STRUCT(Object::Pointer, LogFile, 208)
+		void FindSeqObjectsByClass(ScriptClass* DesiredClass, bool bRecursive, ScriptArray<class SequenceObject*>& OutputObjects)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.FindSeqObjectsByClass");
-			byte* params = (byte*)malloc(20);
-			*(ScriptClass**)params = DesiredClass;
-			*(bool*)(params + 4) = bRecursive;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8) = OutputObjects;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutputObjects = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptClass**)&params[0] = DesiredClass;
+			*(bool*)&params[4] = bRecursive;
+			*(ScriptArray<class SequenceObject*>*)&params[8] = OutputObjects;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutputObjects = *(ScriptArray<class SequenceObject*>*)&params[8];
 		}
-		void FindSeqObjectsByName(ScriptArray<wchar_t> SeqObjName, bool bCheckComment, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& OutputObjects, bool bRecursive)
+		void FindSeqObjectsByName(ScriptString* SeqObjName, bool bCheckComment, ScriptArray<class SequenceObject*>& OutputObjects, bool bRecursive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.FindSeqObjectsByName");
-			byte* params = (byte*)malloc(32);
-			*(ScriptArray<wchar_t>*)params = SeqObjName;
-			*(bool*)(params + 12) = bCheckComment;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 16) = OutputObjects;
-			*(bool*)(params + 28) = bRecursive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutputObjects = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 16);
-			free(params);
+			byte params[32] = { NULL };
+			*(ScriptString**)&params[0] = SeqObjName;
+			*(bool*)&params[12] = bCheckComment;
+			*(ScriptArray<class SequenceObject*>*)&params[16] = OutputObjects;
+			*(bool*)&params[28] = bRecursive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutputObjects = *(ScriptArray<class SequenceObject*>*)&params[16];
 		}
 		void Reset()
 		{
@@ -66,12 +83,12 @@ void**)(params + 16);
 		void SetEnabled(bool bInEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.SetEnabled");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bInEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bInEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
+#undef ADD_OBJECT

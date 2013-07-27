@@ -1,59 +1,62 @@
 #pragma once
-#include "Core.Object.Color.h"
 #include "UTGame.UTLocalMessage.h"
-#include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
+#include "Engine.PlayerReplicationInfo.h"
 #include "Engine.PlayerController.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDeathMessage." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTDeathMessage : public UTLocalMessage
 	{
 	public:
-		ADD_VAR(::BoolProperty, bNoConsoleDeathMessages, 0x1)
-		ADD_VAR(::StrProperty, SomeoneString, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, KilledString, 0xFFFFFFFF)
-		Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		ADD_BOOL(bNoConsoleDeathMessages, 124, 0x1)
+		ADD_STRUCT(ScriptString*, SomeoneString, 112)
+		ADD_STRUCT(ScriptString*, KilledString, 100)
+		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDeathMessage.GetConsoleColor");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerReplicationInfo**)params = RelatedPRI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Color*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Color*)&params[4];
 		}
-		ScriptArray<wchar_t> GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDeathMessage.GetString");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Switch;
-			*(bool*)(params + 4) = bPRI1HUD;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Switch;
+			*(bool*)&params[4] = bPRI1HUD;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDeathMessage.ClientReceive");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerController**)params = P;
-			*(int*)(params + 4) = Switch;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class PlayerController**)&params[0] = P;
+			*(int*)&params[4] = Switch;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

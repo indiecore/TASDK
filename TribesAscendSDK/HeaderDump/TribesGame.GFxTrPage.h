@@ -1,50 +1,85 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
 #include "TribesGame.GFxTrAction.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GFxTrPage : public GFxObject
 	{
 	public:
-		ADD_VAR(::StrProperty, HelpButtonYLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonXLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonBLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonALabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonYKey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonXKey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonBKey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpButtonAKey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PageLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PageLabelOverride, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bShowTribesLogo, 0x200)
-		ADD_VAR(::BoolProperty, bParentLocked, 0x100)
-		ADD_VAR(::BoolProperty, bHasModifiers, 0x80)
-		ADD_VAR(::BoolProperty, bCreated, 0x40)
-		ADD_VAR(::BoolProperty, bActive, 0x20)
-		ADD_VAR(::BoolProperty, bAllowBack, 0x10)
-		ADD_VAR(::BoolProperty, bEndOfLine, 0x8)
-		ADD_VAR(::BoolProperty, bRemoveOption, 0x4)
-		ADD_VAR(::BoolProperty, bModifyOption, 0x2)
-		ADD_VAR(::BoolProperty, bFillingFocus, 0x1)
-		ADD_VAR(::IntProperty, LoadoutEquipType, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LoadoutClassId, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NewAction, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, OptionCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DataCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ActiveIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ScrollIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, HelpButtonYNum, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, HelpButtonXNum, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, HelpButtonBNum, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, HelpButtonANum, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, GoBack, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ActiveLoadout, 0xFFFFFFFF)
+		static const auto MENU_ELEMENT_LOGIN = 1;
+		static const auto MENU_ELEMENT_OPTIONS = 2;
+		static const auto MENU_ELEMENT_SIDEBAR = 3;
+		static const auto MENU_ELEMENT_DESCRIPTION = 4;
+		static const auto MENU_ELEMENT_UPGRADES = 5;
+		static const auto MENU_ELEMENT_POPUPACQ = 6;
+		static const auto MENU_ELEMENT_POPUPALERT = 7;
+		static const auto MENU_ELEMENT_POPUPPURCHASE = 8;
+		static const auto MENU_ELEMENT_SUMMARYPLAYER = 9;
+		static const auto MENU_ELEMENT_SUMMARYTEAM = 10;
+		static const auto MENU_ELEMENT_NOUSE = 11;
+		static const auto MENU_ELEMENT_PRICE = 12;
+		static const auto MENU_ELEMENT_PROFILE = 13;
+		static const auto MENU_ELEMENT_FEATURE = 14;
+		static const auto MENU_ELEMENT_SERVERBROWSER = 15;
+		static const auto MAX_FRIENDS_DISPLAYED = 150;
+		class ResolutionSet
+		{
+		public:
+			ADD_STRUCT(TgPlayerProfile::PropertyPair, Res, 4)
+			ADD_STRUCT(int, Index, 0)
+		};
+		ADD_STRUCT(ScriptArray<ScriptString*>, OptionTitlesOverride, 188)
+		ADD_STRUCT(ScriptArray<ScriptString*>, OptionSubtextOverride, 200)
+		ADD_STRUCT(ScriptArray<ScriptString*>, OptionTitles, 320)
+		ADD_STRUCT(ScriptArray<ScriptString*>, OptionSubtext, 332)
+		ADD_STRUCT(ScriptArray<class GFxTrAction*>, PageActions, 344)
+		ADD_STRUCT(ScriptString*, HelpButtonYLabel, 308)
+		ADD_STRUCT(ScriptString*, HelpButtonXLabel, 296)
+		ADD_STRUCT(ScriptString*, HelpButtonBLabel, 284)
+		ADD_STRUCT(ScriptString*, HelpButtonALabel, 272)
+		ADD_STRUCT(ScriptString*, HelpButtonYKey, 260)
+		ADD_STRUCT(ScriptString*, HelpButtonXKey, 248)
+		ADD_STRUCT(ScriptString*, HelpButtonBKey, 236)
+		ADD_STRUCT(ScriptString*, HelpButtonAKey, 224)
+		ADD_STRUCT(ScriptString*, PageLabel, 212)
+		ADD_STRUCT(ScriptString*, PageLabelOverride, 176)
+		ADD_BOOL(bShowTribesLogo, 172, 0x200)
+		ADD_BOOL(bParentLocked, 172, 0x100)
+		ADD_BOOL(bHasModifiers, 172, 0x80)
+		ADD_BOOL(bCreated, 172, 0x40)
+		ADD_BOOL(bActive, 172, 0x20)
+		ADD_BOOL(bAllowBack, 172, 0x10)
+		ADD_BOOL(bEndOfLine, 172, 0x8)
+		ADD_BOOL(bRemoveOption, 172, 0x4)
+		ADD_BOOL(bModifyOption, 172, 0x2)
+		ADD_BOOL(bFillingFocus, 172, 0x1)
+		ADD_STRUCT(int, LoadoutEquipType, 168)
+		ADD_STRUCT(int, LoadoutClassId, 164)
+		ADD_STRUCT(int, NewAction, 160)
+		ADD_STRUCT(int, OptionCount, 156)
+		ADD_STRUCT(int, DataCount, 152)
+		ADD_STRUCT(int, ActiveIndex, 148)
+		ADD_STRUCT(int, ScrollIndex, 144)
+		ADD_STRUCT(int, HelpButtonYNum, 140)
+		ADD_STRUCT(int, HelpButtonXNum, 136)
+		ADD_STRUCT(int, HelpButtonBNum, 132)
+		ADD_STRUCT(int, HelpButtonANum, 128)
+		ADD_STRUCT(int, GoBack, 124)
+		ADD_STRUCT(int, ActiveLoadout, 120)
 		void Initialize()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.Initialize");
@@ -53,259 +88,213 @@ namespace UnrealScript
 		class GFxTrAction* AddAction()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.AddAction");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxTrAction**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxTrAction**)&params[0];
 		}
 		class GFxTrAction* AddActionNumber(int ActionNumber)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.AddActionNumber");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionNumber;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxTrAction**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionNumber;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxTrAction**)&params[4];
 		}
-		class GFxTrAction* AddActionString(ScriptArray<wchar_t> ActionString)
+		class GFxTrAction* AddActionString(ScriptString* ActionString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.AddActionString");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = ActionString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxTrAction**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = ActionString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxTrAction**)&params[12];
 		}
 		class GFxTrAction* AddActionPage(class GFxTrPage* ActionPage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.AddActionPage");
-			byte* params = (byte*)malloc(8);
-			*(class GFxTrPage**)params = ActionPage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxTrAction**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxTrPage**)&params[0] = ActionPage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxTrAction**)&params[4];
 		}
-		class GFxTrAction* AddActionSet(class GFxTrPage* ActionPage, int ActionNumber, ScriptArray<wchar_t> ActionString)
+		class GFxTrAction* AddActionSet(class GFxTrPage* ActionPage, int ActionNumber, ScriptString* ActionString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.AddActionSet");
-			byte* params = (byte*)malloc(24);
-			*(class GFxTrPage**)params = ActionPage;
-			*(int*)(params + 4) = ActionNumber;
-			*(ScriptArray<wchar_t>*)(params + 8) = ActionString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxTrAction**)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(class GFxTrPage**)&params[0] = ActionPage;
+			*(int*)&params[4] = ActionNumber;
+			*(ScriptString**)&params[8] = ActionString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxTrAction**)&params[20];
 		}
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.TakeFocus");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		int TakeAction(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.TakeAction");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		int ModifyAction(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.ModifyAction");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		void ModifyFocus(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.ModifyFocus");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HelpButton(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.HelpButton");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.SpecialAction");
-			byte* params = (byte*)malloc(4);
-			*(class GFxTrAction**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxTrAction**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupData(class GFxObject* Obj)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.PopupData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = Obj;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PopupComplete(int Action, ScriptArray<wchar_t> TextInput)
+		void PopupComplete(int Action, ScriptString* TextInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.PopupComplete");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Action;
-			*(ScriptArray<wchar_t>*)(params + 4) = TextInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Action;
+			*(ScriptString**)&params[4] = TextInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillOptions(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillOptions");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		bool IsOwned(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.IsOwned");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool CheckPurchasable()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.CheckPurchasable");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool IsEquipMaxed(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.IsEquipMaxed");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillOption");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		class GFxObject* FillDefault()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillDefault");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[0];
 		}
 		bool CheckUpgrades(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.CheckUpgrades");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool CheckPricing(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.CheckPricing");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		class GFxObject* FillUpgrades(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillUpgrades");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		class GFxObject* FillPricing(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillPricing");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void CheckDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.CheckDescription");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillDescription");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void FillPage(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillPage");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearActions()
 		{
@@ -320,55 +309,45 @@ namespace UnrealScript
 		class GFxObject* FillClass(int ClassId, int ActionIndex, bool bShowActive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillClass");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = ClassId;
-			*(int*)(params + 4) = ActionIndex;
-			*(bool*)(params + 8) = bShowActive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = ClassId;
+			*(int*)&params[4] = ActionIndex;
+			*(bool*)&params[8] = bShowActive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[12];
 		}
 		class GFxObject* FillEquipTypes(int EquipId, int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.FillEquipTypes");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = EquipId;
-			*(int*)(params + 4) = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = EquipId;
+			*(int*)&params[4] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[8];
 		}
 		bool NewClassEquip(int ClassId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.NewClassEquip");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ClassId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ClassId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool NewClassUpgrade(int ClassId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.NewClassUpgrade");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ClassId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ClassId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool NewEquipUpgrade(int EquipId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.NewEquipUpgrade");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = EquipId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = EquipId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void RevertSetting()
 		{
@@ -413,18 +392,16 @@ namespace UnrealScript
 		void ProfileUp(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.ProfileUp");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProfileDown(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.ProfileDown");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetRunaway()
 		{
@@ -434,18 +411,16 @@ namespace UnrealScript
 		void ShowReticule(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.ShowReticule");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SaveReticule(class GFxObject* Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage.SaveReticule");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = Data;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = Data;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnClose()
 		{
@@ -454,4 +429,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

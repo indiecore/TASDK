@@ -1,45 +1,46 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.TextureRenderTarget.h"
-#include "Core.Object.LinearColor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.Texture.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TextureRenderTarget2D." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.TextureRenderTarget2D." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TextureRenderTarget2D : public TextureRenderTarget
 	{
 	public:
-		ADD_VAR(::BoolProperty, bForceLinearGamma, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ClearColor, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, AddressY, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, AddressX, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
-		class TextureRenderTarget2D* Create(int InSizeX, int InSizeY, byte InFormat, LinearColor InClearColor, bool bOnlyRenderOnce)
+		ADD_BOOL(bForceLinearGamma, 272, 0x1)
+		ADD_STRUCT(Object::LinearColor, ClearColor, 256)
+		ADD_STRUCT(Texture::TextureAddress, AddressY, 254)
+		ADD_STRUCT(Texture::TextureAddress, AddressX, 253)
+		ADD_STRUCT(Texture::EPixelFormat, Format, 252)
+		ADD_STRUCT(int, SizeY, 248)
+		ADD_STRUCT(int, SizeX, 244)
+		class TextureRenderTarget2D* Create(int InSizeX, int InSizeY, Texture::EPixelFormat InFormat, Object::LinearColor InClearColor, bool bOnlyRenderOnce)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureRenderTarget2D.Create");
-			byte* params = (byte*)malloc(33);
-			*(int*)params = InSizeX;
-			*(int*)(params + 4) = InSizeY;
-			*(params + 8) = InFormat;
-			*(LinearColor*)(params + 12) = InClearColor;
-			*(bool*)(params + 28) = bOnlyRenderOnce;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class TextureRenderTarget2D**)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[33] = { NULL };
+			*(int*)&params[0] = InSizeX;
+			*(int*)&params[4] = InSizeY;
+			*(Texture::EPixelFormat*)&params[8] = InFormat;
+			*(Object::LinearColor*)&params[12] = InClearColor;
+			*(bool*)&params[28] = bOnlyRenderOnce;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class TextureRenderTarget2D**)&params[32];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

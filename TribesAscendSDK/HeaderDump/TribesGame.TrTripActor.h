@@ -1,39 +1,44 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Actor.h"
 #include "Engine.ParticleSystem.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrTripActor." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrTripActor." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrTripActor : public Actor
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fSleepTime, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, r_Left)
-		ADD_OBJECT(Actor, r_Right)
-		ADD_VAR(::BoolProperty, m_bRequiresTwoNotifiers, 0x4)
-		ADD_OBJECT(ParticleSystem, m_LaserTemplate)
-		ADD_VAR(::FloatProperty, r_fSleepEndTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, r_bIsInitialized, 0x2)
-		ADD_VAR(::BoolProperty, r_bIsPowered, 0x1)
+		ADD_STRUCT(float, m_fSleepTime, 492)
+		ADD_OBJECT(Actor, r_Left, 476)
+		ADD_OBJECT(Actor, r_Right, 480)
+		ADD_BOOL(m_bRequiresTwoNotifiers, 484, 0x4)
+		ADD_OBJECT(ParticleSystem, m_LaserTemplate, 520)
+		ADD_STRUCT(float, r_fSleepEndTime, 488)
+		ADD_BOOL(r_bIsInitialized, 484, 0x2)
+		ADD_BOOL(r_bIsPowered, 484, 0x1)
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateTripComponent()
 		{
@@ -50,12 +55,11 @@ namespace UnrealScript
 void* Notifier)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.DestroyNotify");
-			byte* params = (byte*)malloc(8);
+			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)params = Notifier;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = Notifier;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
@@ -69,48 +73,45 @@ void* Left,
 void* Right)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.InitializeTripPhysics");
-			byte* params = (byte*)malloc(16);
+			byte params[16] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)params = Left;
+void**)&params[0] = Left;
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)(params + 8) = Right;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[8] = Right;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GoToSleep(bool bIsPowered)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.GoToSleep");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bIsPowered;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bIsPowered;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Vector HitLocation, Vector HitNormal)
+void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Touch");
-			byte* params = (byte*)malloc(32);
-			*(class Actor**)params = Other;
+			byte params[32] = { NULL };
+			*(class Actor**)&params[0] = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComp;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = OtherComp;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

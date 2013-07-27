@@ -1,28 +1,20 @@
 #pragma once
 #include "Engine.LightComponent.h"
-#include "Engine.EngineTypes.LightmassDirectionalLightSettings.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DirectionalLightComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.DirectionalLightComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.EngineTypes.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class DirectionalLightComponent : public LightComponent
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<LightmassDirectionalLightSettings>, LightmassSettings, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CascadeDistributionExponent, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumWholeSceneDynamicShadowCascades, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WholeSceneDynamicShadowRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TraceDistance, 0xFFFFFFFF)
+		ADD_STRUCT(EngineTypes::LightmassDirectionalLightSettings, LightmassSettings, 448)
+		ADD_STRUCT(float, CascadeDistributionExponent, 444)
+		ADD_STRUCT(int, NumWholeSceneDynamicShadowCascades, 440)
+		ADD_STRUCT(float, WholeSceneDynamicShadowRadius, 436)
+		ADD_STRUCT(float, TraceDistance, 432)
 		void OnUpdatePropertyLightColor()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DirectionalLightComponent.OnUpdatePropertyLightColor");
@@ -35,5 +27,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

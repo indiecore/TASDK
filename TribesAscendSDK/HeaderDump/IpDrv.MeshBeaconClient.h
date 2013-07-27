@@ -1,145 +1,155 @@
 #pragma once
-#include "IpDrv.MeshBeaconClient.ClientBandwidthTestData.h"
 #include "IpDrv.MeshBeacon.h"
-#include "IpDrv.MeshBeacon.ConnectionBandwidthStats.h"
 #include "IpDrv.ClientBeaconAddressResolver.h"
-#include "IpDrv.MeshBeaconClient.ClientConnectionRequest.h"
-#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.OnlineGameSearch.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.MeshBeaconClient." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty IpDrv.MeshBeaconClient." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty IpDrv.MeshBeaconClient." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MeshBeaconClient : public MeshBeacon
 	{
 	public:
-		ADD_VAR(::BoolProperty, bUsingRegisteredAddr, 0x1)
-		ADD_OBJECT(ClientBeaconAddressResolver, Resolver)
-		ADD_OBJECT(ScriptClass, ResolverClass)
-		ADD_VAR(::StrProperty, ResolverClassName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ConnectionRequestElapsedTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ConnectionRequestTimeout, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ClientBeaconRequestType, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ClientBeaconState, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<ClientBandwidthTestData>, CurrentBandwidthTest, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<ClientConnectionRequest>, ClientPendingRequest, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<OnlineGameSearchResult>, HostPendingRequest, 0xFFFFFFFF)
-		void OnCreateNewSessionRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Players)
+		enum EMeshBeaconClientState : byte
+		{
+			MBCS_None = 0,
+			MBCS_Connecting = 1,
+			MBCS_Connected = 2,
+			MBCS_ConnectionFailed = 3,
+			MBCS_AwaitingResponse = 4,
+			MBCS_Closed = 5,
+			MBCS_MAX = 6,
+		};
+		class ClientBandwidthTestData
+		{
+		public:
+			ADD_STRUCT(float, ElapsedTestTime, 16)
+			ADD_STRUCT(int, NumBytesSentLast, 12)
+			ADD_STRUCT(int, NumBytesSentTotal, 8)
+			ADD_STRUCT(int, NumBytesToSendTotal, 4)
+			ADD_STRUCT(MeshBeacon::EMeshBeaconBandwidthTestState, CurrentState, 1)
+			ADD_STRUCT(MeshBeacon::EMeshBeaconBandwidthTestType, TestType, 0)
+		};
+		class ClientConnectionRequest
+		{
+		public:
+			ADD_STRUCT(ScriptArray<MeshBeacon::ConnectionBandwidthStats>, BandwidthHistory, 20)
+			ADD_STRUCT(int, MinutesSinceLastTest, 32)
+			ADD_STRUCT(float, GoodHostRatio, 16)
+			ADD_BOOL(bCanHostVs, 12, 0x1)
+			ADD_STRUCT(OnlineSubsystem::ENATType, NatType, 8)
+			ADD_STRUCT(OnlineSubsystem::UniqueNetId, PlayerNetId, 0)
+		};
+		ADD_BOOL(bUsingRegisteredAddr, 216, 0x1)
+		ADD_OBJECT(ClientBeaconAddressResolver, Resolver, 212)
+		ADD_OBJECT(ScriptClass, ResolverClass, 208)
+		ADD_STRUCT(ScriptString*, ResolverClassName, 196)
+		ADD_STRUCT(float, ConnectionRequestElapsedTime, 192)
+		ADD_STRUCT(float, ConnectionRequestTimeout, 188)
+		ADD_STRUCT(MeshBeacon::EMeshBeaconPacketType, ClientBeaconRequestType, 185)
+		ADD_STRUCT(MeshBeaconClient::EMeshBeaconClientState, ClientBeaconState, 184)
+		ADD_STRUCT(MeshBeaconClient::ClientBandwidthTestData, CurrentBandwidthTest, 164)
+		ADD_STRUCT(MeshBeaconClient::ClientConnectionRequest, ClientPendingRequest, 128)
+		ADD_STRUCT(OnlineGameSearch::OnlineGameSearchResult, HostPendingRequest, 120)
+		void OnCreateNewSessionRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, ScriptArray<MeshBeacon::PlayerMember>& Players)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnCreateNewSessionRequestReceived");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = SessionName;
-			*(ScriptClass**)(params + 8) = SearchClass;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12) = Players;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Players = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptClass**)&params[8] = SearchClass;
+			*(ScriptArray<MeshBeacon::PlayerMember>*)&params[12] = Players;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Players = *(ScriptArray<MeshBeacon::PlayerMember>*)&params[12];
 		}
 		void OnTravelRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, byte& PlatformSpecificInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnTravelRequestReceived");
-			byte* params = (byte*)malloc(13);
-			*(ScriptName*)params = SessionName;
-			*(ScriptClass**)(params + 8) = SearchClass;
-			*(params + 12) = PlatformSpecificInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PlatformSpecificInfo = *(params + 12);
-			free(params);
+			byte params[13] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptClass**)&params[8] = SearchClass;
+			params[12] = PlatformSpecificInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			PlatformSpecificInfo = params[12];
 		}
-		void OnReceivedBandwidthTestResults(byte TestType, byte TestResult, ConnectionBandwidthStats& BandwidthStats)
+		void OnReceivedBandwidthTestResults(MeshBeacon::EMeshBeaconBandwidthTestType TestType, MeshBeacon::EMeshBeaconBandwidthTestResult TestResult, MeshBeacon::ConnectionBandwidthStats& BandwidthStats)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestResults");
-			byte* params = (byte*)malloc(14);
-			*params = TestType;
-			*(params + 1) = TestResult;
-			*(ConnectionBandwidthStats*)(params + 4) = BandwidthStats;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BandwidthStats = *(ConnectionBandwidthStats*)(params + 4);
-			free(params);
+			byte params[14] = { NULL };
+			*(MeshBeacon::EMeshBeaconBandwidthTestType*)&params[0] = TestType;
+			*(MeshBeacon::EMeshBeaconBandwidthTestResult*)&params[1] = TestResult;
+			*(MeshBeacon::ConnectionBandwidthStats*)&params[4] = BandwidthStats;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			BandwidthStats = *(MeshBeacon::ConnectionBandwidthStats*)&params[4];
 		}
-		void OnReceivedBandwidthTestRequest(byte TestType)
+		void OnReceivedBandwidthTestRequest(MeshBeacon::EMeshBeaconBandwidthTestType TestType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestRequest");
-			byte* params = (byte*)malloc(1);
-			*params = TestType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(MeshBeacon::EMeshBeaconBandwidthTestType*)&params[0] = TestType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnConnectionRequestResult(byte ConnectionResult)
+		void OnConnectionRequestResult(MeshBeacon::EMeshBeaconConnectionResult ConnectionResult)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnConnectionRequestResult");
-			byte* params = (byte*)malloc(1);
-			*params = ConnectionResult;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(MeshBeacon::EMeshBeaconConnectionResult*)&params[0] = ConnectionResult;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyBeacon()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.DestroyBeacon");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool RequestConnection(OnlineGameSearchResult& DesiredHost, ClientConnectionRequest& ClientRequest, bool bRegisterSecureAddress)
+		bool RequestConnection(OnlineGameSearch::OnlineGameSearchResult& DesiredHost, MeshBeaconClient::ClientConnectionRequest& ClientRequest, bool bRegisterSecureAddress)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.RequestConnection");
-			byte* params = (byte*)malloc(52);
-			*(OnlineGameSearchResult*)params = DesiredHost;
-			*(ClientConnectionRequest*)(params + 8) = ClientRequest;
-			*(bool*)(params + 44) = bRegisterSecureAddress;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredHost = *(OnlineGameSearchResult*)params;
-			ClientRequest = *(ClientConnectionRequest*)(params + 8);
-			auto returnVal = *(bool*)(params + 48);
-			free(params);
-			return returnVal;
+			byte params[52] = { NULL };
+			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = DesiredHost;
+			*(MeshBeaconClient::ClientConnectionRequest*)&params[8] = ClientRequest;
+			*(bool*)&params[44] = bRegisterSecureAddress;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
+			ClientRequest = *(MeshBeaconClient::ClientConnectionRequest*)&params[8];
+			return *(bool*)&params[48];
 		}
-		bool BeginBandwidthTest(byte TestType, int TestBufferSize)
+		bool BeginBandwidthTest(MeshBeacon::EMeshBeaconBandwidthTestType TestType, int TestBufferSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.BeginBandwidthTest");
-			byte* params = (byte*)malloc(9);
-			*params = TestType;
-			*(int*)(params + 4) = TestBufferSize;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[9] = { NULL };
+			*(MeshBeacon::EMeshBeaconBandwidthTestType*)&params[0] = TestType;
+			*(int*)&params[4] = TestBufferSize;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		bool SendHostNewGameSessionResponse(bool bSuccess, ScriptName SessionName, ScriptClass* SearchClass, byte& PlatformSpecificInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.SendHostNewGameSessionResponse");
-			byte* params = (byte*)malloc(21);
-			*(bool*)params = bSuccess;
-			*(ScriptName*)(params + 4) = SessionName;
-			*(ScriptClass**)(params + 12) = SearchClass;
-			*(params + 16) = PlatformSpecificInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PlatformSpecificInfo = *(params + 16);
-			auto returnVal = *(bool*)(params + 96);
-			free(params);
-			return returnVal;
+			byte params[21] = { NULL };
+			*(bool*)&params[0] = bSuccess;
+			*(ScriptName*)&params[4] = SessionName;
+			*(ScriptClass**)&params[12] = SearchClass;
+			params[16] = PlatformSpecificInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			PlatformSpecificInfo = params[16];
+			return *(bool*)&params[96];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

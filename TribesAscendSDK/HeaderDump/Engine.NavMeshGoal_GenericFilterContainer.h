@@ -1,57 +1,47 @@
 #pragma once
 #include "Engine.NavMeshPathGoalEvaluator.h"
-#include "Core.Object.Vector.h"
-#include "Engine.NavigationHandle.h"
-#include "Core.Object.Pointer.h"
 #include "Engine.NavMeshGoal_Filter.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoal_GenericFilterContainer." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.NavMeshGoal_GenericFilterContainer." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Engine.NavigationHandle.h"
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class NavMeshGoal_GenericFilterContainer : public NavMeshPathGoalEvaluator
 	{
 	public:
-		ADD_OBJECT(NavigationHandle, MyNavigationHandle)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SuccessfulGoal, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<class NavMeshGoal_Filter*>, GoalFilters, 80)
+		ADD_OBJECT(NavigationHandle, MyNavigationHandle, 96)
+		ADD_STRUCT(Object::Pointer, SuccessfulGoal, 92)
 		class NavMeshGoal_GenericFilterContainer* CreateAndAddFilterToNavHandle(class NavigationHandle* NavHandle, int InMaxPathVisits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.CreateAndAddFilterToNavHandle");
-			byte* params = (byte*)malloc(12);
-			*(class NavigationHandle**)params = NavHandle;
-			*(int*)(params + 4) = InMaxPathVisits;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class NavMeshGoal_GenericFilterContainer**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(int*)&params[4] = InMaxPathVisits;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class NavMeshGoal_GenericFilterContainer**)&params[8];
 		}
 		class NavMeshGoal_Filter* GetFilterOfType(ScriptClass* Filter_Class)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.GetFilterOfType");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = Filter_Class;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class NavMeshGoal_Filter**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = Filter_Class;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class NavMeshGoal_Filter**)&params[4];
 		}
-		Vector GetGoalPoint()
+		Object::Vector GetGoalPoint()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.GetGoalPoint");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[0];
 		}
 		void Recycle()
 		{

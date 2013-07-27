@@ -1,34 +1,29 @@
 #pragma once
 #include "Engine.SkeletalMeshActorSpawnable.h"
 #include "Engine.MaterialInstanceConstant.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployableHologram." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDeployableHologram." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDeployableHologram : public SkeletalMeshActorSpawnable
 	{
 	public:
-		ADD_VAR(::IntProperty, m_nOldInvalidDeployReason, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, m_RuntimeMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_HologramMaterial)
+		ADD_STRUCT(int, m_nOldInvalidDeployReason, 544)
+		ADD_OBJECT(MaterialInstanceConstant, m_RuntimeMIC, 540)
+		ADD_OBJECT(MaterialInstanceConstant, m_HologramMaterial, 536)
 		void SetValidDeployableLocation(bool bValidLocation, int InvalidDeployReason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.SetValidDeployableLocation");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bValidLocation;
-			*(int*)(params + 4) = InvalidDeployReason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bValidLocation;
+			*(int*)&params[4] = InvalidDeployReason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearAllMessages()
 		{
@@ -48,12 +43,11 @@ namespace UnrealScript
 		void Init(ScriptClass* DeployableClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.Init");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = DeployableClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = DeployableClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

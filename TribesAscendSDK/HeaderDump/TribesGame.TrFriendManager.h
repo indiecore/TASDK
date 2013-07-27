@@ -1,140 +1,147 @@
 #pragma once
 #include "TribesGame.TrObject.h"
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrFriendManager." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrFriendManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrFriendManager : public TrObject
 	{
 	public:
-		ADD_VAR(::BoolProperty, AddFriendSuccess, 0x1)
-		ADD_VAR(::StrProperty, RecentlyAddedFriend, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, GFxList)
-		ADD_VAR(::IntProperty, GFxCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PrevBlockedCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PrevFollowerCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PrevFriendCount, 0xFFFFFFFF)
+		enum EOnlineState : byte
+		{
+			EOS_OFFLINE = 0,
+			EOS_ONLINE = 1,
+			EOS_INGAME = 2,
+			EOS_MAX = 3,
+		};
+		class FriendStruct
+		{
+		public:
+			ADD_STRUCT(ScriptString*, PlayerName, 4)
+			ADD_STRUCT(TrFriendManager::EOnlineState, OnlineState, 16)
+			ADD_STRUCT(int, PlayerID, 0)
+		};
+		ADD_BOOL(AddFriendSuccess, 72, 0x1)
+		ADD_STRUCT(ScriptString*, RecentlyAddedFriend, 76)
+		ADD_STRUCT(ScriptArray<TrFriendManager::FriendStruct>, FriendsList, 96)
+		ADD_STRUCT(ScriptArray<TrFriendManager::FriendStruct>, FollowersList, 108)
+		ADD_STRUCT(ScriptArray<TrFriendManager::FriendStruct>, IgnoredList, 120)
+		ADD_OBJECT(GFxObject, GFxList, 92)
+		ADD_STRUCT(int, GFxCount, 88)
+		ADD_STRUCT(int, PrevBlockedCount, 68)
+		ADD_STRUCT(int, PrevFollowerCount, 64)
+		ADD_STRUCT(int, PrevFriendCount, 60)
 		void RequestFriendsList()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.RequestFriendsList");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AddFriend(ScriptArray<wchar_t> PlayerName)
+		void AddFriend(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.AddFriend");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool JoinFriend(ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Password)
+		bool JoinFriend(ScriptString* PlayerName, ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.JoinFriend");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)&params[12] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
-		void IgnoreFriend(ScriptArray<wchar_t> PlayerName, bool bIgnore)
+		void IgnoreFriend(ScriptString* PlayerName, bool bIgnore)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.IgnoreFriend");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			*(bool*)(params + 12) = bIgnore;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			*(bool*)&params[12] = bIgnore;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void RemoveFriend(ScriptArray<wchar_t> PlayerName)
+		void RemoveFriend(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.RemoveFriend");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Update()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.Update");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void RemoveFromList(ScriptArray<wchar_t> PlayerName)
+		void RemoveFromList(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.RemoveFromList");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetOnlineFriendCount()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetOnlineFriendCount");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		int GetInGameFriendCount()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetInGameFriendCount");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		int GetOnlineFollowerCount()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetOnlineFollowerCount");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		bool IsFriend(ScriptArray<wchar_t> PlayerName)
+		bool IsFriend(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.IsFriend");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		int GetFriendListIndex(ScriptArray<wchar_t> PlayerName)
+		int GetFriendListIndex(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetFriendListIndex");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
-		void AddFriendScoreboard(ScriptArray<wchar_t> PlayerName)
+		void AddFriendScoreboard(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.AddFriendScoreboard");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

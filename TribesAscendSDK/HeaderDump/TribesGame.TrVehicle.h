@@ -1,12 +1,13 @@
 #pragma once
 #include "UTGame.UTVehicle.h"
 #include "TribesGame.TrVehicleStation.h"
-#include "UDKBase.UDKPawn.MaterialImpactEffect.h"
-#include "Core.Object.Vector.h"
-#include "Engine.Actor.RigidBodyState.h"
 #include "TribesGame.TrStatsInterface.h"
+#include "Core.Object.h"
+#include "Engine.Actor.h"
+#include "UDKBase.UDKCarriedObject.h"
+#include "TribesGame.TrObject.h"
 #include "Engine.MaterialInstanceConstant.h"
-#include "Core.Object.Rotator.h"
+#include "UDKBase.UDKPawn.h"
 #include "TribesGame.TrPawn.h"
 #include "Engine.Pawn.h"
 #include "Engine.Controller.h"
@@ -15,220 +16,200 @@
 #include "Engine.PlayerController.h"
 #include "TribesGame.TrProj_Tracer.h"
 #include "Engine.Canvas.h"
-#include "Engine.Actor.CollisionImpactData.h"
-#include "Engine.Actor.h"
 #include "UTGame.UTPawn.h"
-#include "Engine.Actor.TraceHitInfo.h"
 #include "TribesGame.TrHUD.h"
-#include "UDKBase.UDKCarriedObject.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "UTGame.UTVehicleWeapon.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicle." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrVehicle." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrVehicle." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrVehicle : public UTVehicle
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fCurrentPowerPool, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, r_fMaxPowerPool, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_sName, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nIconIndex, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bClientPhysDirty, 0x100)
-		ADD_STRUCT(::NonArithmeticProperty<RigidBodyState>, m_ClientRBState, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bServerCorrectionForce, 0x200)
-		ADD_VAR(::BoolProperty, m_bImprovedLagSupport, 0x4)
-		ADD_VAR(::ByteProperty, m_VehicleType, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bUsesArmoredMultiplier, 0x80)
-		ADD_VAR(::StrProperty, m_sWeapon1Name, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_sWeapon2Name, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fMaxPawnLeaveSpeed, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nDetectedByEnemyScannerCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nServerTickCount, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fClientPhysDeltaTime, 0xFFFFFFFF)
-		ADD_OBJECT(TrStatsInterface, Stats)
-		ADD_STRUCT(::VectorProperty, m_vDeathCamStartOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleHealthBarHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleHealthBarWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleHealthBarPlacementY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleHealthBarPlacementX, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, m_MarkerMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_Passenger4HealthBarMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_Passenger3HealthBarMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_Passenger2HealthBarMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_Passenger1HealthBarMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_DriverHealthBarMIC)
-		ADD_OBJECT(MaterialInstanceConstant, m_HealthBarMIC)
-		ADD_VAR(::FloatProperty, m_fRemainingSeekingTargetHUDZoomTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fRemainingPotentialSeekingTargetHUDZoomTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fContrailSpeed, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<MaterialImpactEffect>, m_DefaultDustEffect, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ShowHeaderUntil, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fBoostFadeOutTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fBoostFadeInTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fDivingMaxSpeedMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, r_nBaseMaxSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fWallDamageTickTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fLastWallDamageTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fWallMaxDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fWallMinDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fWallMinDamageSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fWallMaxDamageSpeed, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, WallCollisionDamageType)
-		ADD_VAR(::FloatProperty, m_fVehicleDamageTickTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fLastVehicleDamageTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleMaxDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleMinDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleMinDamageSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fVehicleMaxDamageSpeed, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, VehicleCollisionDamageType)
-		ADD_VAR(::FloatProperty, m_fPawnDamageTickTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPawnMaxDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPawnMinDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPawnMaxDamageSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPawnPushSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fFlagPushSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_CrashDamageSeverity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPowerPoolTickRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPowerPoolRechargeRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, r_fCurrentPowerPool, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fBoostReactivatePct, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fBoostEnergyPerSec, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fBoostMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTimeToReset, 0xFFFFFFFF)
-		ADD_OBJECT(TrVehicleStation, m_OwnerStation)
-		ADD_VAR(::ByteProperty, m_MissileLockStatus, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, r_MissileLock, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, r_bDetectedByEnemyScanner, 0x400)
-		ADD_VAR(::BoolProperty, r_LevelFlightEnabled, 0x40)
-		ADD_VAR(::BoolProperty, m_bLowPowerPool, 0x20)
-		ADD_VAR(::BoolProperty, r_BoostersEnabled, 0x10)
-		ADD_VAR(::BoolProperty, r_bIsInvulnerable, 0x8)
-		ADD_VAR(::BoolProperty, m_bBoostRequiresThrust, 0x2)
-		ADD_VAR(::BoolProperty, m_bPostSpawnLocked, 0x1)
-		ADD_OBJECT(TrPawn, m_PawnToTeleport)
-		ADD_OBJECT(Pawn, Passenger)
+		ADD_STRUCT(float, m_fCurrentPowerPool, 2804)
+		ADD_STRUCT(float, r_fMaxPowerPool, 2812)
+		ADD_STRUCT(ScriptString*, m_sName, 2932)
+		ADD_STRUCT(int, m_nIconIndex, 2944)
+		ADD_BOOL(m_bClientPhysDirty, 2776, 0x100)
+		ADD_STRUCT(Actor::RigidBodyState, m_ClientRBState, 3136)
+		ADD_BOOL(m_bServerCorrectionForce, 2776, 0x200)
+		ADD_BOOL(m_bImprovedLagSupport, 2776, 0x4)
+		ADD_STRUCT(TrObject::EVehicleTypes, m_VehicleType, 2780)
+		ADD_BOOL(m_bUsesArmoredMultiplier, 2776, 0x80)
+		ADD_STRUCT(ScriptString*, m_sWeapon1Name, 3092)
+		ADD_STRUCT(ScriptString*, m_sWeapon2Name, 3104)
+		ADD_STRUCT(ScriptArray<UDKPawn::MaterialImpactEffect>, m_DustEffects, 2948)
+		ADD_STRUCT(float, m_fMaxPawnLeaveSpeed, 3208)
+		ADD_STRUCT(int, m_nDetectedByEnemyScannerCount, 3204)
+		ADD_STRUCT(int, m_nServerTickCount, 3200)
+		ADD_STRUCT(float, m_fClientPhysDeltaTime, 3120)
+		ADD_OBJECT(TrStatsInterface, Stats, 3116)
+		ADD_STRUCT(Object::Vector, m_vDeathCamStartOffset, 3080)
+		ADD_STRUCT(float, m_fVehicleHealthBarHeight, 3076)
+		ADD_STRUCT(float, m_fVehicleHealthBarWidth, 3072)
+		ADD_STRUCT(float, m_fVehicleHealthBarPlacementY, 3068)
+		ADD_STRUCT(float, m_fVehicleHealthBarPlacementX, 3064)
+		ADD_OBJECT(MaterialInstanceConstant, m_MarkerMIC, 3060)
+		ADD_OBJECT(MaterialInstanceConstant, m_Passenger4HealthBarMIC, 3056)
+		ADD_OBJECT(MaterialInstanceConstant, m_Passenger3HealthBarMIC, 3052)
+		ADD_OBJECT(MaterialInstanceConstant, m_Passenger2HealthBarMIC, 3048)
+		ADD_OBJECT(MaterialInstanceConstant, m_Passenger1HealthBarMIC, 3044)
+		ADD_OBJECT(MaterialInstanceConstant, m_DriverHealthBarMIC, 3040)
+		ADD_OBJECT(MaterialInstanceConstant, m_HealthBarMIC, 3036)
+		ADD_STRUCT(float, m_fRemainingSeekingTargetHUDZoomTime, 3032)
+		ADD_STRUCT(Object::Rotator, m_rPotentialSeekingTargetHUDRotation, 3020)
+		ADD_STRUCT(float, m_fRemainingPotentialSeekingTargetHUDZoomTime, 3016)
+		ADD_STRUCT(float, m_fContrailSpeed, 3012)
+		ADD_STRUCT(UDKPawn::MaterialImpactEffect, m_DefaultDustEffect, 2960)
+		ADD_STRUCT(float, ShowHeaderUntil, 2928)
+		ADD_STRUCT(float, m_fBoostFadeOutTime, 2920)
+		ADD_STRUCT(float, m_fBoostFadeInTime, 2916)
+		ADD_STRUCT(float, m_fDivingMaxSpeedMultiplier, 2912)
+		ADD_STRUCT(int, r_nBaseMaxSpeed, 2908)
+		ADD_STRUCT(float, m_fWallDamageTickTime, 2904)
+		ADD_STRUCT(float, m_fLastWallDamageTime, 2900)
+		ADD_STRUCT(float, m_fWallMaxDamage, 2896)
+		ADD_STRUCT(float, m_fWallMinDamage, 2892)
+		ADD_STRUCT(float, m_fWallMinDamageSpeed, 2888)
+		ADD_STRUCT(float, m_fWallMaxDamageSpeed, 2884)
+		ADD_OBJECT(ScriptClass, WallCollisionDamageType, 2880)
+		ADD_STRUCT(float, m_fVehicleDamageTickTime, 2876)
+		ADD_STRUCT(float, m_fLastVehicleDamageTime, 2872)
+		ADD_STRUCT(float, m_fVehicleMaxDamage, 2868)
+		ADD_STRUCT(float, m_fVehicleMinDamage, 2864)
+		ADD_STRUCT(float, m_fVehicleMinDamageSpeed, 2860)
+		ADD_STRUCT(float, m_fVehicleMaxDamageSpeed, 2856)
+		ADD_OBJECT(ScriptClass, VehicleCollisionDamageType, 2852)
+		ADD_STRUCT(float, m_fPawnDamageTickTime, 2848)
+		ADD_STRUCT(float, m_fPawnMaxDamage, 2844)
+		ADD_STRUCT(float, m_fPawnMinDamage, 2840)
+		ADD_STRUCT(float, m_fPawnMaxDamageSpeed, 2836)
+		ADD_STRUCT(float, m_fPawnPushSpeed, 2832)
+		ADD_STRUCT(float, m_fFlagPushSpeed, 2828)
+		ADD_STRUCT(float, m_CrashDamageSeverity, 2824)
+		ADD_STRUCT(float, m_fPowerPoolTickRate, 2820)
+		ADD_STRUCT(float, m_fPowerPoolRechargeRate, 2816)
+		ADD_STRUCT(float, r_fCurrentPowerPool, 2808)
+		ADD_STRUCT(float, m_fBoostReactivatePct, 2800)
+		ADD_STRUCT(float, m_fBoostEnergyPerSec, 2796)
+		ADD_STRUCT(float, m_fBoostMultiplier, 2792)
+		ADD_STRUCT(float, m_fTimeToReset, 2788)
+		ADD_OBJECT(TrVehicleStation, m_OwnerStation, 2784)
+		ADD_STRUCT(TrObject::EMissileLock, m_MissileLockStatus, 2782)
+		ADD_STRUCT(TrObject::EMissileLock, r_MissileLock, 2781)
+		ADD_BOOL(r_bDetectedByEnemyScanner, 2776, 0x400)
+		ADD_BOOL(r_LevelFlightEnabled, 2776, 0x40)
+		ADD_BOOL(m_bLowPowerPool, 2776, 0x20)
+		ADD_BOOL(r_BoostersEnabled, 2776, 0x10)
+		ADD_BOOL(r_bIsInvulnerable, 2776, 0x8)
+		ADD_BOOL(m_bBoostRequiresThrust, 2776, 0x2)
+		ADD_BOOL(m_bPostSpawnLocked, 2776, 0x1)
+		ADD_OBJECT(TrPawn, m_PawnToTeleport, 2772)
+		ADD_OBJECT(Pawn, Passenger, 2756)
 		bool IsEmpty()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.IsEmpty");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool RidingPawnLeave(int SeatIndex, bool bForceLeave)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.RidingPawnLeave");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = SeatIndex;
-			*(bool*)(params + 4) = bForceLeave;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(bool*)&params[4] = bForceLeave;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		int GetSeatIndexForController(class Controller* ControllerToMove)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetSeatIndexForController");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = ControllerToMove;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = ControllerToMove;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
-		bool CalcOtherWatchingCam(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV, class TrPlayerController* WatcherController)
+		bool CalcOtherWatchingCam(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV, class TrPlayerController* WatcherController)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.CalcOtherWatchingCam");
-			byte* params = (byte*)malloc(40);
-			*(float*)params = fDeltaTime;
-			*(Vector*)(params + 4) = out_CamLoc;
-			*(Rotator*)(params + 16) = out_CamRot;
-			*(float*)(params + 28) = out_FOV;
-			*(class TrPlayerController**)(params + 32) = WatcherController;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 4);
-			out_CamRot = *(Rotator*)(params + 16);
-			out_FOV = *(float*)(params + 28);
-			auto returnVal = *(bool*)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(float*)&params[0] = fDeltaTime;
+			*(Object::Vector*)&params[4] = out_CamLoc;
+			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)&params[28] = out_FOV;
+			*(class TrPlayerController**)&params[32] = WatcherController;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[4];
+			out_CamRot = *(Object::Rotator*)&params[16];
+			out_FOV = *(float*)&params[28];
+			return *(bool*)&params[36];
 		}
 		bool SetScannerDetect(bool detected)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SetScannerDetect");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = detected;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = detected;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.StopsProjectile");
-			byte* params = (byte*)malloc(8);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.NativePostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsumePowerPool(float fAmount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ConsumePowerPool");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = fAmount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = fAmount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetPowerPoolPercent()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetPowerPoolPercent");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		void RegainPowerPool(float fDeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.RegainPowerPool");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = fDeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = fDeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SyncClientCurrentPowerPool()
 		{
@@ -238,10 +219,9 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
@@ -253,145 +233,126 @@ namespace UnrealScript
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetDetectedByEnemyScanner(bool detected)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SetDetectedByEnemyScanner");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = detected;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = detected;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetDetectedByEnemyScanner()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetDetectedByEnemyScanner");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void PancakeOther(class Pawn* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PancakeOther");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Controller* GetCollisionDamageInstigator()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetCollisionDamageInstigator");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Controller**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Controller**)&params[0];
 		}
 		float GetDamageAmountForCollision(float Speed)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetDamageAmountForCollision");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = Speed;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = Speed;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		void RigidBodyCollision(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComponent, CollisionImpactData& Collision, int ContactIndex)
+void* OtherComponent, Actor::CollisionImpactData& Collision, int ContactIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.RigidBodyCollision");
-			byte* params = (byte*)malloc(48);
+			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = HitComponent;
+void**)&params[0] = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComponent;
-			*(CollisionImpactData*)(params + 8) = Collision;
-			*(int*)(params + 44) = ContactIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Collision = *(CollisionImpactData*)(params + 8);
-			free(params);
+void**)&params[4] = OtherComponent;
+			*(Actor::CollisionImpactData*)&params[8] = Collision;
+			*(int*)&params[44] = ContactIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Collision = *(Actor::CollisionImpactData*)&params[8];
 		}
 		void RanInto(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.RanInto");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SitDriver(class UTPawn* UTP, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SitDriver");
-			byte* params = (byte*)malloc(8);
-			*(class UTPawn**)params = UTP;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPawn**)&params[0] = UTP;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachDriver(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.DetachDriver");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPawnToTeleport(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SetPawnToTeleport");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPostSpawnLocked(bool bLocked)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SetPostSpawnLocked");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bLocked;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bLocked;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendLockOnMessage(int Switch)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SendLockOnMessage");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Switch;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Switch;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool Died(class Controller* Killer, ScriptClass* DamageType, Vector HitLocation)
+		bool Died(class Controller* Killer, ScriptClass* DamageType, Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.Died");
-			byte* params = (byte*)malloc(24);
-			*(class Controller**)params = Killer;
-			*(ScriptClass**)(params + 4) = DamageType;
-			*(Vector*)(params + 8) = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(ScriptClass**)&params[4] = DamageType;
+			*(Object::Vector*)&params[8] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 		void KillControllerForTeamChange(class Controller* ControllerToKill)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.KillControllerForTeamChange");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = ControllerToKill;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = ControllerToKill;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeleportDriverToSeat()
 		{
@@ -401,42 +362,34 @@ void**)(params + 4) = OtherComponent;
 		bool CanArmorDriveVehicle(ScriptClass* FamilyInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.CanArmorDriveVehicle");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = FamilyInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = FamilyInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool CanArmorEnterVehicle(ScriptClass* FamilyInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.CanArmorEnterVehicle");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = FamilyInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = FamilyInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		int GetFirstAvailableSeat(bool bSeatMustAllowFlag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetFirstAvailableSeat");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bSeatMustAllowFlag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bSeatMustAllowFlag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		bool TryToDrive(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.TryToDrive");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void DriverLeft()
 		{
@@ -446,10 +399,9 @@ void**)(params + 4) = OtherComponent;
 		void PassengerLeave(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PassengerLeave");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckReset()
 		{
@@ -461,25 +413,23 @@ void**)(params + 4) = OtherComponent;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ResetResetTime");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void HandleMomentum(Vector Momentum, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo)
+		void HandleMomentum(Object::Vector Momentum, Object::Vector HitLocation, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.HandleMomentum");
-			byte* params = (byte*)malloc(56);
-			*(Vector*)params = Momentum;
-			*(Vector*)(params + 12) = HitLocation;
-			*(ScriptClass**)(params + 24) = DamageType;
-			*(TraceHitInfo*)(params + 28) = HitInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[56] = { NULL };
+			*(Object::Vector*)&params[0] = Momentum;
+			*(Object::Vector*)&params[12] = HitLocation;
+			*(ScriptClass**)&params[24] = DamageType;
+			*(Actor::TraceHitInfo*)&params[28] = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleBoosters(bool bEnabled, bool ToggleTimer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ToggleBoosters");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bEnabled;
-			*(bool*)(params + 4) = ToggleTimer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bEnabled;
+			*(bool*)&params[4] = ToggleTimer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsumeBoostPowerPool()
 		{
@@ -489,48 +439,41 @@ void**)(params + 4) = OtherComponent;
 		bool CanActivateBoosters()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.CanActivateBoosters");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool ShouldRechargePowerPool()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ShouldRechargePowerPool");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void ServerToggleLevelFlight(bool bEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ServerToggleLevelFlight");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BoostSoundFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* AC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.BoostSoundFinished");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = AC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = AC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayBoosterEffects(bool bEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PlayBoosterEffects");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayMissileLockSounds()
 		{
@@ -540,67 +483,53 @@ void**)params = AC;
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool Occupied()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.Occupied");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RenderDriverPassengerMarker(class Canvas* Canvas, bool friendly, class TrHUD* HUD, class TrPlayerController* TrPC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.RenderDriverPassengerMarker");
-			byte* params = (byte*)malloc(20);
-			*(class Canvas**)params = Canvas;
-			*(bool*)(params + 4) = friendly;
-			*(class TrHUD**)(params + 8) = HUD;
-			*(class TrPlayerController**)(params + 12) = TrPC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			*(bool*)&params[4] = friendly;
+			*(class TrHUD**)&params[8] = HUD;
+			*(class TrPlayerController**)&params[12] = TrPC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void SetSeatStoragePawn(int SeatIndex, class Pawn* PawnToSit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SetSeatStoragePawn");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			*(class Pawn**)(params + 4) = PawnToSit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(class Pawn**)&params[4] = PawnToSit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetSVehicleDebug(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& DebugInfo)
+		void GetSVehicleDebug(ScriptArray<ScriptString*>& DebugInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetSVehicleDebug");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = DebugInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DebugInfo = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<ScriptString*>*)&params[0] = DebugInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DebugInfo = *(ScriptArray<ScriptString*>*)&params[0];
 		}
 		void InitializeSeats()
 		{
@@ -610,265 +539,229 @@ void**)params;
 		bool PassengerEnter(class Pawn* P, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PassengerEnter");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = P;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void AttachDriver(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.AttachDriver");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AttachRidingPawn(class TrPawn* PawnToSit, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.AttachRidingPawn");
-			byte* params = (byte*)malloc(8);
-			*(class TrPawn**)params = PawnToSit;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class TrPawn**)&params[0] = PawnToSit;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachRidingPawn(class TrPawn* PawnLeft)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.DetachRidingPawn");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = PawnLeft;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = PawnLeft;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateSeatAnimations(class TrPawn* PawnToSit, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.UpdateSeatAnimations");
-			byte* params = (byte*)malloc(8);
-			*(class TrPawn**)params = PawnToSit;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class TrPawn**)&params[0] = PawnToSit;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HoldGameObject(class UDKCarriedObject* GameObj)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.HoldGameObject");
-			byte* params = (byte*)malloc(4);
-			*(class UDKCarriedObject**)params = GameObj;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UDKCarriedObject**)&params[0] = GameObj;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HandleEnteringFlag(class UTPlayerReplicationInfo* EnteringPRI, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.HandleEnteringFlag");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerReplicationInfo**)params = EnteringPRI;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = EnteringPRI;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool DriverEnter(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.DriverEnter");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		class PlayerReplicationInfo* GetSeatPRI(int SeatNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetSeatPRI");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PlayerReplicationInfo**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PlayerReplicationInfo**)&params[4];
 		}
 		void ServerChangeSeat(int RequestedSeat)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ServerChangeSeat");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = RequestedSeat;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = RequestedSeat;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SwitchSeat(int RequestedSeat, class Controller* ControllerRequestingSeatChange)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SwitchSeat");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = RequestedSeat;
-			*(class Controller**)(params + 4) = ControllerRequestingSeatChange;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = RequestedSeat;
+			*(class Controller**)&params[4] = ControllerRequestingSeatChange;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ChangeSeat(class Controller* ControllerToMove, int RequestedSeat)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ChangeSeat");
-			byte* params = (byte*)malloc(12);
-			*(class Controller**)params = ControllerToMove;
-			*(int*)(params + 4) = RequestedSeat;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Controller**)&params[0] = ControllerToMove;
+			*(int*)&params[4] = RequestedSeat;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void SwitchWeapon(byte NewGroup)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SwitchWeapon");
-			byte* params = (byte*)malloc(1);
-			*params = NewGroup;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = NewGroup;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetSeatIndexForStoragePawn(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetSeatIndexForStoragePawn");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		bool PlaceExitingDriver(class Pawn* ExitingDriver)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PlaceExitingDriver");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = ExitingDriver;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = ExitingDriver;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		bool TryExitPos(class Pawn* ExitingDriver, Vector ExitPos, bool bMustFindGround)
+		bool TryExitPos(class Pawn* ExitingDriver, Object::Vector ExitPos, bool bMustFindGround)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.TryExitPos");
-			byte* params = (byte*)malloc(24);
-			*(class Pawn**)params = ExitingDriver;
-			*(Vector*)(params + 4) = ExitPos;
-			*(bool*)(params + 16) = bMustFindGround;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(class Pawn**)&params[0] = ExitingDriver;
+			*(Object::Vector*)&params[4] = ExitPos;
+			*(bool*)&params[16] = bMustFindGround;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 		bool SeatAvailable(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SeatAvailable");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool AnySeatAvailable()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.AnySeatAvailable");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
+		Object::Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetWeaponAim");
-			byte* params = (byte*)malloc(16);
-			*(class UTVehicleWeapon**)params = VWeapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class UTVehicleWeapon**)&params[0] = VWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[4];
 		}
 		void WeaponRotationChanged(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.WeaponRotationChanged");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool HealDamage(int Amount, class Controller* Healer, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.HealDamage");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Amount;
-			*(class Controller**)(params + 4) = Healer;
-			*(ScriptClass**)(params + 8) = DamageType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Amount;
+			*(class Controller**)&params[4] = Healer;
+			*(ScriptClass**)&params[8] = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		void DoRepairs(int HealAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void DoRepairs(int HealAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.DoRepairs");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = HealAmount;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = HealAmount;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DriverRadiusDamage(float DamageAmount, float DamageRadius, class Controller* EventInstigator, ScriptClass* DamageType, float Momentum, Vector HitLocation, class Actor* DamageCauser, float DamageFalloffExponent)
+		void DriverRadiusDamage(float DamageAmount, float DamageRadius, class Controller* EventInstigator, ScriptClass* DamageType, float Momentum, Object::Vector HitLocation, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.DriverRadiusDamage");
-			byte* params = (byte*)malloc(40);
-			*(float*)params = DamageAmount;
-			*(float*)(params + 4) = DamageRadius;
-			*(class Controller**)(params + 8) = EventInstigator;
-			*(ScriptClass**)(params + 12) = DamageType;
-			*(float*)(params + 16) = Momentum;
-			*(Vector*)(params + 20) = HitLocation;
-			*(class Actor**)(params + 32) = DamageCauser;
-			*(float*)(params + 36) = DamageFalloffExponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[40] = { NULL };
+			*(float*)&params[0] = DamageAmount;
+			*(float*)&params[4] = DamageRadius;
+			*(class Controller**)&params[8] = EventInstigator;
+			*(ScriptClass**)&params[12] = DamageType;
+			*(float*)&params[16] = Momentum;
+			*(Object::Vector*)&params[20] = HitLocation;
+			*(class Actor**)&params[32] = DamageCauser;
+			*(float*)&params[36] = DamageFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Suicide()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.Suicide");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.TakeRadiusDamage");
-			byte* params = (byte*)malloc(44);
-			*(class Controller**)params = InstigatedBy;
-			*(float*)(params + 4) = BaseDamage;
-			*(float*)(params + 8) = DamageRadius;
-			*(ScriptClass**)(params + 12) = DamageType;
-			*(float*)(params + 16) = Momentum;
-			*(Vector*)(params + 20) = HurtOrigin;
-			*(bool*)(params + 32) = bFullDamage;
-			*(class Actor**)(params + 36) = DamageCauser;
-			*(float*)(params + 40) = DamageFalloffExponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[44] = { NULL };
+			*(class Controller**)&params[0] = InstigatedBy;
+			*(float*)&params[4] = BaseDamage;
+			*(float*)&params[8] = DamageRadius;
+			*(ScriptClass**)&params[12] = DamageType;
+			*(float*)&params[16] = Momentum;
+			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(bool*)&params[32] = bFullDamage;
+			*(class Actor**)&params[36] = DamageCauser;
+			*(float*)&params[40] = DamageFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Damage;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Damage;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckDamageSmoke()
 		{
@@ -880,156 +773,137 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.BlowupVehicle");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void VehicleWeaponFireEffects(Vector HitLocation, int SeatIndex)
+		void VehicleWeaponFireEffects(Object::Vector HitLocation, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.VehicleWeaponFireEffects");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitLocation;
-			*(int*)(params + 12) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(int*)&params[12] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleWeaponStoppedFiring(bool bViaReplication, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.VehicleWeaponStoppedFiring");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bViaReplication;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bViaReplication;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Vector HitLocation, int SeatIndex)
+		void ThirdPersonFireEffects(Object::Vector HitLocation, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ThirdPersonFireEffects");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitLocation;
-			*(int*)(params + 12) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(int*)&params[12] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SpawnTracerBeam(Vector Start, Vector End, class ParticleSystem* TracerBeamTemplate)
+		void SpawnTracerBeam(Object::Vector Start, Object::Vector End, class ParticleSystem* TracerBeamTemplate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SpawnTracerBeam");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = Start;
-			*(Vector*)(params + 12) = End;
-			*(class ParticleSystem**)(params + 24) = TracerBeamTemplate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = Start;
+			*(Object::Vector*)&params[12] = End;
+			*(class ParticleSystem**)&params[24] = TracerBeamTemplate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		class TrProj_Tracer* SpawnTracerEffect(byte TracerType, Vector EffectLocation, Vector HitLocation, float HitDistance)
+		class TrProj_Tracer* SpawnTracerEffect(TrObject::EWeaponTracerType TracerType, Object::Vector EffectLocation, Object::Vector HitLocation, float HitDistance)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SpawnTracerEffect");
-			byte* params = (byte*)malloc(33);
-			*params = TracerType;
-			*(Vector*)(params + 4) = EffectLocation;
-			*(Vector*)(params + 16) = HitLocation;
-			*(float*)(params + 28) = HitDistance;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class TrProj_Tracer**)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[33] = { NULL };
+			*(TrObject::EWeaponTracerType*)&params[0] = TracerType;
+			*(Object::Vector*)&params[4] = EffectLocation;
+			*(Object::Vector*)&params[16] = HitLocation;
+			*(float*)&params[28] = HitDistance;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class TrProj_Tracer**)&params[32];
 		}
-		void ProcessViewRotation(float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		void ProcessViewRotation(float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ProcessViewRotation");
-			byte* params = (byte*)malloc(28);
-			*(float*)params = DeltaTime;
-			*(Rotator*)(params + 4) = out_ViewRotation;
-			*(Rotator*)(params + 16) = out_DeltaRot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_ViewRotation = *(Rotator*)(params + 4);
-			out_DeltaRot = *(Rotator*)(params + 16);
-			free(params);
+			byte params[28] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			*(Object::Rotator*)&params[4] = out_ViewRotation;
+			*(Object::Rotator*)&params[16] = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_ViewRotation = *(Object::Rotator*)&params[4];
+			out_DeltaRot = *(Object::Rotator*)&params[16];
 		}
-		void ProcessViewRotationBasedOnSeat(int SeatIndex, float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		void ProcessViewRotationBasedOnSeat(int SeatIndex, float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ProcessViewRotationBasedOnSeat");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = SeatIndex;
-			*(float*)(params + 4) = DeltaTime;
-			*(Rotator*)(params + 8) = out_ViewRotation;
-			*(Rotator*)(params + 20) = out_DeltaRot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_ViewRotation = *(Rotator*)(params + 8);
-			out_DeltaRot = *(Rotator*)(params + 20);
-			free(params);
+			byte params[32] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(float*)&params[4] = DeltaTime;
+			*(Object::Rotator*)&params[8] = out_ViewRotation;
+			*(Object::Rotator*)&params[20] = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_ViewRotation = *(Object::Rotator*)&params[8];
+			out_DeltaRot = *(Object::Rotator*)&params[20];
 		}
 		bool ShouldShowUseable(class PlayerController* PC, float Dist)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.ShouldShowUseable");
-			byte* params = (byte*)malloc(12);
-			*(class PlayerController**)params = PC;
-			*(float*)(params + 4) = Dist;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(float*)&params[4] = Dist;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void SetDriving(bool bNewDriving)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.SetDriving");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bNewDriving;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bNewDriving;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayVehicleEvent(ScriptName EventTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PlayVehicleEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = EventTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = EventTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleEvent(ScriptName EventTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.VehicleEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = EventTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = EventTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayClientVehicleSound(ScriptName SoundTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.PlayClientVehicleSound");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = SoundTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = SoundTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MigrateVehicleSounds(class Pawn* P, bool bIsRiding)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.MigrateVehicleSounds");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			*(bool*)(params + 4) = bIsRiding;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(bool*)&params[4] = bIsRiding;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopVehicleSounds()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.StopVehicleSounds");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Vector GetCameraFocus(int SeatIndex)
+		Object::Vector GetCameraFocus(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetCameraFocus");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
-		ScriptArray<wchar_t> GetSpectatorName()
+		ScriptString* GetSpectatorName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GetSpectatorName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void PlayHorn()
 		{
@@ -1039,10 +913,9 @@ void**)params;
 		void GoInvulnerable(float InvulnerableTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle.GoInvulnerable");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = InvulnerableTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = InvulnerableTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearInvulnerability()
 		{
@@ -1051,6 +924,6 @@ void**)params;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

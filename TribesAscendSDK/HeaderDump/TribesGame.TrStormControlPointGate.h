@@ -1,47 +1,43 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Actor.h"
 #include "TribesGame.TrGameObjective.h"
 #include "TribesGame.TrStormControlPoint.h"
-#include "Core.Object.Vector.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Canvas.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrStormControlPointGate." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrStormControlPointGate : public TrGameObjective
 	{
 	public:
-		ADD_OBJECT(TrStormControlPoint, m_ControlPoint)
+		ADD_OBJECT(TrStormControlPoint, m_ControlPoint, 1360)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Vector HitLocation, Vector HitNormal)
+void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPointGate.Touch");
-			byte* params = (byte*)malloc(32);
-			*(class Actor**)params = Other;
+			byte params[32] = { NULL };
+			*(class Actor**)&params[0] = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComp;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = OtherComp;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPointGate.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

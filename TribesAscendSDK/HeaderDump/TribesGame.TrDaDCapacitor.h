@@ -1,92 +1,80 @@
 #pragma once
 #include "TribesGame.TrGameObjective.h"
 #include "Engine.Actor.h"
+#include "Core.Object.h"
 #include "Engine.Controller.h"
 #include "TribesGame.TrDaDCore.h"
 #include "Engine.MaterialInstanceConstant.h"
-#include "Core.Object.Vector.h"
-#include "Engine.Actor.TraceHitInfo.h"
+#include "Engine.Texture2D.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Canvas.h"
-#include "Engine.Texture2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDaDCapacitor." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDaDCapacitor." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDaDCapacitor : public TrGameObjective
 	{
 	public:
-		ADD_VAR(::StrProperty, StringC, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, StringB, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, StringA, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_CapacitorIndex, 0xFFFFFFFF)
-		ADD_OBJECT(TrDaDCore, m_Core)
-		ADD_VAR(::FloatProperty, m_fShieldBarPlacementY, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, m_ShieldBarMIC)
+		ADD_STRUCT(ScriptString*, StringC, 1404)
+		ADD_STRUCT(ScriptString*, StringB, 1392)
+		ADD_STRUCT(ScriptString*, StringA, 1380)
+		ADD_STRUCT(int, m_CapacitorIndex, 1372)
+		ADD_OBJECT(TrDaDCore, m_Core, 1368)
+		ADD_STRUCT(float, m_fShieldBarPlacementY, 1364)
+		ADD_OBJECT(MaterialInstanceConstant, m_ShieldBarMIC, 1360)
 		void Init(class TrDaDCore* Core, int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCapacitor.Init");
-			byte* params = (byte*)malloc(8);
-			*(class TrDaDCore**)params = Core;
-			*(int*)(params + 4) = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class TrDaDCore**)&params[0] = Core;
+			*(int*)&params[4] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCapacitor.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = DamageAmount;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = DamageAmount;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetScreenName(class PlayerController* PC)
+		ScriptString* GetScreenName(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCapacitor.GetScreenName");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCapacitor.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCapacitor.GetMarker");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Texture2D**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Texture2D**)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

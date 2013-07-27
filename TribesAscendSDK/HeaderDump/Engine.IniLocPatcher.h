@@ -1,18 +1,28 @@
 #pragma once
 #include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class IniLocPatcher : public Object
 	{
 	public:
-		void OnReadTitleFileComplete(bool bWasSuccessful, ScriptArray<wchar_t> Filename)
+		class IniLocFileEntry
+		{
+		public:
+			ADD_STRUCT(OnlineSubsystem::EOnlineEnumerationReadState, ReadState, 12)
+			ADD_STRUCT(ScriptString*, Filename, 0)
+		};
+		ADD_STRUCT(ScriptArray<IniLocPatcher::IniLocFileEntry>, Files, 60)
+		void OnReadTitleFileComplete(bool bWasSuccessful, ScriptString* Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.OnReadTitleFileComplete");
-			byte* params = (byte*)malloc(16);
-			*(bool*)params = bWasSuccessful;
-			*(ScriptArray<wchar_t>*)(params + 4) = Filename;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			*(ScriptString**)&params[4] = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Init()
 		{
@@ -24,77 +34,65 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.DownloadFiles");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnReadFileComplete(bool bWasSuccessful, ScriptArray<wchar_t> Filename)
+		void OnReadFileComplete(bool bWasSuccessful, ScriptString* Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.OnReadFileComplete");
-			byte* params = (byte*)malloc(16);
-			*(bool*)params = bWasSuccessful;
-			*(ScriptArray<wchar_t>*)(params + 4) = Filename;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			*(ScriptString**)&params[4] = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessIniLocFile(ScriptArray<wchar_t> Filename, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& FileData)
+		void ProcessIniLocFile(ScriptString* Filename, ScriptArray<byte>& FileData)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.ProcessIniLocFile");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Filename;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12) = FileData;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FileData = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Filename;
+			*(ScriptArray<byte>*)&params[12] = FileData;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			FileData = *(ScriptArray<byte>*)&params[12];
 		}
-		void AddFileToDownload(ScriptArray<wchar_t> Filename)
+		void AddFileToDownload(ScriptString* Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.AddFileToDownload");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Filename;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddReadFileDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadTitleFileCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.AddReadFileDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = ReadTitleFileCompleteDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = ReadTitleFileCompleteDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearReadFileDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadTitleFileCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.ClearReadFileDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = ReadTitleFileCompleteDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = ReadTitleFileCompleteDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearCachedFiles()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.ClearCachedFiles");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> UpdateLocFileName(ScriptArray<wchar_t> Filename)
+		ScriptString* UpdateLocFileName(ScriptString* Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.IniLocPatcher.UpdateLocFileName");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Filename;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
 	};
 }
+#undef ADD_STRUCT

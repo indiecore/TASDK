@@ -1,122 +1,179 @@
 #pragma once
-#include "Core.Object.LinearColor.h"
 #include "Engine.ActorComponent.h"
-#include "Core.Object.Color.h"
+#include "Core.Object.h"
+#include "Engine.Brush.h"
 #include "Engine.LightFunction.h"
-#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
-#include "Core.Object.Guid.h"
-#include "Engine.LightComponent.LightingChannelContainer.h"
-#include "Core.Object.Matrix.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LightComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.LightComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.LightComponent." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class LightComponent : public ActorComponent
 	{
 	public:
-		ADD_VAR(::FloatProperty, Brightness, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, LightColor, 0xFFFFFFFF)
-		ADD_OBJECT(LightFunction, Function)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SceneInfo, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Matrix>, WorldToLight, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LightToWorld, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightGuid, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightmapGuid, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LightEnv_BouncedLightBrightness, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, LightEnv_BouncedModulationColor, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		ADD_VAR(::BoolProperty, CastShadows, 0x2)
-		ADD_VAR(::BoolProperty, CastStaticShadows, 0x4)
-		ADD_VAR(::BoolProperty, CastDynamicShadows, 0x8)
-		ADD_VAR(::BoolProperty, bCastCompositeShadow, 0x10)
-		ADD_VAR(::BoolProperty, bAffectCompositeShadowDirection, 0x20)
-		ADD_VAR(::BoolProperty, bNonModulatedSelfShadowing, 0x40)
-		ADD_VAR(::BoolProperty, bSelfShadowOnly, 0x80)
-		ADD_VAR(::BoolProperty, bAllowPreShadow, 0x100)
-		ADD_VAR(::BoolProperty, bForceDynamicLight, 0x200)
-		ADD_VAR(::BoolProperty, UseDirectLightMap, 0x400)
-		ADD_VAR(::BoolProperty, bHasLightEverBeenBuiltIntoLightMap, 0x800)
-		ADD_VAR(::BoolProperty, bOnlyAffectSameAndSpecifiedLevels, 0x1000)
-		ADD_VAR(::BoolProperty, bCanAffectDynamicPrimitivesOutsideDynamicChannel, 0x2000)
-		ADD_VAR(::BoolProperty, bUseVolumes, 0x4000)
-		ADD_VAR(::BoolProperty, bRenderLightShafts, 0x8000)
-		ADD_VAR(::BoolProperty, bUseImageReflectionSpecular, 0x10000)
-		ADD_VAR(::BoolProperty, bPrecomputedLightingIsValid, 0x20000)
-		ADD_VAR(::BoolProperty, bExplicitlyAssignedLight, 0x40000)
-		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, LightingChannels, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, LightAffectsClassification, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, LightShadowMode, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ModShadowColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ModShadowFadeoutTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ModShadowFadeoutExponent, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LightListIndex, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ShadowProjectionTechnique, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ShadowFilterQuality, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MinShadowResolution, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxShadowResolution, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ShadowFadeResolution, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionDepthRange, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BloomScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BloomThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BloomScreenBlendThreshold, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, BloomTint, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RadialBlurPercent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OcclusionMaskDarkness, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, ReflectionTexture)
-		ADD_VAR(::FloatProperty, ReflectionScale, 0xFFFFFFFF)
+		enum EShadowFilterQuality : byte
+		{
+			SFQ_Low = 0,
+			SFQ_Medium = 1,
+			SFQ_High = 2,
+			SFQ_MAX = 3,
+		};
+		enum EShadowProjectionTechnique : byte
+		{
+			ShadowProjTech_Default = 0,
+			ShadowProjTech_PCF = 1,
+			ShadowProjTech_VSM = 2,
+			ShadowProjTech_BPCF_Low = 3,
+			ShadowProjTech_BPCF_Medium = 4,
+			ShadowProjTech_BPCF_High = 5,
+			ShadowProjTech_MAX = 6,
+		};
+		enum ELightShadowMode : byte
+		{
+			LightShadow_Normal = 0,
+			LightShadow_Modulate = 1,
+			LightShadow_ModulateBetter = 2,
+			LightShadow_MAX = 3,
+		};
+		enum ELightAffectsClassification : byte
+		{
+			LAC_USER_SELECTED = 0,
+			LAC_DYNAMIC_AFFECTING = 1,
+			LAC_STATIC_AFFECTING = 2,
+			LAC_DYNAMIC_AND_STATIC_AFFECTING = 3,
+			LAC_MAX = 4,
+		};
+		class LightingChannelContainer
+		{
+		public:
+			ADD_BOOL(Crowd, 0, 0x4000000)
+			ADD_BOOL(Gameplay, 0, 0x2000000)
+			ADD_BOOL(Gameplay, 0, 0x1000000)
+			ADD_BOOL(Gameplay, 0, 0x800000)
+			ADD_BOOL(Gameplay, 0, 0x400000)
+			ADD_BOOL(Cinematic, 0, 0x200000)
+			ADD_BOOL(Cinematic, 0, 0x100000)
+			ADD_BOOL(Cinematic, 0, 0x80000)
+			ADD_BOOL(Cinematic, 0, 0x40000)
+			ADD_BOOL(Cinematic, 0, 0x20000)
+			ADD_BOOL(Cinematic, 0, 0x10000)
+			ADD_BOOL(Cinematic, 0, 0x8000)
+			ADD_BOOL(Cinematic, 0, 0x4000)
+			ADD_BOOL(Cinematic, 0, 0x2000)
+			ADD_BOOL(Cinematic, 0, 0x1000)
+			ADD_BOOL(Unnamed, 0, 0x800)
+			ADD_BOOL(Unnamed, 0, 0x400)
+			ADD_BOOL(Unnamed, 0, 0x200)
+			ADD_BOOL(Unnamed, 0, 0x100)
+			ADD_BOOL(Unnamed, 0, 0x80)
+			ADD_BOOL(Unnamed, 0, 0x40)
+			ADD_BOOL(Skybox, 0, 0x20)
+			ADD_BOOL(CompositeDynamic, 0, 0x10)
+			ADD_BOOL(Dynamic, 0, 0x8)
+			ADD_BOOL(Static, 0, 0x4)
+			ADD_BOOL(BSP, 0, 0x2)
+			ADD_BOOL(bInitialized, 0, 0x1)
+		};
+		ADD_STRUCT(float, Brightness, 256)
+		ADD_STRUCT(Object::Color, LightColor, 260)
+		ADD_OBJECT(LightFunction, Function, 264)
+		ADD_STRUCT(Object::Pointer, SceneInfo, 88)
+		ADD_STRUCT(Object::Matrix, WorldToLight, 96)
+		ADD_STRUCT(Object::Matrix, LightToWorld, 160)
+		ADD_STRUCT(Object::Guid, LightGuid, 224)
+		ADD_STRUCT(Object::Guid, LightmapGuid, 240)
+		ADD_STRUCT(float, LightEnv_BouncedLightBrightness, 268)
+		ADD_STRUCT(Object::Color, LightEnv_BouncedModulationColor, 272)
+		ADD_BOOL(bEnabled, 276, 0x1)
+		ADD_BOOL(CastShadows, 276, 0x2)
+		ADD_BOOL(CastStaticShadows, 276, 0x4)
+		ADD_BOOL(CastDynamicShadows, 276, 0x8)
+		ADD_BOOL(bCastCompositeShadow, 276, 0x10)
+		ADD_BOOL(bAffectCompositeShadowDirection, 276, 0x20)
+		ADD_BOOL(bNonModulatedSelfShadowing, 276, 0x40)
+		ADD_BOOL(bSelfShadowOnly, 276, 0x80)
+		ADD_BOOL(bAllowPreShadow, 276, 0x100)
+		ADD_BOOL(bForceDynamicLight, 276, 0x200)
+		ADD_BOOL(UseDirectLightMap, 276, 0x400)
+		ADD_BOOL(bHasLightEverBeenBuiltIntoLightMap, 276, 0x800)
+		ADD_BOOL(bOnlyAffectSameAndSpecifiedLevels, 276, 0x1000)
+		ADD_BOOL(bCanAffectDynamicPrimitivesOutsideDynamicChannel, 276, 0x2000)
+		ADD_BOOL(bUseVolumes, 276, 0x4000)
+		ADD_BOOL(bRenderLightShafts, 276, 0x8000)
+		ADD_BOOL(bUseImageReflectionSpecular, 276, 0x10000)
+		ADD_BOOL(bPrecomputedLightingIsValid, 276, 0x20000)
+		ADD_BOOL(bExplicitlyAssignedLight, 276, 0x40000)
+		ADD_STRUCT(ScriptArray<ScriptName>, OtherLevelsToAffect, 284)
+		ADD_STRUCT(LightComponent::LightingChannelContainer, LightingChannels, 296)
+		ADD_STRUCT(ScriptArray<class Brush*>, InclusionVolumes, 300)
+		ADD_STRUCT(ScriptArray<class Brush*>, ExclusionVolumes, 312)
+		ADD_STRUCT(ScriptArray<Object::Pointer>, InclusionConvexVolumes, 324)
+		ADD_STRUCT(ScriptArray<Object::Pointer>, ExclusionConvexVolumes, 336)
+		ADD_STRUCT(LightComponent::ELightAffectsClassification, LightAffectsClassification, 348)
+		ADD_STRUCT(LightComponent::ELightShadowMode, LightShadowMode, 349)
+		ADD_STRUCT(Object::LinearColor, ModShadowColor, 352)
+		ADD_STRUCT(float, ModShadowFadeoutTime, 368)
+		ADD_STRUCT(float, ModShadowFadeoutExponent, 372)
+		ADD_STRUCT(int, LightListIndex, 376)
+		ADD_STRUCT(LightComponent::EShadowProjectionTechnique, ShadowProjectionTechnique, 380)
+		ADD_STRUCT(LightComponent::EShadowFilterQuality, ShadowFilterQuality, 381)
+		ADD_STRUCT(int, MinShadowResolution, 384)
+		ADD_STRUCT(int, MaxShadowResolution, 388)
+		ADD_STRUCT(int, ShadowFadeResolution, 392)
+		ADD_STRUCT(float, OcclusionDepthRange, 396)
+		ADD_STRUCT(float, BloomScale, 400)
+		ADD_STRUCT(float, BloomThreshold, 404)
+		ADD_STRUCT(float, BloomScreenBlendThreshold, 408)
+		ADD_STRUCT(Object::Color, BloomTint, 412)
+		ADD_STRUCT(float, RadialBlurPercent, 416)
+		ADD_STRUCT(float, OcclusionMaskDarkness, 420)
+		ADD_OBJECT(Texture2D, ReflectionTexture, 424)
+		ADD_STRUCT(float, ReflectionScale, 428)
 		void SetEnabled(bool bSetEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.SetEnabled");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bSetEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bSetEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetLightProperties(float NewBrightness, Color NewLightColor, class LightFunction* NewLightFunction)
+		void SetLightProperties(float NewBrightness, Object::Color NewLightColor, class LightFunction* NewLightFunction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.SetLightProperties");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = NewBrightness;
-			*(Color*)(params + 4) = NewLightColor;
-			*(class LightFunction**)(params + 8) = NewLightFunction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(float*)&params[0] = NewBrightness;
+			*(Object::Color*)&params[4] = NewLightColor;
+			*(class LightFunction**)&params[8] = NewLightFunction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Vector GetOrigin()
+		Object::Vector GetOrigin()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.GetOrigin");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[0];
 		}
-		Vector GetDirection()
+		Object::Vector GetDirection()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.GetDirection");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[0];
 		}
 		void UpdateColorAndBrightness()
 		{
@@ -155,6 +212,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

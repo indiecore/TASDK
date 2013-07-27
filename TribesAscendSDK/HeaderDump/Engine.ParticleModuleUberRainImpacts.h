@@ -1,50 +1,53 @@
 #pragma once
 #include "Engine.ParticleModuleUberBase.h"
-#include "Core.DistributionFloat.RawDistributionFloat.h"
-#include "Core.DistributionVector.RawDistributionVector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.DistributionVector.h"
+#include "Core.DistributionFloat.h"
+#include "Engine.ParticleModuleLocationPrimitiveCylinder.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleUberRainImpacts." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleUberRainImpacts." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleUberRainImpacts : public ParticleModuleUberBase
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, AlphaOverLife, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, ColorOverLife, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, PC_HeightAxis, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PC_StartHeight, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PC_StartRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, PC_StartLocation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PC_VelocityScale, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LifeMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bRadialVelocity, 0x2000)
-		ADD_VAR(::BoolProperty, bVelocity, 0x1000)
-		ADD_VAR(::BoolProperty, bSurfaceOnly, 0x800)
-		ADD_VAR(::BoolProperty, bNegative_Z, 0x400)
-		ADD_VAR(::BoolProperty, bNegative_Y, 0x200)
-		ADD_VAR(::BoolProperty, bNegative_X, 0x100)
-		ADD_VAR(::BoolProperty, bPositive_Z, 0x80)
-		ADD_VAR(::BoolProperty, bPositive_Y, 0x40)
-		ADD_VAR(::BoolProperty, bPositive_X, 0x20)
-		ADD_VAR(::BoolProperty, bIsUsingCylinder, 0x10)
-		ADD_VAR(::BoolProperty, MultiplyZ, 0x8)
-		ADD_VAR(::BoolProperty, MultiplyY, 0x4)
-		ADD_VAR(::BoolProperty, MultiplyX, 0x2)
-		ADD_VAR(::BoolProperty, bInheritParent, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartSize, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Lifetime, 0xFFFFFFFF)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, AlphaOverLife, 344)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, ColorOverLife, 316)
+		ADD_STRUCT(ParticleModuleLocationPrimitiveCylinder::CylinderHeightAxis, PC_HeightAxis, 312)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, PC_StartHeight, 284)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, PC_StartRadius, 256)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, PC_StartLocation, 228)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, PC_VelocityScale, 200)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, LifeMultiplier, 172)
+		ADD_BOOL(bRadialVelocity, 168, 0x2000)
+		ADD_BOOL(bVelocity, 168, 0x1000)
+		ADD_BOOL(bSurfaceOnly, 168, 0x800)
+		ADD_BOOL(bNegative_Z, 168, 0x400)
+		ADD_BOOL(bNegative_Y, 168, 0x200)
+		ADD_BOOL(bNegative_X, 168, 0x100)
+		ADD_BOOL(bPositive_Z, 168, 0x80)
+		ADD_BOOL(bPositive_Y, 168, 0x40)
+		ADD_BOOL(bPositive_X, 168, 0x20)
+		ADD_BOOL(bIsUsingCylinder, 168, 0x10)
+		ADD_BOOL(MultiplyZ, 168, 0x8)
+		ADD_BOOL(MultiplyY, 168, 0x4)
+		ADD_BOOL(MultiplyX, 168, 0x2)
+		ADD_BOOL(bInheritParent, 168, 0x1)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, StartRotation, 140)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, StartSize, 112)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Lifetime, 84)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

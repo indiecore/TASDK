@@ -1,55 +1,53 @@
 #pragma once
 #include "Engine.Projectile.h"
 #include "Engine.Vehicle.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKProjectile." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKProjectile." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKProjectile." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKProjectile : public Projectile
 	{
 	public:
-		ADD_OBJECT(Vehicle, InstigatorBaseVehicle)
-		ADD_VAR(::FloatProperty, CustomGravityScaling, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Buoyancy, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TerminalVelocity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LockWarningInterval, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastLockWarningTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitialDir, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HomingTrackingStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BaseTrackingStrength, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, SeekTarget)
-		ADD_VAR(::FloatProperty, AccelRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CheckRadius, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bNotBlockedByShield, 0x8)
-		ADD_VAR(::BoolProperty, bCheckProjectileLight, 0x4)
-		ADD_VAR(::BoolProperty, bShuttingDown, 0x2)
-		ADD_VAR(::BoolProperty, bWideCheck, 0x1)
+		ADD_OBJECT(Vehicle, InstigatorBaseVehicle, 592)
+		ADD_STRUCT(float, CustomGravityScaling, 588)
+		ADD_STRUCT(float, Buoyancy, 584)
+		ADD_STRUCT(float, TerminalVelocity, 580)
+		ADD_STRUCT(float, LockWarningInterval, 576)
+		ADD_STRUCT(float, LastLockWarningTime, 572)
+		ADD_STRUCT(Object::Vector, InitialDir, 560)
+		ADD_STRUCT(float, HomingTrackingStrength, 556)
+		ADD_STRUCT(float, BaseTrackingStrength, 552)
+		ADD_OBJECT(Actor, SeekTarget, 548)
+		ADD_STRUCT(float, AccelRate, 544)
+		ADD_STRUCT(float, CheckRadius, 540)
+		ADD_BOOL(bNotBlockedByShield, 536, 0x8)
+		ADD_BOOL(bCheckProjectileLight, 536, 0x4)
+		ADD_BOOL(bShuttingDown, 536, 0x2)
+		ADD_BOOL(bWideCheck, 536, 0x1)
 		float GetTerminalVelocity()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProjectile.GetTerminalVelocity");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		void CreateProjectileLight()
 		{
@@ -58,6 +56,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

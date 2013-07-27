@@ -13,62 +13,55 @@ namespace UnrealScript
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetTitle(ScriptArray<wchar_t> Title)
+		void SetTitle(ScriptString* Title)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetTitle");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Title;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Title;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetInfo(ScriptArray<wchar_t> Info)
+		void SetInfo(ScriptString* Info)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetInfo");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Info;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Info;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetAcceptButtonLabel(ScriptArray<wchar_t> Label)
+		void SetAcceptButtonLabel(ScriptString* Label)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetAcceptButtonLabel");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Label;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Label;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetBackButtonLabel(ScriptArray<wchar_t> Label)
+		void SetBackButtonLabel(ScriptString* Label)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetBackButtonLabel");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Label;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Label;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAcceptButton_OnPress(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* EventListener)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetAcceptButton_OnPress");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = EventListener;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = EventListener;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

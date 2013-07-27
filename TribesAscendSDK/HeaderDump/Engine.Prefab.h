@@ -2,27 +2,25 @@
 #include "Engine.PrefabSequence.h"
 #include "Core.Object.h"
 #include "Engine.Texture2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Prefab." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.Prefab." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class Prefab : public Object
 	{
 	public:
-		ADD_OBJECT(Texture2D, PrefabPreview)
-		ADD_OBJECT(PrefabSequence, PrefabSequence)
-		ADD_VAR(::IntProperty, PrefabVersion, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<class Object*>, PrefabArchetypes, 64)
+		ADD_STRUCT(ScriptArray<class Object*>, RemovedArchetypes, 76)
+		ADD_OBJECT(Texture2D, PrefabPreview, 92)
+		ADD_OBJECT(PrefabSequence, PrefabSequence, 88)
+		ADD_STRUCT(int, PrefabVersion, 60)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

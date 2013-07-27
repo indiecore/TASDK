@@ -1,41 +1,71 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.AlienFXManager." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class AlienFXManager : public Object
 	{
 	public:
-		ADD_VAR(::ByteProperty, eLastOverlay, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, eCurrOverlay, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fIntervalCount, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fInterval, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fBoundsPct, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fHighBounds, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fLowBounds, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, nTarget, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fDamages, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fObjectiveTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, fDamageTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bBrighten, 0x8)
-		ADD_VAR(::BoolProperty, bMenuOpen, 0x4)
-		ADD_VAR(::BoolProperty, bLoaded, 0x2)
-		ADD_VAR(::BoolProperty, bShowFX, 0x1)
-		ADD_VAR(::IntProperty, nHealth, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, nTeam, 0xFFFFFFFF)
+		enum FXOverlay : byte
+		{
+			FXO_NONE = 0,
+			FXO_RAGE = 1,
+			FXO_REGEN = 2,
+			FXO_DYING = 3,
+			FXO_INVULN = 4,
+			FXO_JAMMER = 5,
+			FXO_SHIELD = 6,
+			FXO_STEALTH = 7,
+			FXO_MAX = 8,
+		};
+		enum FXArea : byte
+		{
+			FXA_ALL = 0,
+			FXA_RIGHT = 1,
+			FXA_LEFT = 2,
+			FXA_UPPER = 3,
+			FXA_LOWER = 4,
+			FXA_FRONT = 5,
+			FXA_REAR = 6,
+			FXA_MAX = 7,
+		};
+		ADD_STRUCT(AlienFXManager::FXOverlay, eLastOverlay, 141)
+		ADD_STRUCT(AlienFXManager::FXOverlay, eCurrOverlay, 140)
+		ADD_STRUCT(float, fIntervalCount, 136)
+		ADD_STRUCT(float, fInterval, 132)
+		ADD_STRUCT(float, fSpeed, 128)
+		ADD_STRUCT(float, fBoundsPct, 124)
+		ADD_STRUCT(float, fHighBounds, 120)
+		ADD_STRUCT(float, fLowBounds, 116)
+		ADD_STRUCT(int, nTarget, 112)
+		ADD_STRUCT(float, fDamages, 80)
+		ADD_STRUCT(float, fObjectiveTime, 76)
+		ADD_STRUCT(float, fDamageTime, 72)
+		ADD_BOOL(bBrighten, 68, 0x8)
+		ADD_BOOL(bMenuOpen, 68, 0x4)
+		ADD_BOOL(bLoaded, 68, 0x2)
+		ADD_BOOL(bShowFX, 68, 0x1)
+		ADD_STRUCT(int, nHealth, 64)
+		ADD_STRUCT(int, nTeam, 60)
 		void Init(bool bEnable)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Init");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bEnable;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bEnable;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Close()
 		{
@@ -65,59 +95,53 @@ namespace UnrealScript
 		void menu(bool bOpen)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.menu");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bOpen;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bOpen;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Damage(byte Area)
+		void Damage(AlienFXManager::FXArea Area)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Damage");
-			byte* params = (byte*)malloc(1);
-			*params = Area;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(AlienFXManager::FXArea*)&params[0] = Area;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTeam(int TeamNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.SetTeam");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = TeamNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetHealth(int Health)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.SetHealth");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Health;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Health;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Overlay(byte Type)
+		void Overlay(AlienFXManager::FXOverlay Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Overlay");
-			byte* params = (byte*)malloc(1);
-			*params = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(AlienFXManager::FXOverlay*)&params[0] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DamageConvert(ScriptArray<wchar_t> Area)
+		void DamageConvert(ScriptString* Area)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.DamageConvert");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Area;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Area;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

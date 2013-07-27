@@ -1,26 +1,22 @@
 #pragma once
 #include "Engine.ReplicationInfo.h"
 #include "Engine.TeamInfo.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKTeamOwnedInfo." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKTeamOwnedInfo : public ReplicationInfo
 	{
 	public:
-		ADD_OBJECT(TeamInfo, Team)
+		ADD_OBJECT(TeamInfo, Team, 476)
 		byte GetTeamNum()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeamOwnedInfo.GetTeamNum");
-			byte* params = (byte*)malloc(1);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *params;
-			free(params);
-			return returnVal;
+			byte params[1] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[0];
 		}
 	};
 }

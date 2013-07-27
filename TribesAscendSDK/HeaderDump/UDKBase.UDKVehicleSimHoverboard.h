@@ -1,81 +1,78 @@
 #pragma once
 #include "Engine.SVehicleSimBase.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.InterpCurveFloat.h"
+#include "Engine.RB_ConstraintInstance.h"
+#include "Core.Object.h"
 #include "Engine.SoundCue.h"
 #include "UDKBase.UDKVehicle.h"
-#include "Engine.RB_ConstraintInstance.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleSimHoverboard." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKVehicleSimHoverboard." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKVehicleSimHoverboard." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKVehicleSimHoverboard : public SVehicleSimBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, CurrentLookYaw, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SlalomSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HoverboardSlalomMaxAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentSteerOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LandedCountdown, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpinSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AutoSpin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpinHeadingOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TrickJumpWarmup, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TakeoffYaw, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, GroundNormal, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, OverWaterSound)
-		ADD_VAR(::FloatProperty, WaterCheckLevel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, StopThreshold, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bLeftGround, 0x4)
-		ADD_VAR(::BoolProperty, bInAJump, 0x2)
-		ADD_VAR(::BoolProperty, bIsOverDeepWater, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, TurnDampingSpeedFunc, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxTurnTorque, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpinTurnTorqueScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TurnTorqueFactor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxRiseForce, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LatDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxStrafeForce, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LongDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxReverseVelocity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxReverseForce, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxThrustForce, 0xFFFFFFFF)
+		ADD_STRUCT(float, CurrentLookYaw, 264)
+		ADD_STRUCT(float, SlalomSpeed, 260)
+		ADD_STRUCT(float, HoverboardSlalomMaxAngle, 256)
+		ADD_STRUCT(float, CurrentSteerOffset, 252)
+		ADD_STRUCT(float, LandedCountdown, 248)
+		ADD_STRUCT(float, SpinSpeed, 244)
+		ADD_STRUCT(float, AutoSpin, 240)
+		ADD_STRUCT(float, SpinHeadingOffset, 236)
+		ADD_STRUCT(float, TrickJumpWarmup, 232)
+		ADD_STRUCT(float, TakeoffYaw, 228)
+		ADD_STRUCT(Object::Vector, GroundNormal, 216)
+		ADD_OBJECT(SoundCue, OverWaterSound, 212)
+		ADD_STRUCT(float, WaterCheckLevel, 208)
+		ADD_STRUCT(float, StopThreshold, 204)
+		ADD_BOOL(bLeftGround, 200, 0x4)
+		ADD_BOOL(bInAJump, 200, 0x2)
+		ADD_BOOL(bIsOverDeepWater, 200, 0x1)
+		ADD_STRUCT(Object::InterpCurveFloat, TurnDampingSpeedFunc, 184)
+		ADD_STRUCT(float, MaxTurnTorque, 180)
+		ADD_STRUCT(float, SpinTurnTorqueScale, 176)
+		ADD_STRUCT(float, TurnTorqueFactor, 172)
+		ADD_STRUCT(float, MaxRiseForce, 168)
+		ADD_STRUCT(float, LatDamping, 164)
+		ADD_STRUCT(float, MaxStrafeForce, 160)
+		ADD_STRUCT(float, LongDamping, 156)
+		ADD_STRUCT(float, MaxReverseVelocity, 152)
+		ADD_STRUCT(float, MaxReverseForce, 148)
+		ADD_STRUCT(float, MaxThrustForce, 144)
 		void InitWheels(class UDKVehicle* Vehicle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleSimHoverboard.InitWheels");
-			byte* params = (byte*)malloc(4);
-			*(class UDKVehicle**)params = Vehicle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UDKVehicle**)&params[0] = Vehicle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateLeanConstraint(class RB_ConstraintInstance* LeanUprightConstraintInstance, Vector LeanY, Vector LeanZ)
+		void UpdateLeanConstraint(class RB_ConstraintInstance* LeanUprightConstraintInstance, Object::Vector LeanY, Object::Vector LeanZ)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleSimHoverboard.UpdateLeanConstraint");
-			byte* params = (byte*)malloc(28);
-			*(class RB_ConstraintInstance**)params = LeanUprightConstraintInstance;
-			*(Vector*)(params + 4) = LeanY;
-			*(Vector*)(params + 16) = LeanZ;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class RB_ConstraintInstance**)&params[0] = LeanUprightConstraintInstance;
+			*(Object::Vector*)&params[4] = LeanY;
+			*(Object::Vector*)&params[16] = LeanZ;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

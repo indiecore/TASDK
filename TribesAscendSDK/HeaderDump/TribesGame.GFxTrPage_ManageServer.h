@@ -14,20 +14,17 @@ namespace UnrealScript
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageServer.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageServer.FillOption");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void RefreshButtons()
 		{
@@ -42,20 +39,17 @@ namespace UnrealScript
 		void CheckDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageServer.CheckDescription");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ManageServer.FillDescription");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 	};
 }

@@ -9,10 +9,9 @@ namespace UnrealScript
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCaptureActor.OnToggle");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Toggle**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Toggle**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

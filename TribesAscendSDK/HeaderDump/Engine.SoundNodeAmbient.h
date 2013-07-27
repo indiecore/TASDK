@@ -1,53 +1,63 @@
 #pragma once
-#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
+#include "Core.DistributionFloat.h"
 #include "Engine.SoundNodeWave.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.SoundNodeAttenuation.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeAmbient." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SoundNodeAmbient." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SoundNodeAmbient." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SoundNodeAmbient : public SoundNode
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, VolumeModulation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PitchModulation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LPFMaxRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LPFMinRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MaxRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MinRadius, 0xFFFFFFFF)
-		ADD_OBJECT(SoundNodeWave, Wave)
-		ADD_VAR(::FloatProperty, VolumeMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VolumeMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PitchMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PitchMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LPFRadiusMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LPFRadiusMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RadiusMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RadiusMin, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, DistanceModel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, dBAttenuationAtMax, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAttenuateWithLowPassFilter, 0x8)
-		ADD_VAR(::BoolProperty, bAttenuateWithLPF, 0x4)
-		ADD_VAR(::BoolProperty, bSpatialize, 0x2)
-		ADD_VAR(::BoolProperty, bAttenuate, 0x1)
+		class AmbientSoundSlot
+		{
+		public:
+			ADD_STRUCT(float, Weight, 12)
+			ADD_STRUCT(float, VolumeScale, 8)
+			ADD_STRUCT(float, PitchScale, 4)
+			ADD_OBJECT(SoundNodeWave, Wave, 0)
+		};
+		ADD_STRUCT(ScriptArray<SoundNodeAmbient::AmbientSoundSlot>, SoundSlots, 120)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, VolumeModulation, 276)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, PitchModulation, 248)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, LPFMaxRadius, 220)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, LPFMinRadius, 192)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, MaxRadius, 164)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, MinRadius, 136)
+		ADD_OBJECT(SoundNodeWave, Wave, 132)
+		ADD_STRUCT(float, VolumeMax, 116)
+		ADD_STRUCT(float, VolumeMin, 112)
+		ADD_STRUCT(float, PitchMax, 108)
+		ADD_STRUCT(float, PitchMin, 104)
+		ADD_STRUCT(float, LPFRadiusMax, 100)
+		ADD_STRUCT(float, LPFRadiusMin, 96)
+		ADD_STRUCT(float, RadiusMax, 92)
+		ADD_STRUCT(float, RadiusMin, 88)
+		ADD_STRUCT(SoundNodeAttenuation::SoundDistanceModel, DistanceModel, 84)
+		ADD_STRUCT(float, dBAttenuationAtMax, 80)
+		ADD_BOOL(bAttenuateWithLowPassFilter, 76, 0x8)
+		ADD_BOOL(bAttenuateWithLPF, 76, 0x4)
+		ADD_BOOL(bSpatialize, 76, 0x2)
+		ADD_BOOL(bAttenuate, 76, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,52 +1,43 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Emitter.h"
 #include "Engine.ParticleSystem.h"
-#include "Core.Object.Vector.h"
+#include "UDKBase.UDKPawn.h"
 #include "Engine.WorldInfo.h"
 namespace UnrealScript
 {
 	class UTEmitter : public Emitter
 	{
 	public:
-		class ParticleSystem* GetTemplateForDistance(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& TemplateList, Vector SpawnLocation, class WorldInfo* WI)
+		class ParticleSystem* GetTemplateForDistance(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>& TemplateList, Object::Vector SpawnLocation, class WorldInfo* WI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmitter.GetTemplateForDistance");
-			byte* params = (byte*)malloc(32);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = TemplateList;
-			*(Vector*)(params + 12) = SpawnLocation;
-			*(class WorldInfo**)(params + 24) = WI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			TemplateList = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			auto returnVal = *(class ParticleSystem**)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>*)&params[0] = TemplateList;
+			*(Object::Vector*)&params[12] = SpawnLocation;
+			*(class WorldInfo**)&params[24] = WI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			TemplateList = *(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>*)&params[0];
+			return *(class ParticleSystem**)&params[28];
 		}
 		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmitter.SetTemplate");
-			byte* params = (byte*)malloc(8);
-			*(class ParticleSystem**)params = NewTemplate;
-			*(bool*)(params + 4) = bDestroyOnFinish;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class ParticleSystem**)&params[0] = NewTemplate;
+			*(bool*)&params[4] = bDestroyOnFinish;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLightEnvironment(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Light)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmitter.SetLightEnvironment");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = Light;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = Light;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

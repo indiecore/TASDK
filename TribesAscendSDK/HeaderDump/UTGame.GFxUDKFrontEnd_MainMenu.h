@@ -1,30 +1,33 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
 #include "GFxUI.GFxClikWidget.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_MainMenu." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_MainMenu." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxUDKFrontEnd_MainMenu : public GFxUDKFrontEnd_Screen
 	{
 	public:
-		ADD_OBJECT(GFxClikWidget, ListMC)
-		ADD_VAR(::ByteProperty, LastSelectedIndex, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, UserNameTxt)
-		ADD_OBJECT(GFxObject, UserLabelTxt)
-		ADD_OBJECT(GFxObject, ListDataProvider)
+		class Option
+		{
+		public:
+			ADD_STRUCT(ScriptString*, OptionDesc, 24)
+			ADD_STRUCT(ScriptString*, OptionLabel, 12)
+			ADD_STRUCT(ScriptString*, OptionName, 0)
+		};
+		ADD_OBJECT(GFxClikWidget, ListMC, 232)
+		ADD_STRUCT(ScriptArray<GFxUDKFrontEnd_MainMenu::Option>, ListOptions, 220)
+		ADD_STRUCT(byte, LastSelectedIndex, 248)
+		ADD_OBJECT(GFxObject, UserNameTxt, 244)
+		ADD_OBJECT(GFxObject, UserLabelTxt, 240)
+		ADD_OBJECT(GFxObject, ListDataProvider, 236)
 		void OnViewLoaded()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.OnViewLoaded");
@@ -33,18 +36,16 @@ namespace UnrealScript
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Select_InstantAction()
 		{
@@ -61,37 +62,33 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.Select_ExitGame");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ExitDialog_SelectOK(EventData ev)
+		void ExitDialog_SelectOK(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.ExitDialog_SelectOK");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ExitDialog_SelectBack(EventData ev)
+		void ExitDialog_SelectBack(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.ExitDialog_SelectBack");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnListItemPress(EventData ev)
+		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.OnListItemPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnListChange(EventData ev)
+		void OnListChange(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.OnListChange");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
@@ -106,10 +103,9 @@ namespace UnrealScript
 		void SetList(class GFxObject* InList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.SetList");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = InList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = InList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnEscapeKeyPress()
 		{
@@ -119,16 +115,14 @@ namespace UnrealScript
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

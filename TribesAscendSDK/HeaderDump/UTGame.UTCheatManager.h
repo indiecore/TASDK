@@ -1,20 +1,18 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "Engine.CheatManager.h"
 #include "Engine.SpeechRecognition.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTCheatManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTCheatManager : public CheatManager
 	{
 	public:
-		ADD_OBJECT(SpeechRecognition, RecogObject)
-		ADD_OBJECT(ScriptClass, LMC)
+		ADD_OBJECT(SpeechRecognition, RecogObject, 96)
+		ADD_OBJECT(ScriptClass, LMC, 92)
 		void ViewFlag()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.ViewFlag");
@@ -23,34 +21,30 @@ namespace UnrealScript
 		void Glow(float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.Glow");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void LM(ScriptArray<wchar_t> MessageClassName)
+		void LM(ScriptString* MessageClassName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.LM");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = MessageClassName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = MessageClassName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LMS(int Switch)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.LMS");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Switch;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Switch;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SummonV(ScriptArray<wchar_t> ClassName)
+		void SummonV(ScriptString* ClassName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.SummonV");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = ClassName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = ClassName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AllWeapons()
 		{
@@ -75,10 +69,9 @@ namespace UnrealScript
 		void Invisible(bool B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.Invisible");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FreeCamera()
 		{
@@ -98,27 +91,24 @@ namespace UnrealScript
 		void RBGrav(float NewGravityScaling)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.RBGrav");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewGravityScaling;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewGravityScaling;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SuicideBy(ScriptArray<wchar_t> Type, int DeathHealth)
+		void SuicideBy(ScriptString* Type, int DeathHealth)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.SuicideBy");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Type;
-			*(int*)(params + 12) = DeathHealth;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Type;
+			*(int*)&params[12] = DeathHealth;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void EditWeapon(ScriptArray<wchar_t> WhichWeapon)
+		void EditWeapon(ScriptString* WhichWeapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.EditWeapon");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = WhichWeapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = WhichWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillOtherBots()
 		{
@@ -130,22 +120,20 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.SpawnABloodDecal");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void LeaveADecal(Vector HitLoc, Vector HitNorm)
+		void LeaveADecal(Object::Vector HitLoc, Object::Vector HitNorm)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.LeaveADecal");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLoc;
-			*(Vector*)(params + 12) = HitNorm;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLoc;
+			*(Object::Vector*)&params[12] = HitNorm;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TiltIt(bool bActive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.TiltIt");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bActive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowStickBindings()
 		{
@@ -155,26 +143,23 @@ namespace UnrealScript
 		void SetStickBind(float val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.SetStickBind");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillAll(ScriptClass* aClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.KillAll");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = aClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = aClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillAllPawns(ScriptClass* aClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCheatManager.KillAllPawns");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = aClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = aClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

@@ -1,29 +1,25 @@
 #pragma once
 #include "Engine.NavMeshGoal_GenericFilterContainer.h"
 #include "Engine.NavMeshGoal_Filter.h"
-#include "Core.Object.Vector.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoalFilter_PolyEncompassesAI." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NavMeshGoalFilter_PolyEncompassesAI : public NavMeshGoal_Filter
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, OverrideExtentToCheck, 0xFFFFFFFF)
-		bool MakeSureAIFits(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOverrideExtentToCheck)
+		ADD_STRUCT(Object::Vector, OverrideExtentToCheck, 72)
+		bool MakeSureAIFits(class NavMeshGoal_GenericFilterContainer* FilterContainer, Object::Vector InOverrideExtentToCheck)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_PolyEncompassesAI.MakeSureAIFits");
-			byte* params = (byte*)malloc(20);
-			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
-			*(Vector*)(params + 4) = InOverrideExtentToCheck;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class NavMeshGoal_GenericFilterContainer**)&params[0] = FilterContainer;
+			*(Object::Vector*)&params[4] = InOverrideExtentToCheck;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 	};
 }

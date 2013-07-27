@@ -1,65 +1,63 @@
 #pragma once
 #include "TribesGame.TrDeviceAttachment.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAttachment_RepairTool." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrAttachment_RepairTool." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrAttachment_RepairTool : public TrDeviceAttachment
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, m_Tangent, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_Location, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bIsTracerActive, 0x1)
+		ADD_STRUCT(Object::Vector, m_Tangent, 804)
+		ADD_STRUCT(Object::Vector, m_Location, 792)
+		ADD_BOOL(m_bIsTracerActive, 784, 0x1)
 		void KillRepairEffect()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.KillRepairEffect");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SpawnRepairEffect(Vector HitLocation, Vector HitNormal)
+		void SpawnRepairEffect(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.SpawnRepairEffect");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateRepairEffect(float DeltaTime, Vector HitLocation, Vector HitNormal)
+		void UpdateRepairEffect(float DeltaTime, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.UpdateRepairEffect");
-			byte* params = (byte*)malloc(28);
-			*(float*)params = DeltaTime;
-			*(Vector*)(params + 4) = HitLocation;
-			*(Vector*)(params + 16) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(Object::Vector*)&params[16] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayImpactEffects(Vector HitLocation)
+		void PlayImpactEffects(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.PlayImpactEffects");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Vector HitLocation)
+		void ThirdPersonFireEffects(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.ThirdPersonFireEffects");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopThirdPersonFireEffects()
 		{
@@ -68,5 +66,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

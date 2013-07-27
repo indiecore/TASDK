@@ -14,26 +14,23 @@ namespace UnrealScript
 		void AttachDriver(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.AttachDriver");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachDriver(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.DetachDriver");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

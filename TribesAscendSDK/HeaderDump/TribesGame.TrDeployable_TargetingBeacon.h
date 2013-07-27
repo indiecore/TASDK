@@ -3,43 +3,39 @@
 #include "Engine.Texture2D.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Canvas.h"
-#include "Core.Object.Vector.h"
+#include "Core.Object.h"
 namespace UnrealScript
 {
 	class TrDeployable_TargetingBeacon : public TrDeployable_RadarSensor
 	{
 	public:
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TargetingBeacon.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void RenderForTeammate(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir, float Distance)
+		void RenderForTeammate(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir, float Distance)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TargetingBeacon.RenderForTeammate");
-			byte* params = (byte*)malloc(36);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			*(float*)(params + 32) = Distance;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			*(float*)&params[32] = Distance;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TargetingBeacon.GetMarker");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Texture2D**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Texture2D**)&params[0];
 		}
 	};
 }

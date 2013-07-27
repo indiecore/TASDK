@@ -1,19 +1,27 @@
 #pragma once
 #include "Engine.Info.h"
 #include "Engine.SeqAct_Toggle.h"
-#include "Engine.FogVolumeDensityInfo.CheckpointRecord.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FogVolumeDensityInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class FogVolumeDensityInfo : public Info
 	{
 	public:
-		ADD_VAR(::BoolProperty, bEnabled, 0x1)
+		class CheckpointRecord
+		{
+		public:
+			ADD_BOOL(bEnabled, 0, 0x1)
+		};
+		ADD_BOOL(bEnabled, 484, 0x1)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.PostBeginPlay");
@@ -22,46 +30,40 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.OnToggle");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Toggle**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Toggle**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldSaveForCheckpoint()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.ShouldSaveForCheckpoint");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		void CreateCheckpointRecord(CheckpointRecord& Record)
+		void CreateCheckpointRecord(FogVolumeDensityInfo::CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.CreateCheckpointRecord");
-			byte* params = (byte*)malloc(4);
-			*(CheckpointRecord*)params = Record;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(CheckpointRecord*)params;
-			free(params);
+			byte params[4] = { NULL };
+			*(FogVolumeDensityInfo::CheckpointRecord*)&params[0] = Record;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Record = *(FogVolumeDensityInfo::CheckpointRecord*)&params[0];
 		}
-		void ApplyCheckpointRecord(CheckpointRecord& Record)
+		void ApplyCheckpointRecord(FogVolumeDensityInfo::CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.ApplyCheckpointRecord");
-			byte* params = (byte*)malloc(4);
-			*(CheckpointRecord*)params = Record;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(CheckpointRecord*)params;
-			free(params);
+			byte params[4] = { NULL };
+			*(FogVolumeDensityInfo::CheckpointRecord*)&params[0] = Record;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Record = *(FogVolumeDensityInfo::CheckpointRecord*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

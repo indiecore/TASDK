@@ -1,26 +1,17 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
-#include "Core.Object.Guid.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionParameter." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialExpressionParameter." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class MaterialExpressionParameter : public MaterialExpression
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Guid>, ExpressionGUID, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, ParameterName, 0xFFFFFFFF)
+		ADD_STRUCT(Object::Guid, ExpressionGUID, 116)
+		ADD_STRUCT(ScriptName, ParameterName, 108)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

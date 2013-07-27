@@ -1,33 +1,32 @@
 #pragma once
 #include "Engine.PrimitiveComponent.h"
-#include "Core.Object.InterpCurveFloat.h"
-#include "Core.Object.Color.h"
-#include "Core.Object.InterpCurveVector.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SplineComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SplineComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SplineComponent : public PrimitiveComponent
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, SplineReparamTable, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bSplineDisabled, 0x1)
-		ADD_VAR(::FloatProperty, SplineArrowSize, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SplineDrawRes, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, SplineColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SplineCurviness, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveVector>, SplineInfo, 0xFFFFFFFF)
+		ADD_STRUCT(Object::InterpCurveFloat, SplineReparamTable, 524)
+		ADD_BOOL(bSplineDisabled, 520, 0x1)
+		ADD_STRUCT(float, SplineArrowSize, 516)
+		ADD_STRUCT(float, SplineDrawRes, 512)
+		ADD_STRUCT(Object::Color, SplineColor, 508)
+		ADD_STRUCT(float, SplineCurviness, 504)
+		ADD_STRUCT(Object::InterpCurveVector, SplineInfo, 488)
 		void UpdateSplineCurviness()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.UpdateSplineCurviness");
@@ -41,33 +40,27 @@ namespace UnrealScript
 		float GetSplineLength()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.GetSplineLength");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
-		Vector GetLocationAtDistanceAlongSpline(float Distance)
+		Object::Vector GetLocationAtDistanceAlongSpline(float Distance)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.GetLocationAtDistanceAlongSpline");
-			byte* params = (byte*)malloc(16);
-			*(float*)params = Distance;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(float*)&params[0] = Distance;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
-		Vector GetTangentAtDistanceAlongSpline(float Distance)
+		Object::Vector GetTangentAtDistanceAlongSpline(float Distance)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.GetTangentAtDistanceAlongSpline");
-			byte* params = (byte*)malloc(16);
-			*(float*)params = Distance;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(float*)&params[0] = Distance;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

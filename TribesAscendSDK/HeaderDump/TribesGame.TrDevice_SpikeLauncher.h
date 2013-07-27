@@ -2,55 +2,49 @@
 #include "TribesGame.TrDevice.h"
 #include "Engine.SoundCue.h"
 #include "Engine.AnimNodeSequence.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDevice_SpikeLauncher." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDevice_SpikeLauncher : public TrDevice
 	{
 	public:
-		ADD_OBJECT(SoundCue, m_SpikeIdleSound)
+		ADD_OBJECT(SoundCue, m_SpikeIdleSound, 2148)
 		void SetSpikeIdle(bool bEnabled)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.SetSpikeIdle");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bEnabled;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimPlay(class AnimNodeSequence* SeqNode)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.OnAnimPlay");
-			byte* params = (byte*)malloc(4);
-			*(class AnimNodeSequence**)params = SeqNode;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.OnAnimEnd");
-			byte* params = (byte*)malloc(12);
-			*(class AnimNodeSequence**)params = SeqNode;
-			*(float*)(params + 4) = PlayedTime;
-			*(float*)(params + 8) = ExcessTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(float*)&params[4] = PlayedTime;
+			*(float*)&params[8] = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayWeaponEquip()
 		{

@@ -1,76 +1,64 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlineFriends.h"
 #include "Engine.UIDataStore_Remote.h"
-#include "Core.Object.Pointer.h"
 #include "Engine.UIDataProvider_OnlineProfileSettings.h"
 #include "Engine.UIDataProvider_PlayerAchievements.h"
 #include "Engine.UIDataProvider_OnlinePartyChatList.h"
+#include "Core.Object.h"
 #include "Engine.UIDataProvider_OnlineFriendMessages.h"
 #include "Engine.UIDataProvider_OnlinePlayerStorage.h"
 #include "Engine.UIDataProvider.h"
 #include "Engine.LocalPlayer.h"
 #include "Engine.OnlinePlayerStorage.h"
 #include "Engine.OnlineProfileSettings.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlinePlayerData." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataStore_OnlinePlayerData." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.UIDataStore_OnlinePlayerData." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UIDataStore_OnlinePlayerData : public UIDataStore_Remote
 	{
 	public:
-		ADD_OBJECT(UIDataProvider_OnlineProfileSettings, ProfileProvider)
-		ADD_OBJECT(UIDataProvider_OnlinePartyChatList, PartyChatProvider)
-		ADD_OBJECT(ScriptClass, PartyChatProviderClass)
-		ADD_VAR(::StrProperty, PartyChatProviderClassName, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, AchievementsProviderClass)
-		ADD_VAR(::StrProperty, AchievementsProviderClassName, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, FriendMessagesProviderClass)
-		ADD_VAR(::StrProperty, FriendMessagesProviderClassName, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, FriendsProviderClass)
-		ADD_VAR(::StrProperty, FriendsProviderClassName, 0xFFFFFFFF)
-		ADD_OBJECT(UIDataProvider_PlayerAchievements, AchievementsProvider)
-		ADD_OBJECT(UIDataProvider_OnlineFriendMessages, FriendMessagesProvider)
-		ADD_OBJECT(UIDataProvider_OnlinePlayerStorage, StorageProvider)
-		ADD_OBJECT(ScriptClass, PlayerStorageClass)
-		ADD_VAR(::StrProperty, PlayerStorageClassName, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, ProfileSettingsClass)
-		ADD_VAR(::StrProperty, ProfileSettingsClassName, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PlayerNick, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PlayerControllerId, 0xFFFFFFFF)
-		ADD_OBJECT(UIDataProvider_OnlineFriends, FriendsProvider)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
+		ADD_OBJECT(UIDataProvider_OnlineProfileSettings, ProfileProvider, 160)
+		ADD_OBJECT(UIDataProvider_OnlinePartyChatList, PartyChatProvider, 256)
+		ADD_OBJECT(ScriptClass, PartyChatProviderClass, 252)
+		ADD_STRUCT(ScriptString*, PartyChatProviderClassName, 240)
+		ADD_OBJECT(ScriptClass, AchievementsProviderClass, 236)
+		ADD_STRUCT(ScriptString*, AchievementsProviderClassName, 224)
+		ADD_OBJECT(ScriptClass, FriendMessagesProviderClass, 220)
+		ADD_STRUCT(ScriptString*, FriendMessagesProviderClassName, 208)
+		ADD_OBJECT(ScriptClass, FriendsProviderClass, 204)
+		ADD_STRUCT(ScriptString*, FriendsProviderClassName, 192)
+		ADD_OBJECT(UIDataProvider_PlayerAchievements, AchievementsProvider, 188)
+		ADD_OBJECT(UIDataProvider_OnlineFriendMessages, FriendMessagesProvider, 184)
+		ADD_OBJECT(UIDataProvider_OnlinePlayerStorage, StorageProvider, 180)
+		ADD_OBJECT(ScriptClass, PlayerStorageClass, 176)
+		ADD_STRUCT(ScriptString*, PlayerStorageClassName, 164)
+		ADD_OBJECT(ScriptClass, ProfileSettingsClass, 156)
+		ADD_STRUCT(ScriptString*, ProfileSettingsClassName, 144)
+		ADD_STRUCT(ScriptString*, PlayerNick, 132)
+		ADD_STRUCT(int, PlayerControllerId, 128)
+		ADD_OBJECT(UIDataProvider_OnlineFriends, FriendsProvider, 124)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		void OnSettingProviderChanged(class UIDataProvider* SourceProvider, ScriptName SettingsName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnSettingProviderChanged");
-			byte* params = (byte*)malloc(12);
-			*(class UIDataProvider**)params = SourceProvider;
-			*(ScriptName*)(params + 4) = SettingsName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(ScriptName*)&params[4] = SettingsName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnRegister");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = InPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
@@ -80,10 +68,9 @@ namespace UnrealScript
 		void OnLoginChange(byte LocalUserNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnLoginChange");
-			byte* params = (byte*)malloc(1);
-			*params = LocalUserNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayerDataChange()
 		{
@@ -103,25 +90,20 @@ namespace UnrealScript
 		class OnlineProfileSettings* GetCachedPlayerProfile(int ControllerId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.GetCachedPlayerProfile");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ControllerId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class OnlineProfileSettings**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class OnlineProfileSettings**)&params[4];
 		}
 		class OnlinePlayerStorage* GetCachedPlayerStorage(int ControllerId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.GetCachedPlayerStorage");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ControllerId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class OnlinePlayerStorage**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class OnlinePlayerStorage**)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

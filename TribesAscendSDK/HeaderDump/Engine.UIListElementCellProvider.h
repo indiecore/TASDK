@@ -4,5 +4,6 @@ namespace UnrealScript
 {
 	class UIListElementCellProvider : public Interface
 	{
+		static const auto UnknownCellDataFieldName = 'NAME_None';
 	};
 }

@@ -1,28 +1,35 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavMeshGoal_Filter." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NavMeshGoal_Filter : public Object
 	{
 	public:
-		ADD_VAR(::IntProperty, NumNodesProcessed, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumNodesThrownOut, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bShowDebug, 0x1)
-		ScriptArray<wchar_t> GetDumpString()
+		ADD_STRUCT(int, NumNodesProcessed, 68)
+		ADD_STRUCT(int, NumNodesThrownOut, 64)
+		ADD_BOOL(bShowDebug, 60, 0x1)
+		ScriptString* GetDumpString()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_Filter.GetDumpString");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

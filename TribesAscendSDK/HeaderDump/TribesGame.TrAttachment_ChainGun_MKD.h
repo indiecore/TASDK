@@ -1,50 +1,55 @@
 #pragma once
 #include "TribesGame.TrDeviceAttachment.h"
 #include "TribesGame.TrSkelControl_SpinControl.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAttachment_ChainGun_MKD." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrAttachment_ChainGun_MKD." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrAttachment_ChainGun_MKD : public TrDeviceAttachment
 	{
 	public:
-		ADD_OBJECT(TrSkelControl_SpinControl, m_BarrelSpinControl)
-		ADD_VAR(::FloatProperty, m_fLastFireTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fCurrSpinTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bSpinningUp, 0x2)
-		ADD_VAR(::BoolProperty, m_bIsFiring, 0x1)
+		ADD_OBJECT(TrSkelControl_SpinControl, m_BarrelSpinControl, 796)
+		ADD_STRUCT(float, m_fLastFireTime, 792)
+		ADD_STRUCT(float, m_fCurrSpinTime, 788)
+		ADD_BOOL(m_bSpinningUp, 784, 0x2)
+		ADD_BOOL(m_bIsFiring, 784, 0x1)
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_ChainGun_MKD.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Vector HitLocation)
+		void ThirdPersonFireEffects(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_ChainGun_MKD.ThirdPersonFireEffects");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

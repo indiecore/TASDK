@@ -1,30 +1,21 @@
 #pragma once
-#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeModulator." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SoundNodeModulator." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.DistributionFloat.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SoundNodeModulator : public SoundNode
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, VolumeModulation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PitchModulation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VolumeMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VolumeMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PitchMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PitchMin, 0xFFFFFFFF)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, VolumeModulation, 120)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, PitchModulation, 92)
+		ADD_STRUCT(float, VolumeMax, 88)
+		ADD_STRUCT(float, VolumeMin, 84)
+		ADD_STRUCT(float, PitchMax, 80)
+		ADD_STRUCT(float, PitchMin, 76)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

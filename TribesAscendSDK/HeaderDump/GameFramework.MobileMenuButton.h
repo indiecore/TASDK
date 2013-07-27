@@ -1,68 +1,53 @@
 #pragma once
+#include "Core.Object.h"
 #include "GameFramework.MobileMenuObject.h"
-#include "GameFramework.MobilePlayerInput.h"
-#include "Core.Object.LinearColor.h"
 #include "Engine.Texture2D.h"
-#include "GameFramework.MobileMenuObject.UVCoords.h"
+#include "GameFramework.MobilePlayerInput.h"
 #include "Engine.Canvas.h"
 #include "GameFramework.MobileMenuScene.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuButton." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.MobileMenuButton." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.MobileMenuButton." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MobileMenuButton : public MobileMenuObject
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, CaptionColor, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Caption, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ImageColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UVCoords>, ImagesUVs, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, Images)
+		ADD_STRUCT(Object::LinearColor, CaptionColor, 208)
+		ADD_STRUCT(ScriptString*, Caption, 196)
+		ADD_STRUCT(Object::LinearColor, ImageColor, 180)
+		ADD_STRUCT(MobileMenuObject::UVCoords, ImagesUVs, 140)
+		ADD_OBJECT(Texture2D, Images, 132)
 		void InitMenuObject(class MobilePlayerInput* PlayerInput, class MobileMenuScene* Scene, int ScreenWidth, int ScreenHeight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.InitMenuObject");
-			byte* params = (byte*)malloc(16);
-			*(class MobilePlayerInput**)params = PlayerInput;
-			*(class MobileMenuScene**)(params + 4) = Scene;
-			*(int*)(params + 8) = ScreenWidth;
-			*(int*)(params + 12) = ScreenHeight;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class MobilePlayerInput**)&params[0] = PlayerInput;
+			*(class MobileMenuScene**)&params[4] = Scene;
+			*(int*)&params[8] = ScreenWidth;
+			*(int*)&params[12] = ScreenHeight;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderObject(class Canvas* Canvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.RenderObject");
-			byte* params = (byte*)malloc(4);
-			*(class Canvas**)params = Canvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderCaption(class Canvas* Canvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.RenderCaption");
-			byte* params = (byte*)malloc(4);
-			*(class Canvas**)params = Canvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

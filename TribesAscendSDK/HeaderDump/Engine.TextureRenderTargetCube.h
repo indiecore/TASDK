@@ -1,18 +1,17 @@
 #pragma once
 #include "Engine.TextureRenderTarget.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TextureRenderTargetCube." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.Texture.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TextureRenderTargetCube : public TextureRenderTarget
 	{
 	public:
-		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
+		ADD_STRUCT(Texture::EPixelFormat, Format, 248)
+		ADD_STRUCT(int, SizeX, 244)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

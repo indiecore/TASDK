@@ -1,604 +1,556 @@
 #pragma once
+#include "PlatformCommon.TgPlayerProfile.h"
 #include "Core.Object.h"
 #include "TribesGame.GFxTrMenuMoviePlayer.h"
 #include "OnlineSubsystemMcts.OnlineGameInterfaceMcts.h"
-#include "TribesGame.TrQueueManager.ServerInfo.h"
-#include "TribesGame.TrQueueManager.ProfileConfig.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrQueueManager." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrQueueManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrQueueManager : public Object
 	{
 	public:
-		ADD_VAR(::BoolProperty, bQueued, 0x1)
-		ADD_VAR(::BoolProperty, bJoiningCustom, 0x4)
-		ADD_VAR(::StrProperty, QueueFriend, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bFilterOwner, 0x8)
-		ADD_VAR(::IntProperty, GameTypeId, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ServerIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MapSlots, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bNeedPassword, 0x2)
-		ADD_OBJECT(GFxTrMenuMoviePlayer, TrOuter)
-		ADD_OBJECT(OnlineGameInterfaceMcts, OnlineGameMcts)
-		ADD_VAR(::BoolProperty, bFavoriteSort, 0x1000)
-		ADD_VAR(::BoolProperty, bPasswordSort, 0x800)
-		ADD_VAR(::BoolProperty, bSlotsSort, 0x400)
-		ADD_VAR(::BoolProperty, bRangeSort, 0x200)
-		ADD_VAR(::BoolProperty, bRulesSort, 0x100)
-		ADD_VAR(::BoolProperty, bTypeSort, 0x80)
-		ADD_VAR(::BoolProperty, bPingSort, 0x40)
-		ADD_VAR(::BoolProperty, bNameSort, 0x20)
-		ADD_VAR(::BoolProperty, bMapSort, 0x10)
-		ADD_VAR(::IntProperty, PasswordQueue, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PasswordIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ProfileIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, queueId, 0xFFFFFFFF)
-		ScriptArray<wchar_t> GetStatus()
+		class ServerInfo
+		{
+		public:
+			ADD_STRUCT(int, PlayerCount, 20)
+			ADD_STRUCT(int, PlayerMax, 16)
+			ADD_STRUCT(ScriptString*, MapName, 56)
+			ADD_STRUCT(ScriptString*, ServerName, 32)
+			ADD_BOOL(bFavorite, 24, 0x2)
+			ADD_STRUCT(int, queueId, 4)
+			ADD_STRUCT(int, Ping, 0)
+			ADD_BOOL(bPrivate, 24, 0x1)
+			ADD_STRUCT(ScriptString*, Ruleset, 68)
+			ADD_STRUCT(int, MinLevel, 8)
+			ADD_STRUCT(int, MaxLevel, 12)
+			ADD_STRUCT(ScriptString*, ServerDesc, 44)
+			ADD_STRUCT(int, GameType, 28)
+		};
+		class RentalItem
+		{
+		public:
+			ADD_STRUCT(ScriptString*, RentalName, 12)
+			ADD_STRUCT(int, Price, 0)
+			ADD_STRUCT(int, LootId, 4)
+			ADD_STRUCT(int, SortOrder, 8)
+		};
+		class ProfileConfig
+		{
+		public:
+			ADD_STRUCT(ScriptString*, PasswordPublic, 48)
+			ADD_STRUCT(ScriptString*, PasswordAdmin, 36)
+			ADD_STRUCT(ScriptString*, ProfileDesc, 24)
+			ADD_STRUCT(ScriptString*, ProfileName, 12)
+			ADD_STRUCT(int, QueueCaseId, 8)
+			ADD_STRUCT(int, GameCaseId, 4)
+			ADD_STRUCT(int, Slots, 0)
+		};
+		class ServerConfig
+		{
+		public:
+			ADD_STRUCT(ScriptArray<TrQueueManager::ProfileConfig>, Profiles, 28)
+			ADD_STRUCT(ScriptString*, ServerName, 16)
+			ADD_BOOL(bCanExpire, 12, 0x8)
+			ADD_BOOL(bActive, 12, 0x4)
+			ADD_BOOL(bOwner, 12, 0x2)
+			ADD_BOOL(bOpen, 12, 0x1)
+			ADD_STRUCT(int, MinutesRented, 8)
+			ADD_STRUCT(int, MatchQueueId, 4)
+			ADD_STRUCT(int, ActiveConfig, 0)
+		};
+		ADD_BOOL(bQueued, 128, 0x1)
+		ADD_BOOL(bJoiningCustom, 128, 0x4)
+		ADD_STRUCT(ScriptArray<int>, RegionFilter, 116)
+		ADD_STRUCT(ScriptString*, QueueFriend, 132)
+		ADD_BOOL(bFilterOwner, 128, 0x8)
+		ADD_STRUCT(ScriptArray<TrQueueManager::ServerInfo>, ServerInfoList, 152)
+		ADD_STRUCT(int, GameTypeId, 96)
+		ADD_STRUCT(ScriptArray<TrQueueManager::ServerConfig>, RentedServers, 164)
+		ADD_STRUCT(int, ServerIndex, 104)
+		ADD_STRUCT(int, MapSlots, 64)
+		ADD_STRUCT(ScriptArray<TrQueueManager::RentalItem>, RentalItems, 176)
+		ADD_BOOL(bNeedPassword, 128, 0x2)
+		ADD_STRUCT(ScriptArray<TgPlayerProfile::PropertyPair>, FilteredGameTypes, 188)
+		ADD_OBJECT(GFxTrMenuMoviePlayer, TrOuter, 148)
+		ADD_OBJECT(OnlineGameInterfaceMcts, OnlineGameMcts, 144)
+		ADD_BOOL(bFavoriteSort, 128, 0x1000)
+		ADD_BOOL(bPasswordSort, 128, 0x800)
+		ADD_BOOL(bSlotsSort, 128, 0x400)
+		ADD_BOOL(bRangeSort, 128, 0x200)
+		ADD_BOOL(bRulesSort, 128, 0x100)
+		ADD_BOOL(bTypeSort, 128, 0x80)
+		ADD_BOOL(bPingSort, 128, 0x40)
+		ADD_BOOL(bNameSort, 128, 0x20)
+		ADD_BOOL(bMapSort, 128, 0x10)
+		ADD_STRUCT(int, PasswordQueue, 112)
+		ADD_STRUCT(int, PasswordIndex, 108)
+		ADD_STRUCT(int, ProfileIndex, 100)
+		ADD_STRUCT(int, queueId, 60)
+		ScriptString* GetStatus()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetStatus");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		bool SetPropNumber(int PropId, int val, int PropType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SetPropNumber");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = PropId;
-			*(int*)(params + 4) = val;
-			*(int*)(params + 8) = PropType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(int*)&params[4] = val;
+			*(int*)&params[8] = PropType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
 		bool GetNextMapId(bool bStart, int& MapId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetNextMapId");
-			byte* params = (byte*)malloc(12);
-			*(bool*)params = bStart;
-			*(int*)(params + 4) = MapId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MapId = *(int*)(params + 4);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(bool*)&params[0] = bStart;
+			*(int*)&params[4] = MapId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MapId = *(int*)&params[4];
+			return *(bool*)&params[8];
 		}
-		ScriptArray<wchar_t> GetMapName(int MapId)
+		ScriptString* GetMapName(int MapId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetMapName");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = MapId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = MapId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
-		ScriptArray<wchar_t> GetProfileName()
+		ScriptString* GetProfileName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetProfileName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		ScriptArray<wchar_t> GetProfileDesc()
+		ScriptString* GetProfileDesc()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetProfileDesc");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		ScriptArray<wchar_t> GetServerGameTypeName(int Index)
+		ScriptString* GetServerGameTypeName(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerGameTypeName");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		int GetProfileGameType()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetProfileGameType");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		ScriptArray<wchar_t> GetServerRotationName()
+		ScriptString* GetServerRotationName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerRotationName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		bool IsGameTypeFiltered(int Id)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.IsGameTypeFiltered");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Id;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Id;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool AmServerOwner()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.AmServerOwner");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		int GetPropNumber(int PropId, int PropType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetPropNumber");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = PropId;
-			*(int*)(params + 4) = PropType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(int*)&params[4] = PropType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
-		ScriptArray<wchar_t> GetServerTimeFormat()
+		ScriptString* GetServerTimeFormat()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerTimeFormat");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		int GetQueueCaseId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetQueueCaseId");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		bool GetServerOnline(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerOnline");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		ScriptArray<wchar_t> GetServerName(int Index)
+		ScriptString* GetServerName(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerName");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		bool AddCustomServer()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.AddCustomServer");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		int GetProfileRotation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetProfileRotation");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		bool GetServerExpired()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerExpired");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		int GetServerTime()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetServerTime");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		bool CustomStart()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomStart");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool CustomStop()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomStop");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool CustomShutdown()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomShutdown");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool CustomNextMap(int MapId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomNextMap");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = MapId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = MapId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		bool CustomKick(ScriptArray<wchar_t> PlayerName)
+		bool CustomKick(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomKick");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		bool CustomBan(ScriptArray<wchar_t> PlayerName)
+		bool CustomBan(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomBan");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
 		bool AddCustomServerTime(int LootId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.AddCustomServerTime");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = LootId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = LootId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool GetPropMin(int PropId, int PropType, int& val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetPropMin");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = PropId;
-			*(int*)(params + 4) = PropType;
-			*(int*)(params + 8) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			val = *(int*)(params + 8);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(int*)&params[4] = PropType;
+			*(int*)&params[8] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			val = *(int*)&params[8];
+			return *(bool*)&params[12];
 		}
 		bool GetPropMax(int PropId, int PropType, int& val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetPropMax");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = PropId;
-			*(int*)(params + 4) = PropType;
-			*(int*)(params + 8) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			val = *(int*)(params + 8);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(int*)&params[4] = PropType;
+			*(int*)&params[8] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			val = *(int*)&params[8];
+			return *(bool*)&params[12];
 		}
-		ScriptArray<wchar_t> GetAdminPassword()
+		ScriptString* GetAdminPassword()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetAdminPassword");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		ScriptArray<wchar_t> GetPublicPassword()
+		ScriptString* GetPublicPassword()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetPublicPassword");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		bool CustomSetName(ScriptArray<wchar_t> QueueName)
+		bool CustomSetName(ScriptString* QueueName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomSetName");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = QueueName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = QueueName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		bool SetPropString(int PropId, ScriptArray<wchar_t> val, int PropType)
+		bool SetPropString(int PropId, ScriptString* val, int PropType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SetPropString");
-			byte* params = (byte*)malloc(24);
-			*(int*)params = PropId;
-			*(ScriptArray<wchar_t>*)(params + 4) = val;
-			*(int*)(params + 16) = PropType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(ScriptString**)&params[4] = val;
+			*(int*)&params[16] = PropType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 		int GetProfileRegion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetProfileRegion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		bool CustomLogin(ScriptArray<wchar_t> Password)
+		bool CustomLogin(ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.CustomLogin");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		int FavoriteSortB(ServerInfo A, ServerInfo B)
+		int FavoriteSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.FavoriteSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int PasswordSortB(ServerInfo A, ServerInfo B)
+		int PasswordSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PasswordSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int SlotsSortB(ServerInfo A, ServerInfo B)
+		int SlotsSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SlotsSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int RangeSortB(ServerInfo A, ServerInfo B)
+		int RangeSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RangeSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int RulesSortB(ServerInfo A, ServerInfo B)
+		int RulesSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RulesSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int TypeSortB(ServerInfo A, ServerInfo B)
+		int TypeSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.TypeSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int PingSortB(ServerInfo A, ServerInfo B)
+		int PingSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PingSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int NameSortB(ServerInfo A, ServerInfo B)
+		int NameSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.NameSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int MapSortB(ServerInfo A, ServerInfo B)
+		int MapSortB(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.MapSortB");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int FavoriteSortA(ServerInfo A, ServerInfo B)
+		int FavoriteSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.FavoriteSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int PasswordSortA(ServerInfo A, ServerInfo B)
+		int PasswordSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PasswordSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int SlotsSortA(ServerInfo A, ServerInfo B)
+		int SlotsSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SlotsSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int RangeSortA(ServerInfo A, ServerInfo B)
+		int RangeSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RangeSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int RulesSortA(ServerInfo A, ServerInfo B)
+		int RulesSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RulesSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int TypeSortA(ServerInfo A, ServerInfo B)
+		int TypeSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.TypeSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int PingSortA(ServerInfo A, ServerInfo B)
+		int PingSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PingSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int NameSortA(ServerInfo A, ServerInfo B)
+		int NameSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.NameSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
-		int MapSortA(ServerInfo A, ServerInfo B)
+		int MapSortA(TrQueueManager::ServerInfo A, TrQueueManager::ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.MapSortA");
-			byte* params = (byte*)malloc(164);
-			*(ServerInfo*)params = A;
-			*(ServerInfo*)(params + 80) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 160);
-			free(params);
-			return returnVal;
+			byte params[164] = { NULL };
+			*(TrQueueManager::ServerInfo*)&params[0] = A;
+			*(TrQueueManager::ServerInfo*)&params[80] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[160];
 		}
 		void ForceGoHome()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.ForceGoHome");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OpenLocal(ScriptArray<wchar_t> URL)
+		void OpenLocal(ScriptString* URL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.OpenLocal");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = URL;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = URL;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetCustomServers()
 		{
@@ -615,37 +567,31 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RefreshRentedServers");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetPropString(int PropId, int PropType)
+		ScriptString* GetPropString(int PropId, int PropType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetPropString");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = PropId;
-			*(int*)(params + 4) = PropType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(int*)&params[4] = PropType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[8];
 		}
-		bool SetLocalName(ScriptArray<wchar_t> val)
+		bool SetLocalName(ScriptString* val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SetLocalName");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		bool MatchQueueJoin(int Queue, ScriptArray<wchar_t> Password)
+		bool MatchQueueJoin(int Queue, ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.MatchQueueJoin");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = Queue;
-			*(ScriptArray<wchar_t>*)(params + 4) = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = Queue;
+			*(ScriptString**)&params[4] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void Initialize()
 		{
@@ -655,41 +601,37 @@ namespace UnrealScript
 		void LeaveMatchmaking(bool bForced)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.LeaveMatchmaking");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bForced;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bForced;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinQueue(int nQueueId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.JoinQueue");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = nQueueId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = nQueueId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPlayerQueued()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SetPlayerQueued");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void JoinFriend(ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Password)
+		void JoinFriend(ScriptString* PlayerName, ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.JoinFriend");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)&params[12] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ExitGameInProgress(bool bForceDrop, bool bKicked)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.ExitGameInProgress");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bForceDrop;
-			*(bool*)(params + 4) = bKicked;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bForceDrop;
+			*(bool*)&params[4] = bKicked;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerInfoLoaded()
 		{
@@ -699,101 +641,87 @@ namespace UnrealScript
 		void JoinCustomServer(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.JoinCustomServer");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void JoinProtectedServer(ScriptArray<wchar_t> Password)
+		void JoinProtectedServer(ScriptString* Password)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.JoinProtectedServer");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Password;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Password;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FavoriteServer(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.FavoriteServer");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PasswordServer(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PasswordServer");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActiveServer(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SetActiveServer");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerPage(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.ServerPage");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ServerSort(ScriptArray<wchar_t> SortName)
+		void ServerSort(ScriptString* SortName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.ServerSort");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = SortName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = SortName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SortOn(ScriptArray<wchar_t> SortName)
+		void SortOn(ScriptString* SortName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SortOn");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = SortName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = SortName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetSlots()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetSlots");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		int GetGameCaseId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetGameCaseId");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		void AddServerConfig(int MatchQueueId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.AddServerConfig");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = MatchQueueId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = MatchQueueId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddProfileConfig(int Index, ProfileConfig Data)
+		void AddProfileConfig(int Index, TrQueueManager::ProfileConfig Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.AddProfileConfig");
-			byte* params = (byte*)malloc(64);
-			*(int*)params = Index;
-			*(ProfileConfig*)(params + 4) = Data;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[64] = { NULL };
+			*(int*)&params[0] = Index;
+			*(TrQueueManager::ProfileConfig*)&params[4] = Data;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetRotation()
 		{
@@ -803,30 +731,27 @@ namespace UnrealScript
 		int GetDefaultMapId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.GetDefaultMapId");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		void MarkFavorite(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.MarkFavorite");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FilterGameType(int Id, bool bFilter)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.FilterGameType");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Id;
-			*(bool*)(params + 4) = bFilter;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Id;
+			*(bool*)&params[4] = bFilter;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

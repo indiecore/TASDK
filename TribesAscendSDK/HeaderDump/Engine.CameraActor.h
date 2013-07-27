@@ -1,54 +1,54 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Actor.h"
-#include "Core.Object.TPOV.h"
-#include "Engine.PostProcessVolume.PostProcessSettings.h"
+#include "Engine.PostProcessVolume.h"
 #include "Engine.HUD.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraActor." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.CameraActor." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class CameraActor : public Actor
 	{
 	public:
-		ADD_VAR(::BoolProperty, bConstrainAspectRatio, 0x1)
-		ADD_VAR(::FloatProperty, AspectRatio, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CamOverridePostProcessAlpha, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, CamOverridePostProcess, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FOVAngle, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bCamOverridePostProcess, 0x2)
-		void GetCameraView(float DeltaTime, TPOV& OutPOV)
+		ADD_BOOL(bConstrainAspectRatio, 476, 0x1)
+		ADD_STRUCT(float, AspectRatio, 480)
+		ADD_STRUCT(float, CamOverridePostProcessAlpha, 488)
+		ADD_STRUCT(PostProcessVolume::PostProcessSettings, CamOverridePostProcess, 492)
+		ADD_STRUCT(float, FOVAngle, 484)
+		ADD_BOOL(bCamOverridePostProcess, 476, 0x2)
+		void GetCameraView(float DeltaTime, Object::TPOV& OutPOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraActor.GetCameraView");
-			byte* params = (byte*)malloc(32);
-			*(float*)params = DeltaTime;
-			*(TPOV*)(params + 4) = OutPOV;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutPOV = *(TPOV*)(params + 4);
-			free(params);
+			byte params[32] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			*(Object::TPOV*)&params[4] = OutPOV;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutPOV = *(Object::TPOV*)&params[4];
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraActor.DisplayDebug");
-			byte* params = (byte*)malloc(12);
-			*(class HUD**)params = HUD;
-			*(float*)(params + 4) = out_YL;
-			*(float*)(params + 8) = out_YPos;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_YL = *(float*)(params + 4);
-			out_YPos = *(float*)(params + 8);
-			free(params);
+			byte params[12] = { NULL };
+			*(class HUD**)&params[0] = HUD;
+			*(float*)&params[4] = out_YL;
+			*(float*)&params[8] = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_YL = *(float*)&params[4];
+			out_YPos = *(float*)&params[8];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

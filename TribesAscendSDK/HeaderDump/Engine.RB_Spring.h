@@ -1,59 +1,58 @@
 #pragma once
 #include "Engine.ActorComponent.h"
-#include "Core.Object.InterpCurveFloat.h"
-#include "Core.Object.Pointer.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_Spring." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.RB_Spring." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class RB_Spring : public ActorComponent
 	{
 	public:
-		ADD_VAR(::FloatProperty, DampMaxForce, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DampSaturateVel, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, SpringMaxForceTimeScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxForceMassRatio, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpringMaxForce, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpringSaturateDist, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MinBodyMass, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TimeSinceActivation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SpringData, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bEnableForceMassRatio, 0x2)
-		ADD_VAR(::BoolProperty, bInHardware, 0x1)
-		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, BoneName2, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, BoneName1, 0xFFFFFFFF)
+		ADD_STRUCT(float, DampMaxForce, 164)
+		ADD_STRUCT(float, DampSaturateVel, 160)
+		ADD_STRUCT(Object::InterpCurveFloat, SpringMaxForceTimeScale, 144)
+		ADD_STRUCT(float, MaxForceMassRatio, 140)
+		ADD_STRUCT(float, SpringMaxForce, 136)
+		ADD_STRUCT(float, SpringSaturateDist, 132)
+		ADD_STRUCT(float, MinBodyMass, 128)
+		ADD_STRUCT(float, TimeSinceActivation, 124)
+		ADD_STRUCT(Object::Pointer, SpringData, 120)
+		ADD_BOOL(bEnableForceMassRatio, 116, 0x2)
+		ADD_BOOL(bInHardware, 116, 0x1)
+		ADD_STRUCT(int, SceneIndex, 112)
+		ADD_STRUCT(ScriptName, BoneName2, 104)
+		ADD_STRUCT(ScriptName, BoneName1, 92)
 		void SetComponents(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* InComponent1, ScriptName InBoneName1, Vector Position1, 
+void* InComponent1, ScriptName InBoneName1, Object::Vector Position1, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* InComponent2, ScriptName InBoneName2, Vector Position2)
+void* InComponent2, ScriptName InBoneName2, Object::Vector Position2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Spring.SetComponents");
-			byte* params = (byte*)malloc(48);
+			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = InComponent1;
-			*(ScriptName*)(params + 4) = InBoneName1;
-			*(Vector*)(params + 12) = Position1;
+void**)&params[0] = InComponent1;
+			*(ScriptName*)&params[4] = InBoneName1;
+			*(Object::Vector*)&params[12] = Position1;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 24) = InComponent2;
-			*(ScriptName*)(params + 28) = InBoneName2;
-			*(Vector*)(params + 36) = Position2;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[24] = InComponent2;
+			*(ScriptName*)&params[28] = InBoneName2;
+			*(Object::Vector*)&params[36] = Position2;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Clear()
 		{
@@ -62,5 +61,5 @@ void**)(params + 24) = InComponent2;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

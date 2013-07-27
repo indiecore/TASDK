@@ -1,27 +1,18 @@
 #pragma once
-#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeDelay." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SoundNodeDelay." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.DistributionFloat.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SoundNodeDelay : public SoundNode
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, DelayDuration, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DelayMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DelayMin, 0xFFFFFFFF)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, DelayDuration, 84)
+		ADD_STRUCT(float, DelayMax, 80)
+		ADD_STRUCT(float, DelayMin, 76)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

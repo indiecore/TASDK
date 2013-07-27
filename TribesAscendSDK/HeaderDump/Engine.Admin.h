@@ -10,53 +10,47 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.PostBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Admin(ScriptArray<wchar_t> CommandLine)
+		void Admin(ScriptString* CommandLine)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.Admin");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = CommandLine;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = CommandLine;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ServerAdmin(ScriptArray<wchar_t> CommandLine)
+		void ServerAdmin(ScriptString* CommandLine)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerAdmin");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = CommandLine;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = CommandLine;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void KickBan(ScriptArray<wchar_t> S)
+		void KickBan(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.KickBan");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ServerKickBan(ScriptArray<wchar_t> S)
+		void ServerKickBan(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerKickBan");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Kick(ScriptArray<wchar_t> S)
+		void Kick(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.Kick");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ServerKick(ScriptArray<wchar_t> S)
+		void ServerKick(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerKick");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerList()
 		{
@@ -73,21 +67,19 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerRestartMap");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Switch(ScriptArray<wchar_t> URL)
+		void Switch(ScriptString* URL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.Switch");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = URL;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = URL;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ServerSwitch(ScriptArray<wchar_t> URL)
+		void ServerSwitch(ScriptString* URL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerSwitch");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = URL;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = URL;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

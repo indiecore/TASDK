@@ -1,26 +1,22 @@
 #pragma once
 #include "Engine.UIDataStore.h"
 #include "Engine.UIDynamicFieldProvider.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.UIDataStore_Registry." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UIDataStore_Registry : public UIDataStore
 	{
 	public:
-		ADD_OBJECT(UIDynamicFieldProvider, RegistryDataProvider)
+		ADD_OBJECT(UIDynamicFieldProvider, RegistryDataProvider, 120)
 		class UIDynamicFieldProvider* GetDataProvider()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_Registry.GetDataProvider");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UIDynamicFieldProvider**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UIDynamicFieldProvider**)&params[0];
 		}
 	};
 }

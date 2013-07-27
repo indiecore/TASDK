@@ -1,40 +1,41 @@
 #pragma once
 #include "Engine.SkelControl_CCD_IK.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.Rotator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSkelControlFootPlacement_CCD." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrSkelControlFootPlacement_CCD." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrSkelControlFootPlacement_CCD : public SkelControl_CCD_IK
 	{
 	public:
-		ADD_VAR(::FloatProperty, FootAdjustHeightLastTick, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OffContactFootAdjustInterpSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OnContactFootAdjustInterpSpeed, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FootUpDirLastTick, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FootOrientInterpSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxFootOrientAdjust, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxDownAdjustment, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxUpAdjustment, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bFootOnGroundLastTick, 0x8)
-		ADD_VAR(::BoolProperty, bOnlyEnableForUpAdjustment, 0x4)
-		ADD_VAR(::BoolProperty, bOrientFootToGround, 0x2)
-		ADD_VAR(::BoolProperty, bInvertFootUpAxis, 0x1)
-		ADD_STRUCT(::RotatorProperty, FootRotOffset, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, FootUpAxis, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FootOffset, 0xFFFFFFFF)
+		ADD_STRUCT(float, FootAdjustHeightLastTick, 320)
+		ADD_STRUCT(float, OffContactFootAdjustInterpSpeed, 316)
+		ADD_STRUCT(float, OnContactFootAdjustInterpSpeed, 312)
+		ADD_STRUCT(Object::Vector, FootUpDirLastTick, 300)
+		ADD_STRUCT(float, FootOrientInterpSpeed, 296)
+		ADD_STRUCT(float, MaxFootOrientAdjust, 292)
+		ADD_STRUCT(float, MaxDownAdjustment, 288)
+		ADD_STRUCT(float, MaxUpAdjustment, 284)
+		ADD_BOOL(bFootOnGroundLastTick, 280, 0x8)
+		ADD_BOOL(bOnlyEnableForUpAdjustment, 280, 0x4)
+		ADD_BOOL(bOrientFootToGround, 280, 0x2)
+		ADD_BOOL(bInvertFootUpAxis, 280, 0x1)
+		ADD_STRUCT(Object::Rotator, FootRotOffset, 268)
+		ADD_STRUCT(Object::EAxis, FootUpAxis, 264)
+		ADD_STRUCT(float, FootOffset, 260)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

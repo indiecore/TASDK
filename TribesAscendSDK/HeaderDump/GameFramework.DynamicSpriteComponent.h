@@ -1,32 +1,20 @@
 #pragma once
-#include "Core.Object.InterpCurveVector2D.h"
+#include "Core.Object.h"
 #include "Engine.SpriteComponent.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.InterpCurveLinearColor.h"
-#include "Core.Object.InterpCurveFloat.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.DynamicSpriteComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.DynamicSpriteComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class DynamicSpriteComponent : public SpriteComponent
 	{
 	public:
-		ADD_VAR(::IntProperty, LoopCount, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LocationOffset, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveVector2D>, AnimatedPosition, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveLinearColor>, AnimatedColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, AnimatedScale, 0xFFFFFFFF)
+		ADD_STRUCT(int, LoopCount, 576)
+		ADD_STRUCT(Object::Vector, LocationOffset, 564)
+		ADD_STRUCT(Object::InterpCurveVector2D, AnimatedPosition, 548)
+		ADD_STRUCT(Object::InterpCurveLinearColor, AnimatedColor, 532)
+		ADD_STRUCT(Object::InterpCurveFloat, AnimatedScale, 516)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

@@ -9,12 +9,10 @@ namespace UnrealScript
 		bool EnforceTwoWayEdges(class NavigationHandle* NavHandle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_EnforceTwoWayEdges.EnforceTwoWayEdges");
-			byte* params = (byte*)malloc(8);
-			*(class NavigationHandle**)params = NavHandle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class NavigationHandle**)&params[0] = NavHandle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 	};
 }

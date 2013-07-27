@@ -9,28 +9,23 @@ namespace UnrealScript
 		void InitBehavior(class GameCrowdAgent* Agent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.InitBehavior");
-			byte* params = (byte*)malloc(4);
-			*(class GameCrowdAgent**)params = Agent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GameCrowdAgent**)&params[0] = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetBehaviorString()
+		ScriptString* GetBehaviorString()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.GetBehaviorString");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		bool ShouldEndIdle()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.ShouldEndIdle");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void StopBehavior()
 		{

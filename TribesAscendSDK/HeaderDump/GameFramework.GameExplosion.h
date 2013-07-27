@@ -1,81 +1,79 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Core.Object.h"
-#include "Core.Object.Vector.h"
 #include "Engine.CameraShake.h"
 #include "Engine.SoundCue.h"
 #include "Engine.ParticleSystem.h"
-#include "Core.Object.Vector2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameExplosion." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.GameExplosion." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.GameExplosion." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GameExplosion : public Object
 	{
 	public:
-		ADD_VAR(::FloatProperty, CameraLensEffectRadius, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, CameraLensEffect)
-		ADD_VAR(::FloatProperty, CamShakeFalloff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CamShakeOuterRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CamShakeInnerRadius, 0xFFFFFFFF)
-		ADD_OBJECT(CameraShake, CamShake_Rear)
-		ADD_OBJECT(CameraShake, CamShake_Right)
-		ADD_OBJECT(CameraShake, CamShake_Left)
-		ADD_OBJECT(CameraShake, CamShake)
-		ADD_VAR(::FloatProperty, FracturePartVel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FractureMeshRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExploRadialBlurMaxBlur, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExploRadialBlurFadeOutTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExploLightFadeOutTime, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, ExplosionSound)
-		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, HitActor)
-		ADD_VAR(::FloatProperty, ExplosionEmitterScale, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, ParticleEmitterTemplate)
-		ADD_VAR(::FloatProperty, MomentumTransferScale, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CringeDuration, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CringeRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, KnockDownStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, KnockDownRadius, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, MyDamageType)
-		ADD_OBJECT(ScriptClass, ActorClassToIgnoreForKnockdownsAndCringes)
-		ADD_OBJECT(ScriptClass, ActorClassToIgnoreForDamage)
-		ADD_OBJECT(Actor, ActorToIgnoreForDamage)
-		ADD_VAR(::FloatProperty, DamageFalloffExponent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DamageRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Damage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DamageDelay, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DirectionalExplosionAngleDeg, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAutoControllerVibration, 0x400)
-		ADD_VAR(::BoolProperty, bOrientCameraShakeTowardsEpicenter, 0x200)
-		ADD_VAR(::BoolProperty, bUseOverlapCheck, 0x100)
-		ADD_VAR(::BoolProperty, bUseMapSpecificValues, 0x80)
-		ADD_VAR(::BoolProperty, bParticleSystemIsBeingOverriddenDontUsePhysMatVersion, 0x40)
-		ADD_VAR(::BoolProperty, bAllowPerMaterialFX, 0x20)
-		ADD_VAR(::BoolProperty, bCausesFracture, 0x10)
-		ADD_VAR(::BoolProperty, bAttachExplosionEmitterToAttachee, 0x8)
-		ADD_VAR(::BoolProperty, bFullDamageToAttachee, 0x4)
-		ADD_VAR(::BoolProperty, bAllowTeammateCringes, 0x2)
-		ADD_VAR(::BoolProperty, bDirectionalExplosion, 0x1)
+		ADD_STRUCT(float, CameraLensEffectRadius, 224)
+		ADD_OBJECT(ScriptClass, CameraLensEffect, 220)
+		ADD_STRUCT(float, CamShakeFalloff, 216)
+		ADD_STRUCT(float, CamShakeOuterRadius, 212)
+		ADD_STRUCT(float, CamShakeInnerRadius, 208)
+		ADD_OBJECT(CameraShake, CamShake_Rear, 204)
+		ADD_OBJECT(CameraShake, CamShake_Right, 200)
+		ADD_OBJECT(CameraShake, CamShake_Left, 196)
+		ADD_OBJECT(CameraShake, CamShake, 192)
+		ADD_STRUCT(float, FracturePartVel, 188)
+		ADD_STRUCT(float, FractureMeshRadius, 184)
+		ADD_STRUCT(float, ExploRadialBlurMaxBlur, 180)
+		ADD_STRUCT(float, ExploRadialBlurFadeOutTime, 176)
+		ADD_STRUCT(float, ExploLightFadeOutTime, 168)
+		ADD_OBJECT(SoundCue, ExplosionSound, 160)
+		ADD_STRUCT(Object::Vector, HitNormal, 148)
+		ADD_STRUCT(Object::Vector, HitLocation, 136)
+		ADD_OBJECT(Actor, HitActor, 132)
+		ADD_STRUCT(float, ExplosionEmitterScale, 128)
+		ADD_OBJECT(ParticleSystem, ParticleEmitterTemplate, 124)
+		ADD_STRUCT(float, MomentumTransferScale, 120)
+		ADD_STRUCT(Object::Vector2D, CringeDuration, 112)
+		ADD_STRUCT(float, CringeRadius, 108)
+		ADD_STRUCT(float, KnockDownStrength, 104)
+		ADD_STRUCT(float, KnockDownRadius, 100)
+		ADD_OBJECT(ScriptClass, MyDamageType, 96)
+		ADD_OBJECT(ScriptClass, ActorClassToIgnoreForKnockdownsAndCringes, 92)
+		ADD_OBJECT(ScriptClass, ActorClassToIgnoreForDamage, 88)
+		ADD_OBJECT(Actor, ActorToIgnoreForDamage, 84)
+		ADD_STRUCT(float, DamageFalloffExponent, 80)
+		ADD_STRUCT(float, DamageRadius, 76)
+		ADD_STRUCT(float, Damage, 72)
+		ADD_STRUCT(float, DamageDelay, 68)
+		ADD_STRUCT(float, DirectionalExplosionAngleDeg, 64)
+		ADD_BOOL(bAutoControllerVibration, 60, 0x400)
+		ADD_BOOL(bOrientCameraShakeTowardsEpicenter, 60, 0x200)
+		ADD_BOOL(bUseOverlapCheck, 60, 0x100)
+		ADD_BOOL(bUseMapSpecificValues, 60, 0x80)
+		ADD_BOOL(bParticleSystemIsBeingOverriddenDontUsePhysMatVersion, 60, 0x40)
+		ADD_BOOL(bAllowPerMaterialFX, 60, 0x20)
+		ADD_BOOL(bCausesFracture, 60, 0x10)
+		ADD_BOOL(bAttachExplosionEmitterToAttachee, 60, 0x8)
+		ADD_BOOL(bFullDamageToAttachee, 60, 0x4)
+		ADD_BOOL(bAllowTeammateCringes, 60, 0x2)
+		ADD_BOOL(bDirectionalExplosion, 60, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,45 +1,47 @@
 #pragma once
 #include "Engine.Projectile.h"
 #include "Engine.Volume.h"
-#include "Core.Object.Pointer.h"
-#include "Core.Object.Vector.h"
-#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxGenericForceFieldBrush." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NxGenericForceFieldBrush." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#include "Engine.PrimitiveComponent.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NxGenericForceFieldBrush : public Volume
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LinearKernel, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ForceField, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TorusRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FalloffQuadratic, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FalloffLinear, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Noise, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, VelocityTarget, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, VelocityMultiplierZ, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, VelocityMultiplierY, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, VelocityMultiplierX, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PositionTarget, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PositionMultiplierZ, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PositionMultiplierY, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PositionMultiplierX, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Constant, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, Coordinates, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, CollideWithChannels, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
+		enum FFB_ForceFieldCoordinates : byte
+		{
+			FFB_CARTESIAN = 0,
+			FFB_SPHERICAL = 1,
+			FFB_CYLINDRICAL = 2,
+			FFB_TOROIDAL = 3,
+			FFB_MAX = 4,
+		};
+		ADD_STRUCT(ScriptArray<Object::Pointer>, ConvexMeshes, 684)
+		ADD_STRUCT(ScriptArray<Object::Pointer>, ExclusionShapes, 696)
+		ADD_STRUCT(ScriptArray<Object::Pointer>, ExclusionShapePoses, 708)
+		ADD_STRUCT(Object::Pointer, LinearKernel, 720)
+		ADD_STRUCT(Object::Pointer, ForceField, 680)
+		ADD_STRUCT(float, TorusRadius, 676)
+		ADD_STRUCT(Object::Vector, FalloffQuadratic, 664)
+		ADD_STRUCT(Object::Vector, FalloffLinear, 652)
+		ADD_STRUCT(Object::Vector, Noise, 640)
+		ADD_STRUCT(Object::Vector, VelocityTarget, 628)
+		ADD_STRUCT(Object::Vector, VelocityMultiplierZ, 616)
+		ADD_STRUCT(Object::Vector, VelocityMultiplierY, 604)
+		ADD_STRUCT(Object::Vector, VelocityMultiplierX, 592)
+		ADD_STRUCT(Object::Vector, PositionTarget, 580)
+		ADD_STRUCT(Object::Vector, PositionMultiplierZ, 568)
+		ADD_STRUCT(Object::Vector, PositionMultiplierY, 556)
+		ADD_STRUCT(Object::Vector, PositionMultiplierX, 544)
+		ADD_STRUCT(Object::Vector, Constant, 532)
+		ADD_STRUCT(NxGenericForceFieldBrush::FFB_ForceFieldCoordinates, Coordinates, 529)
+		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, RBChannel, 528)
+		ADD_STRUCT(PrimitiveComponent::RBCollisionChannelContainer, CollideWithChannels, 524)
+		ADD_STRUCT(int, ExcludeChannel, 520)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxGenericForceFieldBrush.PostBeginPlay");
@@ -48,14 +50,11 @@ namespace UnrealScript
 		bool StopsProjectile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxGenericForceFieldBrush.StopsProjectile");
-			byte* params = (byte*)malloc(8);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

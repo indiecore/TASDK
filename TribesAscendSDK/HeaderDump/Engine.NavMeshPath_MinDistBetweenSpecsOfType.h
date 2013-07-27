@@ -1,39 +1,30 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.NavMeshPathConstraint.h"
+#include "Engine.Pylon.h"
 #include "Engine.NavigationHandle.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavMeshPath_MinDistBetweenSpecsOfType." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshPath_MinDistBetweenSpecsOfType." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NavMeshPath_MinDistBetweenSpecsOfType : public NavMeshPathConstraint
 	{
 	public:
-		ADD_VAR(::ByteProperty, EdgeType, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MinDistBetweenEdgeTypes, 0xFFFFFFFF)
-		bool EnforceMinDist(class NavigationHandle* NavHandle, float InMinDist, byte InEdgeType, Vector LastLocation)
+		ADD_STRUCT(Pylon::ENavMeshEdgeType, EdgeType, 96)
+		ADD_STRUCT(Object::Vector, InitLocation, 84)
+		ADD_STRUCT(float, MinDistBetweenEdgeTypes, 80)
+		bool EnforceMinDist(class NavigationHandle* NavHandle, float InMinDist, Pylon::ENavMeshEdgeType InEdgeType, Object::Vector LastLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_MinDistBetweenSpecsOfType.EnforceMinDist");
-			byte* params = (byte*)malloc(25);
-			*(class NavigationHandle**)params = NavHandle;
-			*(float*)(params + 4) = InMinDist;
-			*(params + 8) = InEdgeType;
-			*(Vector*)(params + 12) = LastLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[25] = { NULL };
+			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(float*)&params[4] = InMinDist;
+			*(Pylon::ENavMeshEdgeType*)&params[8] = InEdgeType;
+			*(Object::Vector*)&params[12] = LastLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
 		void Recycle()
 		{
@@ -42,5 +33,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

@@ -1,47 +1,58 @@
 #pragma once
 #include "Engine.K2GraphBase.h"
-#include "Engine.AITree.AITreeHandle.h"
 #include "Engine.AIController.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.AITree." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Engine.AICommandNodeRoot.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class AITree : public K2GraphBase
 	{
 	public:
-		ADD_OBJECT(K2GraphBase, GatherList)
-		bool SetActiveRoot(ScriptName InName, AITreeHandle& Handle)
+		class AITreeUtilityInfo
+		{
+		public:
+			ADD_STRUCT(float, UtilityRating, 4)
+			ADD_OBJECT(ScriptClass, CommandClass, 0)
+		};
+		class AITreeHandle
+		{
+		public:
+			ADD_STRUCT(ScriptArray<class AICommandNodeBase*>, DisabledNodes, 12)
+			ADD_STRUCT(ScriptArray<AITree::AITreeUtilityInfo>, LastUtilityRatingList, 24)
+			ADD_STRUCT(ScriptArray<AITree::AITreeUtilityInfo>, LastUtilityRatingListAtChange, 36)
+			ADD_OBJECT(AICommandNodeRoot, ActiveRoot, 8)
+			ADD_STRUCT(ScriptName, ActiveRootName, 0)
+		};
+		ADD_STRUCT(ScriptArray<class AICommandNodeRoot*>, RootList, 72)
+		ADD_OBJECT(K2GraphBase, GatherList, 84)
+		bool SetActiveRoot(ScriptName InName, AITree::AITreeHandle& Handle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree.SetActiveRoot");
-			byte* params = (byte*)malloc(60);
-			*(ScriptName*)params = InName;
-			*(AITreeHandle*)(params + 8) = Handle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Handle = *(AITreeHandle*)(params + 8);
-			auto returnVal = *(bool*)(params + 56);
-			free(params);
-			return returnVal;
+			byte params[60] = { NULL };
+			*(ScriptName*)&params[0] = InName;
+			*(AITree::AITreeHandle*)&params[8] = Handle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Handle = *(AITree::AITreeHandle*)&params[8];
+			return *(bool*)&params[56];
 		}
-		
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* EvaluateTree(class AIController* InAI, AITreeHandle& Handle)
+		ScriptArray<ScriptClass*> EvaluateTree(class AIController* InAI, AITree::AITreeHandle& Handle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree.EvaluateTree");
-			byte* params = (byte*)malloc(64);
-			*(class AIController**)params = InAI;
-			*(AITreeHandle*)(params + 4) = Handle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Handle = *(AITreeHandle*)(params + 4);
-			auto returnVal = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 52);
-			free(params);
-			return returnVal;
+			byte params[64] = { NULL };
+			*(class AIController**)&params[0] = InAI;
+			*(AITree::AITreeHandle*)&params[4] = Handle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Handle = *(AITree::AITreeHandle*)&params[4];
+			return *(ScriptArray<ScriptClass*>*)&params[52];
 		}
 	};
 }
+#undef ADD_STRUCT
 #undef ADD_OBJECT

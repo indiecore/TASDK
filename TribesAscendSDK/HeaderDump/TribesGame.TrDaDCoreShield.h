@@ -1,40 +1,37 @@
 #pragma once
 #include "TribesGame.TrDaDCore.h"
 #include "Engine.DynamicSMActor.h"
+#include "Engine.MaterialInstanceConstant.h"
 #include "Engine.Material.h"
 #include "TribesGame.TrDaDShell.h"
 #include "TribesGame.TrPawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDaDCoreShield." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDaDCoreShield." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDaDCoreShield : public DynamicSMActor
 	{
 	public:
-		ADD_OBJECT(TrDaDShell, m_Shell)
-		ADD_VAR(::IntProperty, m_nShieldIndex, 0xFFFFFFFF)
-		ADD_OBJECT(TrDaDCore, m_Core)
-		ADD_OBJECT(Material, m_BaseMaterial)
-		ADD_VAR(::ByteProperty, m_DefenderTeamIndex, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<class MaterialInstanceConstant*>, m_MICs, 536)
+		ADD_OBJECT(TrDaDShell, m_Shell, 560)
+		ADD_STRUCT(int, m_nShieldIndex, 556)
+		ADD_OBJECT(TrDaDCore, m_Core, 552)
+		ADD_OBJECT(Material, m_BaseMaterial, 548)
+		ADD_STRUCT(byte, m_DefenderTeamIndex, 532)
 		void Init(int ShieldIndex, class TrDaDCore* Core, class TrDaDShell* Shell)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.Init");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ShieldIndex;
-			*(class TrDaDCore**)(params + 4) = Core;
-			*(class TrDaDShell**)(params + 8) = Shell;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ShieldIndex;
+			*(class TrDaDCore**)&params[4] = Core;
+			*(class TrDaDShell**)&params[8] = Shell;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
@@ -54,10 +51,9 @@ namespace UnrealScript
 		void UpdateMaterialForPawn(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.UpdateMaterialForPawn");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateMICs()
 		{
@@ -66,5 +62,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

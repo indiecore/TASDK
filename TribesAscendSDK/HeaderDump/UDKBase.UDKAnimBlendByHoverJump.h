@@ -2,19 +2,17 @@
 #include "Engine.Pawn.h"
 #include "UDKBase.UDKAnimBlendByFall.h"
 #include "UDKBase.UDKVehicle.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKAnimBlendByHoverJump." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKAnimBlendByHoverJump : public UDKAnimBlendByFall
 	{
 	public:
-		ADD_OBJECT(UDKVehicle, OwnerHV)
-		ADD_OBJECT(Pawn, OwnerP)
+		ADD_OBJECT(UDKVehicle, OwnerHV, 328)
+		ADD_OBJECT(Pawn, OwnerP, 324)
 	};
 }
 #undef ADD_OBJECT

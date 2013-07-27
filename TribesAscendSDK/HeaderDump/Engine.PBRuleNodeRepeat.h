@@ -1,18 +1,17 @@
 #pragma once
 #include "Engine.PBRuleNodeBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PBRuleNodeRepeat." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.ProcBuildingRuleset.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class PBRuleNodeRepeat : public PBRuleNodeBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, RepeatMaxSize, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, RepeatAxis, 0xFFFFFFFF)
+		ADD_STRUCT(float, RepeatMaxSize, 108)
+		ADD_STRUCT(ProcBuildingRuleset::EProcBuildingAxis, RepeatAxis, 104)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -1,22 +1,21 @@
 #pragma once
 #include "Engine.SkelControlSingleBone.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_HoverboardSwing." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKSkelControl_HoverboardSwing : public SkelControlSingleBone
 	{
 	public:
-		ADD_VAR(::FloatProperty, CurrentSwing, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxUseVel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxSwing, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SwingScale, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SwingHistorySlot, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SwingHistoryWindow, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<float>, SwingHistory, 244)
+		ADD_STRUCT(float, CurrentSwing, 268)
+		ADD_STRUCT(float, MaxUseVel, 264)
+		ADD_STRUCT(float, MaxSwing, 260)
+		ADD_STRUCT(float, SwingScale, 256)
+		ADD_STRUCT(int, SwingHistorySlot, 240)
+		ADD_STRUCT(int, SwingHistoryWindow, 236)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

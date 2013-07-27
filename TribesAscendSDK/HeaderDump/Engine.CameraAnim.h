@@ -1,39 +1,27 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.InterpGroup.h"
-#include "Engine.PostProcessVolume.PostProcessSettings.h"
-#include "Core.Object.Box.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraAnim." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.CameraAnim." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.CameraAnim." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Engine.PostProcessVolume.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class CameraAnim : public Object
 	{
 	public:
-		ADD_VAR(::FloatProperty, BaseFOV, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BasePPSettingsAlpha, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, BasePPSettings, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Box>, BoundingBox, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AnimLength, 0xFFFFFFFF)
-		ADD_OBJECT(InterpGroup, CameraInterpGroup)
+		ADD_STRUCT(float, BaseFOV, 320)
+		ADD_STRUCT(float, BasePPSettingsAlpha, 316)
+		ADD_STRUCT(PostProcessVolume::PostProcessSettings, BasePPSettings, 96)
+		ADD_STRUCT(Object::Box, BoundingBox, 68)
+		ADD_STRUCT(float, AnimLength, 64)
+		ADD_OBJECT(InterpGroup, CameraInterpGroup, 60)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

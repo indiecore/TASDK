@@ -2,46 +2,42 @@
 #include "UTGame.UTLocalMessage.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrStormMessage." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrStormMessage : public UTLocalMessage
 	{
 	public:
-		ADD_VAR(::StrProperty, FriendlyCoreDestroyed, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FriendlyCore25Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FriendlyCore50Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FriendlyCore75Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnemyCoreDestroyed, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnemyCore25Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnemyCore50Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnemyCore75Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnemyCarrierShieldsDown, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FriendlyCarrierShieldsDown, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnemyCarrierShields50Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FriendlyCarrierShields50Percent, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ControlPointTransitioning, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ControlPointLost, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ControlPointWon, 0xFFFFFFFF)
-		ScriptArray<wchar_t> GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ADD_STRUCT(ScriptString*, FriendlyCoreDestroyed, 268)
+		ADD_STRUCT(ScriptString*, FriendlyCore25Percent, 256)
+		ADD_STRUCT(ScriptString*, FriendlyCore50Percent, 244)
+		ADD_STRUCT(ScriptString*, FriendlyCore75Percent, 232)
+		ADD_STRUCT(ScriptString*, EnemyCoreDestroyed, 220)
+		ADD_STRUCT(ScriptString*, EnemyCore25Percent, 208)
+		ADD_STRUCT(ScriptString*, EnemyCore50Percent, 196)
+		ADD_STRUCT(ScriptString*, EnemyCore75Percent, 184)
+		ADD_STRUCT(ScriptString*, EnemyCarrierShieldsDown, 172)
+		ADD_STRUCT(ScriptString*, FriendlyCarrierShieldsDown, 160)
+		ADD_STRUCT(ScriptString*, EnemyCarrierShields50Percent, 148)
+		ADD_STRUCT(ScriptString*, FriendlyCarrierShields50Percent, 136)
+		ADD_STRUCT(ScriptString*, ControlPointTransitioning, 124)
+		ADD_STRUCT(ScriptString*, ControlPointLost, 112)
+		ADD_STRUCT(ScriptString*, ControlPointWon, 100)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormMessage.GetString");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Switch;
-			*(bool*)(params + 4) = bPRI1HUD;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Switch;
+			*(bool*)&params[4] = bPRI1HUD;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

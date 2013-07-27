@@ -4,26 +4,22 @@
 #include "IpDrv.WebResponse.h"
 #include "Engine.WorldInfo.h"
 #include "IpDrv.WebRequest.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebApplication." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty IpDrv.WebApplication." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class WebApplication : public Object
 	{
 	public:
-		ADD_VAR(::StrProperty, Path, 0xFFFFFFFF)
-		ADD_OBJECT(WebServer, WebServer)
-		ADD_OBJECT(WorldInfo, WorldInfo)
+		ADD_STRUCT(ScriptString*, Path, 68)
+		ADD_OBJECT(WebServer, WebServer, 64)
+		ADD_OBJECT(WorldInfo, WorldInfo, 60)
 		void Init()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Init");
@@ -42,33 +38,29 @@ namespace UnrealScript
 		bool PreQuery(class WebRequest* Request, class WebResponse* Response)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.PreQuery");
-			byte* params = (byte*)malloc(12);
-			*(class WebRequest**)params = Request;
-			*(class WebResponse**)(params + 4) = Response;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class WebRequest**)&params[0] = Request;
+			*(class WebResponse**)&params[4] = Response;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void Query(class WebRequest* Request, class WebResponse* Response)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Query");
-			byte* params = (byte*)malloc(8);
-			*(class WebRequest**)params = Request;
-			*(class WebResponse**)(params + 4) = Response;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class WebRequest**)&params[0] = Request;
+			*(class WebResponse**)&params[4] = Response;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostQuery(class WebRequest* Request, class WebResponse* Response)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.PostQuery");
-			byte* params = (byte*)malloc(8);
-			*(class WebRequest**)params = Request;
-			*(class WebResponse**)(params + 4) = Response;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class WebRequest**)&params[0] = Request;
+			*(class WebResponse**)&params[4] = Response;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

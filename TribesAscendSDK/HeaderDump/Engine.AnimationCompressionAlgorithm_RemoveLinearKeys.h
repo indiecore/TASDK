@@ -1,24 +1,33 @@
 #pragma once
 #include "Engine.AnimationCompressionAlgorithm.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimationCompressionAlgorithm_RemoveLinearKeys." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class AnimationCompressionAlgorithm_RemoveLinearKeys : public AnimationCompressionAlgorithm
 	{
 	public:
-		ADD_VAR(::BoolProperty, bActuallyFilterLinearKeys, 0x2)
-		ADD_VAR(::BoolProperty, bRetarget, 0x1)
-		ADD_VAR(::FloatProperty, ParentKeyScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EffectorDiffSocket, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MinEffectorDiff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxEffectorDiff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxAngleDiff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxPosDiff, 0xFFFFFFFF)
+		ADD_BOOL(bActuallyFilterLinearKeys, 104, 0x2)
+		ADD_BOOL(bRetarget, 104, 0x1)
+		ADD_STRUCT(float, ParentKeyScale, 100)
+		ADD_STRUCT(float, EffectorDiffSocket, 96)
+		ADD_STRUCT(float, MinEffectorDiff, 92)
+		ADD_STRUCT(float, MaxEffectorDiff, 88)
+		ADD_STRUCT(float, MaxAngleDiff, 84)
+		ADD_STRUCT(float, MaxPosDiff, 80)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

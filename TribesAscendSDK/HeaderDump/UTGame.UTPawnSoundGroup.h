@@ -2,177 +2,169 @@
 #include "Core.Object.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Pawn.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTPawnSoundGroup." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTPawnSoundGroup : public Object
 	{
 	public:
-		ADD_OBJECT(SoundCue, InstagibSound)
-		ADD_OBJECT(SoundCue, BodyExplosionSound)
-		ADD_OBJECT(SoundCue, CrushedSound)
-		ADD_OBJECT(SoundCue, BulletImpactSound)
-		ADD_OBJECT(SoundCue, DefaultLandingSound)
-		ADD_OBJECT(SoundCue, DefaultFootstepSound)
-		ADD_OBJECT(SoundCue, GaspSound)
-		ADD_OBJECT(SoundCue, DrownSound)
-		ADD_OBJECT(SoundCue, GibSound)
-		ADD_OBJECT(SoundCue, HitSounds)
-		ADD_OBJECT(SoundCue, DyingSound)
-		ADD_OBJECT(SoundCue, FallingDamageLandSound)
-		ADD_OBJECT(SoundCue, LandSound)
-		ADD_OBJECT(SoundCue, DefaultJumpingSound)
-		ADD_OBJECT(SoundCue, DoubleJumpSound)
-		ADD_OBJECT(SoundCue, DodgeSound)
+		class FootstepSoundInfo
+		{
+		public:
+			ADD_OBJECT(SoundCue, Sound, 8)
+			ADD_STRUCT(ScriptName, MaterialType, 0)
+		};
+		ADD_STRUCT(ScriptArray<UTPawnSoundGroup::FootstepSoundInfo>, FootstepSounds, 108)
+		ADD_STRUCT(ScriptArray<UTPawnSoundGroup::FootstepSoundInfo>, JumpingSounds, 124)
+		ADD_STRUCT(ScriptArray<UTPawnSoundGroup::FootstepSoundInfo>, LandingSounds, 136)
+		ADD_OBJECT(SoundCue, InstagibSound, 164)
+		ADD_OBJECT(SoundCue, BodyExplosionSound, 160)
+		ADD_OBJECT(SoundCue, CrushedSound, 156)
+		ADD_OBJECT(SoundCue, BulletImpactSound, 152)
+		ADD_OBJECT(SoundCue, DefaultLandingSound, 148)
+		ADD_OBJECT(SoundCue, DefaultFootstepSound, 120)
+		ADD_OBJECT(SoundCue, GaspSound, 104)
+		ADD_OBJECT(SoundCue, DrownSound, 100)
+		ADD_OBJECT(SoundCue, GibSound, 96)
+		ADD_OBJECT(SoundCue, HitSounds, 84)
+		ADD_OBJECT(SoundCue, DyingSound, 80)
+		ADD_OBJECT(SoundCue, FallingDamageLandSound, 76)
+		ADD_OBJECT(SoundCue, LandSound, 72)
+		ADD_OBJECT(SoundCue, DefaultJumpingSound, 68)
+		ADD_OBJECT(SoundCue, DoubleJumpSound, 64)
+		ADD_OBJECT(SoundCue, DodgeSound, 60)
 		class SoundCue* GetFootstepSound(int FootDown, ScriptName MaterialType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.GetFootstepSound");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = FootDown;
-			*(ScriptName*)(params + 4) = MaterialType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SoundCue**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = FootDown;
+			*(ScriptName*)&params[4] = MaterialType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SoundCue**)&params[12];
 		}
 		class SoundCue* GetLandSound(ScriptName MaterialType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.GetLandSound");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = MaterialType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SoundCue**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = MaterialType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SoundCue**)&params[8];
 		}
 		class SoundCue* GetJumpSound(ScriptName MaterialType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.GetJumpSound");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = MaterialType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SoundCue**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = MaterialType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SoundCue**)&params[8];
 		}
 		void PlayInstagibSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayInstagibSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayBulletImpact(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayBulletImpact");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayCrushedSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayCrushedSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayBodyExplosion(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayBodyExplosion");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDodgeSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayDodgeSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDoubleJumpSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayDoubleJumpSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayJumpSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayJumpSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayLandSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayLandSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayFallingDamageLandSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayFallingDamageLandSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDyingSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayDyingSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayTakeHitSound(class Pawn* P, int Damage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayTakeHitSound");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			*(int*)(params + 4) = Damage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(int*)&params[4] = Damage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayGibSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayGibSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayGaspSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayGaspSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDrownSound(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawnSoundGroup.PlayDrownSound");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
+#undef ADD_STRUCT
 #undef ADD_OBJECT

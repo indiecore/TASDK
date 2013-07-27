@@ -4,54 +4,47 @@
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
 #include "Engine.PlayerController.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrLockedStationMessage." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrLockedStationMessage." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrLockedStationMessage : public UTLocalMessage
 	{
 	public:
-		ADD_OBJECT(SoundCue, DeniedSound)
-		ADD_VAR(::StrProperty, Second, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Seconds, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, StationLocked, 0xFFFFFFFF)
-		ScriptArray<wchar_t> GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ADD_OBJECT(SoundCue, DeniedSound, 136)
+		ADD_STRUCT(ScriptString*, Second, 124)
+		ADD_STRUCT(ScriptString*, Seconds, 112)
+		ADD_STRUCT(ScriptString*, StationLocked, 100)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLockedStationMessage.GetString");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Switch;
-			*(bool*)(params + 4) = bPRI1HUD;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Switch;
+			*(bool*)&params[4] = bPRI1HUD;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLockedStationMessage.ClientReceive");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerController**)params = P;
-			*(int*)(params + 4) = Switch;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class PlayerController**)&params[0] = P;
+			*(int*)&params[4] = Switch;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

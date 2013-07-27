@@ -1,27 +1,29 @@
 #pragma once
 #include "Engine.SequenceCondition.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqCond_HasInventory." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTSeqCond_HasInventory." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTSeqCond_HasInventory : public SequenceCondition
 	{
 	public:
-		ADD_VAR(::BoolProperty, bCheckVehicleDriver, 0x2)
-		ADD_VAR(::BoolProperty, bAllowSubclass, 0x1)
-		ADD_OBJECT(ScriptClass, RequiredInventory)
-		ADD_OBJECT(Actor, Target)
+		ADD_BOOL(bCheckVehicleDriver, 216, 0x2)
+		ADD_BOOL(bAllowSubclass, 216, 0x1)
+		ADD_OBJECT(ScriptClass, RequiredInventory, 212)
+		ADD_OBJECT(Actor, Target, 208)
 		void Activated()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_HasInventory.Activated");
@@ -29,5 +31,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_OBJECT

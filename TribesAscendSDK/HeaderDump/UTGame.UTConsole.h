@@ -1,50 +1,43 @@
 #pragma once
 #include "Engine.Console.h"
-#include "Core.Object.Color.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTConsole." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTConsole : public Console
 	{
 	public:
-		ADD_VAR(::IntProperty, TextCount, 0xFFFFFFFF)
+		ADD_STRUCT(int, TextCount, 452)
 		bool AnyBrowserOpen()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.AnyBrowserOpen");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		bool InputKey(int ControllerId, ScriptName Key, byte Event, float AmountDepressed, bool bGamepad)
+		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.InputKey");
-			byte* params = (byte*)malloc(25);
-			*(int*)params = ControllerId;
-			*(ScriptName*)(params + 4) = Key;
-			*(params + 12) = Event;
-			*(float*)(params + 16) = AmountDepressed;
-			*(bool*)(params + 20) = bGamepad;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[25] = { NULL };
+			*(int*)&params[0] = ControllerId;
+			*(ScriptName*)&params[4] = Key;
+			*(Object::EInputEvent*)&params[12] = Event;
+			*(float*)&params[16] = AmountDepressed;
+			*(bool*)&params[20] = bGamepad;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
-		void OutputTextLine(ScriptArray<wchar_t> Text, Color OverrideColor)
+		void OutputTextLine(ScriptString* Text, Object::Color OverrideColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.OutputTextLine");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Text;
-			*(Color*)(params + 12) = OverrideColor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Text;
+			*(Object::Color*)&params[12] = OverrideColor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

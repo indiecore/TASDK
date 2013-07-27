@@ -1,87 +1,76 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlinePlayerDataBase.h"
-#include "Core.Object.Pointer.h"
-#include "Engine.OnlineSubsystem.AchievementDetails.h"
+#include "Engine.OnlineSubsystem.h"
+#include "Core.Object.h"
 #include "Engine.LocalPlayer.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataProvider_PlayerAchievements." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UIDataProvider_PlayerAchievements : public UIDataProvider_OnlinePlayerDataBase
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<OnlineSubsystem::AchievementDetails>, Achievements, 96)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 92)
 		int GetTotalGamerScore()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetTotalGamerScore");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		int GetMaxTotalGamerScore()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetMaxTotalGamerScore");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		void PopulateAchievementIcons()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.PopulateAchievementIcons");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetAchievementIconPathName(int AchievementId, bool bReturnLockedIcon)
+		ScriptString* GetAchievementIconPathName(int AchievementId, bool bReturnLockedIcon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetAchievementIconPathName");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = AchievementId;
-			*(bool*)(params + 4) = bReturnLockedIcon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = AchievementId;
+			*(bool*)&params[4] = bReturnLockedIcon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[8];
 		}
-		void GetAchievementDetails(int AchievementId, AchievementDetails& OutAchievementDetails)
+		void GetAchievementDetails(int AchievementId, OnlineSubsystem::AchievementDetails& OutAchievementDetails)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetAchievementDetails");
-			byte* params = (byte*)malloc(56);
-			*(int*)params = AchievementId;
-			*(AchievementDetails*)(params + 4) = OutAchievementDetails;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutAchievementDetails = *(AchievementDetails*)(params + 4);
-			free(params);
+			byte params[56] = { NULL };
+			*(int*)&params[0] = AchievementId;
+			*(OnlineSubsystem::AchievementDetails*)&params[4] = OutAchievementDetails;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutAchievementDetails = *(OnlineSubsystem::AchievementDetails*)&params[4];
 		}
 		void OnPlayerAchievementsChanged(int TitleId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnPlayerAchievementsChanged");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = TitleId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = TitleId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayerAchievementUnlocked(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnPlayerAchievementUnlocked");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnRegister");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = InPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
@@ -91,10 +80,9 @@ namespace UnrealScript
 		void OnLoginChange(byte LocalUserNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnLoginChange");
-			byte* params = (byte*)malloc(1);
-			*params = LocalUserNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateAchievements()
 		{

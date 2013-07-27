@@ -1,57 +1,55 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Vector.h"
 #include "UDKBase.UDKGameObjective.h"
 #include "Engine.NavigationPoint.h"
 #include "Engine.TeamInfo.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKCarriedObject." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKCarriedObject." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKCarriedObject." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKCarriedObject : public Actor
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, OldBaseBase)
-		ADD_OBJECT(Actor, OldBase)
-		ADD_STRUCT(::VectorProperty, HomeBaseOffset, 0xFFFFFFFF)
-		ADD_OBJECT(UDKGameObjective, HomeBase)
-		ADD_VAR(::BoolProperty, bHome, 0x1)
-		ADD_VAR(::FloatProperty, LastValidAnchorTime, 0xFFFFFFFF)
-		ADD_OBJECT(NavigationPoint, LastAnchor)
-		ADD_OBJECT(TeamInfo, Team)
-		void SetHUDLocation(Vector NewHUDLocation)
+		ADD_STRUCT(Object::Vector, HUDLocation, 520)
+		ADD_OBJECT(Actor, OldBaseBase, 516)
+		ADD_OBJECT(Actor, OldBase, 512)
+		ADD_STRUCT(Object::Vector, HomeBaseOffset, 500)
+		ADD_OBJECT(UDKGameObjective, HomeBase, 496)
+		ADD_BOOL(bHome, 492, 0x1)
+		ADD_STRUCT(float, LastValidAnchorTime, 484)
+		ADD_OBJECT(NavigationPoint, LastAnchor, 480)
+		ADD_OBJECT(TeamInfo, Team, 476)
+		void SetHUDLocation(Object::Vector NewHUDLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.SetHUDLocation");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = NewHUDLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = NewHUDLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotReachableBy(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.NotReachableBy");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnBaseChainChanged()
 		{
@@ -61,14 +59,12 @@ namespace UnrealScript
 		byte GetTeamNum()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.GetTeamNum");
-			byte* params = (byte*)malloc(1);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *params;
-			free(params);
-			return returnVal;
+			byte params[1] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

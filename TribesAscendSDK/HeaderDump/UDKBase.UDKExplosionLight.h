@@ -1,32 +1,48 @@
 #pragma once
 #include "Engine.PointLightComponent.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKExplosionLight." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKExplosionLight : public PointLightComponent
 	{
 	public:
-		ADD_VAR(::IntProperty, TimeShiftIndex, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Lifetime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HighDetailFrameTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bInitialized, 0x2)
-		ADD_VAR(::BoolProperty, bCheckFrameRate, 0x1)
+		class LightValues
+		{
+		public:
+			ADD_STRUCT(Object::Color, LightColor, 12)
+			ADD_STRUCT(float, Brightness, 8)
+			ADD_STRUCT(float, Radius, 4)
+			ADD_STRUCT(float, StartTime, 0)
+		};
+		ADD_STRUCT(ScriptArray<UDKExplosionLight::LightValues>, TimeShift, 600)
+		ADD_STRUCT(int, TimeShiftIndex, 596)
+		ADD_STRUCT(float, Lifetime, 592)
+		ADD_STRUCT(float, HighDetailFrameTime, 588)
+		ADD_BOOL(bInitialized, 584, 0x2)
+		ADD_BOOL(bCheckFrameRate, 584, 0x1)
 		void OnLightFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Light)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKExplosionLight.OnLightFinished");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = Light;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = Light;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetLight()
 		{
@@ -35,4 +51,5 @@ void**)params = Light;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

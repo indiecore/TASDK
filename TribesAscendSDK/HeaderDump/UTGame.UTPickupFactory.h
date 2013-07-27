@@ -1,36 +1,44 @@
 #pragma once
-#include "Core.Object.LinearColor.h"
+#include "Engine.SoundNodeWave.h"
 #include "UDKBase.UDKPickupFactory.h"
 #include "Engine.Projectile.h"
 #include "Engine.ForceFeedbackWaveform.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.h"
 #include "UTGame.UTBot.h"
 #include "Engine.Controller.h"
 #include "UTGame.UTHUD.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTPickupFactory." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTPickupFactory." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTPickupFactory : public UDKPickupFactory
 	{
 	public:
-		ADD_OBJECT(ForceFeedbackWaveform, PickUpWaveForm)
-		ADD_VAR(::FloatProperty, LastSeekNotificationTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bHasLocationSpeech, 0x1)
-		ADD_VAR(::NameProperty, PickupStatName, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, RespawnSound)
-		ADD_OBJECT(Controller, TeamOwner)
+		ADD_STRUCT(ScriptArray<class SoundNodeWave*>, LocationSpeech, 924)
+		ADD_OBJECT(ForceFeedbackWaveform, PickUpWaveForm, 940)
+		ADD_STRUCT(float, LastSeekNotificationTime, 936)
+		ADD_BOOL(bHasLocationSpeech, 920, 0x1)
+		ADD_STRUCT(ScriptName, PickupStatName, 912)
+		ADD_OBJECT(SoundCue, RespawnSound, 900)
+		ADD_OBJECT(Controller, TeamOwner, 884)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.PostBeginPlay");
@@ -54,29 +62,25 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldCamp(class UTBot* B, float MaxWait)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.ShouldCamp");
-			byte* params = (byte*)malloc(12);
-			*(class UTBot**)params = B;
-			*(float*)(params + 4) = MaxWait;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class UTBot**)&params[0] = B;
+			*(float*)&params[4] = MaxWait;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void UpdateHUD(class UTHUD* H)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.UpdateHUD");
-			byte* params = (byte*)malloc(4);
-			*(class UTHUD**)params = H;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTHUD**)&params[0] = H;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RespawnEffect()
 		{
@@ -86,20 +90,17 @@ namespace UnrealScript
 		bool StopsProjectile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.StopsProjectile");
-			byte* params = (byte*)malloc(8);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		void StartPulse(LinearColor TargetEmissive)
+		void StartPulse(Object::LinearColor TargetEmissive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.StartPulse");
-			byte* params = (byte*)malloc(16);
-			*(LinearColor*)params = TargetEmissive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::LinearColor*)&params[0] = TargetEmissive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPickupMesh()
 		{
@@ -109,11 +110,9 @@ namespace UnrealScript
 		ScriptName GetPickupStatName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.GetPickupStatName");
-			byte* params = (byte*)malloc(8);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptName*)params;
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptName*)&params[0];
 		}
 		void InitPickupMeshEffects()
 		{
@@ -138,12 +137,12 @@ namespace UnrealScript
 		void PickedUpBy(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.PickedUpBy");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,38 +1,34 @@
 #pragma once
 #include "TribesGame.TrSubDevice.h"
-#include "Engine.Actor.ImpactInfo.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSubDevice_ForceField." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.Actor.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrSubDevice_ForceField : public TrSubDevice
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_MinSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_MaxSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_MinDamage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_MaxDamage, 0xFFFFFFFF)
+		ADD_STRUCT(float, m_MinSpeed, 2160)
+		ADD_STRUCT(float, m_MaxSpeed, 2156)
+		ADD_STRUCT(float, m_MinDamage, 2152)
+		ADD_STRUCT(float, m_MaxDamage, 2148)
 		void InstantFire()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSubDevice_ForceField.InstantFire");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		float ModifyInstantHitDamage(byte FiringMode, ImpactInfo Impact, float Damage)
+		float ModifyInstantHitDamage(byte FiringMode, Actor::ImpactInfo Impact, float Damage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSubDevice_ForceField.ModifyInstantHitDamage");
-			byte* params = (byte*)malloc(89);
-			*params = FiringMode;
-			*(ImpactInfo*)(params + 4) = Impact;
-			*(float*)(params + 84) = Damage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 88);
-			free(params);
-			return returnVal;
+			byte params[89] = { NULL };
+			params[0] = FiringMode;
+			*(Actor::ImpactInfo*)&params[4] = Impact;
+			*(float*)&params[84] = Damage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[88];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

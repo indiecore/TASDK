@@ -1,37 +1,40 @@
 #pragma once
 #include "Core.Component.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Core.DistributionFloat." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Core.DistributionFloat." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class DistributionFloat : public Component
 	{
 	public:
-		ADD_VAR(::BoolProperty, bIsDirty, 0x2)
-		ADD_VAR(::BoolProperty, bCanBeBaked, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FCurveEdInterface, 0xFFFFFFFF)
+		class RawDistributionFloat : public RawDistribution
+		{
+		};
+		ADD_BOOL(bIsDirty, 76, 0x2)
+		ADD_BOOL(bCanBeBaked, 76, 0x1)
+		ADD_STRUCT(Object::Pointer, VfTable_FCurveEdInterface, 72)
 		float GetFloatValue(float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.DistributionFloat.GetFloatValue");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

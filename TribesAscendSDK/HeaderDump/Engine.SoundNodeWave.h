@@ -1,70 +1,81 @@
 #pragma once
 #include "Engine.SoundNode.h"
-#include "Core.Object.Pointer.h"
-#include "Core.Object.UntypedBulkData_Mirror.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.EngineTypes.h"
+#include "Core.Object.h"
+#include "Engine.AudioDevice.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeWave." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SoundNodeWave." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SoundNodeWave : public SoundNode
 	{
 	public:
-		ADD_VAR(::StrProperty, SourceFileTimestamp, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, SourceFilePath, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Comment, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ResourceData, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ResourceSize, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ResourceID, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, CompressedPS3Data, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, CompressedXbox360Data, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, CompressedPCData, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, RawPCMDataSize, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RawPCMData, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VorbisDecompressor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, RawData, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SampleRate, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumChannels, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Duration, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Pitch, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Volume, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, SpokenText, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, DecompressionType, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, TTSSpeaker, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bManualWordWrap, 0x40)
-		ADD_VAR(::BoolProperty, bMature, 0x20)
-		ADD_VAR(::BoolProperty, bProcedural, 0x10)
-		ADD_VAR(::BoolProperty, bUseTTS, 0x8)
-		ADD_VAR(::BoolProperty, bDynamicResource, 0x4)
-		ADD_VAR(::BoolProperty, bLoopingSound, 0x2)
-		ADD_VAR(::BoolProperty, bForceRealTimeDecompression, 0x1)
-		ADD_VAR(::IntProperty, CompressionQuality, 0xFFFFFFFF)
-		void GeneratePCMData(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Buffer, int SamplesNeeded)
+		enum EDecompressionType : byte
+		{
+			DTYPE_Setup = 0,
+			DTYPE_Invalid = 1,
+			DTYPE_Preview = 2,
+			DTYPE_Native = 3,
+			DTYPE_RealTime = 4,
+			DTYPE_Procedural = 5,
+			DTYPE_Xenon = 6,
+			DTYPE_MAX = 7,
+		};
+		ADD_STRUCT(ScriptArray<int>, ChannelOffsets, 120)
+		ADD_STRUCT(ScriptArray<int>, ChannelSizes, 132)
+		ADD_STRUCT(ScriptArray<EngineTypes::SubtitleCue>, Subtitles, 376)
+		ADD_STRUCT(ScriptArray<EngineTypes::LocalizedSubtitle>, LocalizedSubtitles, 400)
+		ADD_STRUCT(ScriptString*, SourceFileTimestamp, 424)
+		ADD_STRUCT(ScriptString*, SourceFilePath, 412)
+		ADD_STRUCT(ScriptString*, Comment, 388)
+		ADD_STRUCT(Object::Pointer, ResourceData, 372)
+		ADD_STRUCT(int, ResourceSize, 368)
+		ADD_STRUCT(int, ResourceID, 364)
+		ADD_STRUCT(Object::UntypedBulkData_Mirror, CompressedPS3Data, 312)
+		ADD_STRUCT(Object::UntypedBulkData_Mirror, CompressedXbox360Data, 260)
+		ADD_STRUCT(Object::UntypedBulkData_Mirror, CompressedPCData, 208)
+		ADD_STRUCT(int, RawPCMDataSize, 204)
+		ADD_STRUCT(Object::Pointer, RawPCMData, 200)
+		ADD_STRUCT(Object::Pointer, VorbisDecompressor, 196)
+		ADD_STRUCT(Object::UntypedBulkData_Mirror, RawData, 144)
+		ADD_STRUCT(int, SampleRate, 116)
+		ADD_STRUCT(int, NumChannels, 112)
+		ADD_STRUCT(float, Duration, 108)
+		ADD_STRUCT(float, Pitch, 104)
+		ADD_STRUCT(float, Volume, 100)
+		ADD_STRUCT(ScriptString*, SpokenText, 88)
+		ADD_STRUCT(SoundNodeWave::EDecompressionType, DecompressionType, 85)
+		ADD_STRUCT(AudioDevice::ETTSSpeaker, TTSSpeaker, 84)
+		ADD_BOOL(bManualWordWrap, 80, 0x40)
+		ADD_BOOL(bMature, 80, 0x20)
+		ADD_BOOL(bProcedural, 80, 0x10)
+		ADD_BOOL(bUseTTS, 80, 0x8)
+		ADD_BOOL(bDynamicResource, 80, 0x4)
+		ADD_BOOL(bLoopingSound, 80, 0x2)
+		ADD_BOOL(bForceRealTimeDecompression, 80, 0x1)
+		ADD_STRUCT(int, CompressionQuality, 76)
+		void GeneratePCMData(ScriptArray<byte>& Buffer, int SamplesNeeded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWave.GeneratePCMData");
-			byte* params = (byte*)malloc(16);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = Buffer;
-			*(int*)(params + 12) = SamplesNeeded;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Buffer = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptArray<byte>*)&params[0] = Buffer;
+			*(int*)&params[12] = SamplesNeeded;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Buffer = *(ScriptArray<byte>*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

@@ -1,38 +1,40 @@
 #pragma once
-#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.DistributionFloat.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeOscillator." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SoundNodeOscillator." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SoundNodeOscillator : public SoundNode
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Center, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Offset, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Frequency, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Amplitude, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CenterMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CenterMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OffsetMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OffsetMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FrequencyMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FrequencyMin, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AmplitudeMax, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AmplitudeMin, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bModulatePitch, 0x2)
-		ADD_VAR(::BoolProperty, bModulateVolume, 0x1)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Center, 196)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Offset, 168)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Frequency, 140)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Amplitude, 112)
+		ADD_STRUCT(float, CenterMax, 108)
+		ADD_STRUCT(float, CenterMin, 104)
+		ADD_STRUCT(float, OffsetMax, 100)
+		ADD_STRUCT(float, OffsetMin, 96)
+		ADD_STRUCT(float, FrequencyMax, 92)
+		ADD_STRUCT(float, FrequencyMin, 88)
+		ADD_STRUCT(float, AmplitudeMax, 84)
+		ADD_STRUCT(float, AmplitudeMin, 80)
+		ADD_BOOL(bModulatePitch, 76, 0x2)
+		ADD_BOOL(bModulateVolume, 76, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

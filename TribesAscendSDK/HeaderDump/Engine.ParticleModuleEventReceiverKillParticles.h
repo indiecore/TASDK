@@ -1,17 +1,21 @@
 #pragma once
 #include "Engine.ParticleModuleEventReceiverBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleEventReceiverKillParticles." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class ParticleModuleEventReceiverKillParticles : public ParticleModuleEventReceiverBase
 	{
 	public:
-		ADD_VAR(::BoolProperty, bStopSpawning, 0x1)
+		ADD_BOOL(bStopSpawning, 84, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

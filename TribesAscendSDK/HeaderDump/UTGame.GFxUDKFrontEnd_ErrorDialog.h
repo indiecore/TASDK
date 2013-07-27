@@ -8,34 +8,30 @@ namespace UnrealScript
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetTitle(ScriptArray<wchar_t> Title)
+		void SetTitle(ScriptString* Title)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.SetTitle");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Title;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Title;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetInfo(ScriptArray<wchar_t> Info)
+		void SetInfo(ScriptString* Info)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.SetInfo");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Info;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Info;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetButtonLabel(ScriptArray<wchar_t> ButtonLabel)
+		void SetButtonLabel(ScriptString* ButtonLabel)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.SetButtonLabel");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = ButtonLabel;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = ButtonLabel;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnViewClosed()
 		{
@@ -45,10 +41,9 @@ namespace UnrealScript
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

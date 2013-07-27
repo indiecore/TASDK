@@ -1,22 +1,20 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimObject." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class AnimObject : public Object
 	{
 	public:
-		ADD_VAR(::StrProperty, CategoryDesc, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, OutDrawY, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NodePosY, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NodePosX, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DrawHeight, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DrawWidth, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, CategoryDesc, 80)
+		ADD_STRUCT(int, OutDrawY, 76)
+		ADD_STRUCT(int, NodePosY, 72)
+		ADD_STRUCT(int, NodePosX, 68)
+		ADD_STRUCT(int, DrawHeight, 64)
+		ADD_STRUCT(int, DrawWidth, 60)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

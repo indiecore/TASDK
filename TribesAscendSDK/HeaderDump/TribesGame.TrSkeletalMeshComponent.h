@@ -1,36 +1,43 @@
 #pragma once
 #include "Engine.SkeletalMeshComponent.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSkeletalMeshComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrSkeletalMeshComponent : public SkeletalMeshComponent
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fClearStreamingTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bForceLoadTextures, 0x1)
-		ADD_VAR(::FloatProperty, m_fFOV, 0xFFFFFFFF)
+		ADD_STRUCT(float, m_fClearStreamingTime, 1520)
+		ADD_BOOL(m_bForceLoadTextures, 1516, 0x1)
+		ADD_STRUCT(float, m_fFOV, 1512)
 		void PreloadTextures(bool bForcePreload, float ClearTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSkeletalMeshComponent.PreloadTextures");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bForcePreload;
-			*(float*)(params + 4) = ClearTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bForcePreload;
+			*(float*)&params[4] = ClearTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFOV(float NewFOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSkeletalMeshComponent.SetFOV");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewFOV;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewFOV;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

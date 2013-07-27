@@ -2,108 +2,105 @@
 #include "TribesGame.GFxTrPage.h"
 #include "TribesGame.GFxTrAction.h"
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_ServerEditCallin." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GFxTrPage_ServerEditCallin : public GFxTrPage
 	{
 	public:
-		ADD_VAR(::IntProperty, CallinType, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bBoundsPopup, 0x2)
-		ADD_VAR(::BoolProperty, bPopup, 0x1)
-		ADD_VAR(::IntProperty, popupIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, BuildupIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, CooldownIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PriceIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, EnabledIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ORBNumber, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SUPNumber, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, TACNumber, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxBOunds, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MinBounds, 0xFFFFFFFF)
+		ADD_STRUCT(int, CallinType, 376)
+		ADD_BOOL(bBoundsPopup, 400, 0x2)
+		ADD_BOOL(bPopup, 400, 0x1)
+		ADD_STRUCT(int, popupIndex, 396)
+		ADD_STRUCT(int, BuildupIndex, 392)
+		ADD_STRUCT(int, CooldownIndex, 388)
+		ADD_STRUCT(int, PriceIndex, 384)
+		ADD_STRUCT(int, EnabledIndex, 380)
+		ADD_STRUCT(int, ORBNumber, 372)
+		ADD_STRUCT(int, SUPNumber, 368)
+		ADD_STRUCT(int, TACNumber, 364)
+		ADD_STRUCT(int, MaxBOunds, 360)
+		ADD_STRUCT(int, MinBounds, 356)
 		void SpecialAction(class GFxTrAction* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.SpecialAction");
-			byte* params = (byte*)malloc(4);
-			*(class GFxTrAction**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxTrAction**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.FillOption");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void SetSubTitle(float val, class GFxObject* Obj)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.SetSubTitle");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = val;
-			*(class GFxObject**)(params + 4) = Obj;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(float*)&params[0] = val;
+			*(class GFxObject**)&params[4] = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupData(class GFxObject* Obj)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.PopupData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = Obj;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PopupComplete(int Action, ScriptArray<wchar_t> TextInput)
+		void PopupComplete(int Action, ScriptString* TextInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.PopupComplete");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Action;
-			*(ScriptArray<wchar_t>*)(params + 4) = TextInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Action;
+			*(ScriptString**)&params[4] = TextInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowBoundsError(int PropId, int PropType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.ShowBoundsError");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = PropId;
-			*(int*)(params + 4) = PropType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = PropId;
+			*(int*)&params[4] = PropType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.CheckDescription");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillDescription(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.FillDescription");
-			byte* params = (byte*)malloc(8);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		void ShowModel()
 		{
@@ -112,4 +109,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

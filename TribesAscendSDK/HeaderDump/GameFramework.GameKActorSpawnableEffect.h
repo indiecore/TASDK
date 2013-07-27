@@ -13,10 +13,9 @@ namespace UnrealScript
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameKActorSpawnableEffect.FellOutOfWorld");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = dmgType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartScalingDown()
 		{

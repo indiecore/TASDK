@@ -2,46 +2,50 @@
 #include "IpDrv.TcpLink.h"
 #include "IpDrv.WebApplication.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebServer." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty IpDrv.WebServer." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class WebServer : public TcpLink
 	{
 	public:
-		ADD_VAR(::IntProperty, ConnID, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DefaultApplication, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ApplicationPaths, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ExpirationSeconds, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ConnectionCount, 0xFFFFFFFF)
-		ADD_OBJECT(WebApplication, ApplicationObjects)
-		ADD_VAR(::StrProperty, ServerURL, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxConnections, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ListenPort, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		ADD_VAR(::StrProperty, Applications, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ServerName, 0xFFFFFFFF)
-		class WebApplication* GetApplication(ScriptArray<wchar_t> URI, ScriptArray<wchar_t>& SubURI)
+		ADD_STRUCT(int, ConnID, 868)
+		ADD_STRUCT(int, DefaultApplication, 804)
+		ADD_STRUCT(ScriptString*, ApplicationPaths, 672)
+		ADD_STRUCT(int, ExpirationSeconds, 808)
+		ADD_STRUCT(int, ConnectionCount, 864)
+		ADD_OBJECT(WebApplication, ApplicationObjects, 824)
+		ADD_STRUCT(ScriptString*, ServerURL, 812)
+		ADD_STRUCT(int, MaxConnections, 800)
+		ADD_STRUCT(int, ListenPort, 796)
+		ADD_BOOL(bEnabled, 792, 0x1)
+		ADD_STRUCT(ScriptString*, Applications, 552)
+		ADD_STRUCT(ScriptString*, ServerName, 540)
+		class WebApplication* GetApplication(ScriptString* URI, ScriptString*& SubURI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.GetApplication");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = URI;
-			*(ScriptArray<wchar_t>*)(params + 12) = SubURI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			SubURI = *(ScriptArray<wchar_t>*)(params + 12);
-			auto returnVal = *(class WebApplication**)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = URI;
+			*(ScriptString**)&params[12] = SubURI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			SubURI = *(ScriptString**)&params[12];
+			return *(class WebApplication**)&params[24];
 		}
 		void PostBeginPlay()
 		{
@@ -56,20 +60,19 @@ namespace UnrealScript
 		void GainedChild(class Actor* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.GainedChild");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LostChild(class Actor* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.LostChild");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,18 +1,16 @@
 #pragma once
+#include "Engine.MusicTrackDataStructures.h"
 #include "Engine.SequenceAction.h"
-#include "Engine.MusicTrackDataStructures.MusicTrackStruct.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SeqAct_PlayMusicTrack." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqAct_PlayMusicTrack : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<MusicTrackStruct>, MusicTrack, 0xFFFFFFFF)
+		ADD_STRUCT(MusicTrackDataStructures::MusicTrackStruct, MusicTrack, 232)
 	};
 }
 #undef ADD_STRUCT

@@ -1,60 +1,57 @@
 #pragma once
 #include "Core.Component.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ActorComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ActorComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.ActorComponent." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class ActorComponent : public Component
 	{
 	public:
-		ADD_VAR(::ByteProperty, TickGroup, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bNeedsUpdateTransform, 0x8)
-		ADD_VAR(::BoolProperty, bNeedsReattach, 0x4)
-		ADD_VAR(::BoolProperty, bTickInEditor, 0x2)
-		ADD_VAR(::BoolProperty, bAttached, 0x1)
-		ADD_OBJECT(Actor, Owner)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Scene, 0xFFFFFFFF)
-		void SetTickGroup(byte NewTickGroup)
+		ADD_STRUCT(Object::ETickingGroup, TickGroup, 84)
+		ADD_BOOL(bNeedsUpdateTransform, 80, 0x8)
+		ADD_BOOL(bNeedsReattach, 80, 0x4)
+		ADD_BOOL(bTickInEditor, 80, 0x2)
+		ADD_BOOL(bAttached, 80, 0x1)
+		ADD_OBJECT(Actor, Owner, 76)
+		ADD_STRUCT(Object::Pointer, Scene, 72)
+		void SetTickGroup(Object::ETickingGroup NewTickGroup)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetTickGroup");
-			byte* params = (byte*)malloc(1);
-			*params = NewTickGroup;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(Object::ETickingGroup*)&params[0] = NewTickGroup;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetComponentRBFixed(bool bFixed)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetComponentRBFixed");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bFixed;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bFixed;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ForceUpdate(bool bTransformOnly)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.ForceUpdate");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bTransformOnly;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bTransformOnly;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachFromAny()
 		{
@@ -63,6 +60,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

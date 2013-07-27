@@ -1,96 +1,107 @@
 #pragma once
 #include "Engine.OnlineStats.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineStatsRead." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.OnlineSubsystem.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class OnlineStatsRead : public OnlineStats
 	{
 	public:
-		ADD_VAR(::IntProperty, TitleId, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ViewName, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, TotalRowsInView, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SortColumnId, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ViewId, 0xFFFFFFFF)
+		class ColumnMetaData
+		{
+		public:
+			ADD_STRUCT(ScriptString*, ColumnName, 12)
+			ADD_STRUCT(ScriptName, Name, 4)
+			ADD_STRUCT(int, Id, 0)
+		};
+		class OnlineStatsColumn
+		{
+		public:
+			ADD_STRUCT(Settings::SettingsData, StatValue, 4)
+			ADD_STRUCT(int, ColumnNo, 0)
+		};
+		class OnlineStatsRow
+		{
+		public:
+			ADD_STRUCT(ScriptArray<OnlineStatsRead::OnlineStatsColumn>, Columns, 32)
+			ADD_STRUCT(ScriptString*, NickName, 20)
+			ADD_STRUCT(Settings::SettingsData, Rank, 8)
+			ADD_STRUCT(OnlineSubsystem::UniqueNetId, PlayerID, 0)
+		};
+		ADD_STRUCT(ScriptArray<int>, ColumnIds, 80)
+		ADD_STRUCT(ScriptArray<OnlineStatsRead::OnlineStatsRow>, Rows, 96)
+		ADD_STRUCT(ScriptArray<OnlineStatsRead::ColumnMetaData>, ColumnMappings, 108)
+		ADD_STRUCT(int, TitleId, 132)
+		ADD_STRUCT(ScriptString*, ViewName, 120)
+		ADD_STRUCT(int, TotalRowsInView, 92)
+		ADD_STRUCT(int, SortColumnId, 76)
+		ADD_STRUCT(int, ViewId, 72)
 		void OnReadComplete()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.OnReadComplete");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool GetIntStatValueForPlayer(UniqueNetId PlayerID, int StatColumnNo, int& StatValue)
+		bool GetIntStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, int& StatValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetIntStatValueForPlayer");
-			byte* params = (byte*)malloc(20);
-			*(UniqueNetId*)params = PlayerID;
-			*(int*)(params + 8) = StatColumnNo;
-			*(int*)(params + 12) = StatValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			StatValue = *(int*)(params + 12);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(int*)&params[8] = StatColumnNo;
+			*(int*)&params[12] = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			StatValue = *(int*)&params[12];
+			return *(bool*)&params[16];
 		}
-		bool SetIntStatValueForPlayer(UniqueNetId PlayerID, int StatColumnNo, int StatValue)
+		bool SetIntStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, int StatValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.SetIntStatValueForPlayer");
-			byte* params = (byte*)malloc(20);
-			*(UniqueNetId*)params = PlayerID;
-			*(int*)(params + 8) = StatColumnNo;
-			*(int*)(params + 12) = StatValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(int*)&params[8] = StatColumnNo;
+			*(int*)&params[12] = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
-		bool GetFloatStatValueForPlayer(UniqueNetId PlayerID, int StatColumnNo, float& StatValue)
+		bool GetFloatStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, float& StatValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetFloatStatValueForPlayer");
-			byte* params = (byte*)malloc(20);
-			*(UniqueNetId*)params = PlayerID;
-			*(int*)(params + 8) = StatColumnNo;
-			*(float*)(params + 12) = StatValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			StatValue = *(float*)(params + 12);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(int*)&params[8] = StatColumnNo;
+			*(float*)&params[12] = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			StatValue = *(float*)&params[12];
+			return *(bool*)&params[16];
 		}
-		bool SetFloatStatValueForPlayer(UniqueNetId PlayerID, int StatColumnNo, float StatValue)
+		bool SetFloatStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, float StatValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.SetFloatStatValueForPlayer");
-			byte* params = (byte*)malloc(20);
-			*(UniqueNetId*)params = PlayerID;
-			*(int*)(params + 8) = StatColumnNo;
-			*(float*)(params + 12) = StatValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(int*)&params[8] = StatColumnNo;
+			*(float*)&params[12] = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
-		void AddPlayer(ScriptArray<wchar_t> PlayerName, UniqueNetId PlayerID)
+		void AddPlayer(ScriptString* PlayerName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.AddPlayer");
-			byte* params = (byte*)malloc(20);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			*(UniqueNetId*)(params + 12) = PlayerID;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			*(OnlineSubsystem::UniqueNetId*)&params[12] = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		int GetRankForPlayer(UniqueNetId PlayerID)
+		int GetRankForPlayer(OnlineSubsystem::UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetRankForPlayer");
-			byte* params = (byte*)malloc(12);
-			*(UniqueNetId*)params = PlayerID;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

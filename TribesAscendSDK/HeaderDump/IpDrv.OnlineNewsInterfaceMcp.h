@@ -1,72 +1,90 @@
 #pragma once
 #include "IpDrv.MCPBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.OnlineSubsystem.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.OnlineNewsInterfaceMcp." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class OnlineNewsInterfaceMcp : public MCPBase
 	{
 	public:
-		ADD_VAR(::BoolProperty, bNeedsTicking, 0x1)
-		void OnReadNewsCompleted(bool bWasSuccessful, byte NewsType)
+		class NewsCacheEntry
+		{
+		public:
+			ADD_STRUCT(Object::Pointer, HttpDownloader, 36)
+			ADD_BOOL(bIsUnicode, 32, 0x1)
+			ADD_STRUCT(float, TimeOut, 28)
+			ADD_STRUCT(ScriptString*, NewsItem, 16)
+			ADD_STRUCT(OnlineSubsystem::EOnlineNewsType, NewsType, 13)
+			ADD_STRUCT(OnlineSubsystem::EOnlineEnumerationReadState, ReadState, 12)
+			ADD_STRUCT(ScriptString*, NewsUrl, 0)
+		};
+		ADD_STRUCT(ScriptArray<OnlineNewsInterfaceMcp::NewsCacheEntry>, NewsItems, 64)
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void*>, ReadNewsDelegates, 76)
+		ADD_BOOL(bNeedsTicking, 88, 0x1)
+		void OnReadNewsCompleted(bool bWasSuccessful, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.OnReadNewsCompleted");
-			byte* params = (byte*)malloc(5);
-			*(bool*)params = bWasSuccessful;
-			*(params + 4) = NewsType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			*(OnlineSubsystem::EOnlineNewsType*)&params[4] = NewsType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool ReadNews(byte LocalUserNum, byte NewsType)
+		bool ReadNews(byte LocalUserNum, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.ReadNews");
-			byte* params = (byte*)malloc(6);
-			*params = LocalUserNum;
-			*(params + 1) = NewsType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[6] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::EOnlineNewsType*)&params[1] = NewsType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void AddReadNewsCompletedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadNewsDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.AddReadNewsCompletedDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = ReadNewsDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = ReadNewsDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearReadNewsCompletedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadGameNewsDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.ClearReadNewsCompletedDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = ReadGameNewsDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = ReadGameNewsDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetNews(byte LocalUserNum, byte NewsType)
+		ScriptString* GetNews(byte LocalUserNum, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.GetNews");
-			byte* params = (byte*)malloc(14);
-			*params = LocalUserNum;
-			*(params + 1) = NewsType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[14] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::EOnlineNewsType*)&params[1] = NewsType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

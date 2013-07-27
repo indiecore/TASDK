@@ -18,10 +18,9 @@ namespace UnrealScript
 		void StartFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_NovaSlug.StartFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

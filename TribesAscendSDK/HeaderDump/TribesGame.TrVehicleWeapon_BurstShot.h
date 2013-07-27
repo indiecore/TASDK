@@ -1,19 +1,17 @@
 #pragma once
 #include "TribesGame.TrVehicleWeapon.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicleWeapon_BurstShot." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrVehicleWeapon_BurstShot : public TrVehicleWeapon
 	{
 	public:
-		ADD_VAR(::NameProperty, m_PostFireState, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nBurstShotCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nCurrBurstShotCount, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptName, m_PostFireState, 1788)
+		ADD_STRUCT(int, m_nBurstShotCount, 1784)
+		ADD_STRUCT(int, m_nCurrBurstShotCount, 1780)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

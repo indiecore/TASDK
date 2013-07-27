@@ -1,85 +1,93 @@
 #pragma once
 #include "UTGame.UTGFxTweenableMoviePlayer.h"
-#include "Core.Object.Rotator.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
+#include "UTGame.GFxUI_InventoryButton.h"
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#include "GFxUI.GFxClikWidget.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxProjectedUI." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.GFxProjectedUI." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxProjectedUI." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxProjectedUI : public UTGFxTweenableMoviePlayer
 	{
 	public:
-		ADD_VAR(::StrProperty, CancelString, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, AcceptString, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, StartRotation, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, WeaponClass)
-		ADD_VAR(::FloatProperty, leftThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, rightThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, rotval, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Height, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Width, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Scale, 0xFFFFFFFF)
-		ADD_OBJECT(GFxObject, InfoTitle)
-		ADD_OBJECT(GFxObject, InfoText)
-		ADD_OBJECT(GFxObject, InfoIconItem)
-		ADD_OBJECT(GFxObject, InfoIconWeap)
-		ADD_OBJECT(GFxObject, InfoMC)
-		ADD_OBJECT(GFxObject, BG_Edge_RightBottom)
-		ADD_OBJECT(GFxObject, BG_Edge_RightMiddle)
-		ADD_OBJECT(GFxObject, BG_Edge_RightTop)
-		ADD_OBJECT(GFxObject, BG_Edge_LeftTop)
-		ADD_OBJECT(GFxObject, BG_Edge_LeftMiddle)
-		ADD_OBJECT(GFxObject, BG_Edge_LeftBottom)
-		ADD_OBJECT(GFxObject, BG_Optic4MC)
-		ADD_OBJECT(GFxObject, BG_Optic3MC)
-		ADD_OBJECT(GFxObject, BG_Optic2MC)
-		ADD_OBJECT(GFxObject, BG_Optic1MC)
-		ADD_OBJECT(GFxObject, BG_ArrowMC)
-		ADD_OBJECT(GFxObject, BG_LineMC)
-		ADD_OBJECT(GFxObject, StartUpTextMC)
-		ADD_OBJECT(GFxObject, CPCLogoMC)
-		ADD_OBJECT(GFxObject, BackgroundMC)
-		ADD_OBJECT(GFxObject, LeftArrow01)
-		ADD_OBJECT(GFxObject, LeftArrow02)
-		ADD_OBJECT(GFxObject, ArsenalTabMC)
-		ADD_OBJECT(GFxObject, BackpackTabMC)
-		ADD_VAR(::BoolProperty, bInitialized, 0x2)
-		ADD_VAR(::BoolProperty, bArsenalTabFocused, 0x1)
-		ADD_OBJECT(GFxObject, EquippedWeaponText2)
-		ADD_OBJECT(GFxObject, EquippedWeaponText1)
-		ADD_OBJECT(GFxObject, EquippedWeaponOutline)
-		ADD_OBJECT(GFxObject, EquippedWeapon)
-		ADD_OBJECT(GFxObject, ArsenalMC)
-		ADD_OBJECT(GFxObject, BackpackMC)
-		ADD_OBJECT(GFxObject, MainMC)
-		ADD_OBJECT(GFxObject, Window)
-		ADD_OBJECT(GFxObject, Root)
+		class ItemData
+		{
+		public:
+			ADD_STRUCT(byte, ItemFrame, 24)
+			ADD_STRUCT(ScriptString*, ItemName, 12)
+			ADD_STRUCT(ScriptString*, ItemInfo, 0)
+		};
+		ADD_STRUCT(ScriptArray<class GFxUI_InventoryButton*>, Buttons, 412)
+		ADD_STRUCT(ScriptArray<GFxProjectedUI::ItemData>, Items, 424)
+		ADD_STRUCT(ScriptString*, CancelString, 644)
+		ADD_STRUCT(ScriptString*, AcceptString, 632)
+		ADD_STRUCT(Object::Rotator, StartRotation, 620)
+		ADD_OBJECT(ScriptClass, WeaponClass, 576)
+		ADD_STRUCT(float, leftThreshold, 572)
+		ADD_STRUCT(float, rightThreshold, 568)
+		ADD_STRUCT(float, rotval, 564)
+		ADD_STRUCT(float, Height, 560)
+		ADD_STRUCT(float, Width, 556)
+		ADD_STRUCT(float, Scale, 552)
+		ADD_OBJECT(GFxObject, InfoTitle, 548)
+		ADD_OBJECT(GFxObject, InfoText, 544)
+		ADD_OBJECT(GFxObject, InfoIconItem, 540)
+		ADD_OBJECT(GFxObject, InfoIconWeap, 536)
+		ADD_OBJECT(GFxObject, InfoMC, 532)
+		ADD_OBJECT(GFxObject, BG_Edge_RightBottom, 528)
+		ADD_OBJECT(GFxObject, BG_Edge_RightMiddle, 524)
+		ADD_OBJECT(GFxObject, BG_Edge_RightTop, 520)
+		ADD_OBJECT(GFxObject, BG_Edge_LeftTop, 516)
+		ADD_OBJECT(GFxObject, BG_Edge_LeftMiddle, 512)
+		ADD_OBJECT(GFxObject, BG_Edge_LeftBottom, 508)
+		ADD_OBJECT(GFxObject, BG_Optic4MC, 504)
+		ADD_OBJECT(GFxObject, BG_Optic3MC, 500)
+		ADD_OBJECT(GFxObject, BG_Optic2MC, 496)
+		ADD_OBJECT(GFxObject, BG_Optic1MC, 492)
+		ADD_OBJECT(GFxObject, BG_ArrowMC, 488)
+		ADD_OBJECT(GFxObject, BG_LineMC, 484)
+		ADD_OBJECT(GFxObject, StartUpTextMC, 480)
+		ADD_OBJECT(GFxObject, CPCLogoMC, 476)
+		ADD_OBJECT(GFxObject, BackgroundMC, 472)
+		ADD_OBJECT(GFxObject, LeftArrow01, 468)
+		ADD_OBJECT(GFxObject, LeftArrow02, 464)
+		ADD_OBJECT(GFxObject, ArsenalTabMC, 460)
+		ADD_OBJECT(GFxObject, BackpackTabMC, 456)
+		ADD_BOOL(bInitialized, 452, 0x2)
+		ADD_BOOL(bArsenalTabFocused, 452, 0x1)
+		ADD_OBJECT(GFxObject, EquippedWeaponText2, 448)
+		ADD_OBJECT(GFxObject, EquippedWeaponText1, 444)
+		ADD_OBJECT(GFxObject, EquippedWeaponOutline, 440)
+		ADD_OBJECT(GFxObject, EquippedWeapon, 436)
+		ADD_OBJECT(GFxObject, ArsenalMC, 408)
+		ADD_OBJECT(GFxObject, BackpackMC, 404)
+		ADD_OBJECT(GFxObject, MainMC, 400)
+		ADD_OBJECT(GFxObject, Window, 396)
+		ADD_OBJECT(GFxObject, Root, 392)
 		bool Start(bool StartPaused)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.Start");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = StartPaused;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = StartPaused;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void ConfigureInventory()
 		{
@@ -144,74 +152,65 @@ namespace UnrealScript
 		void SwitchWeapon(byte Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SwitchWeapon");
-			byte* params = (byte*)malloc(1);
-			*params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFocusInSelection(EventData ev)
+		void OnFocusInSelection(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusInSelection");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFocusOutSelection(EventData ev)
+		void OnFocusOutSelection(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusOutSelection");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnClickWeaponButton(EventData ev)
+		void OnClickWeaponButton(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnClickWeaponButton");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFocusUpdateInfo(EventData ev)
+		void OnFocusUpdateInfo(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusUpdateInfo");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFocusArsenalTab(EventData ev)
+		void OnFocusArsenalTab(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusArsenalTab");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFocusBackpackTab(EventData ev)
+		void OnFocusBackpackTab(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusBackpackTab");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnClickFakeItem(EventData ev)
+		void OnClickFakeItem(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnClickFakeItem");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetInfo(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetInfo");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopulateArsenal()
 		{
@@ -221,48 +220,43 @@ namespace UnrealScript
 		void FakeUpdateEquippedWeapon(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FakeUpdateEquippedWeapon");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateEquippedWeapon()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.UpdateEquippedWeapon");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessTweenCallback(ScriptArray<wchar_t> Callback, class GFxObject* TargetMC)
+		void ProcessTweenCallback(ScriptString* Callback, class GFxObject* TargetMC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.ProcessTweenCallback");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Callback;
-			*(class GFxObject**)(params + 12) = TargetMC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Callback;
+			*(class GFxObject**)&params[12] = TargetMC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TweenTurbines(bool Toggle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.TweenTurbines");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = Toggle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = Toggle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FloatSelectionUp(class GFxObject* ButtonIconMC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FloatSelectionUp");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = ButtonIconMC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = ButtonIconMC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FloatSelectionDown(class GFxObject* ButtonIconMC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FloatSelectionDown");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = ButtonIconMC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = ButtonIconMC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdatePos()
 		{
@@ -276,6 +270,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

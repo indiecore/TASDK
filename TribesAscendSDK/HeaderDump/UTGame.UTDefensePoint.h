@@ -4,56 +4,66 @@
 #include "Engine.Controller.h"
 #include "UDKBase.UDKScriptedNavigationPoint.h"
 #include "UDKBase.UDKGameObjective.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.Texture2D.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDefensePoint." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTDefensePoint." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTDefensePoint : public UDKScriptedNavigationPoint
 	{
 	public:
-		ADD_OBJECT(ScriptClass, WeaponPreference)
-		ADD_VAR(::BoolProperty, bSniping, 0x2)
-		ADD_VAR(::BoolProperty, bFirstScript, 0x1)
-		ADD_OBJECT(UDKGameObjective, DefendedObjective)
-		ADD_VAR(::BoolProperty, bOnlyOnFoot, 0x4)
-		ADD_VAR(::NameProperty, DefenseGroup, 0xFFFFFFFF)
-		ADD_OBJECT(UTDefensePoint, NextDefensePoint)
-		ADD_OBJECT(Controller, CurrentUser)
-		ADD_VAR(::ByteProperty, DefensePriority, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bOnlySkilled, 0x8)
+		enum EDefensePriority : byte
+		{
+			DEFPRI_Low = 0,
+			DEFPRI_High = 1,
+			DEFPRI_MAX = 2,
+		};
+		ADD_OBJECT(ScriptClass, WeaponPreference, 712)
+		ADD_BOOL(bSniping, 708, 0x2)
+		ADD_BOOL(bFirstScript, 708, 0x1)
+		ADD_OBJECT(UDKGameObjective, DefendedObjective, 704)
+		ADD_BOOL(bOnlyOnFoot, 708, 0x4)
+		ADD_STRUCT(ScriptName, DefenseGroup, 716)
+		ADD_OBJECT(UTDefensePoint, NextDefensePoint, 700)
+		ADD_OBJECT(Controller, CurrentUser, 696)
+		ADD_STRUCT(ScriptArray<class Texture2D*>, TeamSprites, 728)
+		ADD_STRUCT(UTDefensePoint::EDefensePriority, DefensePriority, 724)
+		ADD_BOOL(bOnlySkilled, 708, 0x8)
 		class Actor* GetMoveTarget()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.GetMoveTarget");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Actor**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Actor**)&params[0];
 		}
 		bool HigherPriorityThan(class UTDefensePoint* S, class UTBot* B, bool bAutoPointsInUse, bool bPrioritizeSameGroup, int& NumChecked)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.HigherPriorityThan");
-			byte* params = (byte*)malloc(24);
-			*(class UTDefensePoint**)params = S;
-			*(class UTBot**)(params + 4) = B;
-			*(bool*)(params + 8) = bAutoPointsInUse;
-			*(bool*)(params + 12) = bPrioritizeSameGroup;
-			*(int*)(params + 16) = NumChecked;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NumChecked = *(int*)(params + 16);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(class UTDefensePoint**)&params[0] = S;
+			*(class UTBot**)&params[4] = B;
+			*(bool*)&params[8] = bAutoPointsInUse;
+			*(bool*)&params[12] = bPrioritizeSameGroup;
+			*(int*)&params[16] = NumChecked;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			NumChecked = *(int*)&params[16];
+			return *(bool*)&params[20];
 		}
 		void Reset()
 		{
@@ -68,11 +78,9 @@ namespace UnrealScript
 		bool CheckForErrors()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.CheckForErrors");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void PreBeginPlay()
 		{
@@ -81,5 +89,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

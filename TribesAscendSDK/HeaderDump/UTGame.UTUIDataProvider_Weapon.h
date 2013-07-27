@@ -1,20 +1,18 @@
 #pragma once
 #include "UTGame.UTUIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTUIDataProvider_Weapon." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTUIDataProvider_Weapon : public UTUIResourceDataProvider
 	{
 	public:
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Flags, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, AmmoClassPath, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ClassName, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, Description, 188)
+		ADD_STRUCT(ScriptString*, Flags, 176)
+		ADD_STRUCT(ScriptString*, AmmoClassPath, 164)
+		ADD_STRUCT(ScriptString*, ClassName, 152)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

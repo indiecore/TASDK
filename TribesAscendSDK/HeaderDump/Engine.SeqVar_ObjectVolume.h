@@ -1,18 +1,30 @@
 #pragma once
 #include "Engine.SeqVar_Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqVar_ObjectVolume." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqVar_ObjectVolume : public SeqVar_Object
 	{
 	public:
-		ADD_VAR(::BoolProperty, bCollidingOnly, 0x1)
-		ADD_VAR(::FloatProperty, LastUpdateTime, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<class Object*>, ContainedObjects, 180)
+		ADD_STRUCT(ScriptArray<ScriptClass*>, ExcludeClassList, 192)
+		ADD_BOOL(bCollidingOnly, 204, 0x1)
+		ADD_STRUCT(float, LastUpdateTime, 176)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

@@ -1,100 +1,100 @@
 #pragma once
 #include "Engine.Controller.h"
-#include "Engine.Actor.PhysEffectInfo.h"
+#include "Core.Object.h"
 #include "Engine.Actor.h"
+#include "Engine.ParticleSystem.h"
 #include "Engine.MaterialInterface.h"
-#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.SoundCue.h"
 #include "Engine.FracturedStaticMeshPart.h"
 #include "Engine.Pawn.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FracturedStaticMeshActor." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.FracturedStaticMeshActor." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.FracturedStaticMeshActor." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class FracturedStaticMeshActor : public Actor
 	{
 	public:
-		ADD_OBJECT(MaterialInterface, MI_LoseChunkPreviousMaterial)
-		ADD_OBJECT(SoundCue, SingleChunkFractureSound)
-		ADD_OBJECT(SoundCue, ExplosionFractureSound)
-		ADD_STRUCT(::NonArithmeticProperty<PhysEffectInfo>, PartImpactEffect, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FractureCullMaxDistance, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FractureCullMinDistance, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ChunkHealthScale, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bBreakChunksOnActorTouch, 0x2)
-		ADD_VAR(::BoolProperty, bHasShownMissingSoundWarning, 0x1)
-		ADD_VAR(::IntProperty, MaxPartsToSpawnAtOnce, 0xFFFFFFFF)
+		class DeferredPartToSpawn
+		{
+		public:
+			ADD_BOOL(bExplosion, 32, 0x1)
+			ADD_STRUCT(float, RelativeScale, 28)
+			ADD_STRUCT(Object::Vector, InitialAngVel, 16)
+			ADD_STRUCT(Object::Vector, InitialVel, 4)
+			ADD_STRUCT(int, ChunkIndex, 0)
+		};
+		ADD_STRUCT(ScriptArray<int>, ChunkHealth, 488)
+		ADD_STRUCT(ScriptArray<ScriptClass*>, FracturedByDamageType, 504)
+		ADD_STRUCT(ScriptArray<class ParticleSystem*>, OverrideFragmentDestroyEffects, 520)
+		ADD_STRUCT(ScriptArray<FracturedStaticMeshActor::DeferredPartToSpawn>, DeferredPartsToSpawn, 540)
+		ADD_OBJECT(MaterialInterface, MI_LoseChunkPreviousMaterial, 576)
+		ADD_OBJECT(SoundCue, SingleChunkFractureSound, 572)
+		ADD_OBJECT(SoundCue, ExplosionFractureSound, 568)
+		ADD_STRUCT(Actor::PhysEffectInfo, PartImpactEffect, 552)
+		ADD_STRUCT(float, FractureCullMaxDistance, 536)
+		ADD_STRUCT(float, FractureCullMinDistance, 532)
+		ADD_STRUCT(float, ChunkHealthScale, 516)
+		ADD_BOOL(bBreakChunksOnActorTouch, 500, 0x2)
+		ADD_BOOL(bHasShownMissingSoundWarning, 500, 0x1)
+		ADD_STRUCT(int, MaxPartsToSpawnAtOnce, 476)
 		bool IsFracturedByDamageType(ScriptClass* dmgType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.IsFracturedByDamageType");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = dmgType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool FractureEffectIsRelevant(bool bForceDedicated, class Pawn* EffectInstigator, byte& bWantPhysChunksAndParticles)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.FractureEffectIsRelevant");
-			byte* params = (byte*)malloc(13);
-			*(bool*)params = bForceDedicated;
-			*(class Pawn**)(params + 4) = EffectInstigator;
-			*(params + 8) = bWantPhysChunksAndParticles;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			bWantPhysChunksAndParticles = *(params + 8);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(bool*)&params[0] = bForceDedicated;
+			*(class Pawn**)&params[4] = EffectInstigator;
+			params[8] = bWantPhysChunksAndParticles;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			bWantPhysChunksAndParticles = params[8];
+			return *(bool*)&params[12];
 		}
-		class FracturedStaticMeshPart* SpawnPart(int ChunkIndex, Vector InitialVel, Vector InitialAngVel, float RelativeScale, bool bExplosion)
+		class FracturedStaticMeshPart* SpawnPart(int ChunkIndex, Object::Vector InitialVel, Object::Vector InitialAngVel, float RelativeScale, bool bExplosion)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.SpawnPart");
-			byte* params = (byte*)malloc(40);
-			*(int*)params = ChunkIndex;
-			*(Vector*)(params + 4) = InitialVel;
-			*(Vector*)(params + 16) = InitialAngVel;
-			*(float*)(params + 28) = RelativeScale;
-			*(bool*)(params + 32) = bExplosion;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class FracturedStaticMeshPart**)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(int*)&params[0] = ChunkIndex;
+			*(Object::Vector*)&params[4] = InitialVel;
+			*(Object::Vector*)&params[16] = InitialAngVel;
+			*(float*)&params[28] = RelativeScale;
+			*(bool*)&params[32] = bExplosion;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class FracturedStaticMeshPart**)&params[36];
 		}
-		class FracturedStaticMeshPart* SpawnPartMulti(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* ChunkIndices, Vector InitialVel, Vector InitialAngVel, float RelativeScale, bool bExplosion)
+		class FracturedStaticMeshPart* SpawnPartMulti(ScriptArray<int> ChunkIndices, Object::Vector InitialVel, Object::Vector InitialAngVel, float RelativeScale, bool bExplosion)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.SpawnPartMulti");
-			byte* params = (byte*)malloc(48);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = ChunkIndices;
-			*(Vector*)(params + 12) = InitialVel;
-			*(Vector*)(params + 24) = InitialAngVel;
-			*(float*)(params + 36) = RelativeScale;
-			*(bool*)(params + 40) = bExplosion;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class FracturedStaticMeshPart**)(params + 44);
-			free(params);
-			return returnVal;
+			byte params[48] = { NULL };
+			*(ScriptArray<int>*)&params[0] = ChunkIndices;
+			*(Object::Vector*)&params[12] = InitialVel;
+			*(Object::Vector*)&params[24] = InitialAngVel;
+			*(float*)&params[36] = RelativeScale;
+			*(bool*)&params[40] = bExplosion;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class FracturedStaticMeshPart**)&params[44];
 		}
 		void PostBeginPlay()
 		{
@@ -106,79 +106,59 @@ void**)params = ChunkIndices;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.ResetHealth");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void BreakOffIsolatedIslands(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& FragmentVis, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* IgnoreFrags, Vector ChunkDir, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* DisableCollWithPart, bool bWantPhysChunks)
+		void BreakOffIsolatedIslands(ScriptArray<byte>& FragmentVis, ScriptArray<int> IgnoreFrags, Object::Vector ChunkDir, ScriptArray<class FracturedStaticMeshPart*> DisableCollWithPart, bool bWantPhysChunks)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.BreakOffIsolatedIslands");
-			byte* params = (byte*)malloc(52);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = FragmentVis;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12) = IgnoreFrags;
-			*(Vector*)(params + 24) = ChunkDir;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 36) = DisableCollWithPart;
-			*(bool*)(params + 48) = bWantPhysChunks;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FragmentVis = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[52] = { NULL };
+			*(ScriptArray<byte>*)&params[0] = FragmentVis;
+			*(ScriptArray<int>*)&params[12] = IgnoreFrags;
+			*(Object::Vector*)&params[24] = ChunkDir;
+			*(ScriptArray<class FracturedStaticMeshPart*>*)&params[36] = DisableCollWithPart;
+			*(bool*)&params[48] = bWantPhysChunks;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			FragmentVis = *(ScriptArray<byte>*)&params[0];
 		}
 		bool SpawnDeferredParts()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.SpawnDeferredParts");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void RemoveDecals(int IndexToRemoveDecalsFrom)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.RemoveDecals");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = IndexToRemoveDecalsFrom;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = IndexToRemoveDecalsFrom;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Damage;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Damage;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Explode()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.Explode");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void BreakOffPartsInRadius(Vector Origin, float Radius, float RBStrength, bool bWantPhysChunksAndParticles)
+		void BreakOffPartsInRadius(Object::Vector Origin, float Radius, float RBStrength, bool bWantPhysChunksAndParticles)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.BreakOffPartsInRadius");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = Origin;
-			*(float*)(params + 12) = Radius;
-			*(float*)(params + 16) = RBStrength;
-			*(bool*)(params + 20) = bWantPhysChunksAndParticles;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = Origin;
+			*(float*)&params[12] = Radius;
+			*(float*)&params[16] = RBStrength;
+			*(bool*)&params[20] = bWantPhysChunksAndParticles;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetVisibility()
 		{
@@ -203,15 +183,14 @@ void**)params;
 		void NotifyHitByExplosion(class Controller* InstigatorController, float DamageAmount, ScriptClass* dmgType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshActor.NotifyHitByExplosion");
-			byte* params = (byte*)malloc(12);
-			*(class Controller**)params = InstigatorController;
-			*(float*)(params + 4) = DamageAmount;
-			*(ScriptClass**)(params + 8) = dmgType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class Controller**)&params[0] = InstigatorController;
+			*(float*)&params[4] = DamageAmount;
+			*(ScriptClass**)&params[8] = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

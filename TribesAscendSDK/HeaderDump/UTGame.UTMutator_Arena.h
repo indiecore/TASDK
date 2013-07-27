@@ -2,18 +2,16 @@
 #include "UTGame.UTMutator.h"
 #include "Engine.Actor.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTMutator_Arena." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTMutator_Arena : public UTMutator
 	{
 	public:
-		ADD_VAR(::StrProperty, ArenaWeaponClassPath, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, ArenaWeaponClassPath, 496)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.PostBeginPlay");
@@ -22,21 +20,18 @@ namespace UnrealScript
 		bool CheckReplacement(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.CheckReplacement");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void ModifyPlayer(class Pawn* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.ModifyPlayer");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

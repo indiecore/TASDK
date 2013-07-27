@@ -1,36 +1,37 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "Engine.SkelControlBase.h"
-#include "Core.Object.Rotator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkelControlSingleBone." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SkelControlSingleBone." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SkelControlSingleBone : public SkelControlBase
 	{
 	public:
-		ADD_VAR(::NameProperty, RotationSpaceBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, BoneRotation, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, TranslationSpaceBoneName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, BoneRotationSpace, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, BoneTranslationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BoneTranslation, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bRemoveMeshRotation, 0x10)
-		ADD_VAR(::BoolProperty, bAddRotation, 0x8)
-		ADD_VAR(::BoolProperty, bAddTranslation, 0x4)
-		ADD_VAR(::BoolProperty, bApplyRotation, 0x2)
-		ADD_VAR(::BoolProperty, bApplyTranslation, 0x1)
+		ADD_STRUCT(ScriptName, RotationSpaceBoneName, 228)
+		ADD_STRUCT(Object::Rotator, BoneRotation, 216)
+		ADD_STRUCT(ScriptName, TranslationSpaceBoneName, 208)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, BoneRotationSpace, 205)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, BoneTranslationSpace, 204)
+		ADD_STRUCT(Object::Vector, BoneTranslation, 192)
+		ADD_BOOL(bRemoveMeshRotation, 188, 0x10)
+		ADD_BOOL(bAddRotation, 188, 0x8)
+		ADD_BOOL(bAddTranslation, 188, 0x4)
+		ADD_BOOL(bApplyRotation, 188, 0x2)
+		ADD_BOOL(bApplyTranslation, 188, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

@@ -1,29 +1,25 @@
 #pragma once
 #include "Engine.PathConstraint.h"
-#include "Core.Object.Vector.h"
+#include "Core.Object.h"
 #include "Engine.Pawn.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.Path_AlongLine." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class Path_AlongLine : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF)
-		bool AlongLine(class Pawn* P, Vector Dir)
+		ADD_STRUCT(Object::Vector, Direction, 68)
+		bool AlongLine(class Pawn* P, Object::Vector Dir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AlongLine.AlongLine");
-			byte* params = (byte*)malloc(20);
-			*(class Pawn**)params = P;
-			*(Vector*)(params + 4) = Dir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(Object::Vector*)&params[4] = Dir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{

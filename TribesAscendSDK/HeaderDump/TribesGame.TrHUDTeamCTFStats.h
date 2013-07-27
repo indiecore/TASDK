@@ -1,46 +1,52 @@
 #pragma once
+#include "UTGame.UTGameReplicationInfo.h"
 #include "Core.Object.h"
 #include "TribesGame.GfxTrHud.h"
 #include "TribesGame.TrPlayerController.h"
 #include "TribesGame.TrGameReplicationInfo.h"
 #include "Engine.PlayerReplicationInfo.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrHUDTeamCTFStats." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrHUDTeamCTFStats." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrHUDTeamCTFStats : public Object
 	{
 	public:
-		ADD_OBJECT(GfxTrHud, m_MoviePlayer)
-		ADD_VAR(::BoolProperty, bIsActive, 0x1)
-		ADD_OBJECT(TrPlayerController, TrPC)
-		ADD_OBJECT(PlayerReplicationInfo, FlagHolderPRI)
-		ADD_VAR(::ByteProperty, bEmptyFlagStatus, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, FlagState, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, GeneratorDowntime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, GeneratorPower, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, TeamScore, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, FlagReturnTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, RemainingTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MyTeam, 0xFFFFFFFF)
+		ADD_OBJECT(GfxTrHud, m_MoviePlayer, 116)
+		ADD_BOOL(bIsActive, 68, 0x1)
+		ADD_OBJECT(TrPlayerController, TrPC, 120)
+		ADD_OBJECT(PlayerReplicationInfo, FlagHolderPRI, 108)
+		ADD_STRUCT(byte, bEmptyFlagStatus, 106)
+		ADD_STRUCT(UTGameReplicationInfo::EFlagState, FlagState, 104)
+		ADD_STRUCT(int, GeneratorDowntime, 96)
+		ADD_STRUCT(int, GeneratorPower, 88)
+		ADD_STRUCT(int, TeamScore, 80)
+		ADD_STRUCT(int, FlagReturnTime, 72)
+		ADD_STRUCT(int, RemainingTime, 64)
+		ADD_STRUCT(int, MyTeam, 60)
 		void Initialize(class TrPlayerController* PC, class GfxTrHud* MP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.Initialize");
-			byte* params = (byte*)malloc(8);
-			*(class TrPlayerController**)params = PC;
-			*(class GfxTrHud**)(params + 4) = MP;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class TrPlayerController**)&params[0] = PC;
+			*(class GfxTrHud**)&params[4] = MP;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Show()
 		{
@@ -65,54 +71,46 @@ namespace UnrealScript
 		int GetTeamIndex(int I)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.GetTeamIndex");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = I;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = I;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void UpdateFlagStatus(class TrGameReplicationInfo* GRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.UpdateFlagStatus");
-			byte* params = (byte*)malloc(4);
-			*(class TrGameReplicationInfo**)params = GRI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGeneratorStatus(class TrGameReplicationInfo* GRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.UpdateGeneratorStatus");
-			byte* params = (byte*)malloc(4);
-			*(class TrGameReplicationInfo**)params = GRI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateTeamScore(class TrGameReplicationInfo* GRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.UpdateTeamScore");
-			byte* params = (byte*)malloc(4);
-			*(class TrGameReplicationInfo**)params = GRI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateTime(class TrGameReplicationInfo* GRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.UpdateTime");
-			byte* params = (byte*)malloc(4);
-			*(class TrGameReplicationInfo**)params = GRI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> FormatTime(int Seconds)
+		ScriptString* FormatTime(int Seconds)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeamCTFStats.FormatTime");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Seconds;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Seconds;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		void ForceUpdate()
 		{
@@ -121,5 +119,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

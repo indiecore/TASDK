@@ -1,113 +1,83 @@
 #pragma once
 #include "Engine.UIDataStore_GameResource.h"
-#include "Core.Object.Pointer.h"
+#include "Core.Object.h"
 #include "UDKBase.UDKUIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKUIDataStore_MenuItems." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKUIDataStore_MenuItems." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKUIDataStore_MenuItems." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKUIDataStore_MenuItems : public UIDataStore_GameResource
 	{
 	public:
-		ADD_VAR(::IntProperty, GameModeFilter, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, MapInfoDataProviderClass)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<int>, EnabledMutators, 204)
+		ADD_STRUCT(ScriptArray<int>, MapCycle, 216)
+		ADD_STRUCT(ScriptArray<int>, WeaponPriority, 228)
+		ADD_STRUCT(int, GameModeFilter, 240)
+		ADD_OBJECT(ScriptClass, MapInfoDataProviderClass, 200)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 196)
 		int GetProviderCount(ScriptName FieldName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetProviderCount");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = FieldName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = FieldName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		bool IsProviderFiltered(ScriptName FieldName, int ProviderIdx)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.IsProviderFiltered");
-			byte* params = (byte*)malloc(16);
-			*(ScriptName*)params = FieldName;
-			*(int*)(params + 8) = ProviderIdx;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptName*)&params[0] = FieldName;
+			*(int*)&params[8] = ProviderIdx;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		void GetAllResourceDataProviders(ScriptClass* ProviderClass, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Providers)
+		void GetAllResourceDataProviders(ScriptClass* ProviderClass, ScriptArray<class UDKUIResourceDataProvider*>& Providers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetAllResourceDataProviders");
-			byte* params = (byte*)malloc(16);
-			*(ScriptClass**)params = ProviderClass;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4) = Providers;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Providers = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptClass**)&params[0] = ProviderClass;
+			*(ScriptArray<class UDKUIResourceDataProvider*>*)&params[4] = Providers;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Providers = *(ScriptArray<class UDKUIResourceDataProvider*>*)&params[4];
 		}
-		int FindValueInProviderSet(ScriptName ProviderFieldName, ScriptName SearchTag, ScriptArray<wchar_t> SearchValue)
+		int FindValueInProviderSet(ScriptName ProviderFieldName, ScriptName SearchTag, ScriptString* SearchValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.FindValueInProviderSet");
-			byte* params = (byte*)malloc(32);
-			*(ScriptName*)params = ProviderFieldName;
-			*(ScriptName*)(params + 8) = SearchTag;
-			*(ScriptArray<wchar_t>*)(params + 16) = SearchValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(ScriptName*)&params[0] = ProviderFieldName;
+			*(ScriptName*)&params[8] = SearchTag;
+			*(ScriptString**)&params[16] = SearchValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[28];
 		}
-		bool GetValueFromProviderSet(ScriptName ProviderFieldName, ScriptName SearchTag, int ListIndex, ScriptArray<wchar_t>& OutValue)
+		bool GetValueFromProviderSet(ScriptName ProviderFieldName, ScriptName SearchTag, int ListIndex, ScriptString*& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetValueFromProviderSet");
-			byte* params = (byte*)malloc(36);
-			*(ScriptName*)params = ProviderFieldName;
-			*(ScriptName*)(params + 8) = SearchTag;
-			*(int*)(params + 16) = ListIndex;
-			*(ScriptArray<wchar_t>*)(params + 20) = OutValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(ScriptArray<wchar_t>*)(params + 20);
-			auto returnVal = *(bool*)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(ScriptName*)&params[0] = ProviderFieldName;
+			*(ScriptName*)&params[8] = SearchTag;
+			*(int*)&params[16] = ListIndex;
+			*(ScriptString**)&params[20] = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutValue = *(ScriptString**)&params[20];
+			return *(bool*)&params[32];
 		}
-		bool GetProviderSet(ScriptName ProviderFieldName, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& OutProviders)
+		bool GetProviderSet(ScriptName ProviderFieldName, ScriptArray<class UDKUIResourceDataProvider*>& OutProviders)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetProviderSet");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = ProviderFieldName;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8) = OutProviders;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutProviders = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = ProviderFieldName;
+			*(ScriptArray<class UDKUIResourceDataProvider*>*)&params[8] = OutProviders;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutProviders = *(ScriptArray<class UDKUIResourceDataProvider*>*)&params[8];
+			return *(bool*)&params[20];
 		}
 		void InitializeListElementProviders()
 		{
@@ -117,22 +87,19 @@ void**)(params + 8);
 		void RemoveListElementProvidersKey(ScriptName KeyName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.RemoveListElementProvidersKey");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = KeyName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = KeyName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddListElementProvidersKey(ScriptName KeyName, class UDKUIResourceDataProvider* Provider)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.AddListElementProvidersKey");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = KeyName;
-			*(class UDKUIResourceDataProvider**)(params + 8) = Provider;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = KeyName;
+			*(class UDKUIResourceDataProvider**)&params[8] = Provider;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,217 +1,236 @@
 #pragma once
-#include "Core.Object.RenderCommandFence_Mirror.h"
-#include "Engine.MaterialInterface.LightmassMaterialInterfaceSettings.h"
+#include "Core.Object.h"
 #include "Engine.Surface.h"
-#include "Core.Object.LinearColor.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.Texture.h"
-#include "Core.Object.Guid.h"
+#include "Engine.EngineTypes.h"
 #include "Engine.Material.h"
 #include "Engine.Font.h"
-#include "Core.Object.InterpCurveFloat.h"
-#include "Core.Object.InterpCurveVector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialInterface." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialInterface." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.MaterialInterface." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MaterialInterface : public Surface
 	{
 	public:
-		ADD_VAR(::FloatProperty, MobileSwayMaxAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileSwayFrequencyMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileMaxVertexMovementAmplitude, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileVerticalFrequencyMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileTangentVertexFrequencyMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SineScaleFrequencyMultipler, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SineScaleY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SineScaleX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FixedScaleY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FixedScaleX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RotateSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PannerSpeedY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PannerSpeedX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TransformCenterY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TransformCenterX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DefaultUniformColor, 0xFFFFFFFF)
-		ADD_OBJECT(Texture, MobileDetailTexture)
-		ADD_OBJECT(Texture, MobileMaskTexture)
-		ADD_VAR(::FloatProperty, MobileBumpOffsetHeightRatio, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileBumpOffsetReferencePlane, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileRimLightingColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileRimLightingExponent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileRimLightingStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileEnvironmentFresnelExponent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileEnvironmentFresnelAmount, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileEnvironmentColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MobileEnvironmentAmount, 0xFFFFFFFF)
-		ADD_OBJECT(Texture, MobileEnvironmentTexture)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileEmissiveColor, 0xFFFFFFFF)
-		ADD_OBJECT(Texture, MobileEmissiveTexture)
-		ADD_VAR(::FloatProperty, MobileSpecularPower, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileSpecularColor, 0xFFFFFFFF)
-		ADD_OBJECT(Texture, MobileNormalTexture)
-		ADD_VAR(::ByteProperty, MobileTextureTransformTarget, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileTextureBlendFactorSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileDetailTextureTexCoordsSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileMaskTextureTexCoordsSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileRimLightingMaskSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileEnvironmentBlendMode, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileEnvironmentMaskSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileEmissiveMaskSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileEmissiveColorSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileSpecularMask, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileAmbientOcclusionSource, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, MobileBaseTextureTexCoordsSource, 0xFFFFFFFF)
-		ADD_OBJECT(Texture, FlattenedTexture)
-		ADD_OBJECT(Texture, MobileBaseTexture)
-		ADD_VAR(::BoolProperty, bUseMobileWaveVertexMovement, 0x400)
-		ADD_VAR(::BoolProperty, bUseMobileTextureTransform, 0x200)
-		ADD_VAR(::BoolProperty, bUseMobileVertexColorMultiply, 0x100)
-		ADD_VAR(::BoolProperty, bUseMobileUniformColorMultiply, 0x80)
-		ADD_VAR(::BoolProperty, bLockColorBlending, 0x40)
-		ADD_VAR(::BoolProperty, bUseMobileBumpOffset, 0x20)
-		ADD_VAR(::BoolProperty, bUseMobilePixelSpecular, 0x10)
-		ADD_VAR(::BoolProperty, bUseMobileVertexSpecular, 0x8)
-		ADD_VAR(::BoolProperty, bUseMobileSpecular, 0x4)
-		ADD_VAR(::BoolProperty, bMobileAllowFog, 0x2)
-		ADD_VAR(::BoolProperty, bAutoFlattenMobile, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PreviewMesh, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LightmassMaterialInterfaceSettings>, LightmassSettings, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RenderCommandFence_Mirror>, ParentRefFence, 0xFFFFFFFF)
+		enum EMaterialUsage : byte
+		{
+			MATUSAGE_SkeletalMesh = 0,
+			MATUSAGE_FracturedMeshes = 1,
+			MATUSAGE_ParticleSprites = 2,
+			MATUSAGE_BeamTrails = 3,
+			MATUSAGE_ParticleSubUV = 4,
+			MATUSAGE_SpeedTree = 5,
+			MATUSAGE_StaticLighting = 6,
+			MATUSAGE_GammaCorrection = 7,
+			MATUSAGE_LensFlare = 8,
+			MATUSAGE_InstancedMeshParticles = 9,
+			MATUSAGE_FluidSurface = 10,
+			MATUSAGE_Decals = 11,
+			MATUSAGE_MaterialEffect = 12,
+			MATUSAGE_MorphTargets = 13,
+			MATUSAGE_FogVolumes = 14,
+			MATUSAGE_RadialBlur = 15,
+			MATUSAGE_InstancedMeshes = 16,
+			MATUSAGE_SplineMesh = 17,
+			MATUSAGE_ScreenDoorFade = 18,
+			MATUSAGE_APEXMesh = 19,
+			MATUSAGE_Terrain = 20,
+			MATUSAGE_Landscape = 21,
+			MATUSAGE_MAX = 22,
+		};
+		class LightmassMaterialInterfaceSettings
+		{
+		public:
+			ADD_BOOL(bOverrideDistanceFieldPenumbraScale, 24, 0x20)
+			ADD_BOOL(bOverrideExportResolutionScale, 24, 0x10)
+			ADD_BOOL(bOverrideSpecularBoost, 24, 0x8)
+			ADD_BOOL(bOverrideDiffuseBoost, 24, 0x4)
+			ADD_BOOL(bOverrideEmissiveBoost, 24, 0x2)
+			ADD_BOOL(bOverrideCastShadowAsMasked, 24, 0x1)
+			ADD_STRUCT(float, DistanceFieldPenumbraScale, 20)
+			ADD_STRUCT(float, ExportResolutionScale, 16)
+			ADD_STRUCT(float, SpecularBoost, 12)
+			ADD_STRUCT(float, DiffuseBoost, 8)
+			ADD_STRUCT(float, EmissiveBoost, 4)
+			ADD_BOOL(bCastShadowAsMasked, 0, 0x1)
+		};
+		ADD_STRUCT(float, MobileSwayMaxAngle, 332)
+		ADD_STRUCT(float, MobileSwayFrequencyMultiplier, 328)
+		ADD_STRUCT(float, MobileMaxVertexMovementAmplitude, 324)
+		ADD_STRUCT(float, MobileVerticalFrequencyMultiplier, 320)
+		ADD_STRUCT(float, MobileTangentVertexFrequencyMultiplier, 316)
+		ADD_STRUCT(float, SineScaleFrequencyMultipler, 312)
+		ADD_STRUCT(float, SineScaleY, 308)
+		ADD_STRUCT(float, SineScaleX, 304)
+		ADD_STRUCT(float, FixedScaleY, 300)
+		ADD_STRUCT(float, FixedScaleX, 296)
+		ADD_STRUCT(float, RotateSpeed, 292)
+		ADD_STRUCT(float, PannerSpeedY, 288)
+		ADD_STRUCT(float, PannerSpeedX, 284)
+		ADD_STRUCT(float, TransformCenterY, 280)
+		ADD_STRUCT(float, TransformCenterX, 276)
+		ADD_STRUCT(Object::LinearColor, DefaultUniformColor, 260)
+		ADD_OBJECT(Texture, MobileDetailTexture, 256)
+		ADD_OBJECT(Texture, MobileMaskTexture, 252)
+		ADD_STRUCT(float, MobileBumpOffsetHeightRatio, 248)
+		ADD_STRUCT(float, MobileBumpOffsetReferencePlane, 244)
+		ADD_STRUCT(Object::LinearColor, MobileRimLightingColor, 228)
+		ADD_STRUCT(float, MobileRimLightingExponent, 224)
+		ADD_STRUCT(float, MobileRimLightingStrength, 220)
+		ADD_STRUCT(float, MobileEnvironmentFresnelExponent, 216)
+		ADD_STRUCT(float, MobileEnvironmentFresnelAmount, 212)
+		ADD_STRUCT(Object::LinearColor, MobileEnvironmentColor, 196)
+		ADD_STRUCT(float, MobileEnvironmentAmount, 192)
+		ADD_OBJECT(Texture, MobileEnvironmentTexture, 188)
+		ADD_STRUCT(Object::LinearColor, MobileEmissiveColor, 172)
+		ADD_OBJECT(Texture, MobileEmissiveTexture, 168)
+		ADD_STRUCT(float, MobileSpecularPower, 164)
+		ADD_STRUCT(Object::LinearColor, MobileSpecularColor, 148)
+		ADD_OBJECT(Texture, MobileNormalTexture, 144)
+		ADD_STRUCT(EngineTypes::EMobileTextureTransformTarget, MobileTextureTransformTarget, 143)
+		ADD_STRUCT(EngineTypes::EMobileTextureBlendFactorSource, MobileTextureBlendFactorSource, 142)
+		ADD_STRUCT(EngineTypes::EMobileTexCoordsSource, MobileDetailTextureTexCoordsSource, 141)
+		ADD_STRUCT(EngineTypes::EMobileTexCoordsSource, MobileMaskTextureTexCoordsSource, 140)
+		ADD_STRUCT(EngineTypes::EMobileValueSource, MobileRimLightingMaskSource, 139)
+		ADD_STRUCT(EngineTypes::EMobileEnvironmentBlendMode, MobileEnvironmentBlendMode, 138)
+		ADD_STRUCT(EngineTypes::EMobileValueSource, MobileEnvironmentMaskSource, 137)
+		ADD_STRUCT(EngineTypes::EMobileValueSource, MobileEmissiveMaskSource, 136)
+		ADD_STRUCT(EngineTypes::EMobileEmissiveColorSource, MobileEmissiveColorSource, 135)
+		ADD_STRUCT(EngineTypes::EMobileSpecularMask, MobileSpecularMask, 134)
+		ADD_STRUCT(EngineTypes::EMobileAmbientOcclusionSource, MobileAmbientOcclusionSource, 133)
+		ADD_STRUCT(EngineTypes::EMobileTexCoordsSource, MobileBaseTextureTexCoordsSource, 132)
+		ADD_OBJECT(Texture, FlattenedTexture, 128)
+		ADD_OBJECT(Texture, MobileBaseTexture, 124)
+		ADD_BOOL(bUseMobileWaveVertexMovement, 120, 0x400)
+		ADD_BOOL(bUseMobileTextureTransform, 120, 0x200)
+		ADD_BOOL(bUseMobileVertexColorMultiply, 120, 0x100)
+		ADD_BOOL(bUseMobileUniformColorMultiply, 120, 0x80)
+		ADD_BOOL(bLockColorBlending, 120, 0x40)
+		ADD_BOOL(bUseMobileBumpOffset, 120, 0x20)
+		ADD_BOOL(bUseMobilePixelSpecular, 120, 0x10)
+		ADD_BOOL(bUseMobileVertexSpecular, 120, 0x8)
+		ADD_BOOL(bUseMobileSpecular, 120, 0x4)
+		ADD_BOOL(bMobileAllowFog, 120, 0x2)
+		ADD_BOOL(bAutoFlattenMobile, 120, 0x1)
+		ADD_STRUCT(Object::Guid, LightingGuid, 104)
+		ADD_STRUCT(ScriptString*, PreviewMesh, 92)
+		ADD_STRUCT(MaterialInterface::LightmassMaterialInterfaceSettings, LightmassSettings, 64)
+		ADD_STRUCT(Object::RenderCommandFence_Mirror, ParentRefFence, 60)
 		class Material* GetMaterial()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetMaterial");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Material**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Material**)&params[0];
 		}
 		class PhysicalMaterial* GetPhysicalMaterial()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetPhysicalMaterial");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PhysicalMaterial**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PhysicalMaterial**)&params[0];
 		}
-		bool GetParameterDesc(ScriptName ParameterName, ScriptArray<wchar_t>& OutDesc)
+		bool GetParameterDesc(ScriptName ParameterName, ScriptString*& OutDesc)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetParameterDesc");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = ParameterName;
-			*(ScriptArray<wchar_t>*)(params + 8) = OutDesc;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutDesc = *(ScriptArray<wchar_t>*)(params + 8);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptString**)&params[8] = OutDesc;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutDesc = *(ScriptString**)&params[8];
+			return *(bool*)&params[20];
 		}
 		bool GetFontParameterValue(ScriptName ParameterName, class Font*& OutFontValue, int& OutFontPage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetFontParameterValue");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = ParameterName;
-			*(class Font**)(params + 8) = OutFontValue;
-			*(int*)(params + 12) = OutFontPage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutFontValue = *(class Font**)(params + 8);
-			OutFontPage = *(int*)(params + 12);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(class Font**)&params[8] = OutFontValue;
+			*(int*)&params[12] = OutFontPage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutFontValue = *(class Font**)&params[8];
+			OutFontPage = *(int*)&params[12];
+			return *(bool*)&params[16];
 		}
 		bool GetScalarParameterValue(ScriptName ParameterName, float& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarParameterValue");
-			byte* params = (byte*)malloc(16);
-			*(ScriptName*)params = ParameterName;
-			*(float*)(params + 8) = OutValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(float*)(params + 8);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(float*)&params[8] = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutValue = *(float*)&params[8];
+			return *(bool*)&params[12];
 		}
-		bool GetScalarCurveParameterValue(ScriptName ParameterName, InterpCurveFloat& OutValue)
+		bool GetScalarCurveParameterValue(ScriptName ParameterName, Object::InterpCurveFloat& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarCurveParameterValue");
-			byte* params = (byte*)malloc(28);
-			*(ScriptName*)params = ParameterName;
-			*(InterpCurveFloat*)(params + 8) = OutValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(InterpCurveFloat*)(params + 8);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::InterpCurveFloat*)&params[8] = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutValue = *(Object::InterpCurveFloat*)&params[8];
+			return *(bool*)&params[24];
 		}
 		bool GetTextureParameterValue(ScriptName ParameterName, class Texture*& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetTextureParameterValue");
-			byte* params = (byte*)malloc(16);
-			*(ScriptName*)params = ParameterName;
-			*(class Texture**)(params + 8) = OutValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(class Texture**)(params + 8);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(class Texture**)&params[8] = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutValue = *(class Texture**)&params[8];
+			return *(bool*)&params[12];
 		}
-		bool GetVectorParameterValue(ScriptName ParameterName, LinearColor& OutValue)
+		bool GetVectorParameterValue(ScriptName ParameterName, Object::LinearColor& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorParameterValue");
-			byte* params = (byte*)malloc(28);
-			*(ScriptName*)params = ParameterName;
-			*(LinearColor*)(params + 8) = OutValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(LinearColor*)(params + 8);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::LinearColor*)&params[8] = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutValue = *(Object::LinearColor*)&params[8];
+			return *(bool*)&params[24];
 		}
-		bool GetVectorCurveParameterValue(ScriptName ParameterName, InterpCurveVector& OutValue)
+		bool GetVectorCurveParameterValue(ScriptName ParameterName, Object::InterpCurveVector& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorCurveParameterValue");
-			byte* params = (byte*)malloc(28);
-			*(ScriptName*)params = ParameterName;
-			*(InterpCurveVector*)(params + 8) = OutValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(InterpCurveVector*)(params + 8);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::InterpCurveVector*)&params[8] = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutValue = *(Object::InterpCurveVector*)&params[8];
+			return *(bool*)&params[24];
 		}
 		void SetForceMipLevelsToBeResident(bool OverrideForceMiplevelsToBeResident, bool bForceMiplevelsToBeResidentValue, float ForceDuration, int CinematicTextureGroups)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.SetForceMipLevelsToBeResident");
-			byte* params = (byte*)malloc(16);
-			*(bool*)params = OverrideForceMiplevelsToBeResident;
-			*(bool*)(params + 4) = bForceMiplevelsToBeResidentValue;
-			*(float*)(params + 8) = ForceDuration;
-			*(int*)(params + 12) = CinematicTextureGroups;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(bool*)&params[0] = OverrideForceMiplevelsToBeResident;
+			*(bool*)&params[4] = bForceMiplevelsToBeResidentValue;
+			*(float*)&params[8] = ForceDuration;
+			*(int*)&params[12] = CinematicTextureGroups;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

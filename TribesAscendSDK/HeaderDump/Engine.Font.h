@@ -1,84 +1,81 @@
 #pragma once
 #include "Core.Object.h"
-#include "Engine.FontImportOptions.FontImportOptionsData.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Font." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.Font." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.Texture2D.h"
+#include "Engine.FontImportOptions.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class Font : public Object
 	{
 	public:
-		ADD_VAR(::IntProperty, NumCharacters, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<FontImportOptionsData>, ImportOptions, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Kerning, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Leading, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Descent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Ascent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EmScale, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, IsRemapped, 0xFFFFFFFF)
+		static const auto NULLCHARACTER = 127;
+		class FontCharacter
+		{
+		public:
+			ADD_STRUCT(int, VerticalOffset, 20)
+			ADD_STRUCT(byte, TextureIndex, 16)
+			ADD_STRUCT(int, VSize, 12)
+			ADD_STRUCT(int, USize, 8)
+			ADD_STRUCT(int, StartV, 4)
+			ADD_STRUCT(int, StartU, 0)
+		};
+		ADD_STRUCT(ScriptArray<Font::FontCharacter>, Characters, 60)
+		ADD_STRUCT(ScriptArray<class Texture2D*>, Textures, 72)
+		ADD_STRUCT(ScriptArray<int>, MaxCharHeight, 320)
+		ADD_STRUCT(int, NumCharacters, 316)
+		ADD_STRUCT(FontImportOptions::FontImportOptionsData, ImportOptions, 168)
+		ADD_STRUCT(int, Kerning, 164)
+		ADD_STRUCT(float, Leading, 160)
+		ADD_STRUCT(float, Descent, 156)
+		ADD_STRUCT(float, Ascent, 152)
+		ADD_STRUCT(float, EmScale, 148)
+		ADD_STRUCT(int, IsRemapped, 144)
 		int GetResolutionPageIndex(float HeightTest)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetResolutionPageIndex");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = HeightTest;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = HeightTest;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		float GetScalingFactor(float HeightTest)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetScalingFactor");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = HeightTest;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = HeightTest;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		float GetAuthoredViewportHeight(float ViewportHeight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetAuthoredViewportHeight");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = ViewportHeight;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = ViewportHeight;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		float GetMaxCharHeight()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetMaxCharHeight");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
-		void GetStringHeightAndWidth(ScriptArray<wchar_t>& InString, int& Height, int& Width)
+		void GetStringHeightAndWidth(ScriptString*& InString, int& Height, int& Width)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetStringHeightAndWidth");
-			byte* params = (byte*)malloc(20);
-			*(ScriptArray<wchar_t>*)params = InString;
-			*(int*)(params + 12) = Height;
-			*(int*)(params + 16) = Width;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InString = *(ScriptArray<wchar_t>*)params;
-			Height = *(int*)(params + 12);
-			Width = *(int*)(params + 16);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptString**)&params[0] = InString;
+			*(int*)&params[12] = Height;
+			*(int*)&params[16] = Width;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			InString = *(ScriptString**)&params[0];
+			Height = *(int*)&params[12];
+			Width = *(int*)&params[16];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

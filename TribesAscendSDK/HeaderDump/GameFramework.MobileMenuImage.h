@@ -1,46 +1,40 @@
 #pragma once
+#include "Core.Object.h"
 #include "GameFramework.MobileMenuObject.h"
-#include "Core.Object.LinearColor.h"
 #include "Engine.Texture2D.h"
-#include "GameFramework.MobileMenuObject.UVCoords.h"
 #include "Engine.Canvas.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuImage." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.MobileMenuImage." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.MobileMenuImage." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MobileMenuImage : public MobileMenuObject
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ImageColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UVCoords>, ImageUVs, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ImageDrawStyle, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, Image)
+		enum MenuImageDrawStyle : byte
+		{
+			IDS_Normal = 0,
+			IDS_Stretched = 1,
+			IDS_Tile = 2,
+			IDS_MAX = 3,
+		};
+		ADD_STRUCT(Object::LinearColor, ImageColor, 160)
+		ADD_STRUCT(MobileMenuObject::UVCoords, ImageUVs, 140)
+		ADD_STRUCT(MobileMenuImage::MenuImageDrawStyle, ImageDrawStyle, 136)
+		ADD_OBJECT(Texture2D, Image, 132)
 		void RenderObject(class Canvas* Canvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuImage.RenderObject");
-			byte* params = (byte*)malloc(4);
-			*(class Canvas**)params = Canvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

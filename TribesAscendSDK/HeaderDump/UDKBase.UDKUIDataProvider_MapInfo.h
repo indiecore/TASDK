@@ -1,21 +1,19 @@
 #pragma once
 #include "UDKBase.UDKUIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKUIDataProvider_MapInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKUIDataProvider_MapInfo : public UDKUIResourceDataProvider
 	{
 	public:
-		ADD_VAR(::StrProperty, PreviewImageMarkup, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, NumPlayers, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, MapName, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MapId, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, PreviewImageMarkup, 192)
+		ADD_STRUCT(ScriptString*, Description, 180)
+		ADD_STRUCT(ScriptString*, NumPlayers, 168)
+		ADD_STRUCT(ScriptString*, MapName, 156)
+		ADD_STRUCT(int, MapId, 152)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

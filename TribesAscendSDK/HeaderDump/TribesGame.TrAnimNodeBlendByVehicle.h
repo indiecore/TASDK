@@ -1,18 +1,25 @@
 #pragma once
 #include "TribesGame.TrAnimNodeBlendList.h"
 #include "TribesGame.TrPawn.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrAnimNodeBlendByVehicle." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrAnimNodeBlendByVehicle : public TrAnimNodeBlendList
 	{
 	public:
-		ADD_OBJECT(TrPawn, m_TrPawn)
+		enum EVehicleAnims : byte
+		{
+			VANIM_NoVehicle = 0,
+			VANIM_Driving = 1,
+			VANIM_Enter = 2,
+			VANIM_Exit = 3,
+			VANIM_ChangeSeat = 4,
+			VANIM_MAX = 5,
+		};
+		ADD_OBJECT(TrPawn, m_TrPawn, 292)
 		void PlayNoVehicleAnim()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayNoVehicleAnim");

@@ -1,74 +1,71 @@
 #pragma once
 #include "TribesGame.TrProj_StickyGrenade.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_SpikeLauncher." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrProj_SpikeLauncher." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrProj_SpikeLauncher : public TrProj_StickyGrenade
 	{
 	public:
-		ADD_OBJECT(ParticleSystem, ProjExplosionTemplateAir)
-		ADD_VAR(::BoolProperty, m_bInAirHit, 0x1)
-		ADD_OBJECT(ScriptClass, m_ThirdProjectile)
-		ADD_OBJECT(ScriptClass, m_SecondProjectile)
+		ADD_OBJECT(ParticleSystem, ProjExplosionTemplateAir, 904)
+		ADD_BOOL(m_bInAirHit, 900, 0x1)
+		ADD_OBJECT(ScriptClass, m_ThirdProjectile, 896)
+		ADD_OBJECT(ScriptClass, m_SecondProjectile, 892)
 		void PreBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.PreBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool StickToTarget(class Actor* Target, Vector HitLocation, Vector HitNormal)
+		bool StickToTarget(class Actor* Target, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.StickToTarget");
-			byte* params = (byte*)malloc(32);
-			*(class Actor**)params = Target;
-			*(Vector*)(params + 4) = HitLocation;
-			*(Vector*)(params + 16) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(class Actor**)&params[0] = Target;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(Object::Vector*)&params[16] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[28];
 		}
-		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.ProcessTouch");
-			byte* params = (byte*)malloc(28);
-			*(class Actor**)params = Other;
-			*(Vector*)(params + 4) = HitLocation;
-			*(Vector*)(params + 16) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(Object::Vector*)&params[16] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Vector HitLocation, Vector HitNormal)
+		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.Explode");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SpawnSecondaryProjectile(Vector Direction)
+		void SpawnSecondaryProjectile(Object::Vector Direction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.SpawnSecondaryProjectile");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = Direction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = Direction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_OBJECT

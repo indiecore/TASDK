@@ -1,85 +1,71 @@
 #pragma once
-#include "Core.Object.Pointer.h"
 #include "Engine.OnlineSubsystem.h"
 #include "IpDrv.OnlineGameInterfaceImpl.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.OnlineSubsystemCommonImpl." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty IpDrv.OnlineSubsystemCommonImpl." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty IpDrv.OnlineSubsystemCommonImpl." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class OnlineSubsystemCommonImpl : public OnlineSubsystem
 	{
 	public:
-		ADD_OBJECT(OnlineGameInterfaceImpl, GameInterfaceImpl)
-		ADD_VAR(::BoolProperty, bIsUsingSpeechRecognition, 0x1)
-		ADD_VAR(::IntProperty, MaxRemoteTalkers, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxLocalTalkers, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VoiceEngine, 0xFFFFFFFF)
-		ScriptArray<wchar_t> GetPlayerNicknameFromIndex(int UserIndex)
+		ADD_OBJECT(OnlineGameInterfaceImpl, GameInterfaceImpl, 240)
+		ADD_BOOL(bIsUsingSpeechRecognition, 236, 0x1)
+		ADD_STRUCT(int, MaxRemoteTalkers, 232)
+		ADD_STRUCT(int, MaxLocalTalkers, 228)
+		ADD_STRUCT(Object::Pointer, VoiceEngine, 224)
+		ScriptString* GetPlayerNicknameFromIndex(int UserIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerNicknameFromIndex");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = UserIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = UserIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
-		UniqueNetId GetPlayerUniqueNetIdFromIndex(int UserIndex)
+		OnlineSubsystem::UniqueNetId GetPlayerUniqueNetIdFromIndex(int UserIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerUniqueNetIdFromIndex");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = UserIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(UniqueNetId*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = UserIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(OnlineSubsystem::UniqueNetId*)&params[4];
 		}
-		bool IsPlayerInSession(ScriptName SessionName, UniqueNetId PlayerID)
+		bool IsPlayerInSession(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.IsPlayerInSession");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = SessionName;
-			*(UniqueNetId*)(params + 8) = PlayerID;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
-		void GetRegisteredPlayers(ScriptName SessionName, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& OutRegisteredPlayers)
+		void GetRegisteredPlayers(ScriptName SessionName, ScriptArray<OnlineSubsystem::UniqueNetId>& OutRegisteredPlayers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetRegisteredPlayers");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = SessionName;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8) = OutRegisteredPlayers;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutRegisteredPlayers = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[8] = OutRegisteredPlayers;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutRegisteredPlayers = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[8];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

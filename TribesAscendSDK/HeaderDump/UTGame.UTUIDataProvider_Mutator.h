@@ -1,39 +1,45 @@
 #pragma once
 #include "UTGame.UTUIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTUIDataProvider_Mutator." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTUIDataProvider_Mutator : public UTUIResourceDataProvider
 	{
 	public:
-		ADD_VAR(::StrProperty, ClassName, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, GroupNames, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bOfficialMutator, 0x2)
-		ADD_VAR(::BoolProperty, bStandaloneOnly, 0x1)
+		ADD_STRUCT(ScriptString*, ClassName, 152)
+		ADD_STRUCT(ScriptString*, Description, 164)
+		ADD_STRUCT(ScriptString*, GroupNames, 176)
+		ADD_STRUCT(ScriptArray<ScriptString*>, SupportedGameTypes, 188)
+		ADD_BOOL(bOfficialMutator, 200, 0x2)
+		ADD_BOOL(bStandaloneOnly, 200, 0x1)
 		bool ShouldBeFiltered()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_Mutator.ShouldBeFiltered");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool SupportsCurrentGameMode()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_Mutator.SupportsCurrentGameMode");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

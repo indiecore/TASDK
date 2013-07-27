@@ -1,76 +1,77 @@
 #pragma once
-#include "Core.Object.Map_Mirror.h"
 #include "Engine.UIDataStore_StringAliasMap.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKUIDataStore_StringAliasBindingMap." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKUIDataStore_StringAliasBindingMap." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKUIDataStore_StringAliasBindingMap : public UIDataStore_StringAliasMap
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, CommandToBindNames, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, FakePlatform, 0xFFFFFFFF)
-		int GetStringWithFieldName(ScriptArray<wchar_t> FieldName, ScriptArray<wchar_t>& MappedString)
+		static const auto SABM_FIND_FIRST_BIND = -2;
+		class ControllerMap
+		{
+		public:
+			ADD_STRUCT(ScriptString*, PS3Mapping, 20)
+			ADD_STRUCT(ScriptString*, XBoxMapping, 8)
+			ADD_STRUCT(ScriptName, KeyName, 0)
+		};
+		class BindCacheElement
+		{
+		public:
+			ADD_STRUCT(int, FieldIndex, 20)
+			ADD_STRUCT(ScriptString*, MappingString, 8)
+			ADD_STRUCT(ScriptName, KeyName, 0)
+		};
+		ADD_STRUCT(ScriptArray<UDKUIDataStore_StringAliasBindingMap::ControllerMap>, ControllerMapArray, 260)
+		ADD_STRUCT(Object::Map_Mirror, CommandToBindNames, 200)
+		ADD_STRUCT(int, FakePlatform, 196)
+		int GetStringWithFieldName(ScriptString* FieldName, ScriptString*& MappedString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.GetStringWithFieldName");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = FieldName;
-			*(ScriptArray<wchar_t>*)(params + 12) = MappedString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MappedString = *(ScriptArray<wchar_t>*)(params + 12);
-			auto returnVal = *(int*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)&params[12] = MappedString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MappedString = *(ScriptString**)&params[12];
+			return *(int*)&params[24];
 		}
-		int GetBoundStringWithFieldName(ScriptArray<wchar_t> FieldName, ScriptArray<wchar_t>& MappedString, int& StartIndex, ScriptArray<wchar_t>& BindString)
+		int GetBoundStringWithFieldName(ScriptString* FieldName, ScriptString*& MappedString, int& StartIndex, ScriptString*& BindString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.GetBoundStringWithFieldName");
-			byte* params = (byte*)malloc(44);
-			*(ScriptArray<wchar_t>*)params = FieldName;
-			*(ScriptArray<wchar_t>*)(params + 12) = MappedString;
-			*(int*)(params + 24) = StartIndex;
-			*(ScriptArray<wchar_t>*)(params + 28) = BindString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MappedString = *(ScriptArray<wchar_t>*)(params + 12);
-			StartIndex = *(int*)(params + 24);
-			BindString = *(ScriptArray<wchar_t>*)(params + 28);
-			auto returnVal = *(int*)(params + 40);
-			free(params);
-			return returnVal;
+			byte params[44] = { NULL };
+			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)&params[12] = MappedString;
+			*(int*)&params[24] = StartIndex;
+			*(ScriptString**)&params[28] = BindString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MappedString = *(ScriptString**)&params[12];
+			StartIndex = *(int*)&params[24];
+			BindString = *(ScriptString**)&params[28];
+			return *(int*)&params[40];
 		}
-		bool FindMappingInBoundKeyCache(ScriptArray<wchar_t> Command, ScriptArray<wchar_t>& MappingStr, int& FieldIndex)
+		bool FindMappingInBoundKeyCache(ScriptString* Command, ScriptString*& MappingStr, int& FieldIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.FindMappingInBoundKeyCache");
-			byte* params = (byte*)malloc(32);
-			*(ScriptArray<wchar_t>*)params = Command;
-			*(ScriptArray<wchar_t>*)(params + 12) = MappingStr;
-			*(int*)(params + 24) = FieldIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MappingStr = *(ScriptArray<wchar_t>*)(params + 12);
-			FieldIndex = *(int*)(params + 24);
-			auto returnVal = *(bool*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)&params[12] = MappingStr;
+			*(int*)&params[24] = FieldIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MappingStr = *(ScriptString**)&params[12];
+			FieldIndex = *(int*)&params[24];
+			return *(bool*)&params[28];
 		}
-		void AddMappingToBoundKeyCache(ScriptArray<wchar_t> Command, ScriptArray<wchar_t> MappingStr, int FieldIndex)
+		void AddMappingToBoundKeyCache(ScriptString* Command, ScriptString* MappingStr, int FieldIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.AddMappingToBoundKeyCache");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = Command;
-			*(ScriptArray<wchar_t>*)(params + 12) = MappingStr;
-			*(int*)(params + 24) = FieldIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)&params[12] = MappingStr;
+			*(int*)&params[24] = FieldIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearBoundKeyCache()
 		{
@@ -79,5 +80,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

@@ -1,29 +1,27 @@
 #pragma once
 #include "UTGame.UTUIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTUIDataProvider_GameModeInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTUIDataProvider_GameModeInfo : public UTUIResourceDataProvider
 	{
 	public:
-		ADD_VAR(::StrProperty, GameMode, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DefaultMap, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Prefixes, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, GameSettingsClass, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PreviewImageMarkup, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, IconVL, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, IconUL, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, IconV, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, IconU, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, IconImage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, OptionSet, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, GameSearchClass, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, GameMode, 152)
+		ADD_STRUCT(ScriptString*, DefaultMap, 164)
+		ADD_STRUCT(ScriptString*, Prefixes, 236)
+		ADD_STRUCT(ScriptString*, GameSettingsClass, 176)
+		ADD_STRUCT(ScriptString*, Description, 212)
+		ADD_STRUCT(ScriptString*, PreviewImageMarkup, 224)
+		ADD_STRUCT(float, IconVL, 272)
+		ADD_STRUCT(float, IconUL, 268)
+		ADD_STRUCT(float, IconV, 264)
+		ADD_STRUCT(float, IconU, 260)
+		ADD_STRUCT(ScriptString*, IconImage, 248)
+		ADD_STRUCT(ScriptString*, OptionSet, 200)
+		ADD_STRUCT(ScriptString*, GameSearchClass, 188)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -3,76 +3,96 @@
 #include "Engine.AnimNode.h"
 #include "Engine.AnimSequence.h"
 #include "Engine.CameraAnim.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.SkelControlBase.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeSequence." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.AnimNodeSequence." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class AnimNodeSequence : public AnimNode
 	{
 	public:
-		ADD_OBJECT(AnimSequence, AnimSeq)
-		ADD_VAR(::BoolProperty, bPlaying, 0x1)
-		ADD_VAR(::FloatProperty, Rate, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bLooping, 0x2)
-		ADD_VAR(::NameProperty, AnimSeqName, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bCauseActorAnimEnd, 0x4)
-		ADD_VAR(::BoolProperty, bCauseActorAnimPlay, 0x8)
-		ADD_VAR(::BoolProperty, bZeroRootRotation, 0x10)
-		ADD_VAR(::BoolProperty, bZeroRootTranslation, 0x20)
-		ADD_VAR(::BoolProperty, bDisableWarningWhenAnimNotFound, 0x40)
-		ADD_VAR(::BoolProperty, bNoNotifies, 0x80)
-		ADD_VAR(::BoolProperty, bForceRefposeWhenNotPlaying, 0x100)
-		ADD_VAR(::BoolProperty, bIsIssuingNotifies, 0x200)
-		ADD_VAR(::BoolProperty, m_bSuppressNotifies, 0x400)
-		ADD_VAR(::BoolProperty, bForceAlwaysSlave, 0x800)
-		ADD_VAR(::BoolProperty, bSynchronize, 0x1000)
-		ADD_VAR(::BoolProperty, bReverseSync, 0x2000)
-		ADD_VAR(::BoolProperty, bShowTimeLineSlider, 0x4000)
-		ADD_VAR(::BoolProperty, bLoopCameraAnim, 0x8000)
-		ADD_VAR(::BoolProperty, bRandomizeCameraAnimLoopStartTime, 0x10000)
-		ADD_VAR(::BoolProperty, bEditorOnlyAddRefPoseToAdditiveAnimation, 0x20000)
-		ADD_VAR(::FloatProperty, CurrentTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PreviousTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EndTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, AnimLinkupIndex, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, NotifyWeightThreshold, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, SynchGroupName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SynchPosOffset, 0xFFFFFFFF)
-		ADD_OBJECT(CameraAnim, CameraAnim)
-		ADD_OBJECT(CameraAnimInst, ActiveCameraAnimInstance)
-		ADD_VAR(::FloatProperty, CameraAnimScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CameraAnimPlayRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CameraAnimBlendInTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CameraAnimBlendOutTime, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, RootBoneOption, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, RootRotationOption, 0xFFFFFFFF)
+		enum ERootRotationOption : byte
+		{
+			RRO_Default = 0,
+			RRO_Discard = 1,
+			RRO_Extract = 2,
+			RRO_MAX = 3,
+		};
+		enum ERootBoneAxis : byte
+		{
+			RBA_Default = 0,
+			RBA_Discard = 1,
+			RBA_Translate = 2,
+			RBA_MAX = 3,
+		};
+		ADD_OBJECT(AnimSequence, AnimSeq, 252)
+		ADD_BOOL(bPlaying, 236, 0x1)
+		ADD_STRUCT(float, Rate, 232)
+		ADD_BOOL(bLooping, 236, 0x2)
+		ADD_STRUCT(ScriptName, AnimSeqName, 224)
+		ADD_BOOL(bCauseActorAnimEnd, 236, 0x4)
+		ADD_BOOL(bCauseActorAnimPlay, 236, 0x8)
+		ADD_BOOL(bZeroRootRotation, 236, 0x10)
+		ADD_BOOL(bZeroRootTranslation, 236, 0x20)
+		ADD_BOOL(bDisableWarningWhenAnimNotFound, 236, 0x40)
+		ADD_BOOL(bNoNotifies, 236, 0x80)
+		ADD_BOOL(bForceRefposeWhenNotPlaying, 236, 0x100)
+		ADD_BOOL(bIsIssuingNotifies, 236, 0x200)
+		ADD_BOOL(m_bSuppressNotifies, 236, 0x400)
+		ADD_BOOL(bForceAlwaysSlave, 236, 0x800)
+		ADD_BOOL(bSynchronize, 236, 0x1000)
+		ADD_BOOL(bReverseSync, 236, 0x2000)
+		ADD_BOOL(bShowTimeLineSlider, 236, 0x4000)
+		ADD_BOOL(bLoopCameraAnim, 236, 0x8000)
+		ADD_BOOL(bRandomizeCameraAnimLoopStartTime, 236, 0x10000)
+		ADD_BOOL(bEditorOnlyAddRefPoseToAdditiveAnimation, 236, 0x20000)
+		ADD_STRUCT(float, CurrentTime, 240)
+		ADD_STRUCT(float, PreviousTime, 244)
+		ADD_STRUCT(float, EndTime, 248)
+		ADD_STRUCT(int, AnimLinkupIndex, 256)
+		ADD_STRUCT(float, NotifyWeightThreshold, 260)
+		ADD_STRUCT(ScriptName, SynchGroupName, 264)
+		ADD_STRUCT(float, SynchPosOffset, 272)
+		ADD_OBJECT(CameraAnim, CameraAnim, 276)
+		ADD_OBJECT(CameraAnimInst, ActiveCameraAnimInstance, 280)
+		ADD_STRUCT(float, CameraAnimScale, 284)
+		ADD_STRUCT(float, CameraAnimPlayRate, 288)
+		ADD_STRUCT(float, CameraAnimBlendInTime, 292)
+		ADD_STRUCT(float, CameraAnimBlendOutTime, 296)
+		ADD_STRUCT(AnimNodeSequence::ERootBoneAxis, RootBoneOption, 300)
+		ADD_STRUCT(AnimNodeSequence::ERootRotationOption, RootRotationOption, 303)
+		ADD_STRUCT(ScriptArray<class SkelControlBase*>, MetaDataSkelControlList, 308)
 		void SetAnim(ScriptName Sequence)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetAnim");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = Sequence;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = Sequence;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAnim(bool bLoop, float InRate, float StartTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.PlayAnim");
-			byte* params = (byte*)malloc(12);
-			*(bool*)params = bLoop;
-			*(float*)(params + 4) = InRate;
-			*(float*)(params + 8) = StartTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(bool*)&params[0] = bLoop;
+			*(float*)&params[4] = InRate;
+			*(float*)&params[8] = StartTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopAnim()
 		{
@@ -87,98 +107,82 @@ namespace UnrealScript
 		void SetPosition(float NewTime, bool bFireNotifies)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetPosition");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = NewTime;
-			*(bool*)(params + 4) = bFireNotifies;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(float*)&params[0] = NewTime;
+			*(bool*)&params[4] = bFireNotifies;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetNormalizedPosition()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetNormalizedPosition");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		float FindGroupRelativePosition(float GroupRelativePosition)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.FindGroupRelativePosition");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = GroupRelativePosition;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = GroupRelativePosition;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		float FindGroupPosition(float GroupRelativePosition)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.FindGroupPosition");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = GroupRelativePosition;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = GroupRelativePosition;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		float GetGroupRelativePosition()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetGroupRelativePosition");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		float GetGlobalPlayRate()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetGlobalPlayRate");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		float GetAnimPlaybackLength()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetAnimPlaybackLength");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		float GetTimeLeft()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetTimeLeft");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
-		void SetRootBoneAxisOption(byte AxisX, byte AxisY, byte AxisZ)
+		void SetRootBoneAxisOption(AnimNodeSequence::ERootBoneAxis AxisX, AnimNodeSequence::ERootBoneAxis AxisY, AnimNodeSequence::ERootBoneAxis AxisZ)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetRootBoneAxisOption");
-			byte* params = (byte*)malloc(3);
-			*params = AxisX;
-			*(params + 1) = AxisY;
-			*(params + 2) = AxisZ;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[3] = { NULL };
+			*(AnimNodeSequence::ERootBoneAxis*)&params[0] = AxisX;
+			*(AnimNodeSequence::ERootBoneAxis*)&params[1] = AxisY;
+			*(AnimNodeSequence::ERootBoneAxis*)&params[2] = AxisZ;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetRootBoneRotationOption(byte AxisX, byte AxisY, byte AxisZ)
+		void SetRootBoneRotationOption(AnimNodeSequence::ERootRotationOption AxisX, AnimNodeSequence::ERootRotationOption AxisY, AnimNodeSequence::ERootRotationOption AxisZ)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetRootBoneRotationOption");
-			byte* params = (byte*)malloc(3);
-			*params = AxisX;
-			*(params + 1) = AxisY;
-			*(params + 2) = AxisZ;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[3] = { NULL };
+			*(AnimNodeSequence::ERootRotationOption*)&params[0] = AxisX;
+			*(AnimNodeSequence::ERootRotationOption*)&params[1] = AxisY;
+			*(AnimNodeSequence::ERootRotationOption*)&params[2] = AxisZ;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,35 +1,25 @@
 #pragma once
-#include "Core.Object.Rotator.h"
 #include "UDKBase.UDKSkelControl_Damage.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_DamageSpring." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKSkelControl_DamageSpring." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKSkelControl_DamageSpring : public UDKSkelControl_Damage
 	{
 	public:
-		ADD_VAR(::FloatProperty, MomentumPortion, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastHitTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastHitMomentum, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RandomPortion, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, CurrentAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AVModifier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpringStiffness, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Falloff, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, MinAngle, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, MaxAngle, 0xFFFFFFFF)
+		ADD_STRUCT(float, MomentumPortion, 444)
+		ADD_STRUCT(float, LastHitTime, 440)
+		ADD_STRUCT(Object::Vector, LastHitMomentum, 428)
+		ADD_STRUCT(float, RandomPortion, 424)
+		ADD_STRUCT(Object::Rotator, CurrentAngle, 412)
+		ADD_STRUCT(float, AVModifier, 408)
+		ADD_STRUCT(float, SpringStiffness, 404)
+		ADD_STRUCT(float, Falloff, 400)
+		ADD_STRUCT(Object::Rotator, MinAngle, 388)
+		ADD_STRUCT(Object::Rotator, MaxAngle, 376)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

@@ -1,51 +1,53 @@
 #pragma once
 #include "Engine.SVehicleSimCar.h"
-#include "Core.Object.InterpCurveFloat.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleSimCar." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKVehicleSimCar." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKVehicleSimCar : public SVehicleSimCar
 	{
 	public:
-		ADD_VAR(::FloatProperty, InAirUprightMaxTorque, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, InAirUprightTorqueFactor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AirControlTurnTorque, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpeedBasedTurnDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ConsoleHardTurnGripFactor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FrontalCollisionGripFactor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ActualHandbrake, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HandbrakeSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HardTurnMotorTorque, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MinHardTurnSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SteeringReductionMinSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SteeringReductionSpeed, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumWheelsForFullSteering, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentSteeringReduction, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SteeringReductionRampUpRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SteeringReductionFactor, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAutoHandbrake, 0x8)
-		ADD_VAR(::BoolProperty, bDriverlessBraking, 0x4)
-		ADD_VAR(::BoolProperty, bHasForcedThrottle, 0x2)
-		ADD_VAR(::BoolProperty, bForceThrottle, 0x1)
-		ADD_VAR(::FloatProperty, ActualThrottle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxRPM, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MinRPM, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ThrottleSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LSDFactor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, EngineRPMCurve, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, TorqueVSpeedCurve, 0xFFFFFFFF)
+		ADD_STRUCT(float, InAirUprightMaxTorque, 312)
+		ADD_STRUCT(float, InAirUprightTorqueFactor, 308)
+		ADD_STRUCT(float, AirControlTurnTorque, 304)
+		ADD_STRUCT(float, SpeedBasedTurnDamping, 300)
+		ADD_STRUCT(float, ConsoleHardTurnGripFactor, 296)
+		ADD_STRUCT(float, FrontalCollisionGripFactor, 292)
+		ADD_STRUCT(float, ActualHandbrake, 288)
+		ADD_STRUCT(float, HandbrakeSpeed, 284)
+		ADD_STRUCT(float, HardTurnMotorTorque, 280)
+		ADD_STRUCT(float, MinHardTurnSpeed, 276)
+		ADD_STRUCT(float, SteeringReductionMinSpeed, 272)
+		ADD_STRUCT(float, SteeringReductionSpeed, 268)
+		ADD_STRUCT(int, NumWheelsForFullSteering, 264)
+		ADD_STRUCT(float, CurrentSteeringReduction, 260)
+		ADD_STRUCT(float, SteeringReductionRampUpRate, 256)
+		ADD_STRUCT(float, SteeringReductionFactor, 252)
+		ADD_BOOL(bAutoHandbrake, 248, 0x8)
+		ADD_BOOL(bDriverlessBraking, 248, 0x4)
+		ADD_BOOL(bHasForcedThrottle, 248, 0x2)
+		ADD_BOOL(bForceThrottle, 248, 0x1)
+		ADD_STRUCT(float, ActualThrottle, 244)
+		ADD_STRUCT(float, MaxRPM, 240)
+		ADD_STRUCT(float, MinRPM, 236)
+		ADD_STRUCT(float, ThrottleSpeed, 232)
+		ADD_STRUCT(float, LSDFactor, 228)
+		ADD_STRUCT(Object::InterpCurveFloat, EngineRPMCurve, 212)
+		ADD_STRUCT(Object::InterpCurveFloat, TorqueVSpeedCurve, 196)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

@@ -1,32 +1,29 @@
 #pragma once
 #include "Engine.SkelControlSingleBone.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSkelControl_JetThruster." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTSkelControl_JetThruster : public SkelControlSingleBone
 	{
 	public:
-		ADD_VAR(::FloatProperty, DesiredStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BlendRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxForwardVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(float, DesiredStrength, 244)
+		ADD_STRUCT(float, BlendRate, 240)
+		ADD_STRUCT(float, MaxForwardVelocity, 236)
 		void TickSkelControl(float DeltaTime, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_JetThruster.TickSkelControl");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = DeltaTime;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = DeltaTime;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

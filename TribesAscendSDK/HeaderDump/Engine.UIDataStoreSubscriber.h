@@ -7,61 +7,48 @@ namespace UnrealScript
 	class UIDataStoreSubscriber : public Interface
 	{
 	public:
-		void SetDataStoreBinding(ScriptArray<wchar_t> MarkupText, int BindingIndex)
+		void SetDataStoreBinding(ScriptString* MarkupText, int BindingIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.SetDataStoreBinding");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = MarkupText;
-			*(int*)(params + 12) = BindingIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = MarkupText;
+			*(int*)&params[12] = BindingIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetDataStoreBinding(int BindingIndex)
+		ScriptString* GetDataStoreBinding(int BindingIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.GetDataStoreBinding");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = BindingIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = BindingIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		bool RefreshSubscriberValue(int BindingIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.RefreshSubscriberValue");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = BindingIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = BindingIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void NotifyDataStoreValueUpdated(class UIDataStore* SourceDataStore, bool bValuesInvalidated, ScriptName PropertyTag, class UIDataProvider* SourceProvider, int ArrayIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.NotifyDataStoreValueUpdated");
-			byte* params = (byte*)malloc(24);
-			*(class UIDataStore**)params = SourceDataStore;
-			*(bool*)(params + 4) = bValuesInvalidated;
-			*(ScriptName*)(params + 8) = PropertyTag;
-			*(class UIDataProvider**)(params + 16) = SourceProvider;
-			*(int*)(params + 20) = ArrayIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(class UIDataStore**)&params[0] = SourceDataStore;
+			*(bool*)&params[4] = bValuesInvalidated;
+			*(ScriptName*)&params[8] = PropertyTag;
+			*(class UIDataProvider**)&params[16] = SourceProvider;
+			*(int*)&params[20] = ArrayIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetBoundDataStores(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& out_BoundDataStores)
+		void GetBoundDataStores(ScriptArray<class UIDataStore*>& out_BoundDataStores)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.GetBoundDataStores");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = out_BoundDataStores;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_BoundDataStores = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<class UIDataStore*>*)&params[0] = out_BoundDataStores;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)&params[0];
 		}
 		void ClearBoundDataStores()
 		{

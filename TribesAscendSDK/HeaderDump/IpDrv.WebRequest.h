@@ -1,176 +1,140 @@
 #pragma once
 #include "Core.Object.h"
-#include "Core.Object.Map_Mirror.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebRequest." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty IpDrv.WebRequest." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class WebRequest : public Object
 	{
 	public:
-		ADD_VAR(::StrProperty, UserName, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Password, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, URI, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, RequestType, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RemoteAddr, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ContentLength, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ContentType, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, VariableMap, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, HeaderMap, 0xFFFFFFFF)
-		ScriptArray<wchar_t> GetVariable(ScriptArray<wchar_t> VariableName, ScriptArray<wchar_t> DefaultValue)
+		enum ERequestType : byte
+		{
+			Request_GET = 0,
+			Request_POST = 1,
+			Request_MAX = 2,
+		};
+		ADD_STRUCT(ScriptString*, UserName, 84)
+		ADD_STRUCT(ScriptString*, Password, 96)
+		ADD_STRUCT(ScriptString*, URI, 72)
+		ADD_STRUCT(WebRequest::ERequestType, RequestType, 124)
+		ADD_STRUCT(ScriptString*, RemoteAddr, 60)
+		ADD_STRUCT(int, ContentLength, 108)
+		ADD_STRUCT(ScriptString*, ContentType, 112)
+		ADD_STRUCT(Object::Map_Mirror, VariableMap, 188)
+		ADD_STRUCT(Object::Map_Mirror, HeaderMap, 128)
+		ScriptString* GetVariable(ScriptString* VariableName, ScriptString* DefaultValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetVariable");
-			byte* params = (byte*)malloc(36);
-			*(ScriptArray<wchar_t>*)params = VariableName;
-			*(ScriptArray<wchar_t>*)(params + 12) = DefaultValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(ScriptString**)&params[0] = VariableName;
+			*(ScriptString**)&params[12] = DefaultValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[24];
 		}
-		int GetVariableCount(ScriptArray<wchar_t> VariableName)
+		int GetVariableCount(ScriptString* VariableName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetVariableCount");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = VariableName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = VariableName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
-		ScriptArray<wchar_t> GetVariableNumber(ScriptArray<wchar_t> VariableName, int Number, ScriptArray<wchar_t> DefaultValue)
+		ScriptString* GetVariableNumber(ScriptString* VariableName, int Number, ScriptString* DefaultValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetVariableNumber");
-			byte* params = (byte*)malloc(40);
-			*(ScriptArray<wchar_t>*)params = VariableName;
-			*(int*)(params + 12) = Number;
-			*(ScriptArray<wchar_t>*)(params + 16) = DefaultValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(ScriptString**)&params[0] = VariableName;
+			*(int*)&params[12] = Number;
+			*(ScriptString**)&params[16] = DefaultValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[28];
 		}
-		ScriptArray<wchar_t> DecodeBase64(ScriptArray<wchar_t> Encoded)
+		ScriptString* DecodeBase64(ScriptString* Encoded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.DecodeBase64");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Encoded;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Encoded;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
-		ScriptArray<wchar_t> EncodeBase64(ScriptArray<wchar_t> Decoded)
+		ScriptString* EncodeBase64(ScriptString* Decoded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.EncodeBase64");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Decoded;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Decoded;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
-		void AddHeader(ScriptArray<wchar_t> HeaderName, ScriptArray<wchar_t> Value)
+		void AddHeader(ScriptString* HeaderName, ScriptString* Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.AddHeader");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = HeaderName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Value;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = HeaderName;
+			*(ScriptString**)&params[12] = Value;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetHeader(ScriptArray<wchar_t> HeaderName, ScriptArray<wchar_t> DefaultValue)
+		ScriptString* GetHeader(ScriptString* HeaderName, ScriptString* DefaultValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetHeader");
-			byte* params = (byte*)malloc(36);
-			*(ScriptArray<wchar_t>*)params = HeaderName;
-			*(ScriptArray<wchar_t>*)(params + 12) = DefaultValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(ScriptString**)&params[0] = HeaderName;
+			*(ScriptString**)&params[12] = DefaultValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[24];
 		}
-		void GetHeaders(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& headers)
+		void GetHeaders(ScriptArray<ScriptString*>& headers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetHeaders");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = headers;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			headers = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<ScriptString*>*)&params[0] = headers;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			headers = *(ScriptArray<ScriptString*>*)&params[0];
 		}
-		void AddVariable(ScriptArray<wchar_t> VariableName, ScriptArray<wchar_t> Value)
+		void AddVariable(ScriptString* VariableName, ScriptString* Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.AddVariable");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = VariableName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Value;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = VariableName;
+			*(ScriptString**)&params[12] = Value;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetVariables(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& varNames)
+		void GetVariables(ScriptArray<ScriptString*>& varNames)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetVariables");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = varNames;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			varNames = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<ScriptString*>*)&params[0] = varNames;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			varNames = *(ScriptArray<ScriptString*>*)&params[0];
 		}
 		void Dump()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.Dump");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessHeaderString(ScriptArray<wchar_t> S)
+		void ProcessHeaderString(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.ProcessHeaderString");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DecodeFormData(ScriptArray<wchar_t> Data)
+		void DecodeFormData(ScriptString* Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.DecodeFormData");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Data;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Data;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		int GetHexDigit(ScriptArray<wchar_t> D)
+		int GetHexDigit(ScriptString* D)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetHexDigit");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = D;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = D;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

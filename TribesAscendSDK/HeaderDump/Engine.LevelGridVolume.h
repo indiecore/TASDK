@@ -1,30 +1,34 @@
 #pragma once
 #include "Engine.Volume.h"
-#include "Engine.KMeshProps.KConvexElem.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LevelGridVolume." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.LevelGridVolume." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.KMeshProps.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class LevelGridVolume : public Volume
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<KConvexElem>, CellConvexElem, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, KeepLoadedRange, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LoadingDistance, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Subdivisions, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, CellShape, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, LevelGridVolumeName, 0xFFFFFFFF)
+		enum LevelGridCellShape : byte
+		{
+			LGCS_Box = 0,
+			LGCS_Hex = 1,
+			LGCS_MAX = 2,
+		};
+		class LevelGridCellCoordinate
+		{
+		public:
+			ADD_STRUCT(int, Z, 8)
+			ADD_STRUCT(int, Y, 4)
+			ADD_STRUCT(int, X, 0)
+		};
+		ADD_STRUCT(KMeshProps::KConvexElem, CellConvexElem, 556)
+		ADD_STRUCT(float, KeepLoadedRange, 552)
+		ADD_STRUCT(float, LoadingDistance, 548)
+		ADD_STRUCT(int, Subdivisions, 536)
+		ADD_STRUCT(LevelGridVolume::LevelGridCellShape, CellShape, 532)
+		ADD_STRUCT(ScriptString*, LevelGridVolumeName, 520)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

@@ -1,31 +1,27 @@
 #pragma once
 #include "GameFramework.SeqEvent_MobileBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileMotion." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqEvent_MobileMotion : public SeqEvent_MobileBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, DeltaYaw, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DeltaPitch, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DeltaRoll, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Yaw, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Pitch, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Roll, 0xFFFFFFFF)
+		ADD_STRUCT(float, DeltaYaw, 276)
+		ADD_STRUCT(float, DeltaPitch, 272)
+		ADD_STRUCT(float, DeltaRoll, 268)
+		ADD_STRUCT(float, Yaw, 264)
+		ADD_STRUCT(float, Pitch, 260)
+		ADD_STRUCT(float, Roll, 256)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileMotion.GetObjClassVersion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

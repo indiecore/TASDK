@@ -1,21 +1,19 @@
 #pragma once
 #include "UDKBase.UDKAnimNodeSequence.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimNodeSeqWeap." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKAnimNodeSeqWeap : public UDKAnimNodeSequence
 	{
 	public:
-		ADD_VAR(::NameProperty, StingerAnim, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, ShoulderRocketAnim, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, SinglePistolAnim, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, DualPistolAnim, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, DefaultAnim, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptName, StingerAnim, 368)
+		ADD_STRUCT(ScriptName, ShoulderRocketAnim, 360)
+		ADD_STRUCT(ScriptName, SinglePistolAnim, 352)
+		ADD_STRUCT(ScriptName, DualPistolAnim, 344)
+		ADD_STRUCT(ScriptName, DefaultAnim, 336)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

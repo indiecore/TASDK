@@ -9,11 +9,10 @@ namespace UnrealScript
 		void AttachTo(class Pawn* P, ScriptName NewBoneName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmit_HitEffect.AttachTo");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = P;
-			*(ScriptName*)(params + 4) = NewBoneName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(ScriptName*)&params[4] = NewBoneName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnBaseDied()
 		{

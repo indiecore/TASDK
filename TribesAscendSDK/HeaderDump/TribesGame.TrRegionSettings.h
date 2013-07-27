@@ -1,71 +1,59 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrRegionSettings." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrRegionSettings." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "GameFramework.SeqAct_ModifyProperty.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrRegionSettings : public GFxObject
 	{
 	public:
-		ADD_OBJECT(GFxObject, m_RegionSettingsList)
-		ADD_VAR(::IntProperty, m_RegionSettingsCount, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<SeqAct_ModifyProperty::PropertyInfo>, AvailableRegions, 128)
+		ADD_OBJECT(GFxObject, m_RegionSettingsList, 124)
+		ADD_STRUCT(int, m_RegionSettingsCount, 120)
 		int GetPreferredSiteId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetPreferredSiteId");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		ScriptArray<wchar_t> LoadRegionSetting()
+		ScriptString* LoadRegionSetting()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.LoadRegionSetting");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		ScriptArray<wchar_t> GetRegionName(int siteId)
+		ScriptString* GetRegionName(int siteId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetRegionName");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = siteId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = siteId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		int GetRegionIdAtIndex(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetRegionIdAtIndex");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
-		int GetRegionIndexByName(ScriptArray<wchar_t> regionName)
+		int GetRegionIndexByName(ScriptString* regionName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetRegionIndexByName");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = regionName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = regionName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
 		void LoadRegions()
 		{
@@ -75,47 +63,42 @@ namespace UnrealScript
 		void SetPreferredSiteId(int siteId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.SetPreferredSiteId");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = siteId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = siteId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadRegionLabels(class GFxObject* List)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.LoadRegionLabels");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = List;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = List;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPreferredRegion(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.SetPreferredRegion");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddRegion(ScriptArray<wchar_t> regionName, int Id, bool bCustomOnly)
+		void AddRegion(ScriptString* regionName, int Id, bool bCustomOnly)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.AddRegion");
-			byte* params = (byte*)malloc(20);
-			*(ScriptArray<wchar_t>*)params = regionName;
-			*(int*)(params + 12) = Id;
-			*(bool*)(params + 16) = bCustomOnly;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptString**)&params[0] = regionName;
+			*(int*)&params[12] = Id;
+			*(bool*)&params[16] = bCustomOnly;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddSetting(ScriptName regionName, int Id)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.AddSetting");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = regionName;
-			*(int*)(params + 8) = Id;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = regionName;
+			*(int*)&params[8] = Id;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

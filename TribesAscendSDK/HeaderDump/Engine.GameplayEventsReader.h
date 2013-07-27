@@ -1,20 +1,23 @@
 #pragma once
 #include "Engine.GameplayEvents.h"
 #include "Engine.GameplayEventsHandler.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GameplayEventsReader : public GameplayEvents
 	{
 	public:
-		bool OpenStatsFile(ScriptArray<wchar_t> Filename)
+		ADD_STRUCT(ScriptArray<class GameplayEventsHandler*>, RegisteredHandlers, 336)
+		bool OpenStatsFile(ScriptString* Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.OpenStatsFile");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Filename;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
 		void CloseStatsFile()
 		{
@@ -24,27 +27,23 @@ namespace UnrealScript
 		bool SerializeHeader()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.SerializeHeader");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void RegisterHandler(class GameplayEventsHandler* NewHandler)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.RegisterHandler");
-			byte* params = (byte*)malloc(4);
-			*(class GameplayEventsHandler**)params = NewHandler;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GameplayEventsHandler**)&params[0] = NewHandler;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnregisterHandler(class GameplayEventsHandler* ExistingHandler)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.UnregisterHandler");
-			byte* params = (byte*)malloc(4);
-			*(class GameplayEventsHandler**)params = ExistingHandler;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GameplayEventsHandler**)&params[0] = ExistingHandler;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessStreamStart()
 		{
@@ -61,68 +60,55 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.ProcessStreamEnd");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetSessionID()
+		ScriptString* GetSessionID()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionID");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		int GetTitleID()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetTitleID");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		int GetPlatform()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetPlatform");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		ScriptArray<wchar_t> GetSessionTimestamp()
+		ScriptString* GetSessionTimestamp()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionTimestamp");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		float GetSessionStart()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionStart");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		float GetSessionEnd()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionEnd");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		float GetSessionDuration()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionDuration");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 	};
 }
+#undef ADD_STRUCT

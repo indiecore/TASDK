@@ -1,27 +1,20 @@
 #pragma once
 #include "Engine.UIDataStoreSubscriber.h"
+#include "Engine.UIDataStore.h"
 namespace UnrealScript
 {
 	class UIDataStorePublisher : public UIDataStoreSubscriber
 	{
 	public:
-		bool SaveSubscriberValue(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& out_BoundDataStores, int BindingIndex)
+		bool SaveSubscriberValue(ScriptArray<class UIDataStore*>& out_BoundDataStores, int BindingIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStorePublisher.SaveSubscriberValue");
-			byte* params = (byte*)malloc(20);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = out_BoundDataStores;
-			*(int*)(params + 12) = BindingIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_BoundDataStores = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptArray<class UIDataStore*>*)&params[0] = out_BoundDataStores;
+			*(int*)&params[12] = BindingIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)&params[0];
+			return *(bool*)&params[16];
 		}
 	};
 }

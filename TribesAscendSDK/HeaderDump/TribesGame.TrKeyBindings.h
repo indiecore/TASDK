@@ -1,61 +1,64 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
 #include "Engine.PlayerInput.h"
+#include "TribesGame.TrObject.h"
 #include "TribesGame.TrPlayerInput_Spectator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrKeyBindings." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrKeyBindings." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrKeyBindings : public GFxObject
 	{
 	public:
-		ADD_VAR(::StrProperty, m_EscapeKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_FriendsHotkey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_SettingsHotkey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_MainMenuHotkey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_ClassSelectKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_TeamSelectKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_TalkReplyKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_ChatHotkey, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_TalkKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_TeamTalkKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_ScoreboardKeybind, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, m_EnterKeybind, 0xFFFFFFFF)
-		ADD_OBJECT(PlayerInput, m_EngineInput)
-		ADD_OBJECT(GFxObject, m_KeyBindingsList)
-		ADD_VAR(::IntProperty, m_KeyBindingsCount, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bGotInputKey, 0x1)
-		ScriptArray<wchar_t> GetCurrentBind(byte Key)
+		ADD_STRUCT(ScriptString*, m_EscapeKeybind, 136)
+		ADD_STRUCT(ScriptString*, m_FriendsHotkey, 232)
+		ADD_STRUCT(ScriptString*, m_SettingsHotkey, 244)
+		ADD_STRUCT(ScriptString*, m_MainMenuHotkey, 256)
+		ADD_STRUCT(ScriptString*, m_ClassSelectKeybind, 172)
+		ADD_STRUCT(ScriptString*, m_TeamSelectKeybind, 160)
+		ADD_STRUCT(ScriptString*, m_TalkReplyKeybind, 220)
+		ADD_STRUCT(ScriptString*, m_ChatHotkey, 268)
+		ADD_STRUCT(ScriptString*, m_TalkKeybind, 196)
+		ADD_STRUCT(ScriptString*, m_TeamTalkKeybind, 208)
+		ADD_STRUCT(ScriptString*, m_ScoreboardKeybind, 184)
+		ADD_STRUCT(ScriptString*, m_EnterKeybind, 148)
+		ADD_OBJECT(PlayerInput, m_EngineInput, 132)
+		ADD_OBJECT(GFxObject, m_KeyBindingsList, 128)
+		ADD_STRUCT(int, m_KeyBindingsCount, 124)
+		ADD_BOOL(m_bGotInputKey, 120, 0x1)
+		ScriptString* GetCurrentBind(TrObject::ESettingsList Key)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetCurrentBind");
-			byte* params = (byte*)malloc(13);
-			*params = Key;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(TrObject::ESettingsList*)&params[0] = Key;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
-		ScriptArray<wchar_t> SaveKeyBind(int Index, ScriptArray<wchar_t> KeyName, bool bStore)
+		ScriptString* SaveKeyBind(int Index, ScriptString* KeyName, bool bStore)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SaveKeyBind");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = KeyName;
-			*(bool*)(params + 16) = bStore;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = KeyName;
+			*(bool*)&params[16] = bStore;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
 		void FlushSettings()
 		{
@@ -65,37 +68,32 @@ namespace UnrealScript
 		void ClearSettingById(int SettingId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ClearSettingById");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SettingId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SettingId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ClearSettingByValue(ScriptArray<wchar_t> StrValue)
+		void ClearSettingByValue(ScriptString* StrValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ClearSettingByValue");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = StrValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = StrValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void StoreSetting(int SettingId, ScriptArray<wchar_t> KeyBind)
+		void StoreSetting(int SettingId, ScriptString* KeyBind)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.StoreSetting");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = SettingId;
-			*(ScriptArray<wchar_t>*)(params + 4) = KeyBind;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(int*)&params[0] = SettingId;
+			*(ScriptString**)&params[4] = KeyBind;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> ReadSetting(int SettingId)
+		ScriptString* ReadSetting(int SettingId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ReadSetting");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = SettingId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = SettingId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		void CaptureNextKey()
 		{
@@ -105,104 +103,90 @@ namespace UnrealScript
 		void ResetDefaultKeyBindings(class PlayerInput* pInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ResetDefaultKeyBindings");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerInput**)params = pInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerInput**)&params[0] = pInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetDefaultSpectatorBindings(class TrPlayerInput_Spectator* pInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ResetDefaultSpectatorBindings");
-			byte* params = (byte*)malloc(4);
-			*(class TrPlayerInput_Spectator**)params = pInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPlayerInput_Spectator**)&params[0] = pInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReadBindings()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ReadBindings");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AddBinding(ScriptArray<wchar_t> Command, ScriptArray<wchar_t> KeyName)
+		void AddBinding(ScriptString* Command, ScriptString* KeyName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.AddBinding");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Command;
-			*(ScriptArray<wchar_t>*)(params + 12) = KeyName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)&params[12] = KeyName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ApplyKeyBinding(int Index, ScriptArray<wchar_t> val)
+		void ApplyKeyBinding(int Index, ScriptString* val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ApplyKeyBinding");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> SavePlayerKeyBind(int Index, ScriptArray<wchar_t> KeyName, bool bStore)
+		ScriptString* SavePlayerKeyBind(int Index, ScriptString* KeyName, bool bStore)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SavePlayerKeyBind");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = KeyName;
-			*(bool*)(params + 16) = bStore;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = KeyName;
+			*(bool*)&params[16] = bStore;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
-		ScriptArray<wchar_t> SaveSpectatorKeyBind(int Index, ScriptArray<wchar_t> KeyName, bool bStore)
+		ScriptString* SaveSpectatorKeyBind(int Index, ScriptString* KeyName, bool bStore)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SaveSpectatorKeyBind");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = KeyName;
-			*(bool*)(params + 16) = bStore;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = KeyName;
+			*(bool*)&params[16] = bStore;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
-		void UnbindPlayerCommand(class PlayerInput* pInput, ScriptArray<wchar_t> Command)
+		void UnbindPlayerCommand(class PlayerInput* pInput, ScriptString* Command)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UnbindPlayerCommand");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerInput**)params = pInput;
-			*(ScriptArray<wchar_t>*)(params + 4) = Command;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class PlayerInput**)&params[0] = pInput;
+			*(ScriptString**)&params[4] = Command;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UnbindSpectatorCommand(class TrPlayerInput_Spectator* pInput, ScriptArray<wchar_t> Command)
+		void UnbindSpectatorCommand(class TrPlayerInput_Spectator* pInput, ScriptString* Command)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UnbindSpectatorCommand");
-			byte* params = (byte*)malloc(16);
-			*(class TrPlayerInput_Spectator**)params = pInput;
-			*(ScriptArray<wchar_t>*)(params + 4) = Command;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class TrPlayerInput_Spectator**)&params[0] = pInput;
+			*(ScriptString**)&params[4] = Command;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetCurrentBinding(class PlayerInput* pInput, ScriptArray<wchar_t> Command)
+		ScriptString* GetCurrentBinding(class PlayerInput* pInput, ScriptString* Command)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetCurrentBinding");
-			byte* params = (byte*)malloc(28);
-			*(class PlayerInput**)params = pInput;
-			*(ScriptArray<wchar_t>*)(params + 4) = Command;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(class PlayerInput**)&params[0] = pInput;
+			*(ScriptString**)&params[4] = Command;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[16];
 		}
-		ScriptArray<wchar_t> GetCommandName(byte Index)
+		ScriptString* GetCommandName(TrObject::ESettingsList Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetCommandName");
-			byte* params = (byte*)malloc(13);
-			*params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(TrObject::ESettingsList*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		void ApplyDefaultSettings()
 		{
@@ -212,36 +196,30 @@ namespace UnrealScript
 		class PlayerInput* GetPlayerInput()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetPlayerInput");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PlayerInput**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PlayerInput**)&params[0];
 		}
 		class TrPlayerInput_Spectator* GetSpectatorInput()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetSpectatorInput");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class TrPlayerInput_Spectator**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class TrPlayerInput_Spectator**)&params[0];
 		}
 		void UpdateRuntimePlayer(class PlayerInput* EngineInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UpdateRuntimePlayer");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerInput**)params = EngineInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerInput**)&params[0] = EngineInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateRuntimeSpectator(class TrPlayerInput_Spectator* SpecInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UpdateRuntimeSpectator");
-			byte* params = (byte*)malloc(4);
-			*(class TrPlayerInput_Spectator**)params = SpecInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPlayerInput_Spectator**)&params[0] = SpecInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SaveInterceptKeys()
 		{
@@ -250,5 +228,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

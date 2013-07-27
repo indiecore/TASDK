@@ -1,18 +1,22 @@
 #pragma once
 #include "Engine.KActor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.KActorSpawnable." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class KActorSpawnable : public KActor
 	{
 	public:
-		ADD_VAR(::BoolProperty, bScalingToZero, 0x2)
-		ADD_VAR(::BoolProperty, bRecycleScaleToZero, 0x1)
+		ADD_BOOL(bScalingToZero, 712, 0x2)
+		ADD_BOOL(bRecycleScaleToZero, 712, 0x1)
 		void Initialize()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.Initialize");
@@ -35,4 +39,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

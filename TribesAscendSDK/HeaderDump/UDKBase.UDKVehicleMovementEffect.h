@@ -1,21 +1,19 @@
 #pragma once
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleMovementEffect." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKVehicleMovementEffect : public Actor
 	{
 	public:
-		ADD_VAR(::FloatProperty, AirCurrentLevel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AirMaxDelta, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, AirEffectScalar, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxVelocityForAirEffect, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MinVelocityForAirEffect, 0xFFFFFFFF)
+		ADD_STRUCT(float, AirCurrentLevel, 500)
+		ADD_STRUCT(float, AirMaxDelta, 496)
+		ADD_STRUCT(ScriptName, AirEffectScalar, 488)
+		ADD_STRUCT(float, MaxVelocityForAirEffect, 484)
+		ADD_STRUCT(float, MinVelocityForAirEffect, 480)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -1,58 +1,57 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.PickupFactory.h"
 #include "Engine.MaterialInstanceConstant.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.LinearColor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKPickupFactory." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKPickupFactory." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKPickupFactory." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKPickupFactory : public PickupFactory
 	{
 	public:
-		ADD_VAR(::NameProperty, GlowEmissiveParam, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, MIC_VisibilitySecondMaterial)
-		ADD_OBJECT(MaterialInstanceConstant, MIC_Visibility)
-		ADD_VAR(::NameProperty, VisibilityParamName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PivotTranslation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, YawRotationRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BobBaseOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BobSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BobOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BobTimer, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, BaseMaterialParamName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseEmissive, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseTargetEmissive, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PulseThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BasePulseTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BasePulseRate, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseDimEmissive, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseBrightEmissive, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, BaseMaterialInstance)
-		ADD_VAR(::BoolProperty, bDoVisibilityFadeIn, 0x80)
-		ADD_VAR(::BoolProperty, bUpdatingPickup, 0x40)
-		ADD_VAR(::BoolProperty, bRotatingPickup, 0x20)
-		ADD_VAR(::BoolProperty, bRandomStart, 0x10)
-		ADD_VAR(::BoolProperty, bFloatingPickup, 0x8)
-		ADD_VAR(::BoolProperty, bIsDisabled, 0x4)
-		ADD_VAR(::BoolProperty, bPulseBase, 0x2)
-		ADD_VAR(::BoolProperty, bIsRespawning, 0x1)
+		ADD_STRUCT(ScriptName, GlowEmissiveParam, 868)
+		ADD_OBJECT(MaterialInstanceConstant, MIC_VisibilitySecondMaterial, 860)
+		ADD_OBJECT(MaterialInstanceConstant, MIC_Visibility, 856)
+		ADD_STRUCT(ScriptName, VisibilityParamName, 848)
+		ADD_STRUCT(Object::Vector, PivotTranslation, 836)
+		ADD_STRUCT(float, YawRotationRate, 832)
+		ADD_STRUCT(float, BobBaseOffset, 828)
+		ADD_STRUCT(float, BobSpeed, 824)
+		ADD_STRUCT(float, BobOffset, 820)
+		ADD_STRUCT(float, BobTimer, 816)
+		ADD_STRUCT(ScriptName, BaseMaterialParamName, 808)
+		ADD_STRUCT(Object::LinearColor, BaseEmissive, 792)
+		ADD_STRUCT(Object::LinearColor, BaseTargetEmissive, 776)
+		ADD_STRUCT(float, PulseThreshold, 772)
+		ADD_STRUCT(float, BasePulseTime, 768)
+		ADD_STRUCT(float, BasePulseRate, 764)
+		ADD_STRUCT(Object::LinearColor, BaseDimEmissive, 748)
+		ADD_STRUCT(Object::LinearColor, BaseBrightEmissive, 732)
+		ADD_OBJECT(MaterialInstanceConstant, BaseMaterialInstance, 728)
+		ADD_BOOL(bDoVisibilityFadeIn, 720, 0x80)
+		ADD_BOOL(bUpdatingPickup, 720, 0x40)
+		ADD_BOOL(bRotatingPickup, 720, 0x20)
+		ADD_BOOL(bRandomStart, 720, 0x10)
+		ADD_BOOL(bFloatingPickup, 720, 0x8)
+		ADD_BOOL(bIsDisabled, 720, 0x4)
+		ADD_BOOL(bPulseBase, 720, 0x2)
+		ADD_BOOL(bIsRespawning, 720, 0x1)
 		void SetPickupVisible()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPickupFactory.SetPickupVisible");
@@ -65,6 +64,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,63 +1,74 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Engine.SeqAct_Latent.h"
+#include "GameFramework.GameCrowdAgent.h"
 #include "GameFramework.GameCrowd_ListOfAgents.h"
 #include "GameFramework.GameCrowdReplicationActor.h"
-#include "Engine.LightComponent.LightingChannelContainer.h"
-#include "GameFramework.GameCrowdAgent.h"
 #include "GameFramework.GameCrowdGroup.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.LightComponent.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqAct_GameCrowdSpawner." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.SeqAct_GameCrowdSpawner." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.SeqAct_GameCrowdSpawner." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SeqAct_GameCrowdSpawner : public SeqAct_Latent
 	{
 	public:
-		ADD_VAR(::FloatProperty, AgentWarmupTime, 0xFFFFFFFF)
-		ADD_OBJECT(GameCrowdReplicationActor, RepActor)
-		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, AgentLightingChannel, 0xFFFFFFFF)
-		ADD_OBJECT(GameCrowd_ListOfAgents, CrowdAgentList)
-		ADD_VAR(::FloatProperty, AgentFrequencySum, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Remainder, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SplitScreenNumReduction, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpawnRadius, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SpawnNum, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpawnRate, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastSpawnLocIndex, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NextDestinationIndex, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bCastShadows, 0x200)
-		ADD_VAR(::BoolProperty, bWarmupPosition, 0x100)
-		ADD_VAR(::BoolProperty, bOnlySpawnHidden, 0x80)
-		ADD_VAR(::BoolProperty, bForceNavMeshPathing, 0x40)
-		ADD_VAR(::BoolProperty, bForceObstacleChecking, 0x20)
-		ADD_VAR(::BoolProperty, bEnableCrowdLightEnvironment, 0x10)
-		ADD_VAR(::BoolProperty, bHasReducedNumberDueToSplitScreen, 0x8)
-		ADD_VAR(::BoolProperty, bRespawnDeadAgents, 0x4)
-		ADD_VAR(::BoolProperty, bCycleSpawnLocs, 0x2)
-		ADD_VAR(::BoolProperty, bSpawningActive, 0x1)
+		class AgentArchetypeInfo
+		{
+		public:
+			ADD_STRUCT(ScriptArray<class Object*>, GroupMembers, 16)
+			ADD_STRUCT(int, CurrSpawned, 12)
+			ADD_STRUCT(int, MaxAllowed, 8)
+			ADD_STRUCT(float, FrequencyModifier, 4)
+			ADD_OBJECT(Object, AgentArchetype, 0)
+		};
+		ADD_STRUCT(ScriptArray<class Actor*>, SpawnLocs, 256)
+		ADD_STRUCT(ScriptArray<SeqAct_GameCrowdSpawner::AgentArchetypeInfo>, AgentArchetypes, 300)
+		ADD_STRUCT(ScriptArray<class GameCrowdAgent*>, SpawnedList, 312)
+		ADD_STRUCT(float, AgentWarmupTime, 332)
+		ADD_OBJECT(GameCrowdReplicationActor, RepActor, 328)
+		ADD_STRUCT(LightComponent::LightingChannelContainer, AgentLightingChannel, 324)
+		ADD_OBJECT(GameCrowd_ListOfAgents, CrowdAgentList, 296)
+		ADD_STRUCT(float, AgentFrequencySum, 292)
+		ADD_STRUCT(float, Remainder, 288)
+		ADD_STRUCT(float, SplitScreenNumReduction, 284)
+		ADD_STRUCT(float, SpawnRadius, 280)
+		ADD_STRUCT(int, SpawnNum, 276)
+		ADD_STRUCT(float, SpawnRate, 272)
+		ADD_STRUCT(int, LastSpawnLocIndex, 268)
+		ADD_STRUCT(int, NextDestinationIndex, 252)
+		ADD_BOOL(bCastShadows, 248, 0x200)
+		ADD_BOOL(bWarmupPosition, 248, 0x100)
+		ADD_BOOL(bOnlySpawnHidden, 248, 0x80)
+		ADD_BOOL(bForceNavMeshPathing, 248, 0x40)
+		ADD_BOOL(bForceObstacleChecking, 248, 0x20)
+		ADD_BOOL(bEnableCrowdLightEnvironment, 248, 0x10)
+		ADD_BOOL(bHasReducedNumberDueToSplitScreen, 248, 0x8)
+		ADD_BOOL(bRespawnDeadAgents, 248, 0x4)
+		ADD_BOOL(bCycleSpawnLocs, 248, 0x2)
+		ADD_BOOL(bSpawningActive, 248, 0x1)
 		void SpawnedAgent(class GameCrowdAgent* NewAgent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.SpawnedAgent");
-			byte* params = (byte*)malloc(4);
-			*(class GameCrowdAgent**)params = NewAgent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GameCrowdAgent**)&params[0] = NewAgent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CacheSpawnerVars()
 		{
@@ -72,44 +83,37 @@ namespace UnrealScript
 		void UpdateSpawning(float DeltaSeconds)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.UpdateSpawning");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaSeconds;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GameCrowdAgent* SpawnAgent(class Actor* SpawnLoc)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.SpawnAgent");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = SpawnLoc;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GameCrowdAgent**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = SpawnLoc;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GameCrowdAgent**)&params[4];
 		}
 		class GameCrowdAgent* CreateNewAgent(class Actor* SpawnLoc, class GameCrowdAgent* AgentTemplate, class GameCrowdGroup* NewGroup)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.CreateNewAgent");
-			byte* params = (byte*)malloc(16);
-			*(class Actor**)params = SpawnLoc;
-			*(class GameCrowdAgent**)(params + 4) = AgentTemplate;
-			*(class GameCrowdGroup**)(params + 8) = NewGroup;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GameCrowdAgent**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class Actor**)&params[0] = SpawnLoc;
+			*(class GameCrowdAgent**)&params[4] = AgentTemplate;
+			*(class GameCrowdGroup**)&params[8] = NewGroup;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GameCrowdAgent**)&params[12];
 		}
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.GetObjClassVersion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

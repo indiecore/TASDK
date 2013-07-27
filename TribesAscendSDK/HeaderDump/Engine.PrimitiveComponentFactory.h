@@ -1,24 +1,28 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PrimitiveComponentFactory." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class PrimitiveComponentFactory : public Object
 	{
 	public:
-		ADD_VAR(::BoolProperty, CastShadow, 0x80)
-		ADD_VAR(::BoolProperty, HiddenEditor, 0x40)
-		ADD_VAR(::BoolProperty, HiddenGame, 0x20)
-		ADD_VAR(::BoolProperty, BlockRigidBody, 0x10)
-		ADD_VAR(::BoolProperty, BlockNonZeroExtent, 0x8)
-		ADD_VAR(::BoolProperty, BlockZeroExtent, 0x4)
-		ADD_VAR(::BoolProperty, BlockActors, 0x2)
-		ADD_VAR(::BoolProperty, CollideActors, 0x1)
+		ADD_BOOL(CastShadow, 60, 0x80)
+		ADD_BOOL(HiddenEditor, 60, 0x40)
+		ADD_BOOL(HiddenGame, 60, 0x20)
+		ADD_BOOL(BlockRigidBody, 60, 0x10)
+		ADD_BOOL(BlockNonZeroExtent, 60, 0x8)
+		ADD_BOOL(BlockZeroExtent, 60, 0x4)
+		ADD_BOOL(BlockActors, 60, 0x2)
+		ADD_BOOL(CollideActors, 60, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

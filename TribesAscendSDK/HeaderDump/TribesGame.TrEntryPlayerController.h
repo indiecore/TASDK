@@ -1,61 +1,60 @@
 #pragma once
 #include "TribesGame.TrPlayerController.h"
+#include "Core.Object.h"
+#include "Engine.PostProcessChain.h"
+#include "TribesGame.TrObject.h"
 #include "Engine.LocalPlayer.h"
 #include "TribesGame.TrPaperDollMainMenu.h"
-#include "Core.Object.Rotator.h"
-#include "Core.Object.Vector.h"
+#include "Engine.OnlineSubsystem.h"
 #include "TribesGame.TrMainMenuContentData.h"
-#include "Engine.PostProcessChain.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEntryPlayerController." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrEntryPlayerController." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrEntryPlayerController." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrEntryPlayerController : public TrPlayerController
 	{
 	public:
-		ADD_VAR(::BoolProperty, bMenuNotified, 0x1)
-		ADD_VAR(::FloatProperty, m_fCameraRotationInterpTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fCameraRotationCurrTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rTargetCameraRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rInitialCameraRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_CameraLocation4x3, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_CameraLocation16x10, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_CameraLocation16x9, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_PreloadTextureTime, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, m_ContentDataType, 0xFFFFFFFF)
-		ADD_OBJECT(TrPaperDollMainMenu, m_MainMenuPaperDoll)
-		ADD_VAR(::StrProperty, MainMenuContentClassName, 0xFFFFFFFF)
-		ADD_OBJECT(TrMainMenuContentData, m_MainMenuContentData)
-		ADD_OBJECT(LocalPlayer, OldPlayer)
-		ADD_OBJECT(PostProcessChain, EntryPostProcessChain)
-		ADD_VAR(::IntProperty, MAX_RESEND_WAIT_TIME, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MIN_RESEND_WAIT_TIME, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_CountdownTime, 0xFFFFFFFF)
+		ADD_BOOL(bMenuNotified, 3444, 0x1)
+		ADD_STRUCT(ScriptArray<class PostProcessChain*>, OldPostProcessChain, 3452)
+		ADD_STRUCT(float, m_fCameraRotationInterpTime, 3560)
+		ADD_STRUCT(float, m_fCameraRotationCurrTime, 3556)
+		ADD_STRUCT(Object::Rotator, m_rTargetCameraRotation, 3544)
+		ADD_STRUCT(Object::Rotator, m_rInitialCameraRotation, 3532)
+		ADD_STRUCT(Object::Vector, m_CameraLocation4x3, 3520)
+		ADD_STRUCT(Object::Vector, m_CameraLocation16x10, 3508)
+		ADD_STRUCT(Object::Vector, m_CameraLocation16x9, 3496)
+		ADD_STRUCT(float, m_PreloadTextureTime, 3492)
+		ADD_STRUCT(TrObject::EContentDataType, m_ContentDataType, 3488)
+		ADD_OBJECT(TrPaperDollMainMenu, m_MainMenuPaperDoll, 3484)
+		ADD_STRUCT(ScriptString*, MainMenuContentClassName, 3472)
+		ADD_OBJECT(TrMainMenuContentData, m_MainMenuContentData, 3468)
+		ADD_OBJECT(LocalPlayer, OldPlayer, 3464)
+		ADD_OBJECT(PostProcessChain, EntryPostProcessChain, 3448)
+		ADD_STRUCT(int, MAX_RESEND_WAIT_TIME, 3440)
+		ADD_STRUCT(int, MIN_RESEND_WAIT_TIME, 3436)
+		ADD_STRUCT(int, m_CountdownTime, 3432)
 		bool RequestPaperDoll()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.RequestPaperDoll");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void SendMenuToLobby()
 		{
@@ -70,19 +69,16 @@ namespace UnrealScript
 		void UpdateMenuTimer(int Seconds)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.UpdateMenuTimer");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Seconds;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Seconds;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetWaitRemaining()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.GetWaitRemaining");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		void NotifyMenuReady()
 		{
@@ -114,26 +110,24 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.PostBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void GetPlayerViewPoint(Vector& POVLocation, Rotator& POVRotation)
+		void GetPlayerViewPoint(Object::Vector& POVLocation, Object::Rotator& POVRotation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.GetPlayerViewPoint");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = POVLocation;
-			*(Rotator*)(params + 12) = POVRotation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			POVLocation = *(Vector*)params;
-			POVRotation = *(Rotator*)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = POVLocation;
+			*(Object::Rotator*)&params[12] = POVRotation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			POVLocation = *(Object::Vector*)&params[0];
+			POVRotation = *(Object::Rotator*)&params[12];
 		}
 		void SwingCamera(float TargetPitch, float TargetYaw, float TargetRoll)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.SwingCamera");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = TargetPitch;
-			*(float*)(params + 4) = TargetYaw;
-			*(float*)(params + 8) = TargetRoll;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(float*)&params[0] = TargetPitch;
+			*(float*)&params[4] = TargetYaw;
+			*(float*)&params[8] = TargetRoll;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SwingCameraBack()
 		{
@@ -158,10 +152,9 @@ namespace UnrealScript
 		void BeginQueueResendTimer(int SecondsLeft)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.BeginQueueResendTimer");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SecondsLeft;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SecondsLeft;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearQueueResendTimer()
 		{
@@ -171,10 +164,9 @@ namespace UnrealScript
 		void LoadingTimer(bool bStart)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.LoadingTimer");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bStart;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bStart;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitInputSystem()
 		{
@@ -189,58 +181,52 @@ namespace UnrealScript
 		void OnControllerChanged(int ControllerId, bool bIsConnected)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnControllerChanged");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ControllerId;
-			*(bool*)(params + 4) = bIsConnected;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ControllerId;
+			*(bool*)&params[4] = bIsConnected;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnGameInviteReceived(byte LocalUserNum, ScriptArray<wchar_t> RequestingNick)
+		void OnGameInviteReceived(byte LocalUserNum, ScriptString* RequestingNick)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnGameInviteReceived");
-			byte* params = (byte*)malloc(13);
-			*params = LocalUserNum;
-			*(ScriptArray<wchar_t>*)(params + 4) = RequestingNick;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[13] = { NULL };
+			params[0] = LocalUserNum;
+			*(ScriptString**)&params[4] = RequestingNick;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer, ScriptString* RequestingNick, ScriptString* Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnFriendInviteReceived");
-			byte* params = (byte*)malloc(33);
-			*params = LocalUserNum;
-			*(UniqueNetId*)(params + 4) = RequestingPlayer;
-			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
-			*(ScriptArray<wchar_t>*)(params + 24) = Message;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[33] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
+			*(ScriptString**)&params[12] = RequestingNick;
+			*(ScriptString**)&params[24] = Message;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId SendingPlayer, ScriptString* SendingNick, ScriptString* Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnFriendMessageReceived");
-			byte* params = (byte*)malloc(33);
-			*params = LocalUserNum;
-			*(UniqueNetId*)(params + 4) = SendingPlayer;
-			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
-			*(ScriptArray<wchar_t>*)(params + 24) = Message;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[33] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::UniqueNetId*)&params[4] = SendingPlayer;
+			*(ScriptString**)&params[12] = SendingNick;
+			*(ScriptString**)&params[24] = Message;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnConnectionStatusChange(byte ConnectionStatus)
+		void OnConnectionStatusChange(OnlineSubsystem::EOnlineServerConnectionStatus ConnectionStatus)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnConnectionStatusChange");
-			byte* params = (byte*)malloc(1);
-			*params = ConnectionStatus;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(OnlineSubsystem::EOnlineServerConnectionStatus*)&params[0] = ConnectionStatus;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLinkStatusChanged(bool bConnected)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnLinkStatusChanged");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bConnected;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bConnected;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QuitToMainMenu()
 		{
@@ -250,19 +236,17 @@ namespace UnrealScript
 		void SetPawnConstructionScene(bool bShow)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.SetPawnConstructionScene");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bShow;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bShow;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowMidGameMenu(ScriptName TabTag, bool bEnableInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.ShowMidGameMenu");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = TabTag;
-			*(bool*)(params + 8) = bEnableInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = TabTag;
+			*(bool*)&params[8] = bEnableInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowScoreboard()
 		{
@@ -272,66 +256,59 @@ namespace UnrealScript
 		void Pose(int PoseId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.Pose");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = PoseId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = PoseId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Weap(int WeapId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.Weap");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = WeapId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = WeapId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Char(int CharID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.Char");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = CharID;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = CharID;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdatePaperDoll_Device(ScriptClass* DeviceClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.UpdatePaperDoll_Device");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = DeviceClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = DeviceClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearMainMenuPaperDoll()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.ClearMainMenuPaperDoll");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void UpdateMainMenuPaperDoll_Mesh(byte Type)
+		void UpdateMainMenuPaperDoll_Mesh(TrObject::EContentDataType Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.UpdateMainMenuPaperDoll_Mesh");
-			byte* params = (byte*)malloc(1);
-			*params = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(TrObject::EContentDataType*)&params[0] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdatePaperDoll(ScriptClass* FamilyInfoClass, ScriptClass* DeviceClass, ScriptClass* skinClass, int TeamNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.UpdatePaperDoll");
-			byte* params = (byte*)malloc(16);
-			*(ScriptClass**)params = FamilyInfoClass;
-			*(ScriptClass**)(params + 4) = DeviceClass;
-			*(ScriptClass**)(params + 8) = skinClass;
-			*(int*)(params + 12) = TeamNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptClass**)&params[0] = FamilyInfoClass;
+			*(ScriptClass**)&params[4] = DeviceClass;
+			*(ScriptClass**)&params[8] = skinClass;
+			*(int*)&params[12] = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnDeviceContentDataClassLoaded(ScriptClass* DeviceContentDataClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnDeviceContentDataClassLoaded");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = DeviceContentDataClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = DeviceContentDataClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnClassSelectedMainMenu()
 		{
@@ -341,10 +318,9 @@ namespace UnrealScript
 		void On3PSkinContentLoaded(ScriptClass* Skin3PDataClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.On3PSkinContentLoaded");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = Skin3PDataClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = Skin3PDataClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshFriendsTimer()
 		{
@@ -363,6 +339,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

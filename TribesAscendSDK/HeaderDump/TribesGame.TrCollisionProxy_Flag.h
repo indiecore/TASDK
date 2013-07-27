@@ -1,34 +1,31 @@
 #pragma once
 #include "TribesGame.TrCollisionProxy.h"
+#include "Core.Object.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCollisionProxy_Flag." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrCollisionProxy_Flag : public TrCollisionProxy
 	{
 	public:
-		ADD_VAR(::IntProperty, m_nFlagReachLevel, 0xFFFFFFFF)
+		ADD_STRUCT(int, m_nFlagReachLevel, 492)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Vector HitLocation, Vector HitNormal)
+void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_Flag.Touch");
-			byte* params = (byte*)malloc(32);
-			*(class Actor**)params = Other;
+			byte params[32] = { NULL };
+			*(class Actor**)&params[0] = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComp;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = OtherComp;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

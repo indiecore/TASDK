@@ -1,35 +1,38 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "Engine.SkelControlBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkelControl_CCD_IK." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SkelControl_CCD_IK." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SkelControl_CCD_IK : public SkelControlBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, MaxAngleSteps, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bNoTurnOptimization, 0x2)
-		ADD_VAR(::BoolProperty, bStartFromTail, 0x1)
-		ADD_VAR(::FloatProperty, Precision, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, IterationsCount, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxPerBoneIterations, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumBones, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EffectorTranslationFromBone, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, EffectorSpaceBoneName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, EffectorLocationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EffectorLocation, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<float>, AngleConstraint, 244)
+		ADD_STRUCT(float, MaxAngleSteps, 256)
+		ADD_BOOL(bNoTurnOptimization, 240, 0x2)
+		ADD_BOOL(bStartFromTail, 240, 0x1)
+		ADD_STRUCT(float, Precision, 236)
+		ADD_STRUCT(int, IterationsCount, 232)
+		ADD_STRUCT(int, MaxPerBoneIterations, 228)
+		ADD_STRUCT(int, NumBones, 224)
+		ADD_STRUCT(Object::Vector, EffectorTranslationFromBone, 212)
+		ADD_STRUCT(ScriptName, EffectorSpaceBoneName, 204)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, EffectorLocationSpace, 200)
+		ADD_STRUCT(Object::Vector, EffectorLocation, 188)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

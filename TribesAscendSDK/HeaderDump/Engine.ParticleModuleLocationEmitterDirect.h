@@ -1,17 +1,15 @@
 #pragma once
 #include "Engine.ParticleModuleLocationBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleLocationEmitterDirect." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleLocationEmitterDirect : public ParticleModuleLocationBase
 	{
 	public:
-		ADD_VAR(::NameProperty, EmitterName, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptName, EmitterName, 72)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

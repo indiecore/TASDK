@@ -1,27 +1,36 @@
 #pragma once
-#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleCameraBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.DistributionFloat.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleCameraOffset." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleCameraOffset." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleCameraOffset : public ParticleModuleCameraBase
 	{
 	public:
-		ADD_VAR(::ByteProperty, UpdateMethod, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, CameraOffset, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bSpawnTimeOnly, 0x1)
+		enum EParticleCameraOffsetUpdateMethod : byte
+		{
+			EPCOUM_DirectSet = 0,
+			EPCOUM_Additive = 1,
+			EPCOUM_Scalar = 2,
+			EPCOUM_MAX = 3,
+		};
+		ADD_STRUCT(ParticleModuleCameraOffset::EParticleCameraOffsetUpdateMethod, UpdateMethod, 104)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, CameraOffset, 72)
+		ADD_BOOL(bSpawnTimeOnly, 100, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

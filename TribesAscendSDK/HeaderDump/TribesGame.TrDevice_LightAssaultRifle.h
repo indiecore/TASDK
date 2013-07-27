@@ -1,20 +1,28 @@
 #pragma once
 #include "TribesGame.TrDevice_AssaultRifle.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_LightAssaultRifle." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrDevice_LightAssaultRifle : public TrDevice_AssaultRifle
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fBurtShotRefireTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bHoldingFire, 0x1)
-		ADD_VAR(::IntProperty, m_nShotsSoFar, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nShotBurstCount, 0xFFFFFFFF)
+		ADD_STRUCT(float, m_fBurtShotRefireTime, 2184)
+		ADD_BOOL(m_bHoldingFire, 2180, 0x1)
+		ADD_STRUCT(int, m_nShotsSoFar, 2176)
+		ADD_STRUCT(int, m_nShotBurstCount, 2172)
 		void OnReloadComplete()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LightAssaultRifle.OnReloadComplete");
@@ -23,18 +31,16 @@ namespace UnrealScript
 		void StopFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LightAssaultRifle.StopFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LightAssaultRifle.StartFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefireTimer()
 		{
@@ -44,10 +50,9 @@ namespace UnrealScript
 		void EndFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LightAssaultRifle.EndFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FireAmmunition()
 		{
@@ -62,11 +67,11 @@ namespace UnrealScript
 		void ServerStopFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LightAssaultRifle.ServerStopFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

@@ -5,30 +5,26 @@
 #include "TribesGame.TrCaHCapturePoint.h"
 #include "TribesGame.TrPawn.h"
 #include "TribesGame.TrStationCollision.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrStation." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrStation." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrStation : public TrGameObjective
 	{
 	public:
-		ADD_OBJECT(TrCaHCapturePoint, m_OwningCaHCapturePoint)
-		ADD_OBJECT(SoundCue, m_StationLeftSoundCue)
-		ADD_OBJECT(SoundCue, m_StationEnteredSoundCue)
-		ADD_OBJECT(ScriptClass, StationCollisionClass)
-		ADD_OBJECT(TrPawn, r_CurrentPawn)
-		ADD_OBJECT(TrStationCollision, m_Collision)
-		ADD_VAR(::FloatProperty, m_fStationZOffset, 0xFFFFFFFF)
+		ADD_OBJECT(TrCaHCapturePoint, m_OwningCaHCapturePoint, 1392)
+		ADD_OBJECT(SoundCue, m_StationLeftSoundCue, 1384)
+		ADD_OBJECT(SoundCue, m_StationEnteredSoundCue, 1376)
+		ADD_OBJECT(ScriptClass, StationCollisionClass, 1372)
+		ADD_OBJECT(TrPawn, r_CurrentPawn, 1368)
+		ADD_OBJECT(TrStationCollision, m_Collision, 1364)
+		ADD_STRUCT(float, m_fStationZOffset, 1360)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PostBeginPlay");
@@ -37,10 +33,9 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
@@ -50,18 +45,16 @@ namespace UnrealScript
 		void PawnEnteredStation(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PawnEnteredStation");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeftStation(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PawnLeftStation");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStationEnteredEffects()
 		{
@@ -76,14 +69,12 @@ namespace UnrealScript
 		bool BlocksLineChecksFromSourceActor(class Actor* SourceActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.BlocksLineChecksFromSourceActor");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = SourceActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = SourceActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

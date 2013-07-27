@@ -15,237 +15,246 @@
 #include "UTGame.UTVehicleFactory.h"
 #include "UTGame.UTGameObjective.h"
 #include "Engine.AIController.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
+#include "Engine.OnlineSubsystem.h"
 #include "Engine.PlayerStart.h"
 #include "Engine.PickupFactory.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "UTGame.UTPawn.h"
 #include "UTGame.UTBot.h"
+#include "UTGame.UTCharInfo.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
-#include "UTGame.UTCharInfo.CharacterInfo.h"
 #include "UTGame.UTMutator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTGame." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTGame." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTGame : public UDKGame
 	{
 	public:
-		ADD_OBJECT(UTVehicle, VehicleList)
-		ADD_VAR(::IntProperty, ResetTimeDelay, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bWarmupRound, 0x1000)
-		ADD_VAR(::IntProperty, WarmupTime, 0xFFFFFFFF)
-		ADD_OBJECT(GameplayEventsWriter, GameplayEventsWriter)
-		ADD_VAR(::StrProperty, GameplayEventsWriterClassName, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, MidgameScorePanelTag, 0xFFFFFFFF)
-		ADD_OBJECT(Pawn, Sniper)
-		ADD_VAR(::FloatProperty, LastManDownTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastEncouragementTime, 0xFFFFFFFF)
-		ADD_OBJECT(SpeechRecognition, SpeechRecognitionData)
-		ADD_VAR(::StrProperty, EndOfMatchRulesTemplateStr_Time, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EndOfMatchRulesTemplateStr_ScoringSingle, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EndOfMatchRulesTemplateStr_Scoring, 0xFFFFFFFF)
-		ADD_OBJECT(NavigationPoint, ScriptedStartSpot)
-		ADD_VAR(::IntProperty, MapCycleIndex, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, BotClass)
-		ADD_VAR(::StrProperty, DemoPrefix, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, ConsolePlayerControllerClass)
-		ADD_OBJECT(ScriptClass, VictoryMessageClass)
-		ADD_VAR(::StrProperty, EnemyRosterName, 0xFFFFFFFF)
-		ADD_OBJECT(UTTeamInfo, EnemyRoster)
-		ADD_VAR(::IntProperty, ResetCountDown, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, EndGameFocus)
-		ADD_VAR(::StrProperty, GameUMenuType, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesMenuType, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, EndMessageCounter, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, EndMessageWait, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EndTime, 0xFFFFFFFF)
-		ADD_OBJECT(NavigationPoint, LastStartSpot)
-		ADD_OBJECT(NavigationPoint, LastPlayerStartSpot)
-		ADD_VAR(::IntProperty, PlayerDeaths, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PlayerKills, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AdjustedDifficulty, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, CountDown, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PendingMatchElapsedTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LateEntryLives, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DefaultMaxLives, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpawnProtectionTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DesiredPlayerCount, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, WeaponTauntUsed, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, StartupStage, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, WarmupRemaining, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, RestartWait, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MinNetPlayers, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ClientProcessingTimeout, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NetWait, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BotRatio, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EndTimeDelay, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ServerSkillLevel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Acronym, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bGivePhysicsGun, 0x40)
-		ADD_VAR(::BoolProperty, bLogGameplayEvents, 0x20)
-		ADD_VAR(::BoolProperty, bUseClassicHUD, 0x10)
-		ADD_VAR(::BoolProperty, bIgnoreTeamForVoiceChat, 0x8)
-		ADD_VAR(::BoolProperty, bNecrisLocked, 0x4)
-		ADD_VAR(::BoolProperty, bForceMidGameMenuAtStart, 0x2)
-		ADD_VAR(::BoolProperty, bMidGameHasMap, 0x1)
-		ADD_VAR(::BoolProperty, bPlayedOneKill, 0x80000000)
-		ADD_VAR(::BoolProperty, bPlayedFiveKills, 0x40000000)
-		ADD_VAR(::BoolProperty, bPlayedTenKills, 0x20000000)
-		ADD_VAR(::BoolProperty, bScoreDeaths, 0x10000000)
-		ADD_VAR(::BoolProperty, bAllowKeyboardAndMouse, 0x8000000)
-		ADD_VAR(::BoolProperty, bConsoleServer, 0x4000000)
-		ADD_VAR(::BoolProperty, bAllowHoverboard, 0x2000000)
-		ADD_VAR(::BoolProperty, bStartWithLockerWeaps, 0x1000000)
-		ADD_VAR(::BoolProperty, bUndrivenVehicleDamage, 0x800000)
-		ADD_VAR(::BoolProperty, bDemoMode, 0x400000)
-		ADD_VAR(::BoolProperty, bMustJoinBeforeStart, 0x200000)
-		ADD_VAR(::BoolProperty, bPlayerBecameActive, 0x100000)
-		ADD_VAR(::BoolProperty, bMustHaveMultiplePlayers, 0x80000)
-		ADD_VAR(::BoolProperty, bOverTimeBroadcast, 0x40000)
-		ADD_VAR(::BoolProperty, bFinalStartup, 0x20000)
-		ADD_VAR(::BoolProperty, bStartedCountDown, 0x10000)
-		ADD_VAR(::BoolProperty, bSkipPlaySound, 0x8000)
-		ADD_VAR(::BoolProperty, bQuickStart, 0x4000)
-		ADD_VAR(::BoolProperty, bFirstBlood, 0x2000)
-		ADD_VAR(::BoolProperty, bShouldWaitForNetPlayers, 0x800)
-		ADD_VAR(::BoolProperty, bWaitForNetPlayers, 0x400)
-		ADD_VAR(::BoolProperty, bTempForceRespawn, 0x200)
-		ADD_VAR(::BoolProperty, bForceRespawn, 0x100)
-		ADD_VAR(::BoolProperty, bPlayersMustBeReady, 0x80)
-		ADD_VAR(::BoolProperty, bAutoNumBots, 0x40)
-		ADD_VAR(::BoolProperty, bCustomBots, 0x20)
-		ADD_VAR(::BoolProperty, bPlayersVsBots, 0x10)
-		ADD_VAR(::BoolProperty, bSoaking, 0x8)
-		ADD_VAR(::BoolProperty, bTeamScoreRounds, 0x4)
-		ADD_VAR(::BoolProperty, bWeaponStay, 0x2)
-		ADD_VAR(::BoolProperty, bExportMenuData, 0x1)
+		enum EVoiceChannel : byte
+		{
+			VC_Spectators = 0,
+			VC_Team1 = 1,
+			VC_Team2 = 2,
+			VC_MAX = 3,
+		};
+		class GameMapCycle
+		{
+		public:
+			ADD_STRUCT(ScriptArray<ScriptString*>, Maps, 8)
+			ADD_STRUCT(ScriptName, GameClassName, 0)
+		};
+		class ActiveBotInfo
+		{
+		public:
+			ADD_BOOL(bInUse, 12, 0x1)
+			ADD_STRUCT(ScriptString*, BotName, 0)
+		};
+		ADD_OBJECT(UTVehicle, VehicleList, 1080)
+		ADD_STRUCT(int, ResetTimeDelay, 1076)
+		ADD_BOOL(bWarmupRound, 896, 0x1000)
+		ADD_STRUCT(int, WarmupTime, 956)
+		ADD_STRUCT(ScriptArray<ScriptClass*>, DefaultInventory, 1100)
+		ADD_STRUCT(ScriptArray<ScriptString*>, MapPrefixes, 1116)
+		ADD_STRUCT(ScriptArray<UTGame::GameMapCycle>, GameSpecificMapCycles, 1148)
+		ADD_STRUCT(ScriptArray<UTGame::ActiveBotInfo>, ActiveBots, 1164)
+		ADD_OBJECT(GameplayEventsWriter, GameplayEventsWriter, 1252)
+		ADD_STRUCT(ScriptString*, GameplayEventsWriterClassName, 1240)
+		ADD_STRUCT(ScriptName, MidgameScorePanelTag, 1232)
+		ADD_OBJECT(Pawn, Sniper, 1228)
+		ADD_STRUCT(float, LastManDownTime, 1224)
+		ADD_STRUCT(float, LastEncouragementTime, 1220)
+		ADD_OBJECT(SpeechRecognition, SpeechRecognitionData, 1216)
+		ADD_STRUCT(ScriptString*, EndOfMatchRulesTemplateStr_Time, 1204)
+		ADD_STRUCT(ScriptString*, EndOfMatchRulesTemplateStr_ScoringSingle, 1192)
+		ADD_STRUCT(ScriptString*, EndOfMatchRulesTemplateStr_Scoring, 1180)
+		ADD_OBJECT(NavigationPoint, ScriptedStartSpot, 1176)
+		ADD_STRUCT(int, MapCycleIndex, 1160)
+		ADD_OBJECT(ScriptClass, BotClass, 1144)
+		ADD_STRUCT(ScriptString*, DemoPrefix, 1132)
+		ADD_OBJECT(ScriptClass, ConsolePlayerControllerClass, 1128)
+		ADD_OBJECT(ScriptClass, VictoryMessageClass, 1112)
+		ADD_STRUCT(ScriptString*, EnemyRosterName, 1088)
+		ADD_OBJECT(UTTeamInfo, EnemyRoster, 1084)
+		ADD_STRUCT(int, ResetCountDown, 1072)
+		ADD_OBJECT(Actor, EndGameFocus, 1068)
+		ADD_STRUCT(ScriptString*, GameUMenuType, 1056)
+		ADD_STRUCT(ScriptString*, RulesMenuType, 1044)
+		ADD_STRUCT(int, EndMessageCounter, 1040)
+		ADD_STRUCT(int, EndMessageWait, 1036)
+		ADD_STRUCT(float, EndTime, 1032)
+		ADD_OBJECT(NavigationPoint, LastStartSpot, 1028)
+		ADD_OBJECT(NavigationPoint, LastPlayerStartSpot, 1024)
+		ADD_STRUCT(int, PlayerDeaths, 1020)
+		ADD_STRUCT(int, PlayerKills, 1016)
+		ADD_STRUCT(float, AdjustedDifficulty, 1012)
+		ADD_STRUCT(int, CountDown, 1008)
+		ADD_STRUCT(int, PendingMatchElapsedTime, 1004)
+		ADD_STRUCT(int, LateEntryLives, 1000)
+		ADD_STRUCT(int, DefaultMaxLives, 996)
+		ADD_STRUCT(float, SpawnProtectionTime, 992)
+		ADD_STRUCT(int, DesiredPlayerCount, 988)
+		ADD_STRUCT(byte, WeaponTauntUsed, 965)
+		ADD_STRUCT(byte, StartupStage, 964)
+		ADD_STRUCT(int, WarmupRemaining, 960)
+		ADD_STRUCT(int, RestartWait, 952)
+		ADD_STRUCT(int, MinNetPlayers, 948)
+		ADD_STRUCT(int, ClientProcessingTimeout, 944)
+		ADD_STRUCT(int, NetWait, 940)
+		ADD_STRUCT(float, BotRatio, 936)
+		ADD_STRUCT(float, EndTimeDelay, 932)
+		ADD_STRUCT(int, ServerSkillLevel, 928)
+		ADD_STRUCT(ScriptString*, Description, 916)
+		ADD_STRUCT(ScriptString*, Acronym, 904)
+		ADD_BOOL(bGivePhysicsGun, 900, 0x40)
+		ADD_BOOL(bLogGameplayEvents, 900, 0x20)
+		ADD_BOOL(bUseClassicHUD, 900, 0x10)
+		ADD_BOOL(bIgnoreTeamForVoiceChat, 900, 0x8)
+		ADD_BOOL(bNecrisLocked, 900, 0x4)
+		ADD_BOOL(bForceMidGameMenuAtStart, 900, 0x2)
+		ADD_BOOL(bMidGameHasMap, 900, 0x1)
+		ADD_BOOL(bPlayedOneKill, 896, 0x80000000)
+		ADD_BOOL(bPlayedFiveKills, 896, 0x40000000)
+		ADD_BOOL(bPlayedTenKills, 896, 0x20000000)
+		ADD_BOOL(bScoreDeaths, 896, 0x10000000)
+		ADD_BOOL(bAllowKeyboardAndMouse, 896, 0x8000000)
+		ADD_BOOL(bConsoleServer, 896, 0x4000000)
+		ADD_BOOL(bAllowHoverboard, 896, 0x2000000)
+		ADD_BOOL(bStartWithLockerWeaps, 896, 0x1000000)
+		ADD_BOOL(bUndrivenVehicleDamage, 896, 0x800000)
+		ADD_BOOL(bDemoMode, 896, 0x400000)
+		ADD_BOOL(bMustJoinBeforeStart, 896, 0x200000)
+		ADD_BOOL(bPlayerBecameActive, 896, 0x100000)
+		ADD_BOOL(bMustHaveMultiplePlayers, 896, 0x80000)
+		ADD_BOOL(bOverTimeBroadcast, 896, 0x40000)
+		ADD_BOOL(bFinalStartup, 896, 0x20000)
+		ADD_BOOL(bStartedCountDown, 896, 0x10000)
+		ADD_BOOL(bSkipPlaySound, 896, 0x8000)
+		ADD_BOOL(bQuickStart, 896, 0x4000)
+		ADD_BOOL(bFirstBlood, 896, 0x2000)
+		ADD_BOOL(bShouldWaitForNetPlayers, 896, 0x800)
+		ADD_BOOL(bWaitForNetPlayers, 896, 0x400)
+		ADD_BOOL(bTempForceRespawn, 896, 0x200)
+		ADD_BOOL(bForceRespawn, 896, 0x100)
+		ADD_BOOL(bPlayersMustBeReady, 896, 0x80)
+		ADD_BOOL(bAutoNumBots, 896, 0x40)
+		ADD_BOOL(bCustomBots, 896, 0x20)
+		ADD_BOOL(bPlayersVsBots, 896, 0x10)
+		ADD_BOOL(bSoaking, 896, 0x8)
+		ADD_BOOL(bTeamScoreRounds, 896, 0x4)
+		ADD_BOOL(bWeaponStay, 896, 0x2)
+		ADD_BOOL(bExportMenuData, 896, 0x1)
 		class Actor* GetAutoObjectiveFor(class UTPlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetAutoObjectiveFor");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Actor**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class UTPlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Actor**)&params[4];
 		}
 		bool ForceRespawn()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ForceRespawn");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool JustStarted(float MaxElapsedTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.JustStarted");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = MaxElapsedTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(float*)&params[0] = MaxElapsedTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		class UTTeamInfo* GetBotTeam(int TeamBots, bool bUseTeamIndex, int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetBotTeam");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = TeamBots;
-			*(bool*)(params + 4) = bUseTeamIndex;
-			*(int*)(params + 8) = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTTeamInfo**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = TeamBots;
+			*(bool*)&params[4] = bUseTeamIndex;
+			*(int*)&params[8] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTTeamInfo**)&params[12];
 		}
 		bool UseLowGore(class WorldInfo* WI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.UseLowGore");
-			byte* params = (byte*)malloc(8);
-			*(class WorldInfo**)params = WI;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class WorldInfo**)&params[0] = WI;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool TooManyBots(class Controller* botToRemove)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.TooManyBots");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = botToRemove;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = botToRemove;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PostBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool AllowMutator(ScriptArray<wchar_t> MutatorClassName)
+		bool AllowMutator(ScriptString* MutatorClassName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowMutator");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = MutatorClassName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = MutatorClassName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		ScriptClass* SetGameType(ScriptArray<wchar_t> MapName, ScriptArray<wchar_t> Options, ScriptArray<wchar_t> Portal)
+		ScriptClass* SetGameType(ScriptString* MapName, ScriptString* Options, ScriptString* Portal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetGameType");
-			byte* params = (byte*)malloc(40);
-			*(ScriptArray<wchar_t>*)params = MapName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Options;
-			*(ScriptArray<wchar_t>*)(params + 24) = Portal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptClass**)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(ScriptString**)&params[0] = MapName;
+			*(ScriptString**)&params[12] = Options;
+			*(ScriptString**)&params[24] = Portal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptClass**)&params[36];
 		}
 		void DriverEnteredVehicle(class Vehicle* V, class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DriverEnteredVehicle");
-			byte* params = (byte*)malloc(8);
-			*(class Vehicle**)params = V;
-			*(class Pawn**)(params + 4) = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Vehicle**)&params[0] = V;
+			*(class Pawn**)&params[4] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DriverLeftVehicle(class Vehicle* V, class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DriverLeftVehicle");
-			byte* params = (byte*)malloc(8);
-			*(class Vehicle**)params = V;
-			*(class Pawn**)(params + 4) = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Vehicle**)&params[0] = V;
+			*(class Pawn**)&params[4] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowBecomeActivePlayer(class PlayerController* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowBecomeActivePlayer");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerController**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerController**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void Reset()
 		{
@@ -255,215 +264,184 @@ namespace UnrealScript
 		void FindNewObjectives(class UTGameObjective* DisabledObjective)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.FindNewObjectives");
-			byte* params = (byte*)malloc(4);
-			*(class UTGameObjective**)params = DisabledObjective;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTGameObjective**)&params[0] = DisabledObjective;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyNavigationChanged(class NavigationPoint* N)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.NotifyNavigationChanged");
-			byte* params = (byte*)malloc(4);
-			*(class NavigationPoint**)params = N;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class NavigationPoint**)&params[0] = N;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> ParseKillMessage(ScriptArray<wchar_t> KillerName, ScriptArray<wchar_t> VictimName, ScriptArray<wchar_t> DeathMessage)
+		ScriptString* ParseKillMessage(ScriptString* KillerName, ScriptString* VictimName, ScriptString* DeathMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ParseKillMessage");
-			byte* params = (byte*)malloc(48);
-			*(ScriptArray<wchar_t>*)params = KillerName;
-			*(ScriptArray<wchar_t>*)(params + 12) = VictimName;
-			*(ScriptArray<wchar_t>*)(params + 24) = DeathMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[48] = { NULL };
+			*(ScriptString**)&params[0] = KillerName;
+			*(ScriptString**)&params[12] = VictimName;
+			*(ScriptString**)&params[24] = DeathMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[36];
 		}
 		bool SkipPlaySound()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SkipPlaySound");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void SetGameSpeed(float T)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetGameSpeed");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = T;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = T;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastDeathMessage(class Controller* Killer, class Controller* Other, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.BroadcastDeathMessage");
-			byte* params = (byte*)malloc(12);
-			*(class Controller**)params = Killer;
-			*(class Controller**)(params + 4) = Other;
-			*(ScriptClass**)(params + 8) = DamageType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)&params[4] = Other;
+			*(ScriptClass**)&params[8] = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ScoreKill(class Controller* Killer, class Controller* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ScoreKill");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = Killer;
-			*(class Controller**)(params + 4) = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)&params[4] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AdjustSkill(class AIController* B, class PlayerController* P, bool bWinner)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AdjustSkill");
-			byte* params = (byte*)malloc(12);
-			*(class AIController**)params = B;
-			*(class PlayerController**)(params + 4) = P;
-			*(bool*)(params + 8) = bWinner;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class AIController**)&params[0] = B;
+			*(class PlayerController**)&params[4] = P;
+			*(bool*)&params[8] = bWinner;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Killed(class Controller* Killer, class Controller* KilledPlayer, class Pawn* KilledPawn, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Killed");
-			byte* params = (byte*)malloc(16);
-			*(class Controller**)params = Killer;
-			*(class Controller**)(params + 4) = KilledPlayer;
-			*(class Pawn**)(params + 8) = KilledPawn;
-			*(ScriptClass**)(params + 12) = DamageType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)&params[4] = KilledPlayer;
+			*(class Pawn**)&params[8] = KilledPawn;
+			*(ScriptClass**)&params[12] = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void InitGame(ScriptArray<wchar_t> Options, ScriptArray<wchar_t>& ErrorMessage)
+		void InitGame(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.InitGame");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Options;
-			*(ScriptArray<wchar_t>*)(params + 12) = ErrorMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)&params[12] = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ErrorMessage = *(ScriptString**)&params[12];
 		}
 		void GenericPlayerInitialization(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GenericPlayerInitialization");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetPause(class PlayerController* PC, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CanUnpauseDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetPause");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerController**)params = PC;
+			byte params[20] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)(params + 4) = CanUnpauseDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+void**)&params[4] = CanUnpauseDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		int LevelRecommendedPlayers()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.LevelRecommendedPlayers");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, UniqueNetId UniqueId, ScriptArray<wchar_t>& ErrorMessage)
+		class PlayerController* Login(ScriptString* Portal, ScriptString* Options, OnlineSubsystem::UniqueNetId UniqueId, ScriptString*& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Login");
-			byte* params = (byte*)malloc(48);
-			*(ScriptArray<wchar_t>*)params = Portal;
-			*(ScriptArray<wchar_t>*)(params + 12) = Options;
-			*(UniqueNetId*)(params + 24) = UniqueId;
-			*(ScriptArray<wchar_t>*)(params + 32) = ErrorMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 32);
-			auto returnVal = *(class PlayerController**)(params + 44);
-			free(params);
-			return returnVal;
+			byte params[48] = { NULL };
+			*(ScriptString**)&params[0] = Portal;
+			*(ScriptString**)&params[12] = Options;
+			*(OnlineSubsystem::UniqueNetId*)&params[24] = UniqueId;
+			*(ScriptString**)&params[32] = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ErrorMessage = *(ScriptString**)&params[32];
+			return *(class PlayerController**)&params[44];
 		}
 		bool ShouldRespawn(class PickupFactory* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ShouldRespawn");
-			byte* params = (byte*)malloc(8);
-			*(class PickupFactory**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PickupFactory**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool WantFastSpawnFor(class AIController* B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.WantFastSpawnFor");
-			byte* params = (byte*)malloc(8);
-			*(class AIController**)params = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class AIController**)&params[0] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		float SpawnWait(class AIController* B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SpawnWait");
-			byte* params = (byte*)malloc(8);
-			*(class AIController**)params = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class AIController**)&params[0] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		void RestartGame()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RestartGame");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CheckEndGame");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void SetEndGameFocus(class PlayerReplicationInfo* Winner)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetEndGameFocus");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerReplicationInfo**)params = Winner;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AtCapacity(bool bSpectator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AtCapacity");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bSpectator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bSpectator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void PostLogin(class PlayerController* NewPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PostLogin");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerController**)params = NewPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerController**)&params[0] = NewPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameSettingsCounts()
 		{
@@ -473,82 +451,71 @@ void**)(params + 4) = CanUnpauseDelegate;
 		void AssignHoverboard(class UTPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AssignHoverboard");
-			byte* params = (byte*)malloc(4);
-			*(class UTPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetHandicapNeed(class Pawn* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetHandicapNeed");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void RestartPlayer(class Controller* aPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RestartPlayer");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = aPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = aPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CampaignSkillAdjust(class UTBot* aBot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CampaignSkillAdjust");
-			byte* params = (byte*)malloc(4);
-			*(class UTBot**)params = aBot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTBot**)&params[0] = aBot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddDefaultInventory(class Pawn* PlayerPawn)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddDefaultInventory");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = PlayerPawn;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = PlayerPawn;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanSpectate(class PlayerController* Viewer, class PlayerReplicationInfo* ViewTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CanSpectate");
-			byte* params = (byte*)malloc(12);
-			*(class PlayerController**)params = Viewer;
-			*(class PlayerReplicationInfo**)(params + 4) = ViewTarget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class PlayerController**)&params[0] = Viewer;
+			*(class PlayerReplicationInfo**)&params[4] = ViewTarget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
-		void ChangeName(class Controller* Other, ScriptArray<wchar_t> S, bool bNameChange)
+		void ChangeName(class Controller* Other, ScriptString* S, bool bNameChange)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ChangeName");
-			byte* params = (byte*)malloc(20);
-			*(class Controller**)params = Other;
-			*(ScriptArray<wchar_t>*)(params + 4) = S;
-			*(bool*)(params + 16) = bNameChange;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class Controller**)&params[0] = Other;
+			*(ScriptString**)&params[4] = S;
+			*(bool*)&params[16] = bNameChange;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DiscardInventory(class Pawn* Other, class Controller* Killer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DiscardInventory");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = Other;
-			*(class Controller**)(params + 4) = Killer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			*(class Controller**)&params[4] = Killer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Logout(class Controller* Exiting)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Logout");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = Exiting;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = Exiting;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillBots()
 		{
@@ -568,120 +535,103 @@ void**)(params + 4) = CanUnpauseDelegate;
 		void KillBot(class UTBot* B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.KillBot");
-			byte* params = (byte*)malloc(4);
-			*(class UTBot**)params = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTBot**)&params[0] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool NeedPlayers()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.NeedPlayers");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		class UTBot* AddBot(ScriptArray<wchar_t> BotName, bool bUseTeamIndex, int TeamIndex)
+		class UTBot* AddBot(ScriptString* BotName, bool bUseTeamIndex, int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddBot");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = BotName;
-			*(bool*)(params + 12) = bUseTeamIndex;
-			*(int*)(params + 16) = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTBot**)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = BotName;
+			*(bool*)&params[12] = bUseTeamIndex;
+			*(int*)&params[16] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTBot**)&params[20];
 		}
-		class UTBot* SpawnBot(ScriptArray<wchar_t> BotName, bool bUseTeamIndex, int TeamIndex)
+		class UTBot* SpawnBot(ScriptString* BotName, bool bUseTeamIndex, int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SpawnBot");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = BotName;
-			*(bool*)(params + 12) = bUseTeamIndex;
-			*(int*)(params + 16) = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTBot**)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = BotName;
+			*(bool*)&params[12] = bUseTeamIndex;
+			*(int*)&params[16] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTBot**)&params[20];
 		}
-		void InitializeBot(class UTBot* NewBot, class UTTeamInfo* BotTeam, CharacterInfo& BotInfo)
+		void InitializeBot(class UTBot* NewBot, class UTTeamInfo* BotTeam, UTCharInfo::CharacterInfo& BotInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.InitializeBot");
-			byte* params = (byte*)malloc(120);
-			*(class UTBot**)params = NewBot;
-			*(class UTTeamInfo**)(params + 4) = BotTeam;
-			*(CharacterInfo*)(params + 8) = BotInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BotInfo = *(CharacterInfo*)(params + 8);
-			free(params);
+			byte params[120] = { NULL };
+			*(class UTBot**)&params[0] = NewBot;
+			*(class UTTeamInfo**)&params[4] = BotTeam;
+			*(UTCharInfo::CharacterInfo*)&params[8] = BotInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			BotInfo = *(UTCharInfo::CharacterInfo*)&params[8];
 		}
 		void InitGameReplicationInfo()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.InitGameReplicationInfo");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetMapTypeRule()
+		ScriptString* GetMapTypeRule()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetMapTypeRule");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		ScriptArray<wchar_t> GetEndGameConditionRule()
+		ScriptString* GetEndGameConditionRule()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetEndGameConditionRule");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void NotifySpree(class UTPlayerReplicationInfo* Other, int Num)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.NotifySpree");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerReplicationInfo**)params = Other;
-			*(int*)(params + 4) = Num;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = Other;
+			*(int*)&params[4] = Num;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndSpree(class UTPlayerReplicationInfo* Killer, class UTPlayerReplicationInfo* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndSpree");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerReplicationInfo**)params = Killer;
-			*(class UTPlayerReplicationInfo**)(params + 4) = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = Killer;
+			*(class UTPlayerReplicationInfo**)&params[4] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameplayMuteList(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.UpdateGameplayMuteList");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetupPlayerMuteList(class UTPlayerController* PC, bool bForceSpectatorChannel)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetupPlayerMuteList");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerController**)params = PC;
-			*(bool*)(params + 4) = bForceSpectatorChannel;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPlayerController**)&params[0] = PC;
+			*(bool*)&params[4] = bForceSpectatorChannel;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemovePlayerFromMuteLists(class UTPlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RemovePlayerFromMuteLists");
-			byte* params = (byte*)malloc(4);
-			*(class UTPlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTPlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetAllPlayerMuteListsToSpectatorChannel()
 		{
@@ -693,53 +643,45 @@ void**)(params + 4) = CanUnpauseDelegate;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.StartMatch");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void EndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		void EndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndGame");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void EndLogging(ScriptArray<wchar_t> Reason)
+		void EndLogging(ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndLogging");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		class NavigationPoint* FindPlayerStart(class Controller* Player, byte InTeam, ScriptArray<wchar_t> IncomingName)
+		class NavigationPoint* FindPlayerStart(class Controller* Player, byte InTeam, ScriptString* IncomingName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.FindPlayerStart");
-			byte* params = (byte*)malloc(21);
-			*(class Controller**)params = Player;
-			*(params + 4) = InTeam;
-			*(ScriptArray<wchar_t>*)(params + 8) = IncomingName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class NavigationPoint**)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[21] = { NULL };
+			*(class Controller**)&params[0] = Player;
+			params[4] = InTeam;
+			*(ScriptString**)&params[8] = IncomingName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class NavigationPoint**)&params[20];
 		}
 		bool DominatingVictory()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DominatingVictory");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool IsAWinner(class PlayerController* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.IsAWinner");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerController**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerController**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void PlayEndOfMatchMessage()
 		{
@@ -759,19 +701,16 @@ void**)(params + 4) = CanUnpauseDelegate;
 		void EndRound(class Actor* EndRoundFocus)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndRound");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = EndRoundFocus;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = EndRoundFocus;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool MatchIsInProgress()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.MatchIsInProgress");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void AddInitialBots()
 		{
@@ -781,132 +720,106 @@ void**)(params + 4) = CanUnpauseDelegate;
 		int CalculatedNetSpeed()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CalculatedNetSpeed");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		bool IsConsoleDedicatedServer()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.IsConsoleDedicatedServer");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		class PlayerStart* ChoosePlayerStart(class Controller* Player, byte InTeam)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ChoosePlayerStart");
-			byte* params = (byte*)malloc(9);
-			*(class Controller**)params = Player;
-			*(params + 4) = InTeam;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PlayerStart**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[9] = { NULL };
+			*(class Controller**)&params[0] = Player;
+			params[4] = InTeam;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PlayerStart**)&params[8];
 		}
 		float RatePlayerStart(class PlayerStart* P, byte Team, class Controller* Player)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RatePlayerStart");
-			byte* params = (byte*)malloc(13);
-			*(class PlayerStart**)params = P;
-			*(params + 4) = Team;
-			*(class Controller**)(params + 8) = Player;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(class PlayerStart**)&params[0] = P;
+			params[4] = Team;
+			*(class Controller**)&params[8] = Player;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
 		bool CheckMaxLives(class PlayerReplicationInfo* Scorer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CheckMaxLives");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerReplicationInfo**)params = Scorer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool CheckScore(class PlayerReplicationInfo* Scorer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CheckScore");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerReplicationInfo**)params = Scorer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void RegisterVehicle(class UTVehicle* V)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RegisterVehicle");
-			byte* params = (byte*)malloc(4);
-			*(class UTVehicle**)params = V;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTVehicle**)&params[0] = V;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ActivateVehicleFactory(class UTVehicleFactory* VF)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ActivateVehicleFactory");
-			byte* params = (byte*)malloc(4);
-			*(class UTVehicleFactory**)params = VF;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTVehicleFactory**)&params[0] = VF;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewObjective(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ViewObjective");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddMutator(ScriptArray<wchar_t> mutname, bool bUserAdded)
+		void AddMutator(ScriptString* mutname, bool bUserAdded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddMutator");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = mutname;
-			*(bool*)(params + 12) = bUserAdded;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = mutname;
+			*(bool*)&params[12] = bUserAdded;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowClientToTeleport(class UTPlayerReplicationInfo* ClientPRI, class Actor* DestinationActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowClientToTeleport");
-			byte* params = (byte*)malloc(12);
-			*(class UTPlayerReplicationInfo**)params = ClientPRI;
-			*(class Actor**)(params + 4) = DestinationActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = ClientPRI;
+			*(class Actor**)&params[4] = DestinationActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void ShowPathTo(class PlayerController* P, int TeamNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ShowPathTo");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerController**)params = P;
-			*(int*)(params + 4) = TeamNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class PlayerController**)&params[0] = P;
+			*(int*)&params[4] = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetSeamlessTravelActorList(bool bToEntry, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& ActorList)
+		void GetSeamlessTravelActorList(bool bToEntry, ScriptArray<class Actor*>& ActorList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetSeamlessTravelActorList");
-			byte* params = (byte*)malloc(16);
-			*(bool*)params = bToEntry;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4) = ActorList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ActorList = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4);
-			free(params);
+			byte params[16] = { NULL };
+			*(bool*)&params[0] = bToEntry;
+			*(ScriptArray<class Actor*>*)&params[4] = ActorList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ActorList = *(ScriptArray<class Actor*>*)&params[4];
 		}
 		void PostSeamlessTravel()
 		{
@@ -916,117 +829,90 @@ void**)(params + 4);
 		void HandleSeamlessTravelPlayer(class Controller*& C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.HandleSeamlessTravelPlayer");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			C = *(class Controller**)params;
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			C = *(class Controller**)&params[0];
 		}
 		class UTMutator* GetBaseUTMutator()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetBaseUTMutator");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTMutator**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTMutator**)&params[0];
 		}
-		void ProcessSpeechRecognition(class UTPlayerController* Speaker, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Words)
+		void ProcessSpeechRecognition(class UTPlayerController* Speaker, ScriptArray<OnlineSubsystem::SpeechRecognizedWord>& Words)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ProcessSpeechRecognition");
-			byte* params = (byte*)malloc(16);
-			*(class UTPlayerController**)params = Speaker;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4) = Words;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Words = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4);
-			free(params);
+			byte params[16] = { NULL };
+			*(class UTPlayerController**)&params[0] = Speaker;
+			*(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4] = Words;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Words = *(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4];
 		}
 		void WriteOnlinePlayerScores()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.WriteOnlinePlayerScores");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		int GetCurrentMapCycleIndex(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& MapList)
+		int GetCurrentMapCycleIndex(ScriptArray<ScriptString*>& MapList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetCurrentMapCycleIndex");
-			byte* params = (byte*)malloc(16);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = MapList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MapList = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptArray<ScriptString*>*)&params[0] = MapList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MapList = *(ScriptArray<ScriptString*>*)&params[0];
+			return *(int*)&params[12];
 		}
-		ScriptArray<wchar_t> GetNextMap()
+		ScriptString* GetNextMap()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetNextMap");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		void ProcessServerTravel(ScriptArray<wchar_t> URL, bool bAbsolute)
+		void ProcessServerTravel(ScriptString* URL, bool bAbsolute)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ProcessServerTravel");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = URL;
-			*(bool*)(params + 12) = bAbsolute;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = URL;
+			*(bool*)&params[12] = bAbsolute;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ContinueSeamlessTravel()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ContinueSeamlessTravel");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetEndOfMatchRules(int InGoalScore, int InTimeLimit)
+		ScriptString* GetEndOfMatchRules(int InGoalScore, int InTimeLimit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetEndOfMatchRules");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = InGoalScore;
-			*(int*)(params + 4) = InTimeLimit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = InGoalScore;
+			*(int*)&params[4] = InTimeLimit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[8];
 		}
 		bool GetLocationFor(class Pawn* StatusPawn, class Actor*& LocationObject, int& MessageIndex, int LocationSpeechOffset)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetLocationFor");
-			byte* params = (byte*)malloc(20);
-			*(class Pawn**)params = StatusPawn;
-			*(class Actor**)(params + 4) = LocationObject;
-			*(int*)(params + 8) = MessageIndex;
-			*(int*)(params + 12) = LocationSpeechOffset;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			LocationObject = *(class Actor**)(params + 4);
-			MessageIndex = *(int*)(params + 8);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class Pawn**)&params[0] = StatusPawn;
+			*(class Actor**)&params[4] = LocationObject;
+			*(int*)&params[8] = MessageIndex;
+			*(int*)&params[12] = LocationSpeechOffset;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			LocationObject = *(class Actor**)&params[4];
+			MessageIndex = *(int*)&params[8];
+			return *(bool*)&params[16];
 		}
 		bool AllowCheats(class PlayerController* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowCheats");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerController**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerController**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void UpdateGameSettings()
 		{
@@ -1035,5 +921,6 @@ void**)params;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

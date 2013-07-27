@@ -1,34 +1,36 @@
 #pragma once
 #include "Engine.SVehicleSimBase.h"
-#include "Core.Object.InterpCurveFloat.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SVehicleSimCar." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SVehicleSimCar." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SVehicleSimCar : public SVehicleSimBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, TimeSinceThrottle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ActualSteering, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bIsDriving, 0x1)
-		ADD_VAR(::FloatProperty, StopThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxBrakeTorque, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EngineBrakeFactor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ReverseThrottle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SteerSpeed, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, MaxSteerAngleCurve, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ChassisTorqueScale, 0xFFFFFFFF)
+		ADD_STRUCT(float, TimeSinceThrottle, 192)
+		ADD_STRUCT(float, ActualSteering, 188)
+		ADD_BOOL(bIsDriving, 184, 0x1)
+		ADD_STRUCT(float, StopThreshold, 180)
+		ADD_STRUCT(float, MaxBrakeTorque, 176)
+		ADD_STRUCT(float, EngineBrakeFactor, 172)
+		ADD_STRUCT(float, ReverseThrottle, 168)
+		ADD_STRUCT(float, SteerSpeed, 164)
+		ADD_STRUCT(Object::InterpCurveFloat, MaxSteerAngleCurve, 148)
+		ADD_STRUCT(float, ChassisTorqueScale, 144)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

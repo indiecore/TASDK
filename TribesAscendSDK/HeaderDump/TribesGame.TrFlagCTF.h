@@ -1,35 +1,31 @@
 #pragma once
 #include "TribesGame.TrFlagBase.h"
 #include "Engine.Controller.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrFlagCTF." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrFlagCTF : public TrFlagBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_YouHaveTheFlagReminderTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_ReturnedTimeLimit, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_LastReturnedTime, 0xFFFFFFFF)
+		ADD_STRUCT(float, m_YouHaveTheFlagReminderTime, 940)
+		ADD_STRUCT(int, m_ReturnedTimeLimit, 936)
+		ADD_STRUCT(int, m_LastReturnedTime, 932)
 		void LogTaken(class Controller* EventInstigator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.LogTaken");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = EventInstigator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogDropped(class Controller* EventInstigator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.LogDropped");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = EventInstigator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearHolder()
 		{
@@ -39,10 +35,9 @@ namespace UnrealScript
 		void SendHome(class Controller* Returner)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.SendHome");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = Returner;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = Returner;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemindPlayerAboutFlagTimer()
 		{
@@ -52,26 +47,23 @@ namespace UnrealScript
 		void BroadcastTakenFromBaseMessage(class Controller* EventInstigator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastTakenFromBaseMessage");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = EventInstigator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastTakenDroppedMessage(class Controller* EventInstigator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastTakenDroppedMessage");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = EventInstigator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastCapturedMessage(class Controller* EventInstigator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastCapturedMessage");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = EventInstigator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastReturnedMessage()
 		{
@@ -81,11 +73,10 @@ namespace UnrealScript
 		void BroadcastDroppedMessage(class Controller* EventInstigator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastDroppedMessage");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = EventInstigator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

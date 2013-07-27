@@ -1,29 +1,21 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.NxForceFieldComponent.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxForceFieldRadialComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NxForceFieldRadialComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.PrimitiveComponent.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NxForceFieldRadialComponent : public NxForceFieldComponent
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Kernel, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ForceFalloff, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SelfRotationStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ForceRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ForceStrength, 0xFFFFFFFF)
+		ADD_STRUCT(Object::Pointer, Kernel, 584)
+		ADD_STRUCT(PrimitiveComponent::ERadialImpulseFalloff, ForceFalloff, 580)
+		ADD_STRUCT(float, SelfRotationStrength, 576)
+		ADD_STRUCT(float, ForceRadius, 572)
+		ADD_STRUCT(float, ForceStrength, 568)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

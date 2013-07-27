@@ -8,10 +8,9 @@ namespace UnrealScript
 		void OcclusionChanged(bool bNowOccluded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAmbientSoundComponent.OcclusionChanged");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bNowOccluded;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bNowOccluded;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

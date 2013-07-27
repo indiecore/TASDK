@@ -1,41 +1,42 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "Engine.SkelControlBase.h"
-#include "Core.Object.Vector2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkelControlLimb." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SkelControlLimb." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SkelControlLimb : public SkelControlBase
 	{
 	public:
-		ADD_VAR(::NameProperty, StretchRollBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, StretchLimits, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAllowStretching, 0x20)
-		ADD_VAR(::BoolProperty, bTakeRotationFromEffectorSpace, 0x10)
-		ADD_VAR(::BoolProperty, bMaintainEffectorRelRot, 0x8)
-		ADD_VAR(::BoolProperty, bRotateJoint, 0x4)
-		ADD_VAR(::BoolProperty, bInvertJointAxis, 0x2)
-		ADD_VAR(::BoolProperty, bInvertBoneAxis, 0x1)
-		ADD_VAR(::NameProperty, JointTargetSpaceBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, JointTargetLocation, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, EffectorSpaceBoneName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, JointAxis, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, BoneAxis, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, JointTargetLocationSpace, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, EffectorLocationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EffectorLocation, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptName, StretchRollBoneName, 244)
+		ADD_STRUCT(Object::Vector2D, StretchLimits, 236)
+		ADD_BOOL(bAllowStretching, 232, 0x20)
+		ADD_BOOL(bTakeRotationFromEffectorSpace, 232, 0x10)
+		ADD_BOOL(bMaintainEffectorRelRot, 232, 0x8)
+		ADD_BOOL(bRotateJoint, 232, 0x4)
+		ADD_BOOL(bInvertJointAxis, 232, 0x2)
+		ADD_BOOL(bInvertBoneAxis, 232, 0x1)
+		ADD_STRUCT(ScriptName, JointTargetSpaceBoneName, 224)
+		ADD_STRUCT(Object::Vector, JointTargetLocation, 212)
+		ADD_STRUCT(ScriptName, EffectorSpaceBoneName, 204)
+		ADD_STRUCT(Object::EAxis, JointAxis, 203)
+		ADD_STRUCT(Object::EAxis, BoneAxis, 202)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, JointTargetLocationSpace, 201)
+		ADD_STRUCT(SkelControlBase::EBoneControlSpace, EffectorLocationSpace, 200)
+		ADD_STRUCT(Object::Vector, EffectorLocation, 188)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

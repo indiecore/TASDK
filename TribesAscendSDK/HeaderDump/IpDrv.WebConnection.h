@@ -4,33 +4,39 @@
 #include "IpDrv.WebApplication.h"
 #include "IpDrv.WebResponse.h"
 #include "IpDrv.WebRequest.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebConnection." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty IpDrv.WebConnection." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class WebConnection : public TcpLink
 	{
 	public:
-		ADD_VAR(::IntProperty, ConnID, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxLineLength, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxValueLength, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, RawBytesExpecting, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bDelayCleanup, 0x1)
-		ADD_OBJECT(WebApplication, Application)
-		ADD_OBJECT(WebResponse, Response)
-		ADD_OBJECT(WebRequest, Request)
-		ADD_VAR(::StrProperty, ReceivedData, 0xFFFFFFFF)
-		ADD_OBJECT(WebServer, WebServer)
+		ADD_STRUCT(int, ConnID, 584)
+		ADD_STRUCT(int, MaxLineLength, 580)
+		ADD_STRUCT(int, MaxValueLength, 576)
+		ADD_STRUCT(int, RawBytesExpecting, 572)
+		ADD_BOOL(bDelayCleanup, 568, 0x1)
+		ADD_OBJECT(WebApplication, Application, 564)
+		ADD_OBJECT(WebResponse, Response, 560)
+		ADD_OBJECT(WebRequest, Request, 556)
+		ADD_STRUCT(ScriptString*, ReceivedData, 544)
+		ADD_OBJECT(WebServer, WebServer, 540)
 		void Accepted()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.Accepted");
@@ -46,45 +52,40 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.Timer");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ReceivedText(ScriptArray<wchar_t> Text)
+		void ReceivedText(ScriptString* Text)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ReceivedText");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Text;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Text;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ReceivedLine(ScriptArray<wchar_t> S)
+		void ReceivedLine(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ReceivedLine");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessHead(ScriptArray<wchar_t> S)
+		void ProcessHead(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ProcessHead");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessGet(ScriptArray<wchar_t> S)
+		void ProcessGet(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ProcessGet");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessPost(ScriptArray<wchar_t> S)
+		void ProcessPost(ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ProcessPost");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateResponseObject()
 		{
@@ -109,13 +110,12 @@ namespace UnrealScript
 		bool IsHanging()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.IsHanging");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

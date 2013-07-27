@@ -1,18 +1,16 @@
 #pragma once
 #include "TribesGame.TrDeployable.h"
 #include "TribesGame.TrGameObjective.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDeployable_BackupGenerator." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDeployable_BackupGenerator : public TrDeployable
 	{
 	public:
-		ADD_OBJECT(TrGameObjective, m_PoweredFriend)
+		ADD_OBJECT(TrGameObjective, m_PoweredFriend, 1524)
 		void DeployComplete()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.DeployComplete");
@@ -21,11 +19,9 @@ namespace UnrealScript
 		bool MainGeneratorIsOnline()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.MainGeneratorIsOnline");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void PowerNearestFriend()
 		{
@@ -60,10 +56,9 @@ namespace UnrealScript
 		void DoPowerUpdate(class TrDeployable* dep)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.DoPowerUpdate");
-			byte* params = (byte*)malloc(4);
-			*(class TrDeployable**)params = dep;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrDeployable**)&params[0] = dep;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{

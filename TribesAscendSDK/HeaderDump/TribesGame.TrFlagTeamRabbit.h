@@ -9,10 +9,9 @@ namespace UnrealScript
 		void SetHolder(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagTeamRabbit.SetHolder");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearHolder()
 		{
@@ -22,10 +21,9 @@ namespace UnrealScript
 		void SendHome(class Controller* Returner)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagTeamRabbit.SendHome");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = Returner;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = Returner;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastReturnedMessage()
 		{

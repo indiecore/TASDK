@@ -2,19 +2,17 @@
 #include "Engine.SkeletalMeshActor.h"
 #include "TribesGame.TrSkelControl_SpinControl.h"
 #include "TribesGame.TrAnimNodeBlendList.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrVehiclePad." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrVehiclePad : public SkeletalMeshActor
 	{
 	public:
-		ADD_OBJECT(TrSkelControl_SpinControl, m_SpinControl)
-		ADD_OBJECT(TrAnimNodeBlendList, m_VehiclePadBlendNode)
+		ADD_OBJECT(TrSkelControl_SpinControl, m_SpinControl, 540)
+		ADD_OBJECT(TrAnimNodeBlendList, m_VehiclePadBlendNode, 536)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehiclePad.PostBeginPlay");
@@ -25,12 +23,11 @@ namespace UnrealScript
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehiclePad.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayIdleAnim()
 		{

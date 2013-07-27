@@ -1,28 +1,30 @@
 #pragma once
 #include "Engine.ParticleModuleKillBase.h"
-#include "Core.DistributionVector.RawDistributionVector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.DistributionVector.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleKillBox." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleKillBox." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleKillBox : public ParticleModuleKillBase
 	{
 	public:
-		ADD_VAR(::BoolProperty, bKillInside, 0x2)
-		ADD_VAR(::BoolProperty, bAbsolute, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, UpperRightCorner, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LowerLeftCorner, 0xFFFFFFFF)
+		ADD_BOOL(bKillInside, 128, 0x2)
+		ADD_BOOL(bAbsolute, 128, 0x1)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, UpperRightCorner, 100)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, LowerLeftCorner, 72)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

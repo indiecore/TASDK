@@ -5,37 +5,53 @@ namespace UnrealScript
 	class GFxTrMenuSounds : public Object
 	{
 	public:
+		enum EMenuSound : byte
+		{
+			EMS_CLASS_ROLLOVER = 0,
+			EMS_CLASS_SELECTED = 1,
+			EMS_CLASS_UNLOCKED = 2,
+			EMS_CLASS_DENIED = 3,
+			EMS_SKILL_ROLLOVER = 4,
+			EMS_SKILL_SELECTED = 5,
+			EMS_SKILL_UNLOCKED = 6,
+			EMS_QUEUE_SELECTED = 7,
+			EMS_QUEUE_EXIT = 8,
+			EMS_TOOLTIP_OPEN = 9,
+			EMS_TOOLTIP_CLOSE = 10,
+			EMS_XP_GAIN = 11,
+			EMS_XP_POINT_POSITIVE = 12,
+			EMS_XP_POINT_NEGATIVE = 13,
+			EMS_PAGE_FORWARD = 14,
+			EMS_PAGE_BACK = 15,
+			EMS_MAX = 16,
+		};
 		void SoundToolTip(bool bOpened)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundToolTip");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bOpened;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bOpened;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundXPGain(int val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundXPGain");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundSkillType(int val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundSkillType");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundClassType(int val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundClassType");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundPurchaseSkill()
 		{
@@ -77,13 +93,12 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.ClassLocked");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayMenuSound(byte MenuSound)
+		void PlayMenuSound(GFxTrMenuSounds::EMenuSound MenuSound)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.PlayMenuSound");
-			byte* params = (byte*)malloc(1);
-			*params = MenuSound;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(GFxTrMenuSounds::EMenuSound*)&params[0] = MenuSound;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

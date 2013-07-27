@@ -1,27 +1,24 @@
 #pragma once
 #include "UTGame.UTInventory.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrInventory." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrInventory : public UTInventory
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fMaxPickupSpeed, 0xFFFFFFFF)
-		void DropFrom(Vector StartLocation, Vector StartVelocity)
+		ADD_STRUCT(float, m_fMaxPickupSpeed, 556)
+		void DropFrom(Object::Vector StartLocation, Object::Vector StartVelocity)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventory.DropFrom");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = StartLocation;
-			*(Vector*)(params + 12) = StartVelocity;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = StartLocation;
+			*(Object::Vector*)&params[12] = StartVelocity;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -9,12 +9,10 @@ namespace UnrealScript
 		float CalculateHijackMetric(class TrProj_TrackingMissile* Tracker)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_HavocPilot.CalculateHijackMetric");
-			byte* params = (byte*)malloc(8);
-			*(class TrProj_TrackingMissile**)params = Tracker;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class TrProj_TrackingMissile**)&params[0] = Tracker;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		void PostBeginPlay()
 		{

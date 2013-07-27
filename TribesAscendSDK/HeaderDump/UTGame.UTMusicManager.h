@@ -2,44 +2,57 @@
 #include "Engine.Info.h"
 #include "UTGame.UTPlayerController.h"
 #include "Engine.SoundCue.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTMusicManager." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTMusicManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTMusicManager : public Info
 	{
 	public:
-		ADD_VAR(::FloatProperty, MusicStartTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastBeat, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, CurrentState, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MusicVolume, 0xFFFFFFFF)
-		ADD_OBJECT(UTPlayerController, PlayerOwner)
-		ADD_VAR(::FloatProperty, CurrTempo, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrFadeFactor, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PendingEvent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PendingEventPlayTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PendingEventDelay, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bPendingAction, 0x1)
-		ADD_VAR(::FloatProperty, LastActionEventTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, StingerVolumeMultiplier, 0xFFFFFFFF)
+		enum EMusicState : byte
+		{
+			MST_Ambient = 0,
+			MST_Tension = 1,
+			MST_Suspense = 2,
+			MST_Action = 3,
+			MST_Victory = 4,
+			MST_MAX = 5,
+		};
+		ADD_STRUCT(float, MusicStartTime, 476)
+		ADD_STRUCT(int, LastBeat, 480)
+		ADD_STRUCT(UTMusicManager::EMusicState, CurrentState, 512)
+		ADD_STRUCT(float, MusicVolume, 496)
+		ADD_OBJECT(UTPlayerController, PlayerOwner, 492)
+		ADD_STRUCT(float, CurrTempo, 484)
+		ADD_STRUCT(float, CurrFadeFactor, 488)
+		ADD_STRUCT(int, PendingEvent, 516)
+		ADD_STRUCT(float, PendingEventPlayTime, 520)
+		ADD_STRUCT(float, PendingEventDelay, 524)
+		ADD_BOOL(bPendingAction, 504, 0x1)
+		ADD_STRUCT(float, LastActionEventTime, 500)
+		ADD_STRUCT(float, StingerVolumeMultiplier, 508)
 		bool AlreadyInActionMusic()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.AlreadyInActionMusic");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void PostBeginPlay()
 		{
@@ -56,34 +69,30 @@ namespace UnrealScript
 void* AC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.IntroFinished");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = AC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = AC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* CreateNewTrack(class SoundCue* MusicCue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.CreateNewTrack");
-			byte* params = (byte*)malloc(8);
-			*(class SoundCue**)params = MusicCue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
+			byte params[8] = { NULL };
+			*(class SoundCue**)&params[0] = MusicCue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4);
-			free(params);
-			return returnVal;
+void**)&params[4];
 		}
 		void MusicEvent(int NewEventIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.MusicEvent");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = NewEventIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = NewEventIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessMusicEvent()
 		{
@@ -93,20 +102,19 @@ void**)(params + 4);
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ChangeTrack(byte NewState)
+		void ChangeTrack(UTMusicManager::EMusicState NewState)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.ChangeTrack");
-			byte* params = (byte*)malloc(1);
-			*params = NewState;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			*(UTMusicManager::EMusicState*)&params[0] = NewState;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

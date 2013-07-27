@@ -1,302 +1,301 @@
 #pragma once
 #include "Engine.MaterialInstanceConstant.h"
-#include "Core.Object.Color.h"
 #include "UTGame.UTHUDBase.h"
-#include "Core.Object.Vector2D.h"
+#include "Engine.Texture2D.h"
+#include "Engine.Font.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
-#include "Engine.Font.h"
-#include "Engine.Texture2D.h"
-#include "Core.Object.LinearColor.h"
-#include "Engine.UIRoot.TextureCoordinates.h"
+#include "Core.Object.h"
+#include "Engine.UIRoot.h"
 #include "UTGame.UTWeapon.h"
 #include "Engine.MaterialEffect.h"
 #include "Engine.Material.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.PlayerReplicationInfo.h"
-#include "Engine.Canvas.h"
-#include "Engine.HUD.HudLocalizedMessage.h"
+#include "Engine.HUD.h"
 #include "Engine.UIInteraction.h"
 #include "Engine.LocalPlayer.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.Canvas.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTHUD." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTHUD." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTHUD." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTHUD : public UTHUDBase
 	{
 	public:
-		ADD_OBJECT(Texture2D, AltHudTexture)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, WhiteLinearColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, TeamHUDColor, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bShowVehicleArmorCount, 0x40000)
-		ADD_VAR(::FloatProperty, TX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TY, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, GoldLinearColor, 0xFFFFFFFF)
-		ADD_OBJECT(Pawn, PawnOwner)
-		ADD_VAR(::FloatProperty, LastAmmoPickupTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastArmorPickupTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MessageOffset, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bIsFirstPlayer, 0x80000)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, BkgTexColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, BkgTexCoords, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, BkgTexture)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, SilverLinearColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DMLinearColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BlueLinearColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, RedLinearColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, AmmoBarColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, THeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BootHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BootWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BootY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BootX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HelmetHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HelmetWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HelmetY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HelmetX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ThighHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ThighWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ThighY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ThighX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VestHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VestWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VestY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VestX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DollHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DollWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DollOffsetY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DollOffsetX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, PawnDollBGCoords, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PlaceMarks, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, YouHaveLost, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, YouHaveWon, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FireToRespawnMessage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DeadMessage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, SpectatorMessage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PressFireToBegin, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, WaitingForMatch, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, WarmupString, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BlackBackgroundColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateRight, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateBubble, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateCenter, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateLeft, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, NameplateBubbleWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, NameplateWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DamageIndicatorSize, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, VehiclePosition, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastFragCount, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FragPulseTime, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, ScoringPosition, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PowerupTransitionTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PowerupYPos, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, PowerupDims, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, MapPosition, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AmmoPulseTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastAmmoCount, 0xFFFFFFFF)
-		ADD_OBJECT(UTWeapon, LastWeapon)
-		ADD_VAR(::FloatProperty, AmmoTextOffsetY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AmmoTextOffsetX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, AmmoBGCoords, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AmmoBarOffsetY, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, AmmoPosition, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorPulseTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastArmorAmount, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorTextY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorTextX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorIconY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorIconX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorBGOffsetY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ArmorBGOffsetX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, ArmorBGCoords, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthPulseTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastHealth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthTextY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthTextX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthIconY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthIconX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthBGOffsetY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthBGOffsetX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthOffsetX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, HealthBGCoords, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DollVisibility, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastDollUpdate, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, DollPosition, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, ClockPosition, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, HitEffectMaterialInstance)
-		ADD_OBJECT(MaterialEffect, HitEffect)
-		ADD_VAR(::FloatProperty, HitEffectFadeTime, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MaxHitEffectColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HitEffectIntensity, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, FadeParamName, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, PositionalParamName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FadeTime, 0xFFFFFFFF)
-		ADD_OBJECT(Material, BaseMaterial)
-		ADD_VAR(::IntProperty, MaxNoOfIndicators, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FullHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FullWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SafeRegionPct, 0xFFFFFFFF)
-		ADD_OBJECT(Weapon, LastSelectedWeapon)
-		ADD_VAR(::FloatProperty, OrderUpdateTime, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DisplayedOrders, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MapDefaultSize, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, MapBackground)
-		ADD_VAR(::FloatProperty, LastWeaponBarDrawnTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SelectedWeaponAmmoOffsetX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponAmmoOffsetY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponAmmoOffsetX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponAmmoThickness, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponAmmoLength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponYOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponYScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SelectedBoxScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponXOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponBarXOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponScaleSpeed, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, BouncedWeapon, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastHUDUpdateTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, EmptyWeaponAlpha, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OffWeaponAlpha, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SelectedWeaponAlpha, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BounceWeaponScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SelectedWeaponScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentWeaponScale, 0xFFFFFFFF)
-		ADD_OBJECT(UTWeapon, WeaponList)
-		ADD_VAR(::FloatProperty, WeaponBarY, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, TeamTextColor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HUDScaleY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HUDScaleX, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponBoxHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponBoxWidth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponBarScale, 0xFFFFFFFF)
-		ADD_OBJECT(UTPlayerReplicationInfo, CharPendingPRI)
-		ADD_OBJECT(UTPlayerReplicationInfo, CharPRI)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CharPortraitSize, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CharPortraitSlideTransitionTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CharPortraitSlideTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CharPortraitTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CharPortraitXPerc, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CharPortraitYPerc, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInstanceConstant, CharPortraitMI)
-		ADD_OBJECT(Material, CharPortraitMaterial)
-		ADD_VAR(::BoolProperty, bShowVehicle, 0x20000)
-		ADD_VAR(::BoolProperty, bShowLeaderboard, 0x10000)
-		ADD_VAR(::BoolProperty, bHasLeaderboard, 0x8000)
-		ADD_VAR(::BoolProperty, bShowFragCount, 0x4000)
-		ADD_VAR(::BoolProperty, bShowScoring, 0x2000)
-		ADD_VAR(::BoolProperty, bDisplayingPowerups, 0x1000)
-		ADD_VAR(::BoolProperty, bShowPowerups, 0x800)
-		ADD_VAR(::BoolProperty, bShowMap, 0x400)
-		ADD_VAR(::BoolProperty, bHasMap, 0x200)
-		ADD_VAR(::BoolProperty, bShowAmmo, 0x100)
-		ADD_VAR(::BoolProperty, bShowDoll, 0x80)
-		ADD_VAR(::BoolProperty, bShowClock, 0x40)
-		ADD_VAR(::BoolProperty, bFadeOutHitEffect, 0x20)
-		ADD_VAR(::BoolProperty, bNoWeaponNumbers, 0x10)
-		ADD_VAR(::BoolProperty, bOnlyShowWeaponBarIfChanging, 0x8)
-		ADD_VAR(::BoolProperty, bShowWeaponbar, 0x4)
-		ADD_VAR(::BoolProperty, bHudMessageRendered, 0x2)
-		ADD_VAR(::BoolProperty, bShowAllAI, 0x1)
-		ADD_OBJECT(UTPlayerReplicationInfo, UTOwnerPRI)
-		ADD_OBJECT(UTPawn, UTPawnOwner)
-		ADD_VAR(::FloatProperty, LastHealthPickupTime, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, GrayColor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, LC_White, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, UT3GHudTexture)
-		ADD_OBJECT(Texture2D, TalkingTexture)
-		ADD_OBJECT(ScriptClass, WeaponSwitchMessage)
-		void DrawTileCentered(class Texture2D* Tex, float XL, float YL, float U, float V, float UL, float VL, LinearColor C)
+		class DamageInfo
+		{
+		public:
+			ADD_OBJECT(MaterialInstanceConstant, MatConstant, 8)
+			ADD_STRUCT(float, FadeValue, 4)
+			ADD_STRUCT(float, FadeTime, 0)
+		};
+		ADD_OBJECT(Texture2D, AltHudTexture, 1528)
+		ADD_STRUCT(Object::LinearColor, WhiteLinearColor, 2612)
+		ADD_STRUCT(Object::LinearColor, TeamHUDColor, 1664)
+		ADD_BOOL(bShowVehicleArmorCount, 1584, 0x40000)
+		ADD_STRUCT(float, TX, 2540)
+		ADD_STRUCT(float, TY, 2544)
+		ADD_STRUCT(Object::LinearColor, GoldLinearColor, 2628)
+		ADD_OBJECT(Pawn, PawnOwner, 1572)
+		ADD_STRUCT(float, LastAmmoPickupTime, 1560)
+		ADD_STRUCT(float, LastArmorPickupTime, 1568)
+		ADD_STRUCT(float, MessageOffset, 1844)
+		ADD_BOOL(bIsFirstPlayer, 1584, 0x80000)
+		ADD_STRUCT(ScriptArray<class Font*>, HudFonts, 1588)
+		ADD_STRUCT(ScriptArray<UTHUD::DamageInfo>, DamageData, 1916)
+		ADD_STRUCT(Object::Color, BkgTexColor, 2680)
+		ADD_STRUCT(UIRoot::TextureCoordinates, BkgTexCoords, 2664)
+		ADD_OBJECT(Texture2D, BkgTexture, 2660)
+		ADD_STRUCT(Object::LinearColor, SilverLinearColor, 2644)
+		ADD_STRUCT(Object::LinearColor, DMLinearColor, 2596)
+		ADD_STRUCT(Object::LinearColor, BlueLinearColor, 2580)
+		ADD_STRUCT(Object::LinearColor, RedLinearColor, 2564)
+		ADD_STRUCT(Object::LinearColor, AmmoBarColor, 2548)
+		ADD_STRUCT(float, THeight, 2536)
+		ADD_STRUCT(float, BootHeight, 2532)
+		ADD_STRUCT(float, BootWidth, 2528)
+		ADD_STRUCT(float, BootY, 2524)
+		ADD_STRUCT(float, BootX, 2520)
+		ADD_STRUCT(float, HelmetHeight, 2516)
+		ADD_STRUCT(float, HelmetWidth, 2512)
+		ADD_STRUCT(float, HelmetY, 2508)
+		ADD_STRUCT(float, HelmetX, 2504)
+		ADD_STRUCT(float, ThighHeight, 2500)
+		ADD_STRUCT(float, ThighWidth, 2496)
+		ADD_STRUCT(float, ThighY, 2492)
+		ADD_STRUCT(float, ThighX, 2488)
+		ADD_STRUCT(float, VestHeight, 2484)
+		ADD_STRUCT(float, VestWidth, 2480)
+		ADD_STRUCT(float, VestY, 2476)
+		ADD_STRUCT(float, VestX, 2472)
+		ADD_STRUCT(float, DollHeight, 2468)
+		ADD_STRUCT(float, DollWidth, 2464)
+		ADD_STRUCT(float, DollOffsetY, 2460)
+		ADD_STRUCT(float, DollOffsetX, 2456)
+		ADD_STRUCT(UIRoot::TextureCoordinates, PawnDollBGCoords, 2440)
+		ADD_STRUCT(ScriptString*, PlaceMarks, 2392)
+		ADD_STRUCT(ScriptString*, YouHaveLost, 2380)
+		ADD_STRUCT(ScriptString*, YouHaveWon, 2368)
+		ADD_STRUCT(ScriptString*, FireToRespawnMessage, 2356)
+		ADD_STRUCT(ScriptString*, DeadMessage, 2344)
+		ADD_STRUCT(ScriptString*, SpectatorMessage, 2332)
+		ADD_STRUCT(ScriptString*, PressFireToBegin, 2320)
+		ADD_STRUCT(ScriptString*, WaitingForMatch, 2308)
+		ADD_STRUCT(ScriptString*, WarmupString, 2296)
+		ADD_STRUCT(Object::LinearColor, BlackBackgroundColor, 2280)
+		ADD_STRUCT(UIRoot::TextureCoordinates, NameplateRight, 2264)
+		ADD_STRUCT(UIRoot::TextureCoordinates, NameplateBubble, 2248)
+		ADD_STRUCT(UIRoot::TextureCoordinates, NameplateCenter, 2232)
+		ADD_STRUCT(UIRoot::TextureCoordinates, NameplateLeft, 2216)
+		ADD_STRUCT(float, NameplateBubbleWidth, 2212)
+		ADD_STRUCT(float, NameplateWidth, 2208)
+		ADD_STRUCT(float, DamageIndicatorSize, 2204)
+		ADD_STRUCT(Object::Vector2D, VehiclePosition, 2196)
+		ADD_STRUCT(int, LastFragCount, 2192)
+		ADD_STRUCT(float, FragPulseTime, 2188)
+		ADD_STRUCT(Object::Vector2D, ScoringPosition, 2180)
+		ADD_STRUCT(float, PowerupTransitionTime, 2176)
+		ADD_STRUCT(float, PowerupYPos, 2172)
+		ADD_STRUCT(Object::Vector2D, PowerupDims, 2164)
+		ADD_STRUCT(Object::Vector2D, MapPosition, 2156)
+		ADD_STRUCT(float, AmmoPulseTime, 2152)
+		ADD_STRUCT(int, LastAmmoCount, 2148)
+		ADD_OBJECT(UTWeapon, LastWeapon, 2144)
+		ADD_STRUCT(float, AmmoTextOffsetY, 2140)
+		ADD_STRUCT(float, AmmoTextOffsetX, 2136)
+		ADD_STRUCT(UIRoot::TextureCoordinates, AmmoBGCoords, 2120)
+		ADD_STRUCT(float, AmmoBarOffsetY, 2116)
+		ADD_STRUCT(Object::Vector2D, AmmoPosition, 2108)
+		ADD_STRUCT(float, ArmorPulseTime, 2104)
+		ADD_STRUCT(int, LastArmorAmount, 2100)
+		ADD_STRUCT(float, ArmorTextY, 2096)
+		ADD_STRUCT(float, ArmorTextX, 2092)
+		ADD_STRUCT(float, ArmorIconY, 2088)
+		ADD_STRUCT(float, ArmorIconX, 2084)
+		ADD_STRUCT(float, ArmorBGOffsetY, 2080)
+		ADD_STRUCT(float, ArmorBGOffsetX, 2076)
+		ADD_STRUCT(UIRoot::TextureCoordinates, ArmorBGCoords, 2060)
+		ADD_STRUCT(float, HealthPulseTime, 2056)
+		ADD_STRUCT(int, LastHealth, 2052)
+		ADD_STRUCT(float, HealthTextY, 2048)
+		ADD_STRUCT(float, HealthTextX, 2044)
+		ADD_STRUCT(float, HealthIconY, 2040)
+		ADD_STRUCT(float, HealthIconX, 2036)
+		ADD_STRUCT(float, HealthBGOffsetY, 2032)
+		ADD_STRUCT(float, HealthBGOffsetX, 2028)
+		ADD_STRUCT(float, HealthOffsetX, 2024)
+		ADD_STRUCT(UIRoot::TextureCoordinates, HealthBGCoords, 2008)
+		ADD_STRUCT(float, DollVisibility, 2004)
+		ADD_STRUCT(float, LastDollUpdate, 2000)
+		ADD_STRUCT(Object::Vector2D, DollPosition, 1992)
+		ADD_STRUCT(Object::Vector2D, ClockPosition, 1984)
+		ADD_OBJECT(MaterialInstanceConstant, HitEffectMaterialInstance, 1980)
+		ADD_OBJECT(MaterialEffect, HitEffect, 1976)
+		ADD_STRUCT(float, HitEffectFadeTime, 1972)
+		ADD_STRUCT(Object::LinearColor, MaxHitEffectColor, 1956)
+		ADD_STRUCT(float, HitEffectIntensity, 1952)
+		ADD_STRUCT(ScriptName, FadeParamName, 1944)
+		ADD_STRUCT(ScriptName, PositionalParamName, 1936)
+		ADD_STRUCT(float, FadeTime, 1932)
+		ADD_OBJECT(Material, BaseMaterial, 1928)
+		ADD_STRUCT(int, MaxNoOfIndicators, 1912)
+		ADD_STRUCT(float, FullHeight, 1908)
+		ADD_STRUCT(float, FullWidth, 1904)
+		ADD_STRUCT(float, SafeRegionPct, 1900)
+		ADD_OBJECT(Weapon, LastSelectedWeapon, 1896)
+		ADD_STRUCT(float, OrderUpdateTime, 1892)
+		ADD_STRUCT(ScriptString*, DisplayedOrders, 1880)
+		ADD_STRUCT(float, MapDefaultSize, 1876)
+		ADD_OBJECT(Texture2D, MapBackground, 1872)
+		ADD_STRUCT(float, LastWeaponBarDrawnTime, 1840)
+		ADD_STRUCT(float, SelectedWeaponAmmoOffsetX, 1836)
+		ADD_STRUCT(float, WeaponAmmoOffsetY, 1832)
+		ADD_STRUCT(float, WeaponAmmoOffsetX, 1828)
+		ADD_STRUCT(float, WeaponAmmoThickness, 1824)
+		ADD_STRUCT(float, WeaponAmmoLength, 1820)
+		ADD_STRUCT(float, WeaponYOffset, 1816)
+		ADD_STRUCT(float, WeaponYScale, 1812)
+		ADD_STRUCT(float, SelectedBoxScale, 1808)
+		ADD_STRUCT(float, WeaponXOffset, 1804)
+		ADD_STRUCT(float, WeaponBarXOffset, 1800)
+		ADD_STRUCT(float, WeaponScaleSpeed, 1796)
+		ADD_STRUCT(int, BouncedWeapon, 1792)
+		ADD_STRUCT(float, LastHUDUpdateTime, 1788)
+		ADD_STRUCT(float, EmptyWeaponAlpha, 1784)
+		ADD_STRUCT(float, OffWeaponAlpha, 1780)
+		ADD_STRUCT(float, SelectedWeaponAlpha, 1776)
+		ADD_STRUCT(float, BounceWeaponScale, 1772)
+		ADD_STRUCT(float, SelectedWeaponScale, 1768)
+		ADD_STRUCT(float, CurrentWeaponScale, 1728)
+		ADD_OBJECT(UTWeapon, WeaponList, 1688)
+		ADD_STRUCT(float, WeaponBarY, 1684)
+		ADD_STRUCT(Object::Color, TeamTextColor, 1680)
+		ADD_STRUCT(float, HUDScaleY, 1660)
+		ADD_STRUCT(float, HUDScaleX, 1656)
+		ADD_STRUCT(float, WeaponBoxHeight, 1652)
+		ADD_STRUCT(float, WeaponBoxWidth, 1648)
+		ADD_STRUCT(float, WeaponBarScale, 1644)
+		ADD_OBJECT(UTPlayerReplicationInfo, CharPendingPRI, 1640)
+		ADD_OBJECT(UTPlayerReplicationInfo, CharPRI, 1636)
+		ADD_STRUCT(Object::Vector2D, CharPortraitSize, 1628)
+		ADD_STRUCT(float, CharPortraitSlideTransitionTime, 1624)
+		ADD_STRUCT(float, CharPortraitSlideTime, 1620)
+		ADD_STRUCT(float, CharPortraitTime, 1616)
+		ADD_STRUCT(float, CharPortraitXPerc, 1612)
+		ADD_STRUCT(float, CharPortraitYPerc, 1608)
+		ADD_OBJECT(MaterialInstanceConstant, CharPortraitMI, 1604)
+		ADD_OBJECT(Material, CharPortraitMaterial, 1600)
+		ADD_BOOL(bShowVehicle, 1584, 0x20000)
+		ADD_BOOL(bShowLeaderboard, 1584, 0x10000)
+		ADD_BOOL(bHasLeaderboard, 1584, 0x8000)
+		ADD_BOOL(bShowFragCount, 1584, 0x4000)
+		ADD_BOOL(bShowScoring, 1584, 0x2000)
+		ADD_BOOL(bDisplayingPowerups, 1584, 0x1000)
+		ADD_BOOL(bShowPowerups, 1584, 0x800)
+		ADD_BOOL(bShowMap, 1584, 0x400)
+		ADD_BOOL(bHasMap, 1584, 0x200)
+		ADD_BOOL(bShowAmmo, 1584, 0x100)
+		ADD_BOOL(bShowDoll, 1584, 0x80)
+		ADD_BOOL(bShowClock, 1584, 0x40)
+		ADD_BOOL(bFadeOutHitEffect, 1584, 0x20)
+		ADD_BOOL(bNoWeaponNumbers, 1584, 0x10)
+		ADD_BOOL(bOnlyShowWeaponBarIfChanging, 1584, 0x8)
+		ADD_BOOL(bShowWeaponbar, 1584, 0x4)
+		ADD_BOOL(bHudMessageRendered, 1584, 0x2)
+		ADD_BOOL(bShowAllAI, 1584, 0x1)
+		ADD_OBJECT(UTPlayerReplicationInfo, UTOwnerPRI, 1580)
+		ADD_OBJECT(UTPawn, UTPawnOwner, 1576)
+		ADD_STRUCT(float, LastHealthPickupTime, 1564)
+		ADD_STRUCT(Object::Color, GrayColor, 1556)
+		ADD_STRUCT(Object::LinearColor, LC_White, 1540)
+		ADD_OBJECT(Texture2D, UT3GHudTexture, 1536)
+		ADD_OBJECT(Texture2D, TalkingTexture, 1532)
+		ADD_OBJECT(ScriptClass, WeaponSwitchMessage, 1524)
+		void DrawTileCentered(class Texture2D* Tex, float XL, float YL, float U, float V, float UL, float VL, Object::LinearColor C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawTileCentered");
-			byte* params = (byte*)malloc(44);
-			*(class Texture2D**)params = Tex;
-			*(float*)(params + 4) = XL;
-			*(float*)(params + 8) = YL;
-			*(float*)(params + 12) = U;
-			*(float*)(params + 16) = V;
-			*(float*)(params + 20) = UL;
-			*(float*)(params + 24) = VL;
-			*(LinearColor*)(params + 28) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[44] = { NULL };
+			*(class Texture2D**)&params[0] = Tex;
+			*(float*)&params[4] = XL;
+			*(float*)&params[8] = YL;
+			*(float*)&params[12] = U;
+			*(float*)&params[16] = V;
+			*(float*)&params[20] = UL;
+			*(float*)&params[24] = VL;
+			*(Object::LinearColor*)&params[28] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetDisplayedOrders(ScriptArray<wchar_t> OrderText)
+		void SetDisplayedOrders(ScriptString* OrderText)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.SetDisplayedOrders");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = OrderText;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = OrderText;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.PostBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Message(class PlayerReplicationInfo* PRI, ScriptArray<wchar_t> msg, ScriptName MsgType, float Lifetime)
+		void Message(class PlayerReplicationInfo* PRI, ScriptString* msg, ScriptName MsgType, float Lifetime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.Message");
-			byte* params = (byte*)malloc(28);
-			*(class PlayerReplicationInfo**)params = PRI;
-			*(ScriptArray<wchar_t>*)(params + 4) = msg;
-			*(ScriptName*)(params + 16) = MsgType;
-			*(float*)(params + 24) = Lifetime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(ScriptString**)&params[4] = msg;
+			*(ScriptName*)&params[16] = MsgType;
+			*(float*)&params[24] = Lifetime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Vector2D ResolveHUDPosition(Vector2D Position, float Width, float Height)
+		Object::Vector2D ResolveHUDPosition(Object::Vector2D Position, float Width, float Height)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ResolveHUDPosition");
-			byte* params = (byte*)malloc(24);
-			*(Vector2D*)params = Position;
-			*(float*)(params + 8) = Width;
-			*(float*)(params + 12) = Height;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector2D*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(Object::Vector2D*)&params[0] = Position;
+			*(float*)&params[8] = Width;
+			*(float*)&params[12] = Height;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector2D*)&params[16];
 		}
-		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, HudLocalizedMessage& InMessage)
+		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, HUD::HudLocalizedMessage& InMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetScreenCoords");
-			byte* params = (byte*)malloc(76);
-			*(float*)params = PosY;
-			*(float*)(params + 4) = ScreenX;
-			*(float*)(params + 8) = ScreenY;
-			*(HudLocalizedMessage*)(params + 12) = InMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ScreenX = *(float*)(params + 4);
-			ScreenY = *(float*)(params + 8);
-			InMessage = *(HudLocalizedMessage*)(params + 12);
-			free(params);
+			byte params[76] = { NULL };
+			*(float*)&params[0] = PosY;
+			*(float*)&params[4] = ScreenX;
+			*(float*)&params[8] = ScreenY;
+			*(HUD::HudLocalizedMessage*)&params[12] = InMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ScreenX = *(float*)&params[4];
+			ScreenY = *(float*)&params[8];
+			InMessage = *(HUD::HudLocalizedMessage*)&params[12];
 		}
-		void DrawMessageText(HudLocalizedMessage LocalMessage, float ScreenX, float ScreenY)
+		void DrawMessageText(HUD::HudLocalizedMessage LocalMessage, float ScreenX, float ScreenY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawMessageText");
-			byte* params = (byte*)malloc(72);
-			*(HudLocalizedMessage*)params = LocalMessage;
-			*(float*)(params + 64) = ScreenX;
-			*(float*)(params + 68) = ScreenY;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[72] = { NULL };
+			*(HUD::HudLocalizedMessage*)&params[0] = LocalMessage;
+			*(float*)&params[64] = ScreenX;
+			*(float*)&params[68] = ScreenY;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender()
 		{
@@ -351,48 +350,43 @@ namespace UnrealScript
 		class UIInteraction* GetUIController(class LocalPlayer*& LP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetUIController");
-			byte* params = (byte*)malloc(8);
-			*(class LocalPlayer**)params = LP;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			LP = *(class LocalPlayer**)params;
-			auto returnVal = *(class UIInteraction**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class LocalPlayer**)&params[0] = LP;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			LP = *(class LocalPlayer**)&params[0];
+			return *(class UIInteraction**)&params[4];
 		}
 		void StartMusic()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.StartMusic");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void GetTeamColor(int TeamIndex, LinearColor& ImageColor, Color& TextColor)
+		void GetTeamColor(int TeamIndex, Object::LinearColor& ImageColor, Object::Color& TextColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetTeamColor");
-			byte* params = (byte*)malloc(24);
-			*(int*)params = TeamIndex;
-			*(LinearColor*)(params + 4) = ImageColor;
-			*(Color*)(params + 20) = TextColor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ImageColor = *(LinearColor*)(params + 4);
-			TextColor = *(Color*)(params + 20);
-			free(params);
+			byte params[24] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			*(Object::LinearColor*)&params[4] = ImageColor;
+			*(Object::Color*)&params[20] = TextColor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ImageColor = *(Object::LinearColor*)&params[4];
+			TextColor = *(Object::Color*)&params[20];
 		}
-		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
+		void DisplayHit(Object::Vector HitDir, int Damage, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayHit");
-			byte* params = (byte*)malloc(20);
-			*(Vector*)params = HitDir;
-			*(int*)(params + 12) = Damage;
-			*(ScriptClass**)(params + 16) = DamageType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(Object::Vector*)&params[0] = HitDir;
+			*(int*)&params[12] = Damage;
+			*(ScriptClass**)&params[16] = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FlashDamage(float FlashPosition)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.FlashDamage");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = FlashPosition;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = FlashPosition;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDamage()
 		{
@@ -404,90 +398,81 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayDamage");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DrawBackground(float X, float Y, float Width, float Height, LinearColor DrawColor, class Canvas* DrawCanvas)
+		void DrawBackground(float X, float Y, float Width, float Height, Object::LinearColor DrawColor, class Canvas* DrawCanvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBackground");
-			byte* params = (byte*)malloc(36);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			*(float*)(params + 8) = Width;
-			*(float*)(params + 12) = Height;
-			*(LinearColor*)(params + 16) = DrawColor;
-			*(class Canvas**)(params + 32) = DrawCanvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			*(float*)&params[8] = Width;
+			*(float*)&params[12] = Height;
+			*(Object::LinearColor*)&params[16] = DrawColor;
+			*(class Canvas**)&params[32] = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawBeaconBackground(float X, float Y, float Width, float Height, LinearColor DrawColor, class Canvas* DrawCanvas)
+		void DrawBeaconBackground(float X, float Y, float Width, float Height, Object::LinearColor DrawColor, class Canvas* DrawCanvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBeaconBackground");
-			byte* params = (byte*)malloc(36);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			*(float*)(params + 8) = Width;
-			*(float*)(params + 12) = Height;
-			*(LinearColor*)(params + 16) = DrawColor;
-			*(class Canvas**)(params + 32) = DrawCanvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			*(float*)&params[8] = Width;
+			*(float*)&params[12] = Height;
+			*(Object::LinearColor*)&params[16] = DrawColor;
+			*(class Canvas**)&params[32] = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawHealth(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, byte Alpha)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawHealth");
-			byte* params = (byte*)malloc(25);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			*(float*)(params + 8) = Width;
-			*(float*)(params + 12) = MaxWidth;
-			*(float*)(params + 16) = Height;
-			*(class Canvas**)(params + 20) = DrawCanvas;
-			*(params + 24) = Alpha;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[25] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			*(float*)&params[8] = Width;
+			*(float*)&params[12] = MaxWidth;
+			*(float*)&params[16] = Height;
+			*(class Canvas**)&params[20] = DrawCanvas;
+			params[24] = Alpha;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, Color BarColor, Color BackColor)
+		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, Object::Color BarColor, Object::Color BackColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBarGraph");
-			byte* params = (byte*)malloc(32);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			*(float*)(params + 8) = Width;
-			*(float*)(params + 12) = MaxWidth;
-			*(float*)(params + 16) = Height;
-			*(class Canvas**)(params + 20) = DrawCanvas;
-			*(Color*)(params + 24) = BarColor;
-			*(Color*)(params + 28) = BackColor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			*(float*)&params[8] = Width;
+			*(float*)&params[12] = MaxWidth;
+			*(float*)&params[16] = Height;
+			*(class Canvas**)&params[20] = DrawCanvas;
+			*(Object::Color*)&params[24] = BarColor;
+			*(Object::Color*)&params[28] = BackColor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> FormatTime(int Seconds)
+		ScriptString* FormatTime(int Seconds)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.FormatTime");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Seconds;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Seconds;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		class Font* GetFontSizeIndex(int FontSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetFontSizeIndex");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = FontSize;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Font**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = FontSize;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Font**)&params[4];
 		}
 		void ShowPortrait(class UTPlayerReplicationInfo* ShowPRI, float PortraitDuration, bool bOverrideCurrentSpeaker)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ShowPortrait");
-			byte* params = (byte*)malloc(12);
-			*(class UTPlayerReplicationInfo**)params = ShowPRI;
-			*(float*)(params + 4) = PortraitDuration;
-			*(bool*)(params + 8) = bOverrideCurrentSpeaker;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = ShowPRI;
+			*(float*)&params[4] = PortraitDuration;
+			*(bool*)&params[8] = bOverrideCurrentSpeaker;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HidePortrait()
 		{
@@ -497,20 +482,18 @@ namespace UnrealScript
 		void DisplayPortrait(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPortrait");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DisplayHUDMessage(ScriptArray<wchar_t> Message, float XOffsetPct, float YOffsetPct)
+		void DisplayHUDMessage(ScriptString* Message, float XOffsetPct, float YOffsetPct)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayHUDMessage");
-			byte* params = (byte*)malloc(20);
-			*(ScriptArray<wchar_t>*)params = Message;
-			*(float*)(params + 12) = XOffsetPct;
-			*(float*)(params + 16) = YOffsetPct;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptString**)&params[0] = Message;
+			*(float*)&params[12] = XOffsetPct;
+			*(float*)&params[16] = YOffsetPct;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayClock()
 		{
@@ -525,10 +508,9 @@ namespace UnrealScript
 		void DisplayAmmo(class UTWeapon* Weapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayAmmo");
-			byte* params = (byte*)malloc(4);
-			*(class UTWeapon**)params = Weapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTWeapon**)&params[0] = Weapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayPowerups()
 		{
@@ -540,32 +522,29 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayScoring");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DisplayFragCount(Vector2D pos)
+		void DisplayFragCount(Object::Vector2D pos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayFragCount");
-			byte* params = (byte*)malloc(8);
-			*(Vector2D*)params = pos;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(Object::Vector2D*)&params[0] = pos;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawNameplateBackground(Vector2D pos, float WordWidth, LinearColor NameplateColor, float WordHeight)
+		void DrawNameplateBackground(Object::Vector2D pos, float WordWidth, Object::LinearColor NameplateColor, float WordHeight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawNameplateBackground");
-			byte* params = (byte*)malloc(32);
-			*(Vector2D*)params = pos;
-			*(float*)(params + 8) = WordWidth;
-			*(LinearColor*)(params + 12) = NameplateColor;
-			*(float*)(params + 28) = WordHeight;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(Object::Vector2D*)&params[0] = pos;
+			*(float*)&params[8] = WordWidth;
+			*(Object::LinearColor*)&params[12] = NameplateColor;
+			*(float*)&params[28] = WordHeight;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DisplayLeaderBoard(Vector2D pos)
+		void DisplayLeaderBoard(Object::Vector2D pos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayLeaderBoard");
-			byte* params = (byte*)malloc(8);
-			*(Vector2D*)params = pos;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(Object::Vector2D*)&params[0] = pos;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayConsoleMessages()
 		{
@@ -574,6 +553,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

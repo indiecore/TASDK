@@ -1,17 +1,15 @@
 #pragma once
 #include "Engine.SequenceAction.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqAct_EnterVehicle." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTSeqAct_EnterVehicle : public SequenceAction
 	{
 	public:
-		ADD_VAR(::IntProperty, SeatIndex, 0xFFFFFFFF)
+		ADD_STRUCT(int, SeatIndex, 232)
 		void Activated()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_EnterVehicle.Activated");
@@ -19,4 +17,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

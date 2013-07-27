@@ -9,13 +9,11 @@ namespace UnrealScript
 		bool GoUntilBust(class Pawn* P, int InMaxPathVisits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Goal_Null.GoUntilBust");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = P;
-			*(int*)(params + 4) = InMaxPathVisits;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(int*)&params[4] = InMaxPathVisits;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void Recycle()
 		{

@@ -1,23 +1,27 @@
 #pragma once
 #include "Engine.SequenceAction.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_ToggleCinematicMode." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class SeqAct_ToggleCinematicMode : public SequenceAction
 	{
 	public:
-		ADD_VAR(::BoolProperty, bHidePlayer, 0x4)
-		ADD_VAR(::BoolProperty, bHideHUD, 0x10)
-		ADD_VAR(::BoolProperty, bDisableMovement, 0x1)
-		ADD_VAR(::BoolProperty, bDisableTurning, 0x2)
-		ADD_VAR(::BoolProperty, bDisableInput, 0x8)
-		ADD_VAR(::BoolProperty, bDroppedPickups, 0x40)
-		ADD_VAR(::BoolProperty, bDeadBodies, 0x20)
+		ADD_BOOL(bHidePlayer, 232, 0x4)
+		ADD_BOOL(bHideHUD, 232, 0x10)
+		ADD_BOOL(bDisableMovement, 232, 0x1)
+		ADD_BOOL(bDisableTurning, 232, 0x2)
+		ADD_BOOL(bDisableInput, 232, 0x8)
+		ADD_BOOL(bDroppedPickups, 232, 0x40)
+		ADD_BOOL(bDeadBodies, 232, 0x20)
 		void Activated()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ToggleCinematicMode.Activated");
@@ -25,4 +29,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

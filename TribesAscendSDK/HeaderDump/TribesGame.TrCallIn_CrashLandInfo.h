@@ -1,54 +1,52 @@
 #pragma once
 #include "TribesGame.TrPawn.h"
 #include "Engine.Info.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCallIn_CrashLandInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrCallIn_CrashLandInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrCallIn_CrashLandInfo." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrCallIn_CrashLandInfo : public Info
 	{
 	public:
-		ADD_VAR(::FloatProperty, MomentumTransfer, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Damage, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DamageRadius, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, DamageTypeClass)
-		ADD_STRUCT(::VectorProperty, r_CrashLandNormal, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, r_CrashLandPoint, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, r_fCrashLandTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, r_bPodLanded, 0x1)
-		ADD_OBJECT(Controller, m_Owner)
-		ADD_OBJECT(ScriptClass, m_ItemToDeploy)
-		bool SpawnCrashLandInfo(class Controller* Initializer, float CrashLandTime, Vector CrashLandPoint, Vector CrashLandNormal, ScriptClass* ItemInDeliveryPod)
+		ADD_STRUCT(float, MomentumTransfer, 528)
+		ADD_STRUCT(float, Damage, 524)
+		ADD_STRUCT(float, DamageRadius, 520)
+		ADD_OBJECT(ScriptClass, DamageTypeClass, 516)
+		ADD_STRUCT(Object::Vector, r_CrashLandNormal, 504)
+		ADD_STRUCT(Object::Vector, r_CrashLandPoint, 492)
+		ADD_STRUCT(float, r_fCrashLandTime, 488)
+		ADD_BOOL(r_bPodLanded, 484, 0x1)
+		ADD_OBJECT(Controller, m_Owner, 480)
+		ADD_OBJECT(ScriptClass, m_ItemToDeploy, 476)
+		bool SpawnCrashLandInfo(class Controller* Initializer, float CrashLandTime, Object::Vector CrashLandPoint, Object::Vector CrashLandNormal, ScriptClass* ItemInDeliveryPod)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.SpawnCrashLandInfo");
-			byte* params = (byte*)malloc(40);
-			*(class Controller**)params = Initializer;
-			*(float*)(params + 4) = CrashLandTime;
-			*(Vector*)(params + 8) = CrashLandPoint;
-			*(Vector*)(params + 20) = CrashLandNormal;
-			*(ScriptClass**)(params + 32) = ItemInDeliveryPod;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(class Controller**)&params[0] = Initializer;
+			*(float*)&params[4] = CrashLandTime;
+			*(Object::Vector*)&params[8] = CrashLandPoint;
+			*(Object::Vector*)&params[20] = CrashLandNormal;
+			*(ScriptClass**)&params[32] = ItemInDeliveryPod;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[36];
 		}
 		void PostBeginPlay()
 		{
@@ -68,10 +66,9 @@ namespace UnrealScript
 		void MoveSameTeamPawn(class TrPawn* PawnToMove)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.MoveSameTeamPawn");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = PawnToMove;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = PawnToMove;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PerformLandingDamage()
 		{
@@ -80,6 +77,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

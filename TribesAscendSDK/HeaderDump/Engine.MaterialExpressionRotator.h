@@ -1,29 +1,19 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
-#include "Engine.MaterialExpression.ExpressionInput.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionRotator." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialExpressionRotator." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class MaterialExpressionRotator : public MaterialExpression
 	{
 	public:
-		ADD_VAR(::FloatProperty, Speed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CenterY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CenterX, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Time, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Coordinate, 0xFFFFFFFF)
+		ADD_STRUCT(float, Speed, 172)
+		ADD_STRUCT(float, CenterY, 168)
+		ADD_STRUCT(float, CenterX, 164)
+		ADD_STRUCT(MaterialExpression::ExpressionInput, Time, 136)
+		ADD_STRUCT(MaterialExpression::ExpressionInput, Coordinate, 108)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

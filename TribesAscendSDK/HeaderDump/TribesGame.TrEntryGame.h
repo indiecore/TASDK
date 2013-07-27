@@ -10,17 +10,15 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryGame.SendMenuEngineLoaded");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptClass* SetGameType(ScriptArray<wchar_t> MapName, ScriptArray<wchar_t> Options, ScriptArray<wchar_t> Portal)
+		ScriptClass* SetGameType(ScriptString* MapName, ScriptString* Options, ScriptString* Portal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryGame.SetGameType");
-			byte* params = (byte*)malloc(40);
-			*(ScriptArray<wchar_t>*)params = MapName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Options;
-			*(ScriptArray<wchar_t>*)(params + 24) = Portal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptClass**)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(ScriptString**)&params[0] = MapName;
+			*(ScriptString**)&params[12] = Options;
+			*(ScriptString**)&params[24] = Portal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptClass**)&params[36];
 		}
 		void OnEngineHasLoaded()
 		{

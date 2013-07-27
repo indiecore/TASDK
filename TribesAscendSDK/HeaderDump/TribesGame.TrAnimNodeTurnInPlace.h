@@ -1,66 +1,84 @@
 #pragma once
 #include "Engine.AnimNodeBlend.h"
-#include "Core.Object.Rotator.h"
+#include "Core.Object.h"
+#include "TribesGame.TrAnimNodeAimOffset.h"
+#include "TribesGame.TrAnimNodeTurnInPlace_Player.h"
 #include "TribesGame.TrPawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAnimNodeTurnInPlace." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrAnimNodeTurnInPlace." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrAnimNodeTurnInPlace." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrAnimNodeTurnInPlace : public AnimNodeBlend
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, m_InterpRotation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTurnInterpTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fIgnoredTransitionTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_RemainingInterpolationTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fInterpolationTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fChooseNewTransitionPercent, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, m_ForcedTransitionAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTransitionThresholdAngle, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nCurrentTransitionIndex, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTransitionBlendTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fRelativeOffset, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nPitchOffset, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nYawOffset, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nLastRootBoneYaw, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPawnRotationRate, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nLastPawnPitch, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nLastPawnYaw, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bDisableAllTurning, 0x8000)
-		ADD_VAR(::BoolProperty, m_bConstrictIdleYawOffset, 0x4000)
-		ADD_VAR(::BoolProperty, m_bUse180ShortestRoute, 0x2000)
-		ADD_VAR(::BoolProperty, m_bUsePawnRotationAtZeroVelocity, 0x1000)
-		ADD_VAR(::BoolProperty, m_bTurnTowardsVelocity, 0x800)
-		ADD_VAR(::BoolProperty, m_bOnlyUpdateRotationWhenMoving, 0x400)
-		ADD_VAR(::BoolProperty, m_bIgnoreTransitionAnimations, 0x200)
-		ADD_VAR(::BoolProperty, m_bAlwaysUpdateYawOffset, 0x100)
-		ADD_VAR(::BoolProperty, m_bMirrorOffsetWhenPawnMirrored, 0x80)
-		ADD_VAR(::BoolProperty, m_bOverrideInterpolationTime, 0x40)
-		ADD_VAR(::BoolProperty, m_bCanChooseNewTransition, 0x20)
-		ADD_VAR(::BoolProperty, m_bPlayingTurnTransition, 0x10)
-		ADD_VAR(::BoolProperty, m_bDelayBlendOutToPlayAnim, 0x8)
-		ADD_VAR(::BoolProperty, m_bDisableRotation, 0x4)
-		ADD_VAR(::BoolProperty, m_bRootRotInitialized, 0x2)
-		ADD_VAR(::BoolProperty, m_bInitialized, 0x1)
-		ADD_OBJECT(TrPawn, m_TrPawn)
+		enum ForcedTransitionAngle : byte
+		{
+			FTA_NONE = 0,
+			FTA = 1,
+			FTA = 2,
+			FTA_MAX = 3,
+		};
+		class RotTransitionInfo
+		{
+		public:
+			ADD_STRUCT(ScriptName, TransName, 4)
+			ADD_STRUCT(float, RotationOffset, 0)
+		};
+		ADD_STRUCT(ScriptArray<class TrAnimNodeAimOffset*>, m_OffsetNodes, 296)
+		ADD_STRUCT(ScriptArray<TrAnimNodeTurnInPlace::RotTransitionInfo>, m_RotTransitions, 308)
+		ADD_STRUCT(ScriptArray<class TrAnimNodeTurnInPlace_Player*>, m_PlayerNodes, 348)
+		ADD_STRUCT(Object::Rotator, m_InterpRotation, 368)
+		ADD_STRUCT(float, m_fTurnInterpTime, 364)
+		ADD_STRUCT(float, m_fIgnoredTransitionTime, 360)
+		ADD_STRUCT(float, m_RemainingInterpolationTime, 344)
+		ADD_STRUCT(float, m_fInterpolationTime, 340)
+		ADD_STRUCT(float, m_fChooseNewTransitionPercent, 336)
+		ADD_STRUCT(TrAnimNodeTurnInPlace::ForcedTransitionAngle, m_ForcedTransitionAngle, 332)
+		ADD_STRUCT(float, m_fTransitionThresholdAngle, 328)
+		ADD_STRUCT(int, m_nCurrentTransitionIndex, 324)
+		ADD_STRUCT(float, m_fTransitionBlendTime, 320)
+		ADD_STRUCT(float, m_fRelativeOffset, 292)
+		ADD_STRUCT(int, m_nPitchOffset, 288)
+		ADD_STRUCT(int, m_nYawOffset, 284)
+		ADD_STRUCT(int, m_nLastRootBoneYaw, 280)
+		ADD_STRUCT(float, m_fPawnRotationRate, 276)
+		ADD_STRUCT(int, m_nLastPawnPitch, 272)
+		ADD_STRUCT(int, m_nLastPawnYaw, 268)
+		ADD_BOOL(m_bDisableAllTurning, 264, 0x8000)
+		ADD_BOOL(m_bConstrictIdleYawOffset, 264, 0x4000)
+		ADD_BOOL(m_bUse180ShortestRoute, 264, 0x2000)
+		ADD_BOOL(m_bUsePawnRotationAtZeroVelocity, 264, 0x1000)
+		ADD_BOOL(m_bTurnTowardsVelocity, 264, 0x800)
+		ADD_BOOL(m_bOnlyUpdateRotationWhenMoving, 264, 0x400)
+		ADD_BOOL(m_bIgnoreTransitionAnimations, 264, 0x200)
+		ADD_BOOL(m_bAlwaysUpdateYawOffset, 264, 0x100)
+		ADD_BOOL(m_bMirrorOffsetWhenPawnMirrored, 264, 0x80)
+		ADD_BOOL(m_bOverrideInterpolationTime, 264, 0x40)
+		ADD_BOOL(m_bCanChooseNewTransition, 264, 0x20)
+		ADD_BOOL(m_bPlayingTurnTransition, 264, 0x10)
+		ADD_BOOL(m_bDelayBlendOutToPlayAnim, 264, 0x8)
+		ADD_BOOL(m_bDisableRotation, 264, 0x4)
+		ADD_BOOL(m_bRootRotInitialized, 264, 0x2)
+		ADD_BOOL(m_bInitialized, 264, 0x1)
+		ADD_OBJECT(TrPawn, m_TrPawn, 260)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

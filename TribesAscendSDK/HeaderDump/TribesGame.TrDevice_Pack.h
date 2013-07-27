@@ -1,54 +1,56 @@
 #pragma once
 #include "TribesGame.TrDevice.h"
 #include "TribesGame.TrPawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_Pack." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDevice_Pack : public TrDevice
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_CachedPowerPoolCostPerSec, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fDefaultPowerPoolCostPerSec, 0xFFFFFFFF)
+		class PowerPoolCostInfo
+		{
+		public:
+			ADD_OBJECT(ScriptClass, m_TrFamilyInfo, 4)
+			ADD_STRUCT(float, m_fPowerPoolCostPerSec, 0)
+		};
+		ADD_STRUCT(ScriptArray<TrDevice_Pack::PowerPoolCostInfo>, m_PowerPoolInfo, 2152)
+		ADD_STRUCT(float, m_CachedPowerPoolCostPerSec, 2164)
+		ADD_STRUCT(float, m_fDefaultPowerPoolCostPerSec, 2148)
 		bool UsesPower()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.UsesPower");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		float GetPowerPool(class TrPawn* aPawn)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.GetPowerPool");
-			byte* params = (byte*)malloc(8);
-			*(class TrPawn**)params = aPawn;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class TrPawn**)&params[0] = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		bool CanBeActive()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.CanBeActive");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void ConsumePowerPool(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ConsumePowerPool");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleActivate()
 		{
@@ -78,27 +80,25 @@ namespace UnrealScript
 		void StartFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.StartFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.StopFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendToFiringState(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.SendToFiringState");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
+#undef ADD_OBJECT

@@ -1,17 +1,15 @@
 #pragma once
 #include "TribesGame.GFxTrScene.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrScene_EULA." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GFxTrScene_EULA : public GFxTrScene
 	{
 	public:
-		ADD_VAR(::StrProperty, EULA, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptString*, EULA, 132)
 		void LoadEULA()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.LoadEULA");
@@ -30,11 +28,10 @@ namespace UnrealScript
 		void EULAReponse(bool bAccepted)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.EULAReponse");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bAccepted;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bAccepted;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -1,52 +1,51 @@
 #pragma once
 #include "TribesGame.TrProjectile.h"
 #include "Engine.CameraAnim.h"
-#include "UDKBase.UDKPawn.MaterialSoundEffect.h"
 #include "Engine.SoundCue.h"
+#include "UDKBase.UDKPawn.h"
 #include "Engine.ParticleSystem.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_Lacerator." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrProj_Lacerator." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrProj_Lacerator." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrProj_Lacerator : public TrProjectile
 	{
 	public:
-		ADD_OBJECT(CameraAnim, ShortRangeKillAnim)
-		ADD_VAR(::BoolProperty, bShrinking, 0x2)
-		ADD_VAR(::BoolProperty, bCheckShortRangeKill, 0x1)
-		ADD_OBJECT(SoundCue, HitPawnSound)
-		ADD_STRUCT(::NonArithmeticProperty<MaterialSoundEffect>, DefaultHitSound, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, RockSmokeTemplate)
-		ADD_OBJECT(ParticleSystem, BounceTemplate)
-		ADD_VAR(::FloatProperty, ShrinkTimer, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DamageAttenuation, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Bounces, 0xFFFFFFFF)
-		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
+		ADD_OBJECT(CameraAnim, ShortRangeKillAnim, 860)
+		ADD_BOOL(bShrinking, 856, 0x2)
+		ADD_BOOL(bCheckShortRangeKill, 856, 0x1)
+		ADD_OBJECT(SoundCue, HitPawnSound, 852)
+		ADD_STRUCT(UDKPawn::MaterialSoundEffect, DefaultHitSound, 840)
+		ADD_OBJECT(ParticleSystem, RockSmokeTemplate, 832)
+		ADD_OBJECT(ParticleSystem, BounceTemplate, 828)
+		ADD_STRUCT(float, ShrinkTimer, 824)
+		ADD_STRUCT(float, DamageAttenuation, 820)
+		ADD_STRUCT(int, Bounces, 816)
+		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.InitProjectile");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = Direction;
-			*(ScriptClass**)(params + 12) = ClassToInherit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = Direction;
+			*(ScriptClass**)&params[12] = ClassToInherit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnFlightEffects()
 		{
@@ -58,69 +57,60 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.InternalSpawnFlightEffects");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		float GetDamage(class Actor* Other, Vector HitLocation)
+		float GetDamage(class Actor* Other, Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.GetDamage");
-			byte* params = (byte*)malloc(20);
-			*(class Actor**)params = Other;
-			*(Vector*)(params + 4) = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[16];
 		}
 		float GetMomentumTransfer()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.GetMomentumTransfer");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
-		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.ProcessTouch");
-			byte* params = (byte*)malloc(28);
-			*(class Actor**)params = Other;
-			*(Vector*)(params + 4) = HitLocation;
-			*(Vector*)(params + 16) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(Object::Vector*)&params[16] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Landed(Vector HitNormal, class Actor* FloorActor)
+		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.Landed");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitNormal;
-			*(class Actor**)(params + 12) = FloorActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitNormal;
+			*(class Actor**)&params[12] = FloorActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool SpawnImpactEffect(Vector HitLocation, Vector HitNormal)
+		bool SpawnImpactEffect(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.SpawnImpactEffect");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
-		void HitWall(Vector HitNormal, class Actor* Wall, 
+		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.HitWall");
-			byte* params = (byte*)malloc(20);
-			*(Vector*)params = HitNormal;
-			*(class Actor**)(params + 12) = Wall;
+			byte params[20] = { NULL };
+			*(Object::Vector*)&params[0] = HitNormal;
+			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 16) = WallComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[16] = WallComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartToShrink()
 		{
@@ -132,15 +122,14 @@ void**)(params + 16) = WallComp;
 void* PSC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Lacerator.MyOnParticleSystemFinished");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = PSC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = PSC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

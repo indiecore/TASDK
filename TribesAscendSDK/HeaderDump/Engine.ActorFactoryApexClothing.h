@@ -1,26 +1,19 @@
 #pragma once
+#include "Engine.ApexClothingAsset.h"
 #include "Engine.ActorFactorySkeletalMesh.h"
-#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ActorFactoryApexClothing." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ActorFactoryApexClothing." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Engine.PrimitiveComponent.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ActorFactoryApexClothing : public ActorFactorySkeletalMesh
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, ClothingRBCollideWithChannels, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, ClothingRBChannel, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<class ApexClothingAsset*>, ClothingAssets, 108)
+		ADD_STRUCT(PrimitiveComponent::RBCollisionChannelContainer, ClothingRBCollideWithChannels, 124)
+		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, ClothingRBChannel, 120)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

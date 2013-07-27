@@ -1,46 +1,43 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.MaterialInterface.h"
-#include "Core.Object.Guid.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SpeedTree." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SpeedTree." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SpeedTree." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SpeedTree : public Object
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, WindDirection, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WindStrength, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInterface, BillboardMaterial)
-		ADD_OBJECT(MaterialInterface, LeafMeshMaterial)
-		ADD_OBJECT(MaterialInterface, LeafCardMaterial)
-		ADD_OBJECT(MaterialInterface, FrondMaterial)
-		ADD_OBJECT(MaterialInterface, Branch2Material)
-		ADD_OBJECT(MaterialInterface, Branch1Material)
-		ADD_VAR(::FloatProperty, LeafStaticShadowOpacity, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SRH, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bLegacySpeedTree, 0x1)
+		ADD_STRUCT(Object::Guid, LightingGuid, 112)
+		ADD_STRUCT(Object::Vector, WindDirection, 100)
+		ADD_STRUCT(float, WindStrength, 96)
+		ADD_OBJECT(MaterialInterface, BillboardMaterial, 92)
+		ADD_OBJECT(MaterialInterface, LeafMeshMaterial, 88)
+		ADD_OBJECT(MaterialInterface, LeafCardMaterial, 84)
+		ADD_OBJECT(MaterialInterface, FrondMaterial, 80)
+		ADD_OBJECT(MaterialInterface, Branch2Material, 76)
+		ADD_OBJECT(MaterialInterface, Branch1Material, 72)
+		ADD_STRUCT(float, LeafStaticShadowOpacity, 68)
+		ADD_STRUCT(Object::Pointer, SRH, 64)
+		ADD_BOOL(bLegacySpeedTree, 60, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

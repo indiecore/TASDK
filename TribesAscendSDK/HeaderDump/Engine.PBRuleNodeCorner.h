@@ -1,24 +1,41 @@
 #pragma once
 #include "Engine.PBRuleNodeBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.ProcBuilding.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PBRuleNodeCorner." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class PBRuleNodeCorner : public PBRuleNodeBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, RoundCurvature, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, RoundTesselation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CornerShapeOffset, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, CornerType, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bUseAdjacentRulesetForRightGap, 0x2)
-		ADD_VAR(::BoolProperty, bNoMeshForConcaveCorners, 0x1)
-		ADD_VAR(::FloatProperty, FlatThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CornerSize, 0xFFFFFFFF)
+		class RBCornerAngleInfo
+		{
+		public:
+			ADD_STRUCT(float, CornerSize, 4)
+			ADD_STRUCT(float, Angle, 0)
+		};
+		ADD_STRUCT(ScriptArray<PBRuleNodeCorner::RBCornerAngleInfo>, Angles, 108)
+		ADD_STRUCT(float, RoundCurvature, 140)
+		ADD_STRUCT(int, RoundTesselation, 136)
+		ADD_STRUCT(float, CornerShapeOffset, 132)
+		ADD_STRUCT(ProcBuilding::EPBCornerType, CornerType, 128)
+		ADD_BOOL(bUseAdjacentRulesetForRightGap, 124, 0x2)
+		ADD_BOOL(bNoMeshForConcaveCorners, 124, 0x1)
+		ADD_STRUCT(float, FlatThreshold, 120)
+		ADD_STRUCT(float, CornerSize, 104)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

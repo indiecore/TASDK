@@ -1,49 +1,50 @@
 #pragma once
+#include "Engine.MaterialInstanceConstant.h"
 #include "UTGame.UTCarriedObject.h"
-#include "Core.Object.Vector.h"
-#include "Engine.ParticleSystem.h"
-#include "Engine.PlayerController.h"
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#include "Engine.ParticleSystem.h"
+#include "Engine.PlayerController.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTCTFFlag." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTCTFFlag." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTCTFFlag." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTCTFFlag : public UTCarriedObject
 	{
 	public:
-		ADD_VAR(::FloatProperty, LastLocationPingTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HoverboardingClothVelClamp, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, RunningClothVelClamp, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bWasClothEnabled, 0x10)
-		ADD_VAR(::BoolProperty, bRespawning, 0x8)
-		ADD_VAR(::BoolProperty, bFadingOut, 0x4)
-		ADD_VAR(::BoolProperty, bBringDownFromBright, 0x2)
-		ADD_VAR(::BoolProperty, bBringUpBright, 0x1)
-		ADD_OBJECT(ParticleSystem, RespawnEffect)
+		ADD_STRUCT(ScriptArray<class MaterialInstanceConstant*>, MICArray, 776)
+		ADD_STRUCT(float, LastLocationPingTime, 820)
+		ADD_STRUCT(Object::Vector, HoverboardingClothVelClamp, 800)
+		ADD_STRUCT(Object::Vector, RunningClothVelClamp, 788)
+		ADD_BOOL(bWasClothEnabled, 772, 0x10)
+		ADD_BOOL(bRespawning, 772, 0x8)
+		ADD_BOOL(bFadingOut, 772, 0x4)
+		ADD_BOOL(bBringDownFromBright, 772, 0x2)
+		ADD_BOOL(bBringUpBright, 772, 0x1)
+		ADD_OBJECT(ParticleSystem, RespawnEffect, 768)
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
@@ -53,10 +54,9 @@ namespace UnrealScript
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnBaseChainChanged()
 		{
@@ -66,12 +66,10 @@ namespace UnrealScript
 		bool ShouldMinimapRenderFor(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.ShouldMinimapRenderFor");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void ClientReturnedHome()
 		{
@@ -81,28 +79,24 @@ namespace UnrealScript
 		void SetHolder(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.SetHolder");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ValidHolder(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.ValidHolder");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void SameTeamTouch(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.SameTeamTouch");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CustomRespawnEffects()
 		{
@@ -122,11 +116,10 @@ namespace UnrealScript
 		void Drop(class Controller* Killer, bool bNoThrow)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFFlag.Drop");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = Killer;
-			*(bool*)(params + 4) = bNoThrow;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(bool*)&params[4] = bNoThrow;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFlagPropertiesToStationaryFlagState()
 		{
@@ -140,6 +133,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

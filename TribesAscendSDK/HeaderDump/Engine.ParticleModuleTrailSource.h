@@ -1,31 +1,43 @@
 #pragma once
 #include "Engine.ParticleModuleTrailBase.h"
-#include "Core.DistributionFloat.RawDistributionFloat.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#include "Core.DistributionFloat.h"
+#include "Engine.ParticleModule.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTrailSource." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleTrailSource." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleTrailSource : public ParticleModuleTrailBase
 	{
 	public:
-		ADD_VAR(::IntProperty, SourceOffsetCount, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bInheritRotation, 0x2)
-		ADD_VAR(::BoolProperty, bLockSourceStength, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, SourceStrength, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, SourceName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, SelectionMethod, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, SourceMethod, 0xFFFFFFFF)
+		enum ETrail2SourceMethod : byte
+		{
+			PET2SRCM_Default = 0,
+			PET2SRCM_Particle = 1,
+			PET2SRCM_Actor = 2,
+			PET2SRCM_MAX = 3,
+		};
+		ADD_STRUCT(ScriptArray<Object::Vector>, SourceOffsetDefaults, 120)
+		ADD_STRUCT(int, SourceOffsetCount, 116)
+		ADD_BOOL(bInheritRotation, 112, 0x2)
+		ADD_BOOL(bLockSourceStength, 112, 0x1)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, SourceStrength, 84)
+		ADD_STRUCT(ScriptName, SourceName, 76)
+		ADD_STRUCT(ParticleModule::EParticleSourceSelectionMethod, SelectionMethod, 73)
+		ADD_STRUCT(ParticleModuleTrailSource::ETrail2SourceMethod, SourceMethod, 72)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

@@ -1,41 +1,35 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "UDKBase.UDKVehicleBase.h"
 #include "UDKBase.UDKWeapon.h"
 #include "UDKBase.UDKVehicle.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKWeaponPawn." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKWeaponPawn." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKWeaponPawn : public UDKVehicleBase
 	{
 	public:
-		ADD_VAR(::IntProperty, MySeatIndex, 0xFFFFFFFF)
-		ADD_OBJECT(UDKWeapon, MyVehicleWeapon)
-		ADD_OBJECT(UDKVehicle, MyVehicle)
-		Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
+		ADD_STRUCT(int, MySeatIndex, 1556)
+		ADD_OBJECT(UDKWeapon, MyVehicleWeapon, 1552)
+		ADD_OBJECT(UDKVehicle, MyVehicle, 1548)
+		Object::Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeaponPawn.GetTargetLocation");
-			byte* params = (byte*)malloc(20);
-			*(class Actor**)params = RequestedBy;
-			*(bool*)(params + 4) = bRequestAlternateLoc;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class Actor**)&params[0] = RequestedBy;
+			*(bool*)&params[4] = bRequestAlternateLoc;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[8];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

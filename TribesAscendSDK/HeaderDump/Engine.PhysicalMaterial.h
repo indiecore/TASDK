@@ -1,90 +1,90 @@
 #pragma once
-#include "Engine.Actor.PhysEffectInfo.h"
+#include "Engine.Actor.h"
 #include "Core.Object.h"
 #include "Engine.PhysicalMaterialPropertyBase.h"
 #include "Engine.SoundCue.h"
-#include "Core.Object.Vector.h"
 #include "Engine.ParticleSystem.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PhysicalMaterial." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.PhysicalMaterial." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.PhysicalMaterial." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class PhysicalMaterial : public Object
 	{
 	public:
-		ADD_VAR(::IntProperty, MaterialIndex, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, FractureSoundSingle)
-		ADD_OBJECT(SoundCue, FractureSoundExplosion)
-		ADD_OBJECT(PhysicalMaterial, Parent)
-		ADD_OBJECT(PhysicalMaterialPropertyBase, PhysicalMaterialProperty)
-		ADD_VAR(::FloatProperty, Friction, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Restitution, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bForceConeFriction, 0x1)
-		ADD_VAR(::BoolProperty, bEnableAnisotropicFriction, 0x2)
-		ADD_STRUCT(::VectorProperty, AnisoFrictionDir, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FrictionV, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Density, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AngularDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MagneticResponse, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WindResponse, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ImpactThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ImpactReFireDelay, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, ImpactEffect)
-		ADD_OBJECT(SoundCue, ImpactSound)
-		ADD_VAR(::FloatProperty, SlideThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SlideReFireDelay, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, SlideEffect)
-		ADD_OBJECT(SoundCue, SlideSound)
-		PhysEffectInfo FindPhysEffectInfo(byte Type)
+		enum EPhysEffectType : byte
+		{
+			EPMET_Impact = 0,
+			EPMET_Slide = 1,
+			EPMET_MAX = 2,
+		};
+		ADD_STRUCT(int, MaterialIndex, 60)
+		ADD_OBJECT(SoundCue, FractureSoundSingle, 148)
+		ADD_OBJECT(SoundCue, FractureSoundExplosion, 144)
+		ADD_OBJECT(PhysicalMaterial, Parent, 152)
+		ADD_OBJECT(PhysicalMaterialPropertyBase, PhysicalMaterialProperty, 156)
+		ADD_STRUCT(float, Friction, 64)
+		ADD_STRUCT(float, Restitution, 68)
+		ADD_BOOL(bForceConeFriction, 72, 0x1)
+		ADD_BOOL(bEnableAnisotropicFriction, 72, 0x2)
+		ADD_STRUCT(Object::Vector, AnisoFrictionDir, 76)
+		ADD_STRUCT(float, FrictionV, 88)
+		ADD_STRUCT(float, Density, 92)
+		ADD_STRUCT(float, AngularDamping, 96)
+		ADD_STRUCT(float, LinearDamping, 100)
+		ADD_STRUCT(float, MagneticResponse, 104)
+		ADD_STRUCT(float, WindResponse, 108)
+		ADD_STRUCT(float, ImpactThreshold, 112)
+		ADD_STRUCT(float, ImpactReFireDelay, 116)
+		ADD_OBJECT(ParticleSystem, ImpactEffect, 120)
+		ADD_OBJECT(SoundCue, ImpactSound, 124)
+		ADD_STRUCT(float, SlideThreshold, 128)
+		ADD_STRUCT(float, SlideReFireDelay, 132)
+		ADD_OBJECT(ParticleSystem, SlideEffect, 136)
+		ADD_OBJECT(SoundCue, SlideSound, 140)
+		Actor::PhysEffectInfo FindPhysEffectInfo(PhysicalMaterial::EPhysEffectType Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindPhysEffectInfo");
-			byte* params = (byte*)malloc(17);
-			*params = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(PhysEffectInfo*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[17] = { NULL };
+			*(PhysicalMaterial::EPhysEffectType*)&params[0] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Actor::PhysEffectInfo*)&params[4];
 		}
 		void FindFractureSounds(class SoundCue*& OutSoundExplosion, class SoundCue*& OutSoundSingle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindFractureSounds");
-			byte* params = (byte*)malloc(8);
-			*(class SoundCue**)params = OutSoundExplosion;
-			*(class SoundCue**)(params + 4) = OutSoundSingle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutSoundExplosion = *(class SoundCue**)params;
-			OutSoundSingle = *(class SoundCue**)(params + 4);
-			free(params);
+			byte params[8] = { NULL };
+			*(class SoundCue**)&params[0] = OutSoundExplosion;
+			*(class SoundCue**)&params[4] = OutSoundSingle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutSoundExplosion = *(class SoundCue**)&params[0];
+			OutSoundSingle = *(class SoundCue**)&params[4];
 		}
 		class PhysicalMaterialPropertyBase* GetPhysicalMaterialProperty(ScriptClass* DesiredClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.GetPhysicalMaterialProperty");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = DesiredClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PhysicalMaterialPropertyBase**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = DesiredClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PhysicalMaterialPropertyBase**)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

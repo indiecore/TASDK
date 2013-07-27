@@ -1,34 +1,40 @@
 #pragma once
-#include "Engine.Emitter.CheckpointRecord.h"
+#include "Core.Object.h"
 #include "Engine.Actor.h"
 #include "Engine.SeqAct_Toggle.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.SeqAct_ParticleEventGenerator.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.Color.h"
 #include "Engine.SeqAct_SetParticleSysParam.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Emitter." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class Emitter : public Actor
 	{
 	public:
-		ADD_VAR(::BoolProperty, bCurrentlyActive, 0x4)
-		ADD_VAR(::BoolProperty, bPostUpdateTickGroup, 0x2)
-		ADD_VAR(::BoolProperty, bDestroyOnSystemFinish, 0x1)
+		class CheckpointRecord
+		{
+		public:
+			ADD_BOOL(bIsActive, 0, 0x1)
+		};
+		ADD_BOOL(bCurrentlyActive, 484, 0x4)
+		ADD_BOOL(bPostUpdateTickGroup, 484, 0x2)
+		ADD_BOOL(bDestroyOnSystemFinish, 484, 0x1)
 		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetTemplate");
-			byte* params = (byte*)malloc(8);
-			*(class ParticleSystem**)params = NewTemplate;
-			*(bool*)(params + 4) = bDestroyOnFinish;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class ParticleSystem**)&params[0] = NewTemplate;
+			*(bool*)&params[4] = bDestroyOnFinish;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
@@ -38,38 +44,34 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnParticleSystemFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* FinishedComponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.OnParticleSystemFinished");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = FinishedComponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = FinishedComponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.OnToggle");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Toggle**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Toggle**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnParticleEventGenerator(class SeqAct_ParticleEventGenerator* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.OnParticleEventGenerator");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_ParticleEventGenerator**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_ParticleEventGenerator**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShutDown()
 		{
@@ -79,85 +81,75 @@ void**)params = FinishedComponent;
 		void SetFloatParameter(ScriptName ParameterName, float Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetFloatParameter");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ParameterName;
-			*(float*)(params + 8) = Param;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(float*)&params[8] = Param;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetVectorParameter(ScriptName ParameterName, Vector Param)
+		void SetVectorParameter(ScriptName ParameterName, Object::Vector Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetVectorParameter");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = ParameterName;
-			*(Vector*)(params + 8) = Param;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::Vector*)&params[8] = Param;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetColorParameter(ScriptName ParameterName, Color Param)
+		void SetColorParameter(ScriptName ParameterName, Object::Color Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetColorParameter");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ParameterName;
-			*(Color*)(params + 8) = Param;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::Color*)&params[8] = Param;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetExtColorParameter(ScriptName ParameterName, byte Red, byte Green, byte Blue, byte Alpha)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetExtColorParameter");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ParameterName;
-			*(params + 8) = Red;
-			*(params + 9) = Green;
-			*(params + 10) = Blue;
-			*(params + 11) = Alpha;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			params[8] = Red;
+			params[9] = Green;
+			params[10] = Blue;
+			params[11] = Alpha;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActorParameter(ScriptName ParameterName, class Actor* Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetActorParameter");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ParameterName;
-			*(class Actor**)(params + 8) = Param;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(class Actor**)&params[8] = Param;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnSetParticleSysParam(class SeqAct_SetParticleSysParam* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.OnSetParticleSysParam");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_SetParticleSysParam**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_SetParticleSysParam**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldSaveForCheckpoint()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.ShouldSaveForCheckpoint");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		void CreateCheckpointRecord(CheckpointRecord& Record)
+		void CreateCheckpointRecord(Emitter::CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.CreateCheckpointRecord");
-			byte* params = (byte*)malloc(4);
-			*(CheckpointRecord*)params = Record;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(CheckpointRecord*)params;
-			free(params);
+			byte params[4] = { NULL };
+			*(Emitter::CheckpointRecord*)&params[0] = Record;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Record = *(Emitter::CheckpointRecord*)&params[0];
 		}
-		void ApplyCheckpointRecord(CheckpointRecord& Record)
+		void ApplyCheckpointRecord(Emitter::CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.ApplyCheckpointRecord");
-			byte* params = (byte*)malloc(4);
-			*(CheckpointRecord*)params = Record;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(CheckpointRecord*)params;
-			free(params);
+			byte params[4] = { NULL };
+			*(Emitter::CheckpointRecord*)&params[0] = Record;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Record = *(Emitter::CheckpointRecord*)&params[0];
 		}
 		void HideSelf()
 		{
@@ -166,4 +158,4 @@ void**)params = FinishedComponent;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

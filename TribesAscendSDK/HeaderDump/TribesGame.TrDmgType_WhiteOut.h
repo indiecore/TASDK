@@ -1,18 +1,16 @@
 #pragma once
 #include "TribesGame.TrDmgType_Explosive.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDmgType_WhiteOut." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrDmgType_WhiteOut : public TrDmgType_Explosive
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fWhiteoutInterpSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fWhiteoutTargetValue, 0xFFFFFFFF)
+		ADD_STRUCT(float, m_fWhiteoutInterpSpeed, 424)
+		ADD_STRUCT(float, m_fWhiteoutTargetValue, 428)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

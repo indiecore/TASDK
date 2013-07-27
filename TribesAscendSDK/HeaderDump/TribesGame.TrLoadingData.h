@@ -1,37 +1,39 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrLoadingData." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrLoadingData : public Object
 	{
 	public:
-		ADD_VAR(::StrProperty, RulesForBlitz, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesForCaH, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesForDaD, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesForArena, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesForRabbit, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesForTDM, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesForCTF, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, GameType, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, MapName, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, MapURL, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Rules, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Tip, 0xFFFFFFFF)
-		ScriptArray<wchar_t> GetRandomTip(int GameIndex)
+		ADD_STRUCT(ScriptArray<ScriptString*>, CTFTips, 204)
+		ADD_STRUCT(ScriptArray<ScriptString*>, TDMTips, 216)
+		ADD_STRUCT(ScriptArray<ScriptString*>, RabbitTips, 228)
+		ADD_STRUCT(ScriptArray<ScriptString*>, ArenaTips, 240)
+		ADD_STRUCT(ScriptArray<ScriptString*>, GenericTips, 252)
+		ADD_STRUCT(ScriptArray<ScriptString*>, CaHTips, 264)
+		ADD_STRUCT(ScriptString*, RulesForBlitz, 192)
+		ADD_STRUCT(ScriptString*, RulesForCaH, 180)
+		ADD_STRUCT(ScriptString*, RulesForDaD, 168)
+		ADD_STRUCT(ScriptString*, RulesForArena, 156)
+		ADD_STRUCT(ScriptString*, RulesForRabbit, 144)
+		ADD_STRUCT(ScriptString*, RulesForTDM, 132)
+		ADD_STRUCT(ScriptString*, RulesForCTF, 120)
+		ADD_STRUCT(ScriptString*, GameType, 108)
+		ADD_STRUCT(ScriptString*, MapName, 96)
+		ADD_STRUCT(ScriptString*, MapURL, 84)
+		ADD_STRUCT(ScriptString*, Rules, 72)
+		ADD_STRUCT(ScriptString*, Tip, 60)
+		ScriptString* GetRandomTip(int GameIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.GetRandomTip");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = GameIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = GameIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
 		void Initialize()
 		{
@@ -45,4 +47,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

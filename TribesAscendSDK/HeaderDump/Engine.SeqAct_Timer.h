@@ -1,18 +1,16 @@
 #pragma once
 #include "Engine.SequenceAction.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_Timer." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqAct_Timer : public SequenceAction
 	{
 	public:
-		ADD_VAR(::FloatProperty, Time, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ActivationTime, 0xFFFFFFFF)
+		ADD_STRUCT(float, Time, 236)
+		ADD_STRUCT(float, ActivationTime, 232)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

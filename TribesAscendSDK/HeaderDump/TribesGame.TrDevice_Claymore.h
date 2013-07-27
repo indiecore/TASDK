@@ -1,38 +1,32 @@
 #pragma once
 #include "TribesGame.TrDevice_AutoFire.h"
-#include "Core.Object.Vector.h"
+#include "Core.Object.h"
 #include "Engine.Projectile.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_Claymore." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrDevice_Claymore : public TrDevice_AutoFire
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fWorldZPlacementOffset, 0xFFFFFFFF)
-		Vector GetPhysicalFireStartLoc(Vector AimDir)
+		ADD_STRUCT(float, m_fWorldZPlacementOffset, 2164)
+		Object::Vector GetPhysicalFireStartLoc(Object::Vector AimDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Claymore.GetPhysicalFireStartLoc");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = AimDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = AimDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[12];
 		}
 		class Projectile* ProjectileFire()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Claymore.ProjectileFire");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Projectile**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Projectile**)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -1,290 +1,270 @@
 #pragma once
 #include "IpDrv.OnlineGameInterfaceImpl.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "OnlineSubsystemMcts.MctsOnlineSettings.h"
 #include "OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.h"
 #include "Engine.OnlineGameSearch.h"
-#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
+#include "Engine.OnlineSubsystem.h"
 #include "Engine.OnlineGameSettings.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty OnlineSubsystemMcts.OnlineGameInterfaceMcts." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class OnlineGameInterfaceMcts : public OnlineGameInterfaceImpl
 	{
 	public:
-		ADD_OBJECT(OnlineGameSearch, InviteGameSearch)
-		ADD_OBJECT(OnlineVoiceInterfaceMcts, MctsVoiceInt)
-		ADD_OBJECT(MctsOnlineSettings, MctsSettings)
-		void OnGameInviteAccepted(OnlineGameSearchResult& InviteResult)
+		enum EMctsMatchmakingType : byte
+		{
+			SMT_Invalid = 0,
+			SMT_LAN = 1,
+			SMT_Internet = 2,
+			SMT_MAX = 3,
+		};
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void*>, GameInviteAcceptedDelegates, 444)
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void*>, RegisterPlayerCompleteDelegates, 460)
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void*>, UnregisterPlayerCompleteDelegates, 472)
+		ADD_OBJECT(OnlineGameSearch, InviteGameSearch, 456)
+		ADD_OBJECT(OnlineVoiceInterfaceMcts, MctsVoiceInt, 440)
+		ADD_OBJECT(MctsOnlineSettings, MctsSettings, 436)
+		void OnGameInviteAccepted(OnlineGameSearch::OnlineGameSearchResult& InviteResult)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.OnGameInviteAccepted");
-			byte* params = (byte*)malloc(8);
-			*(OnlineGameSearchResult*)params = InviteResult;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InviteResult = *(OnlineGameSearchResult*)params;
-			free(params);
+			byte params[8] = { NULL };
+			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = InviteResult;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			InviteResult = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
 		}
-		void OnRegisterPlayerComplete(ScriptName SessionName, UniqueNetId PlayerID, bool bWasSuccessful)
+		void OnRegisterPlayerComplete(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID, bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.OnRegisterPlayerComplete");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = SessionName;
-			*(UniqueNetId*)(params + 8) = PlayerID;
-			*(bool*)(params + 16) = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
+			*(bool*)&params[16] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void OnUnregisterPlayerComplete(ScriptName SessionName, UniqueNetId PlayerID, bool bWasSuccessful)
+		void OnUnregisterPlayerComplete(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID, bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.OnUnregisterPlayerComplete");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = SessionName;
-			*(UniqueNetId*)(params + 8) = PlayerID;
-			*(bool*)(params + 16) = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
+			*(bool*)&params[16] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SealMatch(bool bSeal, bool bLateSeal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.SealMatch");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bSeal;
-			*(bool*)(params + 4) = bLateSeal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bSeal;
+			*(bool*)&params[4] = bLateSeal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HoldInvites(bool bHold)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.HoldInvites");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bHold;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bHold;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndGame(int nWaitSeconds)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.EndGame");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = nWaitSeconds;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = nWaitSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool MatchQueueJoin(int nQueueId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchQueueJoin");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = nQueueId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = nQueueId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool MatchQueueLeave(int nQueueId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchQueueLeave");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = nQueueId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = nQueueId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool MatchChooseClass(int nClassId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchChooseClass");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = nClassId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = nClassId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool MatchChooseSkin(int nSkinId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchChooseSkin");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = nSkinId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = nSkinId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool MatchAcceptInvite()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchAcceptInvite");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool MatchLockIn()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchLockIn");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool MatchLobbyEquipItems(int eType, int nItem1, int nItem2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchLobbyEquipItems");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = eType;
-			*(int*)(params + 4) = nItem1;
-			*(int*)(params + 8) = nItem2;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = eType;
+			*(int*)&params[4] = nItem1;
+			*(int*)&params[8] = nItem2;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
 		bool UpdateOnlineGame(ScriptName SessionName, class OnlineGameSettings* UpdatedGameSettings, bool bShouldRefreshOnlineData)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.UpdateOnlineGame");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = SessionName;
-			*(class OnlineGameSettings**)(params + 8) = UpdatedGameSettings;
-			*(bool*)(params + 12) = bShouldRefreshOnlineData;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(class OnlineGameSettings**)&params[8] = UpdatedGameSettings;
+			*(bool*)&params[12] = bShouldRefreshOnlineData;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		class OnlineGameSettings* GetGameSettings(ScriptName SessionName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.GetGameSettings");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = SessionName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class OnlineGameSettings**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class OnlineGameSettings**)&params[8];
 		}
 		void AddGameInviteAcceptedDelegate(byte LocalUserNum, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* GameInviteAcceptedDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.AddGameInviteAcceptedDelegate");
-			byte* params = (byte*)malloc(13);
-			*params = LocalUserNum;
+			byte params[13] = { NULL };
+			params[0] = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)(params + 4) = GameInviteAcceptedDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = GameInviteAcceptedDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearGameInviteAcceptedDelegate(byte LocalUserNum, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* GameInviteAcceptedDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.ClearGameInviteAcceptedDelegate");
-			byte* params = (byte*)malloc(13);
-			*params = LocalUserNum;
+			byte params[13] = { NULL };
+			params[0] = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)(params + 4) = GameInviteAcceptedDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = GameInviteAcceptedDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AcceptGameInvite(byte LocalUserNum, ScriptName SessionName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.AcceptGameInvite");
-			byte* params = (byte*)malloc(13);
-			*params = LocalUserNum;
-			*(ScriptName*)(params + 4) = SessionName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			params[0] = LocalUserNum;
+			*(ScriptName*)&params[4] = SessionName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		bool RegisterPlayer(ScriptName SessionName, UniqueNetId PlayerID, bool bWasInvited)
+		bool RegisterPlayer(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID, bool bWasInvited)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.RegisterPlayer");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = SessionName;
-			*(UniqueNetId*)(params + 8) = PlayerID;
-			*(bool*)(params + 16) = bWasInvited;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
+			*(bool*)&params[16] = bWasInvited;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 		void AddRegisterPlayerCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RegisterPlayerCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.AddRegisterPlayerCompleteDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = RegisterPlayerCompleteDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = RegisterPlayerCompleteDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearRegisterPlayerCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RegisterPlayerCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.ClearRegisterPlayerCompleteDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = RegisterPlayerCompleteDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = RegisterPlayerCompleteDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool UnregisterPlayer(ScriptName SessionName, UniqueNetId PlayerID)
+		bool UnregisterPlayer(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.UnregisterPlayer");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = SessionName;
-			*(UniqueNetId*)(params + 8) = PlayerID;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = SessionName;
+			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void AddUnregisterPlayerCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UnregisterPlayerCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.AddUnregisterPlayerCompleteDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = UnregisterPlayerCompleteDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = UnregisterPlayerCompleteDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearUnregisterPlayerCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UnregisterPlayerCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.ClearUnregisterPlayerCompleteDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = UnregisterPlayerCompleteDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = UnregisterPlayerCompleteDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool QueryNonAdvertisedData(int StartAt, int NumberToQuery)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.QueryNonAdvertisedData");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = StartAt;
-			*(int*)(params + 4) = NumberToQuery;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = StartAt;
+			*(int*)&params[4] = NumberToQuery;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 	};
 }
+#undef ADD_STRUCT
 #undef ADD_OBJECT

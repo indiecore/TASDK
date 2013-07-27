@@ -3,44 +3,36 @@
 #include "Engine.Weapon.h"
 #include "TribesGame.TrPawn.h"
 #include "TribesGame.TrDeployable.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Rotator.h"
-#include "Engine.Actor.TraceHitInfo.h"
+#include "Core.Object.h"
 #include "Engine.Canvas.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrTurretPawn." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrTurretPawn : public TrPawn
 	{
 	public:
-		ADD_OBJECT(TrDeployable, m_OwnerDeployable)
-		Vector LeadingAimLocation(class Actor* Enemy)
+		ADD_OBJECT(TrDeployable, m_OwnerDeployable, 3192)
+		Object::Vector LeadingAimLocation(class Actor* Enemy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.LeadingAimLocation");
-			byte* params = (byte*)malloc(16);
-			*(class Actor**)params = Enemy;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class Actor**)&params[0] = Enemy;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
-		Vector GetValidAimTarget(Vector PawnLocation, Vector PawnTargetLocation)
+		Object::Vector GetValidAimTarget(Object::Vector PawnLocation, Object::Vector PawnTargetLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.GetValidAimTarget");
-			byte* params = (byte*)malloc(36);
-			*(Vector*)params = PawnLocation;
-			*(Vector*)(params + 12) = PawnTargetLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(Object::Vector*)&params[0] = PawnLocation;
+			*(Object::Vector*)&params[12] = PawnTargetLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[24];
 		}
 		void PostBeginPlay()
 		{
@@ -52,83 +44,74 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.Destroyed");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
+		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.WeaponFired");
-			byte* params = (byte*)malloc(20);
-			*(class Weapon**)params = InWeapon;
-			*(bool*)(params + 4) = bViaReplication;
-			*(Vector*)(params + 8) = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class Weapon**)&params[0] = InWeapon;
+			*(bool*)&params[4] = bViaReplication;
+			*(Object::Vector*)&params[8] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Vector GetAimVectorFor(class Weapon* InWeapon, Vector projStart, class Actor* Enemy)
+		Object::Vector GetAimVectorFor(class Weapon* InWeapon, Object::Vector projStart, class Actor* Enemy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.GetAimVectorFor");
-			byte* params = (byte*)malloc(32);
-			*(class Weapon**)params = InWeapon;
-			*(Vector*)(params + 4) = projStart;
-			*(class Actor**)(params + 16) = Enemy;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(class Weapon**)&params[0] = InWeapon;
+			*(Object::Vector*)&params[4] = projStart;
+			*(class Actor**)&params[16] = Enemy;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[20];
 		}
-		Rotator GetAdjustedAimFor(class Weapon* InWeapon, Vector projStart)
+		Object::Rotator GetAdjustedAimFor(class Weapon* InWeapon, Object::Vector projStart)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.GetAdjustedAimFor");
-			byte* params = (byte*)malloc(28);
-			*(class Weapon**)params = InWeapon;
-			*(Vector*)(params + 4) = projStart;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(class Weapon**)&params[0] = InWeapon;
+			*(Object::Vector*)&params[4] = projStart;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[16];
 		}
-		Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
+		Object::Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.GetWeaponStartTraceLocation");
-			byte* params = (byte*)malloc(16);
-			*(class Weapon**)params = CurrentWeapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class Weapon**)&params[0] = CurrentWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
 		void Reset()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.Reset");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Damage;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Damage;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeRadiusDamage(class Controller* EventInstigator, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* EventInstigator, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.TakeRadiusDamage");
-			byte* params = (byte*)malloc(44);
-			*(class Controller**)params = EventInstigator;
-			*(float*)(params + 4) = BaseDamage;
-			*(float*)(params + 8) = DamageRadius;
-			*(ScriptClass**)(params + 12) = DamageType;
-			*(float*)(params + 16) = Momentum;
-			*(Vector*)(params + 20) = HurtOrigin;
-			*(bool*)(params + 32) = bFullDamage;
-			*(class Actor**)(params + 36) = DamageCauser;
-			*(float*)(params + 40) = DamageFalloffExponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[44] = { NULL };
+			*(class Controller**)&params[0] = EventInstigator;
+			*(float*)&params[4] = BaseDamage;
+			*(float*)&params[8] = DamageRadius;
+			*(ScriptClass**)&params[12] = DamageType;
+			*(float*)&params[16] = Momentum;
+			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(bool*)&params[32] = bFullDamage;
+			*(class Actor**)&params[36] = DamageCauser;
+			*(float*)&params[40] = DamageFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshPlayer()
 		{
@@ -138,40 +121,36 @@ namespace UnrealScript
 		void RefreshInventory(bool bIsRespawn, bool bCallin)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.RefreshInventory");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bIsRespawn;
-			*(bool*)(params + 4) = bCallin;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bIsRespawn;
+			*(bool*)&params[4] = bCallin;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCharacterClassFromInfo(ScriptClass* Info, bool bForce)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.SetCharacterClassFromInfo");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = Info;
-			*(bool*)(params + 4) = bForce;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = Info;
+			*(bool*)&params[4] = bForce;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void IncrementFlashCount(class Weapon* W, byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTurretPawn.IncrementFlashCount");
-			byte* params = (byte*)malloc(5);
-			*(class Weapon**)params = W;
-			*(params + 4) = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			*(class Weapon**)&params[0] = W;
+			params[4] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

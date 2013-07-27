@@ -1,33 +1,39 @@
 #pragma once
 #include "Engine.SequenceAction.h"
 #include "GameFramework.GameCrowd_ListOfAgents.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqAct_GameCrowdPopulationManagerToggle." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.SeqAct_GameCrowdPopulationManagerToggle." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SeqAct_GameCrowdPopulationManagerToggle : public SequenceAction
 	{
 	public:
-		ADD_VAR(::FloatProperty, WarmupPct, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bClearOldArchetypes, 0x2)
-		ADD_OBJECT(GameCrowd_ListOfAgents, CrowdAgentList)
-		ADD_VAR(::FloatProperty, MaxSimulationDistance, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bCastShadows, 0x8)
-		ADD_VAR(::BoolProperty, bEnableCrowdLightEnvironment, 0x4)
-		ADD_VAR(::FloatProperty, SpawnRate, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxAgents, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bKillAgentsInstantly, 0x1)
-		ADD_OBJECT(ScriptClass, PopulationManagerClass)
+		ADD_STRUCT(float, WarmupPct, 232)
+		ADD_BOOL(bClearOldArchetypes, 236, 0x2)
+		ADD_OBJECT(GameCrowd_ListOfAgents, CrowdAgentList, 240)
+		ADD_STRUCT(float, MaxSimulationDistance, 252)
+		ADD_BOOL(bCastShadows, 236, 0x8)
+		ADD_BOOL(bEnableCrowdLightEnvironment, 236, 0x4)
+		ADD_STRUCT(float, SpawnRate, 248)
+		ADD_STRUCT(int, MaxAgents, 244)
+		ADD_BOOL(bKillAgentsInstantly, 236, 0x1)
+		ADD_OBJECT(ScriptClass, PopulationManagerClass, 256)
 		void FindPopMgrTarget()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdPopulationManagerToggle.FindPopMgrTarget");
@@ -36,13 +42,12 @@ namespace UnrealScript
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdPopulationManagerToggle.GetObjClassVersion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

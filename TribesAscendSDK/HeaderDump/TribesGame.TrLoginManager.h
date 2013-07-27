@@ -1,46 +1,52 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.OnlineSubsystem.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrLoginManager." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrLoginManager : public Object
 	{
 	public:
-		ADD_VAR(::BoolProperty, bRemember, 0x1)
-		ADD_VAR(::StrProperty, LoginName, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, LoginPassword, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bWaitingForLoginWaitPopup, 0x2)
+		ADD_BOOL(bRemember, 60, 0x1)
+		ADD_STRUCT(ScriptString*, LoginName, 64)
+		ADD_STRUCT(ScriptString*, LoginPassword, 76)
+		ADD_BOOL(bWaitingForLoginWaitPopup, 60, 0x2)
 		void Initialize()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Initialize");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool Login(ScriptArray<wchar_t> UserName, ScriptArray<wchar_t> Password, bool bShouldRemember)
+		bool Login(ScriptString* UserName, ScriptString* Password, bool bShouldRemember)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Login");
-			byte* params = (byte*)malloc(32);
-			*(ScriptArray<wchar_t>*)params = UserName;
-			*(ScriptArray<wchar_t>*)(params + 12) = Password;
-			*(bool*)(params + 24) = bShouldRemember;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)&params[12] = Password;
+			*(bool*)&params[24] = bShouldRemember;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[28];
 		}
-		void OnUserLoginFailed(byte LocalUserNum, byte ErrorCode)
+		void OnUserLoginFailed(byte LocalUserNum, OnlineSubsystem::EOnlineServerConnectionStatus ErrorCode)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.OnUserLoginFailed");
-			byte* params = (byte*)malloc(2);
-			*params = LocalUserNum;
-			*(params + 1) = ErrorCode;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[2] = { NULL };
+			params[0] = LocalUserNum;
+			*(OnlineSubsystem::EOnlineServerConnectionStatus*)&params[1] = ErrorCode;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RetryLogin()
 		{
@@ -52,13 +58,12 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Logout");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SubmitPlayerName(ScriptArray<wchar_t> PlayerName)
+		void SubmitPlayerName(ScriptString* PlayerName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.SubmitPlayerName");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = PlayerName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoginWaitPopup()
 		{
@@ -68,11 +73,11 @@ namespace UnrealScript
 		void PopupData(class GFxObject* Obj)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.PopupData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = Obj;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

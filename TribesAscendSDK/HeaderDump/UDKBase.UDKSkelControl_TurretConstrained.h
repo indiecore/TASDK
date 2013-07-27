@@ -1,77 +1,90 @@
 #pragma once
 #include "Engine.SkelControlSingleBone.h"
-#include "Core.Object.Rotator.h"
-#include "UDKBase.UDKSkelControl_TurretConstrained.TurretConstraintData.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_TurretConstrained." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKSkelControl_TurretConstrained." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKSkelControl_TurretConstrained : public SkelControlSingleBone
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, ConstrainedBoneRotation, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, AssociatedSeatIndex, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PitchSpeedScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LagDegreesPerSecond, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TurretConstraintData>, MinAngle, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TurretConstraintData>, MaxAngle, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bIsInMotion, 0x100)
-		ADD_VAR(::BoolProperty, bResetWhenUnattended, 0x80)
-		ADD_VAR(::BoolProperty, bFixedWhenFiring, 0x40)
-		ADD_VAR(::BoolProperty, bInvertRoll, 0x20)
-		ADD_VAR(::BoolProperty, bInvertYaw, 0x10)
-		ADD_VAR(::BoolProperty, bInvertPitch, 0x8)
-		ADD_VAR(::BoolProperty, bConstrainRoll, 0x4)
-		ADD_VAR(::BoolProperty, bConstrainYaw, 0x2)
-		ADD_VAR(::BoolProperty, bConstrainPitch, 0x1)
+		class TurretConstraintData
+		{
+		public:
+			ADD_STRUCT(int, RollConstraint, 8)
+			ADD_STRUCT(int, YawConstraint, 4)
+			ADD_STRUCT(int, PitchConstraint, 0)
+		};
+		class TurretStepData
+		{
+		public:
+			ADD_STRUCT(UDKSkelControl_TurretConstrained::TurretConstraintData, MinAngle, 20)
+			ADD_STRUCT(UDKSkelControl_TurretConstrained::TurretConstraintData, MaxAngle, 8)
+			ADD_STRUCT(int, StepEndAngle, 4)
+			ADD_STRUCT(int, StepStartAngle, 0)
+		};
+		ADD_STRUCT(ScriptArray<UDKSkelControl_TurretConstrained::TurretStepData>, Steps, 264)
+		ADD_STRUCT(Object::Rotator, ConstrainedBoneRotation, 300)
+		ADD_STRUCT(int, AssociatedSeatIndex, 296)
+		ADD_STRUCT(Object::Rotator, DesiredBoneRotation, 284)
+		ADD_STRUCT(float, PitchSpeedScale, 280)
+		ADD_STRUCT(float, LagDegreesPerSecond, 276)
+		ADD_STRUCT(UDKSkelControl_TurretConstrained::TurretConstraintData, MinAngle, 252)
+		ADD_STRUCT(UDKSkelControl_TurretConstrained::TurretConstraintData, MaxAngle, 240)
+		ADD_BOOL(bIsInMotion, 236, 0x100)
+		ADD_BOOL(bResetWhenUnattended, 236, 0x80)
+		ADD_BOOL(bFixedWhenFiring, 236, 0x40)
+		ADD_BOOL(bInvertRoll, 236, 0x20)
+		ADD_BOOL(bInvertYaw, 236, 0x10)
+		ADD_BOOL(bInvertPitch, 236, 0x8)
+		ADD_BOOL(bConstrainRoll, 236, 0x4)
+		ADD_BOOL(bConstrainYaw, 236, 0x2)
+		ADD_BOOL(bConstrainPitch, 236, 0x1)
 		void OnTurretStatusChange(bool bIsMoving)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.OnTurretStatusChange");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bIsMoving;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bIsMoving;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void InitTurret(Rotator InitRot, 
+		void InitTurret(Object::Rotator InitRot, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.InitTurret");
-			byte* params = (byte*)malloc(16);
-			*(Rotator*)params = InitRot;
+			byte params[16] = { NULL };
+			*(Object::Rotator*)&params[0] = InitRot;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 12) = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[12] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool WouldConstrainPitch(int TestPitch, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.WouldConstrainPitch");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = TestPitch;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = TestPitch;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+void**)&params[4] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

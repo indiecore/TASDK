@@ -1,59 +1,52 @@
 #pragma once
 #include "Engine.UIDataStore_StringBase.h"
-#include "Core.Object.Map_Mirror.h"
+#include "Core.Object.h"
 #include "Engine.LocalPlayer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_StringAliasMap." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataStore_StringAliasMap." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UIDataStore_StringAliasMap : public UIDataStore_StringBase
 	{
 	public:
-		ADD_VAR(::IntProperty, PlayerIndex, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, MenuInputSets, 0xFFFFFFFF)
+		class UIMenuInputMap
+		{
+		public:
+			ADD_STRUCT(ScriptString*, MappedText, 16)
+			ADD_STRUCT(ScriptName, Set, 8)
+			ADD_STRUCT(ScriptName, FieldName, 0)
+		};
+		ADD_STRUCT(ScriptArray<UIDataStore_StringAliasMap::UIMenuInputMap>, MenuInputMapArray, 120)
+		ADD_STRUCT(int, PlayerIndex, 192)
+		ADD_STRUCT(Object::Map_Mirror, MenuInputSets, 132)
 		class LocalPlayer* GetPlayerOwner()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_StringAliasMap.GetPlayerOwner");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class LocalPlayer**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class LocalPlayer**)&params[0];
 		}
-		int FindMappingWithFieldName(ScriptArray<wchar_t> FieldName, ScriptArray<wchar_t> SetName)
+		int FindMappingWithFieldName(ScriptString* FieldName, ScriptString* SetName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_StringAliasMap.FindMappingWithFieldName");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = FieldName;
-			*(ScriptArray<wchar_t>*)(params + 12) = SetName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)&params[12] = SetName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[24];
 		}
-		int GetStringWithFieldName(ScriptArray<wchar_t> FieldName, ScriptArray<wchar_t>& MappedString)
+		int GetStringWithFieldName(ScriptString* FieldName, ScriptString*& MappedString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_StringAliasMap.GetStringWithFieldName");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = FieldName;
-			*(ScriptArray<wchar_t>*)(params + 12) = MappedString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MappedString = *(ScriptArray<wchar_t>*)(params + 12);
-			auto returnVal = *(int*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)&params[12] = MappedString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MappedString = *(ScriptString**)&params[12];
+			return *(int*)&params[24];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

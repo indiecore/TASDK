@@ -10,42 +10,35 @@ namespace UnrealScript
 		bool CheckScore(class PlayerReplicationInfo* Scorer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrTraining.CheckScore");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerReplicationInfo**)params = Scorer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		byte PickTeam(byte Num, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrTraining.PickTeam");
-			byte* params = (byte*)malloc(6);
-			*params = Num;
-			*(class Controller**)(params + 4) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(params + 8);
-			free(params);
-			return returnVal;
+			byte params[6] = { NULL };
+			params[0] = Num;
+			*(class Controller**)&params[4] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[8];
 		}
 		byte PickTeamForMigration(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrTraining.PickTeamForMigration");
-			byte* params = (byte*)malloc(5);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[4];
 		}
-		void EndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		void EndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrTraining.EndGame");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AutoEndGame()
 		{

@@ -1,46 +1,47 @@
 #pragma once
 #include "TribesGame.TrDeviceAttachment.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAttachment_LaserTargeter." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class TrAttachment_LaserTargeter : public TrDeviceAttachment
 	{
 	public:
-		ADD_VAR(::BoolProperty, m_bIsTracerActive, 0x1)
+		ADD_BOOL(m_bIsTracerActive, 784, 0x1)
 		void KillLaserEffect()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.KillLaserEffect");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SpawnLaserEffect(Vector HitLocation)
+		void SpawnLaserEffect(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.SpawnLaserEffect");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateLaserEffect(Vector HitLocation)
+		void UpdateLaserEffect(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.UpdateLaserEffect");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Vector HitLocation)
+		void ThirdPersonFireEffects(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.ThirdPersonFireEffects");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopThirdPersonFireEffects()
 		{
@@ -49,4 +50,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

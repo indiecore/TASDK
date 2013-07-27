@@ -1,27 +1,22 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Emitter.h"
-#include "Core.Object.Rotator.h"
 #include "UDKBase.UDKPlayerController.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKEmitCameraEffect." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKEmitCameraEffect." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKEmitCameraEffect : public Emitter
 	{
 	public:
-		ADD_OBJECT(UDKPlayerController, Cam)
-		ADD_VAR(::FloatProperty, DistFromCamera, 0xFFFFFFFF)
+		ADD_OBJECT(UDKPlayerController, Cam, 492)
+		ADD_STRUCT(float, DistFromCamera, 488)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.PostBeginPlay");
@@ -35,10 +30,9 @@ namespace UnrealScript
 		void RegisterCamera(class UDKPlayerController* inCam)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.RegisterCamera");
-			byte* params = (byte*)malloc(4);
-			*(class UDKPlayerController**)params = inCam;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UDKPlayerController**)&params[0] = inCam;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Activate()
 		{
@@ -50,19 +44,18 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Deactivate");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void UpdateLocation(Vector& CamLoc, Rotator& CamRot, float CamFOVDeg)
+		void UpdateLocation(Object::Vector& CamLoc, Object::Rotator& CamRot, float CamFOVDeg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.UpdateLocation");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = CamLoc;
-			*(Rotator*)(params + 12) = CamRot;
-			*(float*)(params + 24) = CamFOVDeg;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			CamLoc = *(Vector*)params;
-			CamRot = *(Rotator*)(params + 12);
-			free(params);
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = CamLoc;
+			*(Object::Rotator*)&params[12] = CamRot;
+			*(float*)&params[24] = CamFOVDeg;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			CamLoc = *(Object::Vector*)&params[0];
+			CamRot = *(Object::Rotator*)&params[12];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

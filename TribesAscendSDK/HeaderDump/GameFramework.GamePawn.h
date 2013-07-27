@@ -1,25 +1,28 @@
 #pragma once
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GamePawn." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class GamePawn : public Pawn
 	{
 	public:
-		ADD_VAR(::BoolProperty, bRespondToExplosions, 0x2)
-		ADD_VAR(::BoolProperty, bLastHitWasHeadShot, 0x1)
+		ADD_BOOL(bRespondToExplosions, 1144, 0x2)
+		ADD_BOOL(bLastHitWasHeadShot, 1144, 0x1)
 		void UpdateShadowSettings(bool bInWantShadow)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.UpdateShadowSettings");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bInWantShadow;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bInWantShadow;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReattachMesh()
 		{
@@ -33,4 +36,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

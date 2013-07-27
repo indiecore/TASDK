@@ -1,42 +1,47 @@
 #pragma once
 #include "Engine.SeqAct_Latent.h"
 #include "Engine.SoundCue.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_PlaySound." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SeqAct_PlaySound." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SeqAct_PlaySound : public SeqAct_Latent
 	{
 	public:
-		ADD_VAR(::BoolProperty, bStopped, 0x2)
-		ADD_VAR(::BoolProperty, bSuppressSubtitles, 0x1)
-		ADD_VAR(::FloatProperty, PitchMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VolumeMultiplier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FadeOutTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FadeInTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SoundDuration, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExtraDelay, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, PlaySound)
+		ADD_BOOL(bStopped, 276, 0x2)
+		ADD_BOOL(bSuppressSubtitles, 276, 0x1)
+		ADD_STRUCT(float, PitchMultiplier, 272)
+		ADD_STRUCT(float, VolumeMultiplier, 268)
+		ADD_STRUCT(float, FadeOutTime, 264)
+		ADD_STRUCT(float, FadeInTime, 260)
+		ADD_STRUCT(float, SoundDuration, 256)
+		ADD_STRUCT(float, ExtraDelay, 252)
+		ADD_OBJECT(SoundCue, PlaySound, 248)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_PlaySound.GetObjClassVersion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

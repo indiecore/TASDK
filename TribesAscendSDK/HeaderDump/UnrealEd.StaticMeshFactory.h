@@ -1,22 +1,31 @@
 #pragma once
 #include "Core.Factory.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UnrealEd.StaticMeshFactory." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class StaticMeshFactory : public Factory
 	{
 	public:
-		ADD_VAR(::IntProperty, Pitch, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Roll, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Yaw, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bOneConvexPerUCXObject, 0x1)
-		ADD_VAR(::BoolProperty, bSingleSmoothGroupSingleTangent, 0x1)
-		ADD_VAR(::BoolProperty, bReplaceExistingVertexColors, 0x1)
+		ADD_STRUCT(int, Pitch, 112)
+		ADD_STRUCT(int, Roll, 116)
+		ADD_STRUCT(int, Yaw, 120)
+		ADD_BOOL(bOneConvexPerUCXObject, 124, 0x1)
+		ADD_BOOL(bSingleSmoothGroupSingleTangent, 128, 0x1)
+		ADD_BOOL(bReplaceExistingVertexColors, 132, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

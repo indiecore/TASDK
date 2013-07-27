@@ -1,136 +1,105 @@
 #pragma once
 #include "Engine.UIDataStore.h"
-#include "Engine.OnlinePlaylistProvider.h"
-#include "Core.Object.Pointer.h"
-#include "Engine.UIRoot.UIProviderScriptFieldValue.h"
 #include "Engine.UIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlinePlaylists." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataStore_OnlinePlaylists." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.UIDataStore_OnlinePlaylists." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#include "Engine.UIRoot.h"
+#include "Engine.OnlinePlaylistProvider.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UIDataStore_OnlinePlaylists : public UIDataStore
 	{
 	public:
-		ADD_OBJECT(ScriptClass, ProviderClass)
-		ADD_VAR(::StrProperty, ProviderClassName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
+		static const const char* RANKEDPROVIDERTAG;
+		static const const char* UNRANKEDPROVIDERTAG;
+		ADD_STRUCT(ScriptArray<class UIResourceDataProvider*>, RankedDataProviders, 140)
+		ADD_STRUCT(ScriptArray<class UIResourceDataProvider*>, UnRankedDataProviders, 152)
+		ADD_OBJECT(ScriptClass, ProviderClass, 136)
+		ADD_STRUCT(ScriptString*, ProviderClassName, 124)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		int GetProviderCount(ScriptName ProviderTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetProviderCount");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ProviderTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
-		bool GetResourceProviders(ScriptName ProviderTag, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& out_Providers)
+		bool GetResourceProviders(ScriptName ProviderTag, ScriptArray<class UIResourceDataProvider*>& out_Providers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetResourceProviders");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = ProviderTag;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8) = out_Providers;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_Providers = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptArray<class UIResourceDataProvider*>*)&params[8] = out_Providers;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_Providers = *(ScriptArray<class UIResourceDataProvider*>*)&params[8];
+			return *(bool*)&params[20];
 		}
-		bool GetResourceProviderFields(ScriptName ProviderTag, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& ProviderFieldTags)
+		bool GetResourceProviderFields(ScriptName ProviderTag, ScriptArray<ScriptName>& ProviderFieldTags)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetResourceProviderFields");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = ProviderTag;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8) = ProviderFieldTags;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ProviderFieldTags = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptArray<ScriptName>*)&params[8] = ProviderFieldTags;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ProviderFieldTags = *(ScriptArray<ScriptName>*)&params[8];
+			return *(bool*)&params[20];
 		}
-		bool GetProviderFieldValue(ScriptName ProviderTag, ScriptName SearchField, int ProviderIndex, UIProviderScriptFieldValue& out_FieldValue)
+		bool GetProviderFieldValue(ScriptName ProviderTag, ScriptName SearchField, int ProviderIndex, UIRoot::UIProviderScriptFieldValue& out_FieldValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetProviderFieldValue");
-			byte* params = (byte*)malloc(108);
-			*(ScriptName*)params = ProviderTag;
-			*(ScriptName*)(params + 8) = SearchField;
-			*(int*)(params + 16) = ProviderIndex;
-			*(UIProviderScriptFieldValue*)(params + 20) = out_FieldValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_FieldValue = *(UIProviderScriptFieldValue*)(params + 20);
-			auto returnVal = *(bool*)(params + 104);
-			free(params);
-			return returnVal;
+			byte params[108] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)&params[8] = SearchField;
+			*(int*)&params[16] = ProviderIndex;
+			*(UIRoot::UIProviderScriptFieldValue*)&params[20] = out_FieldValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_FieldValue = *(UIRoot::UIProviderScriptFieldValue*)&params[20];
+			return *(bool*)&params[104];
 		}
-		int FindProviderIndexByFieldValue(ScriptName ProviderTag, ScriptName SearchField, UIProviderScriptFieldValue& ValueToSearchFor)
+		int FindProviderIndexByFieldValue(ScriptName ProviderTag, ScriptName SearchField, UIRoot::UIProviderScriptFieldValue& ValueToSearchFor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.FindProviderIndexByFieldValue");
-			byte* params = (byte*)malloc(104);
-			*(ScriptName*)params = ProviderTag;
-			*(ScriptName*)(params + 8) = SearchField;
-			*(UIProviderScriptFieldValue*)(params + 16) = ValueToSearchFor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ValueToSearchFor = *(UIProviderScriptFieldValue*)(params + 16);
-			auto returnVal = *(int*)(params + 100);
-			free(params);
-			return returnVal;
+			byte params[104] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)&params[8] = SearchField;
+			*(UIRoot::UIProviderScriptFieldValue*)&params[16] = ValueToSearchFor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ValueToSearchFor = *(UIRoot::UIProviderScriptFieldValue*)&params[16];
+			return *(int*)&params[100];
 		}
 		bool GetPlaylistProvider(ScriptName ProviderTag, int ProviderIndex, class UIResourceDataProvider*& out_Provider)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetPlaylistProvider");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = ProviderTag;
-			*(int*)(params + 8) = ProviderIndex;
-			*(class UIResourceDataProvider**)(params + 12) = out_Provider;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_Provider = *(class UIResourceDataProvider**)(params + 12);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			*(int*)&params[8] = ProviderIndex;
+			*(class UIResourceDataProvider**)&params[12] = out_Provider;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_Provider = *(class UIResourceDataProvider**)&params[12];
+			return *(bool*)&params[16];
 		}
 		class OnlinePlaylistProvider* GetOnlinePlaylistProvider(ScriptName ProviderTag, int PlaylistId, int& ProviderIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetOnlinePlaylistProvider");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = ProviderTag;
-			*(int*)(params + 8) = PlaylistId;
-			*(int*)(params + 12) = ProviderIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ProviderIndex = *(int*)(params + 12);
-			auto returnVal = *(class OnlinePlaylistProvider**)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = ProviderTag;
+			*(int*)&params[8] = PlaylistId;
+			*(int*)&params[12] = ProviderIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ProviderIndex = *(int*)&params[12];
+			return *(class OnlinePlaylistProvider**)&params[16];
 		}
 	};
+	const const char* UIDataStore_OnlinePlaylists::RANKEDPROVIDERTAG = "PlaylistsRanked";
+	const const char* UIDataStore_OnlinePlaylists::UNRANKEDPROVIDERTAG = "PlaylistsUnranked";
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

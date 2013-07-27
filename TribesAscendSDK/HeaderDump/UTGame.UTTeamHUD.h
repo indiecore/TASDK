@@ -1,33 +1,35 @@
 #pragma once
 #include "UTGame.UTHUD.h"
-#include "Core.Object.Vector2D.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTTeamHUD." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTTeamHUD." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTTeamHUD : public UTHUD
 	{
 	public:
-		ADD_VAR(::FloatProperty, TeamScaleModifier, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OldRightScore, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OldLeftScore, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RightTeamPulseTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LeftTeamPulseTime, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, TeamIconCenterPoints, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, ScoreTransitionTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastScores, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bShowDirectional, 0x1)
+		ADD_STRUCT(float, TeamScaleModifier, 2736)
+		ADD_STRUCT(float, OldRightScore, 2732)
+		ADD_STRUCT(float, OldLeftScore, 2728)
+		ADD_STRUCT(float, RightTeamPulseTime, 2724)
+		ADD_STRUCT(float, LeftTeamPulseTime, 2720)
+		ADD_STRUCT(Object::Vector2D, TeamIconCenterPoints, 2704)
+		ADD_STRUCT(int, ScoreTransitionTime, 2696)
+		ADD_STRUCT(int, LastScores, 2688)
+		ADD_BOOL(bShowDirectional, 2684, 0x1)
 		void DisplayScoring()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayScoring");
@@ -41,45 +43,39 @@ namespace UnrealScript
 		int GetTeamScore(byte TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.GetTeamScore");
-			byte* params = (byte*)malloc(5);
-			*params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		class Actor* GetDirectionalDest(byte TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.GetDirectionalDest");
-			byte* params = (byte*)malloc(5);
-			*params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Actor**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Actor**)&params[4];
 		}
-		void DisplayTeamLogos(byte TeamIndex, Vector2D pos, float DestScale)
+		void DisplayTeamLogos(byte TeamIndex, Object::Vector2D pos, float DestScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayTeamLogos");
-			byte* params = (byte*)malloc(13);
-			*params = TeamIndex;
-			*(Vector2D*)(params + 4) = pos;
-			*(float*)(params + 12) = DestScale;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[13] = { NULL };
+			params[0] = TeamIndex;
+			*(Object::Vector2D*)&params[4] = pos;
+			*(float*)&params[12] = DestScale;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DisplayDirectionIndicator(byte TeamIndex, Vector2D pos, class Actor* destActor, float DestScale)
+		void DisplayDirectionIndicator(byte TeamIndex, Object::Vector2D pos, class Actor* destActor, float DestScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayDirectionIndicator");
-			byte* params = (byte*)malloc(17);
-			*params = TeamIndex;
-			*(Vector2D*)(params + 4) = pos;
-			*(class Actor**)(params + 12) = destActor;
-			*(float*)(params + 16) = DestScale;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[17] = { NULL };
+			params[0] = TeamIndex;
+			*(Object::Vector2D*)&params[4] = pos;
+			*(class Actor**)&params[12] = destActor;
+			*(float*)&params[16] = DestScale;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

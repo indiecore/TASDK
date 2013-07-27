@@ -1,20 +1,18 @@
 #pragma once
 #include "Engine.SequenceEvent.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileRawInput." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqEvent_MobileRawInput : public SequenceEvent
 	{
 	public:
-		ADD_VAR(::FloatProperty, TimeStamp, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TouchLocationY, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TouchLocationX, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, TouchIndex, 0xFFFFFFFF)
+		ADD_STRUCT(float, TimeStamp, 268)
+		ADD_STRUCT(float, TouchLocationY, 264)
+		ADD_STRUCT(float, TouchLocationX, 260)
+		ADD_STRUCT(int, TouchIndex, 256)
 		void RegisterEvent()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileRawInput.RegisterEvent");
@@ -22,4 +20,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

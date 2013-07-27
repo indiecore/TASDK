@@ -1,6 +1,6 @@
 #pragma once
 #include "Core.Interface.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
+#include "Engine.OnlineSubsystem.h"
 #include "Engine.OnlinePlayerStorage.h"
 #include "Engine.OnlineProfileSettings.h"
 namespace UnrealScript
@@ -8,47 +8,35 @@ namespace UnrealScript
 	class OnlineEventsInterface : public Interface
 	{
 	public:
-		bool UploadPlayerData(UniqueNetId UniqueId, ScriptArray<wchar_t> PlayerNick, class OnlineProfileSettings* ProfileSettings, class OnlinePlayerStorage* PlayerStorage)
+		bool UploadPlayerData(OnlineSubsystem::UniqueNetId UniqueId, ScriptString* PlayerNick, class OnlineProfileSettings* ProfileSettings, class OnlinePlayerStorage* PlayerStorage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineEventsInterface.UploadPlayerData");
-			byte* params = (byte*)malloc(32);
-			*(UniqueNetId*)params = UniqueId;
-			*(ScriptArray<wchar_t>*)(params + 8) = PlayerNick;
-			*(class OnlineProfileSettings**)(params + 20) = ProfileSettings;
-			*(class OnlinePlayerStorage**)(params + 24) = PlayerStorage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 28);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(ScriptString**)&params[8] = PlayerNick;
+			*(class OnlineProfileSettings**)&params[20] = ProfileSettings;
+			*(class OnlinePlayerStorage**)&params[24] = PlayerStorage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[28];
 		}
-		bool UploadGameplayEventsData(UniqueNetId UniqueId, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Payload)
+		bool UploadGameplayEventsData(OnlineSubsystem::UniqueNetId UniqueId, ScriptArray<byte>& Payload)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineEventsInterface.UploadGameplayEventsData");
-			byte* params = (byte*)malloc(24);
-			*(UniqueNetId*)params = UniqueId;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8) = Payload;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Payload = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 8);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(ScriptArray<byte>*)&params[8] = Payload;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Payload = *(ScriptArray<byte>*)&params[8];
+			return *(bool*)&params[20];
 		}
 		bool UpdatePlaylistPopulation(int PlaylistId, int NumPlayers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineEventsInterface.UpdatePlaylistPopulation");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = PlaylistId;
-			*(int*)(params + 4) = NumPlayers;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = PlaylistId;
+			*(int*)&params[4] = NumPlayers;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 	};
 }

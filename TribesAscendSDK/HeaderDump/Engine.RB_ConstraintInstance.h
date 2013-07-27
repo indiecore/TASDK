@@ -1,63 +1,59 @@
 #pragma once
 #include "Engine.RB_ConstraintSetup.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Quat.h"
 #include "Core.Object.h"
-#include "Core.Object.Pointer.h"
-#include "Core.Object.Vector.h"
 #include "Engine.PhysicsAssetInstance.h"
-#include "Core.Object.Matrix.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_ConstraintInstance." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.RB_ConstraintInstance." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.RB_ConstraintInstance." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class RB_ConstraintInstance : public Object
 	{
 	public:
-		ADD_VAR(::BoolProperty, bTerminated, 0x1000)
-		ADD_VAR(::IntProperty, ConstraintIndex, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, DummyKinActor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AngularDriveForceLimit, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AngularDriveDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AngularDriveSpring, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, AngularVelocityTarget, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Quat>, AngularPositionTarget, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearDriveForceLimit, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearDriveDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearDriveSpring, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LinearVelocityTarget, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LinearPositionTarget, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ConstraintData, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bAngularSlerpDrive, 0x800)
-		ADD_VAR(::BoolProperty, bTwistVelocityDrive, 0x400)
-		ADD_VAR(::BoolProperty, bTwistPositionDrive, 0x200)
-		ADD_VAR(::BoolProperty, bSwingVelocityDrive, 0x100)
-		ADD_VAR(::BoolProperty, bSwingPositionDrive, 0x80)
-		ADD_VAR(::BoolProperty, bLinearZVelocityDrive, 0x40)
-		ADD_VAR(::BoolProperty, bLinearZPositionDrive, 0x20)
-		ADD_VAR(::BoolProperty, bLinearYVelocityDrive, 0x10)
-		ADD_VAR(::BoolProperty, bLinearYPositionDrive, 0x8)
-		ADD_VAR(::BoolProperty, bLinearXVelocityDrive, 0x4)
-		ADD_VAR(::BoolProperty, bLinearXPositionDrive, 0x2)
-		ADD_VAR(::BoolProperty, bInHardware, 0x1)
-		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, Owner)
+		ADD_BOOL(bTerminated, 76, 0x1000)
+		ADD_STRUCT(int, ConstraintIndex, 68)
+		ADD_STRUCT(Object::Pointer, DummyKinActor, 168)
+		ADD_STRUCT(float, AngularDriveForceLimit, 164)
+		ADD_STRUCT(float, AngularDriveDamping, 160)
+		ADD_STRUCT(float, AngularDriveSpring, 156)
+		ADD_STRUCT(Object::Vector, AngularVelocityTarget, 144)
+		ADD_STRUCT(Object::Quat, AngularPositionTarget, 128)
+		ADD_STRUCT(float, LinearDriveForceLimit, 116)
+		ADD_STRUCT(float, LinearDriveDamping, 112)
+		ADD_STRUCT(float, LinearDriveSpring, 108)
+		ADD_STRUCT(Object::Vector, LinearVelocityTarget, 96)
+		ADD_STRUCT(Object::Vector, LinearPositionTarget, 84)
+		ADD_STRUCT(Object::Pointer, ConstraintData, 80)
+		ADD_BOOL(bAngularSlerpDrive, 76, 0x800)
+		ADD_BOOL(bTwistVelocityDrive, 76, 0x400)
+		ADD_BOOL(bTwistPositionDrive, 76, 0x200)
+		ADD_BOOL(bSwingVelocityDrive, 76, 0x100)
+		ADD_BOOL(bSwingPositionDrive, 76, 0x80)
+		ADD_BOOL(bLinearZVelocityDrive, 76, 0x40)
+		ADD_BOOL(bLinearZPositionDrive, 76, 0x20)
+		ADD_BOOL(bLinearYVelocityDrive, 76, 0x10)
+		ADD_BOOL(bLinearYPositionDrive, 76, 0x8)
+		ADD_BOOL(bLinearXVelocityDrive, 76, 0x4)
+		ADD_BOOL(bLinearXPositionDrive, 76, 0x2)
+		ADD_BOOL(bInHardware, 76, 0x1)
+		ADD_STRUCT(int, SceneIndex, 72)
+		ADD_OBJECT(Actor, Owner, 60)
 		void TermConstraint()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.TermConstraint");
@@ -72,162 +68,144 @@ void* PrimComp2, class RB_ConstraintSetup* Setup, float Scale, class Actor* InOw
 void* InPrimComp, bool bMakeKinForBody1)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.InitConstraint");
-			byte* params = (byte*)malloc(28);
+			byte params[28] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = PrimComp1;
+void**)&params[0] = PrimComp1;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = PrimComp2;
-			*(class RB_ConstraintSetup**)(params + 8) = Setup;
-			*(float*)(params + 12) = Scale;
-			*(class Actor**)(params + 16) = InOwner;
+void**)&params[4] = PrimComp2;
+			*(class RB_ConstraintSetup**)&params[8] = Setup;
+			*(float*)&params[12] = Scale;
+			*(class Actor**)&params[16] = InOwner;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 20) = InPrimComp;
-			*(bool*)(params + 24) = bMakeKinForBody1;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[20] = InPrimComp;
+			*(bool*)&params[24] = bMakeKinForBody1;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class PhysicsAssetInstance* GetPhysicsAssetInstance()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.GetPhysicsAssetInstance");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PhysicsAssetInstance**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PhysicsAssetInstance**)&params[0];
 		}
-		Vector GetConstraintLocation()
+		Object::Vector GetConstraintLocation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.GetConstraintLocation");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[0];
 		}
 		void SetLinearPositionDrive(bool bEnableXDrive, bool bEnableYDrive, bool bEnableZDrive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetLinearPositionDrive");
-			byte* params = (byte*)malloc(12);
-			*(bool*)params = bEnableXDrive;
-			*(bool*)(params + 4) = bEnableYDrive;
-			*(bool*)(params + 8) = bEnableZDrive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(bool*)&params[0] = bEnableXDrive;
+			*(bool*)&params[4] = bEnableYDrive;
+			*(bool*)&params[8] = bEnableZDrive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLinearVelocityDrive(bool bEnableXDrive, bool bEnableYDrive, bool bEnableZDrive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetLinearVelocityDrive");
-			byte* params = (byte*)malloc(12);
-			*(bool*)params = bEnableXDrive;
-			*(bool*)(params + 4) = bEnableYDrive;
-			*(bool*)(params + 8) = bEnableZDrive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(bool*)&params[0] = bEnableXDrive;
+			*(bool*)&params[4] = bEnableYDrive;
+			*(bool*)&params[8] = bEnableZDrive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAngularPositionDrive(bool bEnableSwingDrive, bool bEnableTwistDrive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularPositionDrive");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bEnableSwingDrive;
-			*(bool*)(params + 4) = bEnableTwistDrive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bEnableSwingDrive;
+			*(bool*)&params[4] = bEnableTwistDrive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAngularVelocityDrive(bool bEnableSwingDrive, bool bEnableTwistDrive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularVelocityDrive");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bEnableSwingDrive;
-			*(bool*)(params + 4) = bEnableTwistDrive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bEnableSwingDrive;
+			*(bool*)&params[4] = bEnableTwistDrive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetLinearPositionTarget(Vector InPosTarget)
+		void SetLinearPositionTarget(Object::Vector InPosTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetLinearPositionTarget");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = InPosTarget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = InPosTarget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetLinearVelocityTarget(Vector InVelTarget)
+		void SetLinearVelocityTarget(Object::Vector InVelTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetLinearVelocityTarget");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = InVelTarget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = InVelTarget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLinearDriveParams(float InSpring, float InDamping, float InForceLimit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetLinearDriveParams");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = InSpring;
-			*(float*)(params + 4) = InDamping;
-			*(float*)(params + 8) = InForceLimit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(float*)&params[0] = InSpring;
+			*(float*)&params[4] = InDamping;
+			*(float*)&params[8] = InForceLimit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetAngularPositionTarget(Quat& InPosTarget)
+		void SetAngularPositionTarget(Object::Quat& InPosTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularPositionTarget");
-			byte* params = (byte*)malloc(16);
-			*(Quat*)params = InPosTarget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InPosTarget = *(Quat*)params;
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Quat*)&params[0] = InPosTarget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			InPosTarget = *(Object::Quat*)&params[0];
 		}
-		void SetAngularVelocityTarget(Vector InVelTarget)
+		void SetAngularVelocityTarget(Object::Vector InVelTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularVelocityTarget");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = InVelTarget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = InVelTarget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAngularDriveParams(float InSpring, float InDamping, float InForceLimit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularDriveParams");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = InSpring;
-			*(float*)(params + 4) = InDamping;
-			*(float*)(params + 8) = InForceLimit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(float*)&params[0] = InSpring;
+			*(float*)&params[4] = InDamping;
+			*(float*)&params[8] = InForceLimit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAngularDOFLimitScale(float InSwing1LimitScale, float InSwing2LimitScale, float InTwistLimitScale, class RB_ConstraintSetup* InSetup)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularDOFLimitScale");
-			byte* params = (byte*)malloc(16);
-			*(float*)params = InSwing1LimitScale;
-			*(float*)(params + 4) = InSwing2LimitScale;
-			*(float*)(params + 8) = InTwistLimitScale;
-			*(class RB_ConstraintSetup**)(params + 12) = InSetup;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(float*)&params[0] = InSwing1LimitScale;
+			*(float*)&params[4] = InSwing2LimitScale;
+			*(float*)&params[8] = InTwistLimitScale;
+			*(class RB_ConstraintSetup**)&params[12] = InSetup;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLinearLimitSize(float NewLimitSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetLinearLimitSize");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = NewLimitSize;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = NewLimitSize;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void MoveKinActorTransform(Matrix& NewTM)
+		void MoveKinActorTransform(Object::Matrix& NewTM)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.MoveKinActorTransform");
-			byte* params = (byte*)malloc(64);
-			*(Matrix*)params = NewTM;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NewTM = *(Matrix*)params;
-			free(params);
+			byte params[64] = { NULL };
+			*(Object::Matrix*)&params[0] = NewTM;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			NewTM = *(Object::Matrix*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

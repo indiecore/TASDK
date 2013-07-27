@@ -1,27 +1,30 @@
 #pragma once
 #include "Engine.TextureRenderTarget2D.h"
 #include "Engine.Canvas.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ScriptedTexture." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class ScriptedTexture : public TextureRenderTarget2D
 	{
 	public:
-		ADD_VAR(::BoolProperty, bSkipNextClear, 0x2)
-		ADD_VAR(::BoolProperty, bNeedsUpdate, 0x1)
+		ADD_BOOL(bSkipNextClear, 276, 0x2)
+		ADD_BOOL(bNeedsUpdate, 276, 0x1)
 		void Render(class Canvas* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ScriptedTexture.Render");
-			byte* params = (byte*)malloc(4);
-			*(class Canvas**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Canvas**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

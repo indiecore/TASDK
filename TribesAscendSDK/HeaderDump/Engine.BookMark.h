@@ -1,20 +1,16 @@
 #pragma once
 #include "Core.Object.h"
-#include "Core.Object.Rotator.h"
-#include "Core.Object.Vector.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.BookMark." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class BookMark : public Object
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
+		ADD_STRUCT(Object::Rotator, Rotation, 72)
+		ADD_STRUCT(Object::Vector, Location, 60)
 	};
 }
 #undef ADD_STRUCT

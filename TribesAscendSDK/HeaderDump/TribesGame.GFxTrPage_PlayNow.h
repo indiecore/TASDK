@@ -2,37 +2,39 @@
 #include "TribesGame.GFxTrPage.h"
 #include "TribesGame.GFxTrAction.h"
 #include "GFxUI.GFxObject.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_PlayNow." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GFxTrPage_PlayNow : public GFxTrPage
 	{
 	public:
-		ADD_VAR(::StrProperty, SeasonUpcomingSubtext, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, NoFriendsOnlineLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RegionsSubtext, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RegionsLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RankedLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, CustomServerLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, JoinFriendLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, JoinFriendInGameSubLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, JoinFriendSubLabel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, CustomServerSubtext, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ComingSoonSubtext, 0xFFFFFFFF)
+		static const auto QUI_CTF = 10350;
+		static const auto QUI_TeamRabbit = 10351;
+		static const auto QUI_Arena = 10352;
+		static const auto QUI_Rabbit = 10353;
+		static const auto QUI_Special = 10354;
+		static const auto QUI_CaptureAndHold = 10377;
+		ADD_STRUCT(ScriptString*, SeasonUpcomingSubtext, 476)
+		ADD_STRUCT(ScriptString*, NoFriendsOnlineLabel, 464)
+		ADD_STRUCT(ScriptString*, RegionsSubtext, 452)
+		ADD_STRUCT(ScriptString*, RegionsLabel, 440)
+		ADD_STRUCT(ScriptString*, RankedLabel, 428)
+		ADD_STRUCT(ScriptString*, CustomServerLabel, 416)
+		ADD_STRUCT(ScriptString*, JoinFriendLabel, 404)
+		ADD_STRUCT(ScriptString*, JoinFriendInGameSubLabel, 392)
+		ADD_STRUCT(ScriptString*, JoinFriendSubLabel, 380)
+		ADD_STRUCT(ScriptString*, CustomServerSubtext, 368)
+		ADD_STRUCT(ScriptString*, ComingSoonSubtext, 356)
 		int GetMeshEnumFromVV(int InVal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.GetMeshEnumFromVV");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = InVal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = InVal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void Initialize()
 		{
@@ -42,21 +44,18 @@ namespace UnrealScript
 		void SpecialAction(class GFxTrAction* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.SpecialAction");
-			byte* params = (byte*)malloc(4);
-			*(class GFxTrAction**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxTrAction**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int TakeAction(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.TakeAction");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 		void RefreshButtons()
 		{
@@ -66,10 +65,9 @@ namespace UnrealScript
 		void FillData(class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.FillData");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveDuplicateQueues()
 		{
@@ -79,34 +77,28 @@ namespace UnrealScript
 		bool HaveDuplicates(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.HaveDuplicates");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.FillOption");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ActionIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[4];
 		}
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_PlayNow.TakeFocus");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = ActionIndex;
-			*(class GFxObject**)(params + 4) = DataList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = ActionIndex;
+			*(class GFxObject**)&params[4] = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[8];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

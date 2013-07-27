@@ -1,85 +1,68 @@
 #pragma once
 #include "TribesGame.TrVehicle.h"
-#include "Core.Object.Vector.h"
 #include "Engine.CameraShake.h"
-#include "Core.Object.Rotator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicle_Tank." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrVehicle_Tank." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrVehicle_Tank." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrVehicle_Tank : public TrVehicle
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_CameraShakeEffectiveRadius, 0xFFFFFFFF)
-		ADD_OBJECT(CameraShake, m_FireCameraShake)
-		ADD_VAR(::ByteProperty, GunnerFiringMode, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, GunnerFlashCount, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, GunnerWeaponRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, GunnerFlashLocation, 0xFFFFFFFF)
+		ADD_STRUCT(float, m_CameraShakeEffectiveRadius, 3244)
+		ADD_OBJECT(CameraShake, m_FireCameraShake, 3240)
+		ADD_STRUCT(byte, GunnerFiringMode, 3237)
+		ADD_STRUCT(byte, GunnerFlashCount, 3236)
+		ADD_STRUCT(Object::Rotator, GunnerWeaponRotation, 3224)
+		ADD_STRUCT(Object::Vector, GunnerFlashLocation, 3212)
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void VehicleWeaponFireEffects(Vector HitLocation, int SeatIndex)
+		void VehicleWeaponFireEffects(Object::Vector HitLocation, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.VehicleWeaponFireEffects");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitLocation;
-			*(int*)(params + 12) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(int*)&params[12] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessViewRotationBasedOnSeat(int SeatIndex, float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		void ProcessViewRotationBasedOnSeat(int SeatIndex, float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.ProcessViewRotationBasedOnSeat");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = SeatIndex;
-			*(float*)(params + 4) = DeltaTime;
-			*(Rotator*)(params + 8) = out_ViewRotation;
-			*(Rotator*)(params + 20) = out_DeltaRot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_ViewRotation = *(Rotator*)(params + 8);
-			out_DeltaRot = *(Rotator*)(params + 20);
-			free(params);
+			byte params[32] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(float*)&params[4] = DeltaTime;
+			*(Object::Rotator*)&params[8] = out_ViewRotation;
+			*(Object::Rotator*)&params[20] = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_ViewRotation = *(Object::Rotator*)&params[8];
+			out_DeltaRot = *(Object::Rotator*)&params[20];
 		}
-		Rotator LimitViewRotation(Rotator LimitViewRotation, float LimitViewPitchMin, float LimitViewPitchMax)
+		Object::Rotator LimitViewRotation(Object::Rotator LimitViewRotation, float LimitViewPitchMin, float LimitViewPitchMax)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.LimitViewRotation");
-			byte* params = (byte*)malloc(32);
-			*(Rotator*)params = LimitViewRotation;
-			*(float*)(params + 12) = LimitViewPitchMin;
-			*(float*)(params + 16) = LimitViewPitchMax;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(Object::Rotator*)&params[0] = LimitViewRotation;
+			*(float*)&params[12] = LimitViewPitchMin;
+			*(float*)&params[16] = LimitViewPitchMax;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

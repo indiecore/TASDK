@@ -1,34 +1,24 @@
 #pragma once
 #include "Engine.UIDataStore_OnlineGameSearch.h"
 #include "UDKBase.UDKUIDataProvider_ServerDetails.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKDataStore_GameSearchBase." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UDKDataStore_GameSearchBase : public UIDataStore_OnlineGameSearch
 	{
 	public:
-		ADD_OBJECT(UDKUIDataProvider_ServerDetails, ServerDetailsProvider)
-		bool GetEnabledMutators(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& MutatorIndices)
+		ADD_OBJECT(UDKUIDataProvider_ServerDetails, ServerDetailsProvider, 168)
+		bool GetEnabledMutators(ScriptArray<int>& MutatorIndices)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.GetEnabledMutators");
-			byte* params = (byte*)malloc(16);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = MutatorIndices;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MutatorIndices = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptArray<int>*)&params[0] = MutatorIndices;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			MutatorIndices = *(ScriptArray<int>*)&params[0];
+			return *(bool*)&params[12];
 		}
 		void Init()
 		{
@@ -38,40 +28,33 @@ void**)params;
 		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.SubmitGameSearch");
-			byte* params = (byte*)malloc(9);
-			*params = ControllerIndex;
-			*(bool*)(params + 4) = bInvalidateExistingSearchResults;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[9] = { NULL };
+			params[0] = ControllerIndex;
+			*(bool*)&params[4] = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void OnSearchComplete(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.OnSearchComplete");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.HasOutstandingQueries");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bRestrictCheckToSelf;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bRestrictCheckToSelf;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool HasExistingSearchResults()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.HasExistingSearchResults");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 	};
 }

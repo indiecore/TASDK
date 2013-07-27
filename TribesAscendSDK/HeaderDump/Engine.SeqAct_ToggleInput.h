@@ -1,18 +1,22 @@
 #pragma once
 #include "Engine.SeqAct_Toggle.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_ToggleInput." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
 namespace UnrealScript
 {
 	class SeqAct_ToggleInput : public SeqAct_Toggle
 	{
 	public:
-		ADD_VAR(::BoolProperty, bToggleMovement, 0x1)
-		ADD_VAR(::BoolProperty, bToggleTurning, 0x2)
+		ADD_BOOL(bToggleMovement, 232, 0x1)
+		ADD_BOOL(bToggleTurning, 232, 0x2)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL

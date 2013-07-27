@@ -1,27 +1,18 @@
 #pragma once
 #include "GameFramework.SeqEvent_MobileZoneBase.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileLook." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.SeqEvent_MobileLook." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqEvent_MobileLook : public SeqEvent_MobileZoneBase
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, StickStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Yaw, 0xFFFFFFFF)
+		ADD_STRUCT(Object::Vector, RotationVector, 276)
+		ADD_STRUCT(float, StickStrength, 272)
+		ADD_STRUCT(float, Yaw, 268)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

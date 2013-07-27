@@ -1,56 +1,74 @@
 #pragma once
 #include "UTGame.UTBot.h"
 #include "Engine.Controller.h"
+#include "Core.Object.h"
 #include "UTGame.UTPickupFactory.h"
 #include "Engine.ParticleSystem.h"
-#include "UTGame.UTWeaponLocker.ReplacementWeaponEntry.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTWeaponLocker." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTWeaponLocker." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTWeaponLocker." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTWeaponLocker : public UTPickupFactory
 	{
 	public:
-		ADD_VAR(::FloatProperty, NextProximityCheckTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ScaleRate, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, WeaponSpawnEffectTemplate)
-		ADD_OBJECT(ParticleSystem, ActiveEffectTemplate)
-		ADD_OBJECT(ParticleSystem, InactiveEffectTemplate)
-		ADD_VAR(::FloatProperty, ProximityDistanceSquared, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentWeaponScaleX, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bScalingUp, 0x4)
-		ADD_VAR(::BoolProperty, bPlayerNearby, 0x2)
-		ADD_VAR(::BoolProperty, bIsActive, 0x1)
-		ADD_VAR(::StrProperty, LockerString, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<ReplacementWeaponEntry>, ReplacementWeapons, 0xFFFFFFFF)
+		class WeaponEntry
+		{
+		public:
+			ADD_OBJECT(ScriptClass, WeaponClass, 0)
+		};
+		class PawnToucher
+		{
+		public:
+			ADD_STRUCT(float, NextTouchTime, 4)
+			ADD_OBJECT(Pawn, P, 0)
+		};
+		class ReplacementWeaponEntry
+		{
+		public:
+			ADD_OBJECT(ScriptClass, WeaponClass, 4)
+			ADD_BOOL(bReplaced, 0, 0x1)
+		};
+		ADD_STRUCT(ScriptArray<UTWeaponLocker::WeaponEntry>, Weapons, 944)
+		ADD_STRUCT(ScriptArray<Object::Vector>, LockerPositions, 1004)
+		ADD_STRUCT(ScriptArray<UTWeaponLocker::PawnToucher>, Customers, 1028)
+		ADD_STRUCT(float, NextProximityCheckTime, 1076)
+		ADD_STRUCT(float, ScaleRate, 1072)
+		ADD_OBJECT(ParticleSystem, WeaponSpawnEffectTemplate, 1068)
+		ADD_OBJECT(ParticleSystem, ActiveEffectTemplate, 1064)
+		ADD_OBJECT(ParticleSystem, InactiveEffectTemplate, 1060)
+		ADD_STRUCT(float, ProximityDistanceSquared, 1048)
+		ADD_STRUCT(float, CurrentWeaponScaleX, 1044)
+		ADD_BOOL(bScalingUp, 1040, 0x4)
+		ADD_BOOL(bPlayerNearby, 1040, 0x2)
+		ADD_BOOL(bIsActive, 1040, 0x1)
+		ADD_STRUCT(ScriptString*, LockerString, 1016)
+		ADD_STRUCT(UTWeaponLocker::ReplacementWeaponEntry, ReplacementWeapons, 956)
 		float BotDesireability(class Pawn* Bot, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.BotDesireability");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = Bot;
-			*(class Controller**)(params + 4) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = Bot;
+			*(class Controller**)&params[4] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[8];
 		}
 		void SetInitialState()
 		{
@@ -60,33 +78,27 @@ namespace UnrealScript
 		bool ShouldCamp(class UTBot* B, float MaxWait)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ShouldCamp");
-			byte* params = (byte*)malloc(12);
-			*(class UTBot**)params = B;
-			*(float*)(params + 4) = MaxWait;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class UTBot**)&params[0] = B;
+			*(float*)&params[4] = MaxWait;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		bool AddCustomer(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.AddCustomer");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool HasCustomer(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.HasCustomer");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
@@ -101,44 +113,38 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplaceWeapon(int Index, ScriptClass* NewWeaponClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ReplaceWeapon");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			*(ScriptClass**)(params + 4) = NewWeaponClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptClass**)&params[4] = NewWeaponClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Reset()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.Reset");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetHumanReadableName()
+		ScriptString* GetHumanReadableName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.GetHumanReadableName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.DetourWeight");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = Other;
-			*(float*)(params + 4) = PathWeight;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			*(float*)&params[4] = PathWeight;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[8];
 		}
 		void InitializePickup()
 		{
@@ -153,20 +159,18 @@ namespace UnrealScript
 		void NotifyLocalPlayerDead(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.NotifyLocalPlayerDead");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerController**)params = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPlayerNearby(class PlayerController* PC, bool bNewPlayerNearby, bool bPlayEffects)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.SetPlayerNearby");
-			byte* params = (byte*)malloc(12);
-			*(class PlayerController**)params = PC;
-			*(bool*)(params + 4) = bNewPlayerNearby;
-			*(bool*)(params + 8) = bPlayEffects;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(bool*)&params[4] = bNewPlayerNearby;
+			*(bool*)&params[8] = bPlayEffects;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyWeapons()
 		{
@@ -180,6 +184,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

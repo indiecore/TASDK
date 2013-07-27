@@ -1,59 +1,52 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "TribesGame.TrProj_Mine.h"
+#include "Core.Object.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_Claymore." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrProj_Claymore : public TrProj_Mine
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fScalarAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fDetonationAngle, 0xFFFFFFFF)
-		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
+		ADD_STRUCT(float, m_fScalarAngle, 904)
+		ADD_STRUCT(float, m_fDetonationAngle, 900)
+		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Claymore.InitProjectile");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = Direction;
-			*(ScriptClass**)(params + 12) = ClassToInherit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = Direction;
+			*(ScriptClass**)&params[12] = ClassToInherit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetExplosionEffectParameters(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* ProjExplosion)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Claymore.SetExplosionEffectParameters");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = ProjExplosion;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = ProjExplosion;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnEnteredDetonationArea(class Pawn* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Claymore.PawnEnteredDetonationArea");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Claymore.GetMarker");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Texture2D**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Texture2D**)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

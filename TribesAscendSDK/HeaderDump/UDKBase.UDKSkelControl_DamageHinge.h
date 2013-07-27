@@ -1,21 +1,20 @@
 #pragma once
 #include "UDKBase.UDKSkelControl_Damage.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_DamageHinge." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKSkelControl_DamageHinge : public UDKSkelControl_Damage
 	{
 	public:
-		ADD_VAR(::FloatProperty, SpringStiffness, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AVModifier, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, PivotAxis, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxAngle, 0xFFFFFFFF)
+		ADD_STRUCT(float, SpringStiffness, 392)
+		ADD_STRUCT(float, CurrentAngle, 388)
+		ADD_STRUCT(float, AVModifier, 384)
+		ADD_STRUCT(Object::EAxis, PivotAxis, 380)
+		ADD_STRUCT(float, MaxAngle, 376)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

@@ -1,43 +1,42 @@
 #pragma once
 #include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.h"
 #include "Engine.NavigationHandle.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.NavMeshGoal_OutOfViewFrom." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.NavMeshGoal_OutOfViewFrom." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NavMeshGoal_OutOfViewFrom : public NavMeshPathGoalEvaluator
 	{
 	public:
-		ADD_VAR(::BoolProperty, bShowDebug, 0x1)
-		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, GoalPoly, 0xFFFFFFFF)
+		ADD_BOOL(bShowDebug, 96, 0x1)
+		ADD_STRUCT(Object::Vector, OutOfViewLocation, 84)
+		ADD_STRUCT(Object::Pointer, GoalPoly, 80)
 		void RecycleNative()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshGoal_OutOfViewFrom.RecycleNative");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool MustBeHiddenFromThisPoint(class NavigationHandle* NavHandle, Vector InOutOfViewLocation)
+		bool MustBeHiddenFromThisPoint(class NavigationHandle* NavHandle, Object::Vector InOutOfViewLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshGoal_OutOfViewFrom.MustBeHiddenFromThisPoint");
-			byte* params = (byte*)malloc(20);
-			*(class NavigationHandle**)params = NavHandle;
-			*(Vector*)(params + 4) = InOutOfViewLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(Object::Vector*)&params[4] = InOutOfViewLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{
@@ -46,5 +45,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

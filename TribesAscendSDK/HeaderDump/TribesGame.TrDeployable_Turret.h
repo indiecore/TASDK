@@ -1,38 +1,56 @@
 #pragma once
-#include "Core.Object.Color.h"
+#include "Engine.SkelControlLookAt.h"
 #include "TribesGame.TrDeployable.h"
+#include "GameFramework.GameSkelCtrl_Recoil.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployable_Turret." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDeployable_Turret." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDeployable_Turret : public TrDeployable
 	{
 	public:
-		ADD_VAR(::FloatProperty, m_fLastStallTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fFireStallRestoreTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTimeToIgnoreInvulnerable, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTimeToAcquireTarget, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fTargetAcquiredTime, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, m_TargetAcquiredSoundCue)
-		ADD_VAR(::FloatProperty, m_fDeltaFireInterval, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, m_MuzzleFlashLightClass)
-		ADD_VAR(::BoolProperty, m_bCanTargetVehicles, 0x2)
-		ADD_VAR(::BoolProperty, m_bEnabled, 0x1)
+		class IgnorePawn
+		{
+		public:
+			ADD_STRUCT(float, UnignoreTime, 4)
+			ADD_OBJECT(TrPawn, PawnToIgnore, 0)
+		};
+		ADD_STRUCT(ScriptArray<class SkelControlLookAt*>, m_LookAtSkelControls, 1528)
+		ADD_STRUCT(ScriptArray<ScriptName>, m_LookAtSkelControlNames, 1540)
+		ADD_STRUCT(ScriptArray<class GameSkelCtrl_Recoil*>, m_RecoilSkelControls, 1552)
+		ADD_STRUCT(ScriptArray<ScriptName>, m_RecoilSkelControlNames, 1564)
+		ADD_STRUCT(ScriptArray<TrDeployable_Turret::IgnorePawn>, m_IgnorePawnList, 1604)
+		ADD_STRUCT(float, m_fLastStallTime, 1624)
+		ADD_STRUCT(float, m_fFireStallRestoreTime, 1620)
+		ADD_STRUCT(float, m_fTimeToIgnoreInvulnerable, 1616)
+		ADD_STRUCT(float, m_fTimeToAcquireTarget, 1600)
+		ADD_STRUCT(float, m_fTargetAcquiredTime, 1596)
+		ADD_OBJECT(SoundCue, m_TargetAcquiredSoundCue, 1592)
+		ADD_STRUCT(float, m_fDeltaFireInterval, 1588)
+		ADD_OBJECT(ScriptClass, m_MuzzleFlashLightClass, 1580)
+		ADD_BOOL(m_bCanTargetVehicles, 1524, 0x2)
+		ADD_BOOL(m_bEnabled, 1524, 0x1)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PostBeginPlay");
@@ -43,12 +61,11 @@ namespace UnrealScript
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DeployComplete()
 		{
@@ -63,11 +80,9 @@ void**)params = SkelComp;
 		float GetAcquireDelayTime()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetAcquireDelayTime");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		void CleanupIgnoreList()
 		{
@@ -77,47 +92,40 @@ void**)params = SkelComp;
 		bool CanTargetPawn(class Pawn* aPawn)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CanTargetPawn");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = aPawn;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		class Pawn* GetTargetPawn()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetTargetPawn");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Pawn**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Pawn**)&params[0];
 		}
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateAim(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.UpdateAim");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayFireEffects(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
+		void PlayFireEffects(class Weapon* InWeapon, bool bViaReplication, Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PlayFireEffects");
-			byte* params = (byte*)malloc(20);
-			*(class Weapon**)params = InWeapon;
-			*(bool*)(params + 4) = bViaReplication;
-			*(Vector*)(params + 8) = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class Weapon**)&params[0] = InWeapon;
+			*(bool*)&params[4] = bViaReplication;
+			*(Object::Vector*)&params[8] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CauseMuzzleFlash()
 		{
@@ -131,35 +139,30 @@ void**)params = SkelComp;
 		}
 		void SetMuzzleFlashParams(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* PSC, Color MuzzleFlashColor)
+void* PSC, Object::Color MuzzleFlashColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.SetMuzzleFlashParams");
-			byte* params = (byte*)malloc(8);
+			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = PSC;
-			*(Color*)(params + 4) = MuzzleFlashColor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = PSC;
+			*(Object::Color*)&params[4] = MuzzleFlashColor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
+		Object::Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetWeaponStartTraceLocation");
-			byte* params = (byte*)malloc(16);
-			*(class Weapon**)params = CurrentWeapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class Weapon**)&params[0] = CurrentWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
 		class Texture2D* GetMarker()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetMarker");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Texture2D**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Texture2D**)&params[0];
 		}
 		void AwardKillAssists()
 		{
@@ -168,5 +171,6 @@ void**)params = PSC;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

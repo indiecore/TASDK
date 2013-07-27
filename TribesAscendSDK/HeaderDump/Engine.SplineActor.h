@@ -1,51 +1,54 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Actor.h"
-#include "Core.Object.InterpCurveFloat.h"
-#include "Core.Object.Color.h"
-#include "Core.Object.Vector.h"
 #include "Engine.SeqAct_Toggle.h"
 #include "Engine.SeqAct_ToggleHidden.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SplineActor." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SplineActor." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SplineActor." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class SplineActor : public Actor
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, SplineVelocityOverTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, visitedWeight, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, bestPathWeight, 0xFFFFFFFF)
-		ADD_OBJECT(SplineActor, previousPath)
-		ADD_OBJECT(SplineActor, prevOrdered)
-		ADD_OBJECT(SplineActor, nextOrdered)
-		ADD_VAR(::BoolProperty, bAlreadyVisited, 0x2)
-		ADD_VAR(::BoolProperty, bDisableDestination, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, SplineColor, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SplineActorTangent, 0xFFFFFFFF)
-		Vector GetWorldSpaceTangent()
+		class SplineConnection
+		{
+		public:
+			ADD_OBJECT(SplineActor, ConnectTo, 4)
+		};
+		ADD_STRUCT(ScriptArray<SplineActor::SplineConnection>, Connections, 476)
+		ADD_STRUCT(ScriptArray<class SplineActor*>, LinksFrom, 508)
+		ADD_STRUCT(Object::InterpCurveFloat, SplineVelocityOverTime, 540)
+		ADD_STRUCT(int, visitedWeight, 536)
+		ADD_STRUCT(int, bestPathWeight, 532)
+		ADD_OBJECT(SplineActor, previousPath, 528)
+		ADD_OBJECT(SplineActor, prevOrdered, 524)
+		ADD_OBJECT(SplineActor, nextOrdered, 520)
+		ADD_BOOL(bAlreadyVisited, 504, 0x2)
+		ADD_BOOL(bDisableDestination, 504, 0x1)
+		ADD_STRUCT(Object::Color, SplineColor, 500)
+		ADD_STRUCT(Object::Vector, SplineActorTangent, 488)
+		Object::Vector GetWorldSpaceTangent()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.GetWorldSpaceTangent");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[0];
 		}
 		void UpdateSplineComponents()
 		{
@@ -55,65 +58,56 @@ namespace UnrealScript
 		void UpdateConnectedSplineComponents(bool bFinish)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.UpdateConnectedSplineComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bFinish;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bFinish;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddConnectionTo(class SplineActor* NextActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.AddConnectionTo");
-			byte* params = (byte*)malloc(4);
-			*(class SplineActor**)params = NextActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SplineActor**)&params[0] = NextActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsConnectedTo(class SplineActor* NextActor, bool bCheckForDisableDestination)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.IsConnectedTo");
-			byte* params = (byte*)malloc(12);
-			*(class SplineActor**)params = NextActor;
-			*(bool*)(params + 4) = bCheckForDisableDestination;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class SplineActor**)&params[0] = NextActor;
+			*(bool*)&params[4] = bCheckForDisableDestination;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* FindSplineComponentTo(class SplineActor* NextActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.FindSplineComponentTo");
-			byte* params = (byte*)malloc(8);
-			*(class SplineActor**)params = NextActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
+			byte params[8] = { NULL };
+			*(class SplineActor**)&params[0] = NextActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4);
-			free(params);
-			return returnVal;
+void**)&params[4];
 		}
 		class SplineActor* FindTargetForComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SplineComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.FindTargetForComponent");
-			byte* params = (byte*)malloc(8);
+			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SplineComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SplineActor**)(params + 4);
-			free(params);
-			return returnVal;
+void**)&params[0] = SplineComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SplineActor**)&params[4];
 		}
 		void BreakConnectionTo(class SplineActor* NextActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.BreakConnectionTo");
-			byte* params = (byte*)malloc(4);
-			*(class SplineActor**)params = NextActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SplineActor**)&params[0] = NextActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BreakAllConnections()
 		{
@@ -128,75 +122,54 @@ void**)params = SplineComp;
 		class SplineActor* GetRandomConnection(bool bUseLinksFrom)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.GetRandomConnection");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bUseLinksFrom;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SplineActor**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bUseLinksFrom;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SplineActor**)&params[4];
 		}
-		class SplineActor* GetBestConnectionInDirection(Vector DesiredDir, bool bUseLinksFrom)
+		class SplineActor* GetBestConnectionInDirection(Object::Vector DesiredDir, bool bUseLinksFrom)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.GetBestConnectionInDirection");
-			byte* params = (byte*)malloc(20);
-			*(Vector*)params = DesiredDir;
-			*(bool*)(params + 12) = bUseLinksFrom;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class SplineActor**)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(Object::Vector*)&params[0] = DesiredDir;
+			*(bool*)&params[12] = bUseLinksFrom;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class SplineActor**)&params[16];
 		}
-		bool FindSplinePathTo(class SplineActor* Goal, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& OutRoute)
+		bool FindSplinePathTo(class SplineActor* Goal, ScriptArray<class SplineActor*>& OutRoute)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.FindSplinePathTo");
-			byte* params = (byte*)malloc(20);
-			*(class SplineActor**)params = Goal;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4) = OutRoute;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutRoute = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class SplineActor**)&params[0] = Goal;
+			*(ScriptArray<class SplineActor*>*)&params[4] = OutRoute;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutRoute = *(ScriptArray<class SplineActor*>*)&params[4];
+			return *(bool*)&params[16];
 		}
-		void GetAllConnectedSplineActors(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& OutSet)
+		void GetAllConnectedSplineActors(ScriptArray<class SplineActor*>& OutSet)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.GetAllConnectedSplineActors");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = OutSet;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutSet = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<class SplineActor*>*)&params[0] = OutSet;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			OutSet = *(ScriptArray<class SplineActor*>*)&params[0];
 		}
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.OnToggle");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Toggle**)params = inAction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Toggle**)&params[0] = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnToggleHidden(class SeqAct_ToggleHidden* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.OnToggleHidden");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_ToggleHidden**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_ToggleHidden**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

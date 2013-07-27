@@ -4,55 +4,48 @@
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
 #include "Engine.PlayerController.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrTimerMessage." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrTimerMessage." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrTimerMessage : public UTLocalMessage
 	{
 	public:
-		ADD_VAR(::StrProperty, TimerMessage, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, m_sOneMinuteWarningBE)
-		ADD_OBJECT(SoundCue, m_sFiveMinuteWarningBE)
-		ADD_OBJECT(SoundCue, m_sOneMinuteWarningDS)
-		ADD_OBJECT(SoundCue, m_sFiveMinuteWarningDS)
-		ScriptArray<wchar_t> GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ADD_STRUCT(ScriptString*, TimerMessage, 116)
+		ADD_OBJECT(SoundCue, m_sOneMinuteWarningBE, 112)
+		ADD_OBJECT(SoundCue, m_sFiveMinuteWarningBE, 108)
+		ADD_OBJECT(SoundCue, m_sOneMinuteWarningDS, 104)
+		ADD_OBJECT(SoundCue, m_sFiveMinuteWarningDS, 100)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimerMessage.GetString");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Switch;
-			*(bool*)(params + 4) = bPRI1HUD;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Switch;
+			*(bool*)&params[4] = bPRI1HUD;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimerMessage.ClientReceive");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerController**)params = P;
-			*(int*)(params + 4) = Switch;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class PlayerController**)&params[0] = P;
+			*(int*)&params[4] = Switch;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

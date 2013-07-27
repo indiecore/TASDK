@@ -11,14 +11,12 @@ namespace UnrealScript
 		float BotDesireability(class Actor* PickupHolder, class Pawn* P, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupInventory.BotDesireability");
-			byte* params = (byte*)malloc(16);
-			*(class Actor**)params = PickupHolder;
-			*(class Pawn**)(params + 4) = P;
-			*(class Controller**)(params + 8) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class Actor**)&params[0] = PickupHolder;
+			*(class Pawn**)&params[4] = P;
+			*(class Controller**)&params[8] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
 	};
 }

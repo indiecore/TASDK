@@ -1,113 +1,112 @@
 #pragma once
+#include "TribesGame.TrObject.h"
 #include "TribesGame.TrVehicle.h"
 #include "TribesGame.TrStation.h"
-#include "TribesGame.TrVehicleStation.VehicleSpawnInfo.h"
 #include "TribesGame.TrAnimNodeBlendList.h"
 #include "Engine.Texture2D.h"
 #include "TribesGame.TrVehiclePad.h"
 #include "TribesGame.TrPawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicleStation." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrVehicleStation." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrVehicleStation." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrVehicleStation : public TrStation
 	{
 	public:
-		ADD_OBJECT(TrAnimNodeBlendList, m_VehicleStationBlendNode)
-		ADD_VAR(::FloatProperty, m_fTimeToSpawnVehicleAfterRequest, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fInstigatorTeleportTime, 0xFFFFFFFF)
-		ADD_OBJECT(TrPawn, m_PawnRequestingVehicle)
-		ADD_OBJECT(TrVehicle, m_LastSpawnedVehicle)
-		ADD_VAR(::FloatProperty, m_fSpawnTimeStamp, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fPostSpawnLockoutTime, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, m_LastRequestedVehicleType, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, r_nSpawnSequenceEnded, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, r_bSpawnSequenceStarted, 0x2)
-		ADD_VAR(::BoolProperty, r_bIsLocked, 0x1)
-		ADD_VAR(::IntProperty, r_nSpawnedVehicles, 0xFFFFFFFF)
-		ADD_OBJECT(TrVehiclePad, m_VehiclePad)
-		ADD_STRUCT(::NonArithmeticProperty<VehicleSpawnInfo>, m_SpawnList, 0xFFFFFFFF)
-		bool RequestSpawnVehicle(byte VehicleType)
+		static const auto SPAWNED_VEHICLE_LIST_MASK = 0xF;
+		class VehicleSpawnInfo
+		{
+		public:
+			ADD_STRUCT(Object::Rotator, m_rSpawnRotOffset, 20)
+			ADD_STRUCT(Object::Vector, m_vSpawnLocOffset, 8)
+			ADD_STRUCT(int, m_nMaxCount, 4)
+			ADD_OBJECT(ScriptClass, m_VehicleClass, 0)
+		};
+		ADD_OBJECT(TrAnimNodeBlendList, m_VehicleStationBlendNode, 1596)
+		ADD_STRUCT(float, m_fTimeToSpawnVehicleAfterRequest, 1592)
+		ADD_STRUCT(float, m_fInstigatorTeleportTime, 1588)
+		ADD_OBJECT(TrPawn, m_PawnRequestingVehicle, 1584)
+		ADD_OBJECT(TrVehicle, m_LastSpawnedVehicle, 1580)
+		ADD_STRUCT(float, m_fSpawnTimeStamp, 1576)
+		ADD_STRUCT(float, m_fPostSpawnLockoutTime, 1572)
+		ADD_STRUCT(TrObject::EVehicleTypes, m_LastRequestedVehicleType, 1569)
+		ADD_STRUCT(byte, r_nSpawnSequenceEnded, 1568)
+		ADD_BOOL(r_bSpawnSequenceStarted, 1564, 0x2)
+		ADD_BOOL(r_bIsLocked, 1564, 0x1)
+		ADD_STRUCT(int, r_nSpawnedVehicles, 1560)
+		ADD_OBJECT(TrVehiclePad, m_VehiclePad, 1556)
+		ADD_STRUCT(TrVehicleStation::VehicleSpawnInfo, m_SpawnList, 1396)
+		bool RequestSpawnVehicle(TrObject::EVehicleTypes VehicleType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.RequestSpawnVehicle");
-			byte* params = (byte*)malloc(5);
-			*params = VehicleType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		int GetNumVehiclesSpawnedByType(byte VehicleType)
+		int GetNumVehiclesSpawnedByType(TrObject::EVehicleTypes VehicleType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetNumVehiclesSpawnedByType");
-			byte* params = (byte*)malloc(5);
-			*params = VehicleType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
-		int GetMaxVehicleCountAllowed(byte VehicleType)
+		int GetMaxVehicleCountAllowed(TrObject::EVehicleTypes VehicleType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetMaxVehicleCountAllowed");
-			byte* params = (byte*)malloc(5);
-			*params = VehicleType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnEnteredStation(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PawnEnteredStation");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeftStation(class TrPawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PawnLeftStation");
-			byte* params = (byte*)malloc(4);
-			*(class TrPawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStationEnteredEffects()
 		{
@@ -149,45 +148,38 @@ void**)params = SkelComp;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.Unlock");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool AbleToSpawnVehicleType(byte VehicleType)
+		bool AbleToSpawnVehicleType(TrObject::EVehicleTypes VehicleType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.AbleToSpawnVehicleType");
-			byte* params = (byte*)malloc(5);
-			*params = VehicleType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		void AddVehicleToPackedList(byte VehicleType, int Num)
+		void AddVehicleToPackedList(TrObject::EVehicleTypes VehicleType, int Num)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.AddVehicleToPackedList");
-			byte* params = (byte*)malloc(5);
-			*params = VehicleType;
-			*(int*)(params + 4) = Num;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			*(int*)&params[4] = Num;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetMarker");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Texture2D**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Texture2D**)&params[0];
 		}
 		bool ShouldPostRenderForCaH()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.ShouldPostRenderForCaH");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

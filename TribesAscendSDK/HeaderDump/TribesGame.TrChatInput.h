@@ -3,127 +3,123 @@
 #include "Engine.Interaction.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Canvas.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrChatInput." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrChatInput." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrChatInput : public Interaction
 	{
 	public:
-		ADD_VAR(::BoolProperty, bEnableUI, 0x4)
-		ADD_VAR(::BoolProperty, bCtrl, 0x2)
-		ADD_VAR(::BoolProperty, bCaptureKeyInput, 0x1)
-		ADD_VAR(::StrProperty, ChannelStr, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, TypedStrPos, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, TypedStr, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, DefaultTexture_White)
-		ADD_OBJECT(Texture2D, DefaultTexture_Black)
-		ADD_OBJECT(LocalPlayer, ConsoleTargetPlayer)
+		ADD_BOOL(bEnableUI, 148, 0x4)
+		ADD_BOOL(bCtrl, 148, 0x2)
+		ADD_BOOL(bCaptureKeyInput, 148, 0x1)
+		ADD_STRUCT(ScriptString*, ChannelStr, 136)
+		ADD_STRUCT(int, TypedStrPos, 132)
+		ADD_STRUCT(ScriptString*, TypedStr, 120)
+		ADD_OBJECT(Texture2D, DefaultTexture_White, 116)
+		ADD_OBJECT(Texture2D, DefaultTexture_Black, 112)
+		ADD_OBJECT(LocalPlayer, ConsoleTargetPlayer, 108)
 		void Initialized()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.Initialized");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetInputText(ScriptArray<wchar_t> Text)
+		void SetInputText(ScriptString* Text)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.SetInputText");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Text;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Text;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCursorPos(int Position)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.SetCursorPos");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Position;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Position;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ConsoleCommand(ScriptArray<wchar_t> Command)
+		void ConsoleCommand(ScriptString* Command)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.ConsoleCommand");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Command;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Command;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void StartTyping(ScriptArray<wchar_t> Text)
+		void StartTyping(ScriptString* Text)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.StartTyping");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Text;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Text;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender_Console(class Canvas* Canvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.PostRender_Console");
-			byte* params = (byte*)malloc(4);
-			*(class Canvas**)params = Canvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool InputKey(int ControllerId, ScriptName Key, byte Event, float AmountDepressed, bool bGamepad)
+		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.InputKey");
-			byte* params = (byte*)malloc(25);
-			*(int*)params = ControllerId;
-			*(ScriptName*)(params + 4) = Key;
-			*(params + 12) = Event;
-			*(float*)(params + 16) = AmountDepressed;
-			*(bool*)(params + 20) = bGamepad;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[25] = { NULL };
+			*(int*)&params[0] = ControllerId;
+			*(ScriptName*)&params[4] = Key;
+			*(Object::EInputEvent*)&params[12] = Event;
+			*(float*)&params[16] = AmountDepressed;
+			*(bool*)&params[20] = bGamepad;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
-		bool InputChar(int ControllerId, ScriptArray<wchar_t> Unicode)
+		bool InputChar(int ControllerId, ScriptString* Unicode)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.InputChar");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = ControllerId;
-			*(ScriptArray<wchar_t>*)(params + 4) = Unicode;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = ControllerId;
+			*(ScriptString**)&params[4] = Unicode;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void FlushPlayerInput()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.FlushPlayerInput");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool ProcessControlKey(ScriptName Key, byte Event)
+		bool ProcessControlKey(ScriptName Key, Object::EInputEvent Event)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.ProcessControlKey");
-			byte* params = (byte*)malloc(13);
-			*(ScriptName*)params = Key;
-			*(params + 8) = Event;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(ScriptName*)&params[0] = Key;
+			*(Object::EInputEvent*)&params[8] = Event;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		void AppendInputText(ScriptArray<wchar_t> Text)
+		void AppendInputText(ScriptString* Text)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.AppendInputText");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Text;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Text;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

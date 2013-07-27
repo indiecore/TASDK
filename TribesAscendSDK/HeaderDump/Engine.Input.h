@@ -1,56 +1,76 @@
 #pragma once
 #include "Engine.Interaction.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Input." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class Input : public Interaction
 	{
 	public:
-		ADD_VAR(::FloatProperty, CurrentDeltaTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentDelta, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, CurrentEvent, 0xFFFFFFFF)
+		class KeyBind
+		{
+		public:
+			ADD_BOOL(bIgnoreAlt, 20, 0x20)
+			ADD_BOOL(bIgnoreShift, 20, 0x10)
+			ADD_BOOL(bIgnoreCtrl, 20, 0x8)
+			ADD_BOOL(Alt, 20, 0x4)
+			ADD_BOOL(Shift, 20, 0x2)
+			ADD_BOOL(Control, 20, 0x1)
+			ADD_STRUCT(ScriptString*, Command, 8)
+			ADD_STRUCT(ScriptName, Name, 0)
+		};
+		ADD_STRUCT(ScriptArray<Input::KeyBind>, Bindings, 108)
+		ADD_STRUCT(ScriptArray<ScriptName>, PressedKeys, 120)
+		ADD_STRUCT(ScriptArray<Object::Pointer>, AxisArray, 204)
+		ADD_STRUCT(float, CurrentDeltaTime, 140)
+		ADD_STRUCT(float, CurrentDelta, 136)
+		ADD_STRUCT(Object::EInputEvent, CurrentEvent, 132)
 		void ResetInput()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.ResetInput");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptArray<wchar_t> GetBind(ScriptName& Key)
+		ScriptString* GetBind(ScriptName& Key)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.GetBind");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = Key;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Key = *(ScriptName*)params;
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = Key;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Key = *(ScriptName*)&params[0];
+			return *(ScriptString**)&params[8];
 		}
-		ScriptArray<wchar_t> GetBindNameFromCommandScript(ScriptArray<wchar_t>& KeyCommand)
+		ScriptString* GetBindNameFromCommandScript(ScriptString*& KeyCommand)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.GetBindNameFromCommandScript");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = KeyCommand;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			KeyCommand = *(ScriptArray<wchar_t>*)params;
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = KeyCommand;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			KeyCommand = *(ScriptString**)&params[0];
+			return *(ScriptString**)&params[12];
 		}
-		void SetBind(ScriptName& BindName, ScriptArray<wchar_t> Command)
+		void SetBind(ScriptName& BindName, ScriptString* Command)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.SetBind");
-			byte* params = (byte*)malloc(20);
-			*(ScriptName*)params = BindName;
-			*(ScriptArray<wchar_t>*)(params + 8) = Command;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BindName = *(ScriptName*)params;
-			free(params);
+			byte params[20] = { NULL };
+			*(ScriptName*)&params[0] = BindName;
+			*(ScriptString**)&params[8] = Command;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			BindName = *(ScriptName*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

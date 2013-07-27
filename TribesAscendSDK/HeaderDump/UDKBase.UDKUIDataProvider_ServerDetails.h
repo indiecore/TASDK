@@ -1,36 +1,30 @@
 #pragma once
 #include "UDKBase.UDKUIDataProvider_SimpleElementProvider.h"
 #include "Engine.UIDataProvider_Settings.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKUIDataProvider_ServerDetails." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKUIDataProvider_ServerDetails : public UDKUIDataProvider_SimpleElementProvider
 	{
 	public:
-		ADD_VAR(::IntProperty, SearchResultsRow, 0xFFFFFFFF)
+		ADD_STRUCT(int, SearchResultsRow, 92)
 		class UIDataProvider_Settings* GetSearchResultsProvider()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_ServerDetails.GetSearchResultsProvider");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UIDataProvider_Settings**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UIDataProvider_Settings**)&params[0];
 		}
 		int GetElementCount()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_ServerDetails.GetElementCount");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

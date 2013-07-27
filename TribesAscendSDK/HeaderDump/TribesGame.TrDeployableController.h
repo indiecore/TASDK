@@ -2,37 +2,31 @@
 #include "Engine.AIController.h"
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.Weapon.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDeployableController." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDeployableController : public AIController
 	{
 	public:
-		ADD_OBJECT(TrPlayerController, m_SpawnedFromController)
+		ADD_OBJECT(TrPlayerController, m_SpawnedFromController, 924)
 		bool CanFireWeapon(class Weapon* Wpn, byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableController.CanFireWeapon");
-			byte* params = (byte*)malloc(9);
-			*(class Weapon**)params = Wpn;
-			*(params + 4) = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[9] = { NULL };
+			*(class Weapon**)&params[0] = Wpn;
+			params[4] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		byte ScriptGetTeamNum()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableController.ScriptGetTeamNum");
-			byte* params = (byte*)malloc(1);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *params;
-			free(params);
-			return returnVal;
+			byte params[1] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[0];
 		}
 	};
 }

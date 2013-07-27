@@ -1,31 +1,26 @@
 #pragma once
 #include "Engine.NavMeshGoal_GenericFilterContainer.h"
 #include "Engine.NavMeshGoal_Filter.h"
-#include "Core.Object.Vector.h"
-#include "Core.Object.Pointer.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoalFilter_OutOfViewFrom." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class NavMeshGoalFilter_OutOfViewFrom : public NavMeshGoal_Filter
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, GoalPoly, 0xFFFFFFFF)
-		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOutOfViewLocation)
+		ADD_STRUCT(Object::Vector, OutOfViewLocation, 76)
+		ADD_STRUCT(Object::Pointer, GoalPoly, 72)
+		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Object::Vector InOutOfViewLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_OutOfViewFrom.MustBeHiddenFromThisPoint");
-			byte* params = (byte*)malloc(20);
-			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
-			*(Vector*)(params + 4) = InOutOfViewLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class NavMeshGoal_GenericFilterContainer**)&params[0] = FilterContainer;
+			*(Object::Vector*)&params[4] = InOutOfViewLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 	};
 }

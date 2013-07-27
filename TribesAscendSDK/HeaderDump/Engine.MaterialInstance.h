@@ -1,105 +1,98 @@
 #pragma once
-#include "Core.Object.Guid.h"
 #include "Engine.MaterialInterface.h"
-#include "Core.Object.Pointer.h"
-#include "Engine.Texture2D.h"
-#include "Engine.Font.h"
-#include "Engine.Texture.h"
-#include "Core.Object.InterpCurveFloat.h"
 #include "Engine.PhysicalMaterial.h"
-#include "Core.Object.LinearColor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.Texture.h"
+#include "Core.Object.h"
+#include "Engine.Font.h"
+#include "Engine.Texture2D.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialInstance." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialInstance." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.MaterialInstance." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MaterialInstance : public MaterialInterface
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Guid>, ParentLightingGuid, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Resources, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, StaticPermutationResources, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, StaticParameters, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bNeedsMaterialFlattening, 0x8)
-		ADD_VAR(::BoolProperty, ReentrantFlag, 0x4)
-		ADD_VAR(::BoolProperty, bStaticPermutationDirty, 0x2)
-		ADD_VAR(::BoolProperty, bHasStaticPermutationResource, 0x1)
-		ADD_OBJECT(PhysicalMaterial, WhitePhysicalMaterial)
-		ADD_OBJECT(PhysicalMaterial, BlackPhysicalMaterial)
-		ADD_VAR(::IntProperty, PhysMaterialMaskUVChannel, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, PhysMaterialMask)
-		ADD_OBJECT(MaterialInterface, Parent)
-		ADD_OBJECT(PhysicalMaterial, PhysMaterial)
+		ADD_STRUCT(ScriptArray<class Texture*>, ReferencedTextures, 392)
+		ADD_STRUCT(ScriptArray<Object::Guid>, ReferencedTextureGuids, 404)
+		ADD_STRUCT(Object::Guid, ParentLightingGuid, 416)
+		ADD_STRUCT(Object::Pointer, Resources, 380)
+		ADD_STRUCT(Object::Pointer, StaticPermutationResources, 372)
+		ADD_STRUCT(Object::Pointer, StaticParameters, 364)
+		ADD_BOOL(bNeedsMaterialFlattening, 360, 0x8)
+		ADD_BOOL(ReentrantFlag, 360, 0x4)
+		ADD_BOOL(bStaticPermutationDirty, 360, 0x2)
+		ADD_BOOL(bHasStaticPermutationResource, 360, 0x1)
+		ADD_OBJECT(PhysicalMaterial, WhitePhysicalMaterial, 356)
+		ADD_OBJECT(PhysicalMaterial, BlackPhysicalMaterial, 352)
+		ADD_STRUCT(int, PhysMaterialMaskUVChannel, 348)
+		ADD_OBJECT(Texture2D, PhysMaterialMask, 344)
+		ADD_OBJECT(MaterialInterface, Parent, 340)
+		ADD_OBJECT(PhysicalMaterial, PhysMaterial, 336)
 		void SetParent(class MaterialInterface* NewParent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetParent");
-			byte* params = (byte*)malloc(4);
-			*(class MaterialInterface**)params = NewParent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class MaterialInterface**)&params[0] = NewParent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetVectorParameterValue(ScriptName ParameterName, LinearColor& Value)
+		void SetVectorParameterValue(ScriptName ParameterName, Object::LinearColor& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetVectorParameterValue");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = ParameterName;
-			*(LinearColor*)(params + 8) = Value;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(LinearColor*)(params + 8);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::LinearColor*)&params[8] = Value;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Value = *(Object::LinearColor*)&params[8];
 		}
 		void SetScalarParameterValue(ScriptName ParameterName, float Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarParameterValue");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ParameterName;
-			*(float*)(params + 8) = Value;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(float*)&params[8] = Value;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetScalarCurveParameterValue(ScriptName ParameterName, InterpCurveFloat& Value)
+		void SetScalarCurveParameterValue(ScriptName ParameterName, Object::InterpCurveFloat& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarCurveParameterValue");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = ParameterName;
-			*(InterpCurveFloat*)(params + 8) = Value;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(InterpCurveFloat*)(params + 8);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(Object::InterpCurveFloat*)&params[8] = Value;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Value = *(Object::InterpCurveFloat*)&params[8];
 		}
 		void SetTextureParameterValue(ScriptName ParameterName, class Texture* Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetTextureParameterValue");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = ParameterName;
-			*(class Texture**)(params + 8) = Value;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(class Texture**)&params[8] = Value;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFontParameterValue(ScriptName ParameterName, class Font* FontValue, int FontPage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetFontParameterValue");
-			byte* params = (byte*)malloc(16);
-			*(ScriptName*)params = ParameterName;
-			*(class Font**)(params + 8) = FontValue;
-			*(int*)(params + 12) = FontPage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptName*)&params[0] = ParameterName;
+			*(class Font**)&params[8] = FontValue;
+			*(int*)&params[12] = FontPage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearParameterValues()
 		{
@@ -109,14 +102,12 @@ namespace UnrealScript
 		bool IsInMapOrTransientPackage()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.IsInMapOrTransientPackage");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

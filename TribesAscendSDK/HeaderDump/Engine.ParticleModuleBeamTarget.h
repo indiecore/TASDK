@@ -1,36 +1,38 @@
 #pragma once
-#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleBeamBase.h"
-#include "Core.DistributionVector.RawDistributionVector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.DistributionVector.h"
+#include "Core.DistributionFloat.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleBeamTarget." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleBeamTarget." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleBeamTarget : public ParticleModuleBeamBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, LockRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, TargetStrength, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, TargetTangent, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bLockTargetStength, 0x8)
-		ADD_VAR(::BoolProperty, bLockTargetTangent, 0x4)
-		ADD_VAR(::BoolProperty, bLockTarget, 0x2)
-		ADD_VAR(::BoolProperty, bTargetAbsolute, 0x1)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, Target, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, TargetName, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, TargetTangentMethod, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, TargetMethod, 0xFFFFFFFF)
+		ADD_STRUCT(float, LockRadius, 172)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, TargetStrength, 144)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, TargetTangent, 116)
+		ADD_BOOL(bLockTargetStength, 112, 0x8)
+		ADD_BOOL(bLockTargetTangent, 112, 0x4)
+		ADD_BOOL(bLockTarget, 112, 0x2)
+		ADD_BOOL(bTargetAbsolute, 112, 0x1)
+		ADD_STRUCT(DistributionVector::RawDistributionVector, Target, 84)
+		ADD_STRUCT(ScriptName, TargetName, 76)
+		ADD_STRUCT(ParticleModuleBeamBase::Beam2SourceTargetTangentMethod, TargetTangentMethod, 73)
+		ADD_STRUCT(ParticleModuleBeamBase::Beam2SourceTargetMethod, TargetMethod, 72)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

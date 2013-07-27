@@ -1,49 +1,48 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
+#include "Core.Object.h"
 #include "Engine.DynamicSMActor.h"
 #include "Engine.StaticMesh.h"
-#include "Core.Object.Vector.h"
 #include "Engine.ParticleSystem.h"
-#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.SoundCue.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSimpleDestroyable." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTSimpleDestroyable." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTSimpleDestroyable." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTSimpleDestroyable : public DynamicSMActor
 	{
 	public:
-		ADD_VAR(::FloatProperty, TimeToRespawn, 0xFFFFFFFF)
-		ADD_OBJECT(StaticMesh, RespawnStaticMesh)
-		ADD_VAR(::FloatProperty, RespawnTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SpawnPhysMeshAngularVel, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SpawnPhysMeshLinearVel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SpawnPhysMeshLifeSpan, 0xFFFFFFFF)
-		ADD_OBJECT(StaticMesh, SpawnPhysMesh)
-		ADD_OBJECT(ParticleSystem, ParticlesOnDestroy)
-		ADD_OBJECT(SoundCue, SoundOnDestroy)
-		ADD_OBJECT(StaticMesh, MeshOnDestroy)
-		ADD_VAR(::BoolProperty, bDestroyed, 0x8)
-		ADD_VAR(::BoolProperty, bDestroyOnVehicleTouch, 0x4)
-		ADD_VAR(::BoolProperty, bDestroyOnPlayerTouch, 0x2)
-		ADD_VAR(::BoolProperty, bDestroyOnDamage, 0x1)
+		ADD_STRUCT(float, TimeToRespawn, 588)
+		ADD_OBJECT(StaticMesh, RespawnStaticMesh, 584)
+		ADD_STRUCT(float, RespawnTime, 580)
+		ADD_STRUCT(Object::Vector, SpawnPhysMeshAngularVel, 568)
+		ADD_STRUCT(Object::Vector, SpawnPhysMeshLinearVel, 556)
+		ADD_STRUCT(float, SpawnPhysMeshLifeSpan, 552)
+		ADD_OBJECT(StaticMesh, SpawnPhysMesh, 548)
+		ADD_OBJECT(ParticleSystem, ParticlesOnDestroy, 544)
+		ADD_OBJECT(SoundCue, SoundOnDestroy, 540)
+		ADD_OBJECT(StaticMesh, MeshOnDestroy, 536)
+		ADD_BOOL(bDestroyed, 532, 0x8)
+		ADD_BOOL(bDestroyOnVehicleTouch, 532, 0x4)
+		ADD_BOOL(bDestroyOnPlayerTouch, 532, 0x2)
+		ADD_BOOL(bDestroyOnDamage, 532, 0x1)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.PostBeginPlay");
@@ -59,34 +58,32 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.RespawnDestructible");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = DamageAmount;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = DamageAmount;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Vector HitLocation, Vector HitNormal)
+void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.Touch");
-			byte* params = (byte*)malloc(32);
-			*(class Actor**)params = Other;
+			byte params[32] = { NULL };
+			*(class Actor**)&params[0] = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComp;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = OtherComp;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckRespawn()
 		{
@@ -95,6 +92,6 @@ void**)(params + 4) = OtherComp;
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

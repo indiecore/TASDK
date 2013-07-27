@@ -2,25 +2,27 @@
 #include "Engine.OnlineGameSettings.h"
 #include "Engine.OnlineSubsystem.h"
 #include "Engine.LocalPlayer.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrPartySettings." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrPartySettings : public OnlineGameSettings
 	{
 	public:
-		ADD_OBJECT(OnlineSubsystem, OnlineSub)
+		ADD_STRUCT(ScriptArray<OnlineSubsystem::OnlinePartyMember>, MemberList, 184)
+		ADD_OBJECT(OnlineSubsystem, OnlineSub, 172)
 		void Init(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.Init");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = InPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Close()
 		{
@@ -30,10 +32,9 @@ namespace UnrealScript
 		void OnLoginChange(byte LocalUserNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.OnLoginChange");
-			byte* params = (byte*)malloc(1);
-			*params = LocalUserNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshMembersList()
 		{
@@ -42,4 +43,5 @@ namespace UnrealScript
 		}
 	};
 }
+#undef ADD_STRUCT
 #undef ADD_OBJECT

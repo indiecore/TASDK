@@ -1,19 +1,28 @@
 #pragma once
 #include "Engine.Info.h"
+#include "Engine.Actor.h"
 #include "Engine.SeqAct_Toggle.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CoverGroup." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class CoverGroup : public Info
 	{
 	public:
-		ADD_VAR(::FloatProperty, AutoSelectHeight, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AutoSelectRadius, 0xFFFFFFFF)
+		enum ECoverGroupFillAction : byte
+		{
+			CGFA_Overwrite = 0,
+			CGFA_Add = 1,
+			CGFA_Remove = 2,
+			CGFA_Clear = 3,
+			CGFA_Cylinder = 4,
+			CGFA_MAX = 5,
+		};
+		ADD_STRUCT(ScriptArray<Actor::ActorReference>, CoverLinkRefs, 476)
+		ADD_STRUCT(float, AutoSelectHeight, 492)
+		ADD_STRUCT(float, AutoSelectRadius, 488)
 		void EnableGroup()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.EnableGroup");
@@ -32,11 +41,10 @@ namespace UnrealScript
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.OnToggle");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Toggle**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Toggle**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

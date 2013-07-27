@@ -8,26 +8,23 @@ namespace UnrealScript
 		bool NeedPlayers()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryGame.NeedPlayers");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void StartMatch()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryGame.StartMatch");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void InitGame(ScriptArray<wchar_t> Options, ScriptArray<wchar_t>& ErrorMessage)
+		void InitGame(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryGame.InitGame");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Options;
-			*(ScriptArray<wchar_t>*)(params + 12) = ErrorMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)&params[12] = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ErrorMessage = *(ScriptString**)&params[12];
 		}
 	};
 }

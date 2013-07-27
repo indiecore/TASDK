@@ -1,36 +1,50 @@
 #pragma once
 #include "UDKBase.UDKUIResourceDataProvider.h"
-#include "Engine.UIRoot.UIRangeData.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.UIRoot.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKUIDataProvider_MenuOption." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKUIDataProvider_MenuOption." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKUIDataProvider_MenuOption : public UDKUIResourceDataProvider
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<UIRangeData>, RangeData, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, EditBoxMaxLength, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bOfflineOnly, 0x10)
-		ADD_VAR(::BoolProperty, bOnlineOnly, 0x8)
-		ADD_VAR(::BoolProperty, bKeyboardOrMouseOption, 0x4)
-		ADD_VAR(::BoolProperty, bNumericCombo, 0x2)
-		ADD_VAR(::BoolProperty, bEditableCombo, 0x1)
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, CustomFriendlyName, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, RequiredGameMode, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DataStoreMarkup, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, OptionType, 0xFFFFFFFF)
+		enum EUTOptionType : byte
+		{
+			UTOT_ComboReadOnly = 0,
+			UTOT_ComboNumeric = 1,
+			UTOT_CheckBox = 2,
+			UTOT_Slider = 3,
+			UTOT_Spinner = 4,
+			UTOT_EditBox = 5,
+			UTOT_CollectionCheckBox = 6,
+			UTOT_MAX = 7,
+		};
+		ADD_STRUCT(ScriptArray<ScriptName>, OptionSet, 156)
+		ADD_STRUCT(UIRoot::UIRangeData, RangeData, 220)
+		ADD_STRUCT(int, EditBoxMaxLength, 216)
+		ADD_BOOL(bOfflineOnly, 212, 0x10)
+		ADD_BOOL(bOnlineOnly, 212, 0x8)
+		ADD_BOOL(bKeyboardOrMouseOption, 212, 0x4)
+		ADD_BOOL(bNumericCombo, 212, 0x2)
+		ADD_BOOL(bEditableCombo, 212, 0x1)
+		ADD_STRUCT(ScriptString*, Description, 200)
+		ADD_STRUCT(ScriptString*, CustomFriendlyName, 188)
+		ADD_STRUCT(ScriptName, RequiredGameMode, 180)
+		ADD_STRUCT(ScriptString*, DataStoreMarkup, 168)
+		ADD_STRUCT(UDKUIDataProvider_MenuOption::EUTOptionType, OptionType, 152)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

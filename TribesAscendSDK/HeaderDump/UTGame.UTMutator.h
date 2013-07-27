@@ -2,6 +2,7 @@
 #include "Engine.Mutator.h"
 #include "Engine.Actor.h"
 #include "UTGame.UTPlayerController.h"
+#include "Engine.OnlineSubsystem.h"
 namespace UnrealScript
 {
 	class UTMutator : public Mutator
@@ -10,47 +11,34 @@ namespace UnrealScript
 		class UTMutator* GetNextUTMutator()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator.GetNextUTMutator");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTMutator**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTMutator**)&params[0];
 		}
 		bool MutatorIsAllowed()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator.MutatorIsAllowed");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		bool ReplaceWith(class Actor* Other, ScriptArray<wchar_t> aClassName)
+		bool ReplaceWith(class Actor* Other, ScriptString* aClassName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator.ReplaceWith");
-			byte* params = (byte*)malloc(20);
-			*(class Actor**)params = Other;
-			*(ScriptArray<wchar_t>*)(params + 4) = aClassName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(ScriptString**)&params[4] = aClassName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
-		void ProcessSpeechRecognition(class UTPlayerController* Speaker, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Words)
+		void ProcessSpeechRecognition(class UTPlayerController* Speaker, ScriptArray<OnlineSubsystem::SpeechRecognizedWord>& Words)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator.ProcessSpeechRecognition");
-			byte* params = (byte*)malloc(16);
-			*(class UTPlayerController**)params = Speaker;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4) = Words;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Words = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 4);
-			free(params);
+			byte params[16] = { NULL };
+			*(class UTPlayerController**)&params[0] = Speaker;
+			*(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4] = Words;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Words = *(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4];
 		}
 	};
 }

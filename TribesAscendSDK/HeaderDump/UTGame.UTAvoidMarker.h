@@ -1,6 +1,6 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.Actor.h"
-#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class UTAvoidMarker : public Actor
@@ -8,18 +8,17 @@ namespace UnrealScript
 	public:
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Vector HitLocation, Vector HitNormal)
+void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAvoidMarker.Touch");
-			byte* params = (byte*)malloc(32);
-			*(class Actor**)params = Other;
+			byte params[32] = { NULL };
+			*(class Actor**)&params[0] = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComp;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[4] = OtherComp;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

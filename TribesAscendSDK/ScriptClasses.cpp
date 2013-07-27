@@ -417,6 +417,7 @@ struct ConstDescription
 	std::string valueString;
 	const char* typeString;
 	bool nonIntegral;
+	bool alreadyHasFloatSpec;
 
 	ConstDescription(ScriptConst* originalConst_)
 	{
@@ -424,7 +425,10 @@ struct ConstDescription
 		valueString = std::string(originalConst->value().c_str());
 		nonIntegral = true;
 		if (valueString.find('.') != std::string::npos)
+		{
 			typeString = "float";
+			alreadyHasFloatSpec = valueString.find('f') != std::string::npos;
+		}
 		else if (valueString.find('"') != std::string::npos)
 			typeString = "const char*";
 		else if (valueString.find('t') != std::string::npos || valueString.find('s') != std::string::npos) // [t]rue/fal[s]e
@@ -448,7 +452,7 @@ struct ConstDescription
 	{
 		if (nonIntegral)
 		{
-			if (!strcmp(typeString, "float"))
+			if (!strcmp(typeString, "float") && !alreadyHasFloatSpec)
 				wtr->WriteLine("const %s %s::%s = %sf;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString.c_str());
 			else
 				wtr->WriteLine("const %s %s::%s = %s;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString.c_str());
@@ -587,7 +591,7 @@ struct ClassDescription
 				wtr->Indent--;
 				wtr->Indent--;
 				wtr->WriteLine("} \\");
-				wtr->WriteLine("__declspec(property(get_##name, put=set_##name)) bool name;");
+				wtr->WriteLine("__declspec(property(get=get_##name, put=set_##name)) bool name;");
 			}
 
 			if (structPropertyCount > 0 || primitivePropertyCount > 0)
@@ -601,9 +605,9 @@ struct ClassDescription
 			if (objectPropertyCount > 0)
 			{
 				wtr->WriteLine("#define ADD_OBJECT(x, y, offset) \\");
-				wtr->WriteLine("x* get_##y() { return *(x**)(this + offset); } \\");
-				wtr->WriteLine("void set_##y(x* val) { *(x**)(this + offset) = val; } \\");
-				wtr->WriteLine("__declspec(property(get=get_##y, put=set_##y)) x* y;");
+				wtr->WriteLine("class x* get_##y() { return *(class x**)(this + offset); } \\");
+				wtr->WriteLine("void set_##y(x* val) { *(class x**)(this + offset) = val; } \\");
+				wtr->WriteLine("__declspec(property(get=get_##y, put=set_##y)) class x* y;");
 			}
 
 			wtr->WriteLine("namespace UnrealScript");
@@ -625,6 +629,9 @@ struct ClassDescription
 			nestedConstants[i].WriteDeclaration(wtr);
 		for (unsigned int i = 0; i < nestedEnums.size(); i++)
 			nestedEnums[i].WriteToStream(wtr);
+
+		// BEWARE: This code will run in an infinite loop if
+		// there is a circular reference.
 		if (nestedStructs.size() > 0)
 		{
 			std::unordered_map<const char*, int> definedStructsTable;
@@ -662,7 +669,7 @@ struct ClassDescription
 				bool add = true;
 				for each (auto rc in ns->dependencyManager.requiredChildren)
 				{
-					if (!strcmp(rc->outer()->GetName(), originalClass->GetName()))
+					if (strcmp(rc->object_class()->GetName(), "Enum") && !strcmp(rc->outer()->GetName(), originalClass->GetName()))
 					{
 						if (definedStructsTable.count(rc->GetName()) == 0)
 						{

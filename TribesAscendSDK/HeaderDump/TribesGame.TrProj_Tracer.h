@@ -1,33 +1,35 @@
 #pragma once
 #include "TribesGame.TrProjectile.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_Tracer." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrProj_Tracer." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TrProj_Tracer : public TrProjectile
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, m_vTracerDrawScale3D, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vInitialFrameOfRefVelocity, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vDestinationLoc, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fMeshScaleDownTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fCurScale, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, m_bScalingDown, 0x2)
-		ADD_VAR(::BoolProperty, m_bScaledUp, 0x1)
-		ADD_VAR(::FloatProperty, m_fMeshScaleUpTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fAccelRate, 0xFFFFFFFF)
+		ADD_STRUCT(Object::Vector, m_vTracerDrawScale3D, 824)
+		ADD_STRUCT(Object::Vector, m_vInitialFrameOfRefVelocity, 864)
+		ADD_STRUCT(Object::Vector, m_vDestinationLoc, 852)
+		ADD_STRUCT(float, m_fMeshScaleDownTime, 848)
+		ADD_STRUCT(float, m_fCurScale, 844)
+		ADD_BOOL(m_bScalingDown, 840, 0x2)
+		ADD_BOOL(m_bScaledUp, 840, 0x1)
+		ADD_STRUCT(float, m_fMeshScaleUpTime, 836)
+		ADD_STRUCT(float, m_fAccelRate, 820)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.PostBeginPlay");
@@ -36,24 +38,22 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CalcTracerAccel()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.CalcTracerAccel");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void InitTracer(Vector Start, Vector End)
+		void InitTracer(Object::Vector Start, Object::Vector End)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.InitTracer");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = Start;
-			*(Vector*)(params + 12) = End;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = Start;
+			*(Object::Vector*)&params[12] = End;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillProjectile()
 		{
@@ -78,19 +78,17 @@ namespace UnrealScript
 		void Tick(float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.Tick");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = DeltaTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Vector HitLocation, Vector HitNormal)
+		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.Explode");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Recycle()
 		{
@@ -107,17 +105,16 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.WakeProjectile");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.ProcessTouch");
-			byte* params = (byte*)malloc(28);
-			*(class Actor**)params = Other;
-			*(Vector*)(params + 4) = HitLocation;
-			*(Vector*)(params + 16) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(Object::Vector*)&params[16] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

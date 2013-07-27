@@ -1,690 +1,620 @@
 #pragma once
-#include "GFxUI.GFxObject.ASColorTransform.h"
 #include "Core.Object.h"
+#include "GFxUI.GFxMoviePlayer.h"
 #include "Engine.TranslationContext.h"
-#include "GFxUI.GFxMoviePlayer.ASValue.h"
-#include "GFxUI.GFxObject.ASDisplayInfo.h"
-#include "Core.Object.Matrix.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxObject." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class GFxObject : public Object
 	{
 	public:
-		ADD_VAR(::IntProperty, Value, 0xFFFFFFFF)
-		ASValue Get(ScriptArray<wchar_t> Member)
+		class ASDisplayInfo
+		{
+		public:
+			ADD_BOOL(hasVisible, 40, 0x800)
+			ADD_BOOL(hasAlpha, 40, 0x400)
+			ADD_BOOL(hasZScale, 40, 0x200)
+			ADD_BOOL(hasYScale, 40, 0x100)
+			ADD_BOOL(hasXScale, 40, 0x80)
+			ADD_BOOL(hasYRotation, 40, 0x40)
+			ADD_BOOL(hasXRotation, 40, 0x20)
+			ADD_BOOL(hasRotation, 40, 0x10)
+			ADD_BOOL(hasZ, 40, 0x8)
+			ADD_BOOL(hasY, 40, 0x4)
+			ADD_BOOL(hasX, 40, 0x2)
+			ADD_BOOL(Visible, 40, 0x1)
+			ADD_STRUCT(float, Alpha, 36)
+			ADD_STRUCT(float, ZScale, 32)
+			ADD_STRUCT(float, YScale, 28)
+			ADD_STRUCT(float, XScale, 24)
+			ADD_STRUCT(float, YRotation, 20)
+			ADD_STRUCT(float, XRotation, 16)
+			ADD_STRUCT(float, Rotation, 12)
+			ADD_STRUCT(float, Z, 8)
+			ADD_STRUCT(float, Y, 4)
+			ADD_STRUCT(float, X, 0)
+		};
+		class ASColorTransform
+		{
+		public:
+			ADD_STRUCT(Object::LinearColor, Add, 16)
+			ADD_STRUCT(Object::LinearColor, Multiply, 0)
+		};
+		ADD_STRUCT(ScriptArray<GFxMoviePlayer::GFxWidgetBinding>, SubWidgetBindings, 108)
+		ADD_STRUCT(int, Value, 60)
+		GFxMoviePlayer::ASValue Get(ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.Get");
-			byte* params = (byte*)malloc(36);
-			*(ScriptArray<wchar_t>*)params = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASValue*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxMoviePlayer::ASValue*)&params[12];
 		}
-		bool GetBool(ScriptArray<wchar_t> Member)
+		bool GetBool(ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetBool");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		float GetFloat(ScriptArray<wchar_t> Member)
+		float GetFloat(ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetFloat");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
-		ScriptArray<wchar_t> GetString(ScriptArray<wchar_t> Member)
+		ScriptString* GetString(ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetString");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
-		class GFxObject* GetObject(ScriptArray<wchar_t> Member, ScriptClass* Type)
+		class GFxObject* GetObject(ScriptString* Member, ScriptClass* Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetObject");
-			byte* params = (byte*)malloc(20);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(ScriptClass**)(params + 12) = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(ScriptClass**)&params[12] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[16];
 		}
-		void Set(ScriptArray<wchar_t> Member, ASValue Arg)
+		void Set(ScriptString* Member, GFxMoviePlayer::ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.Set");
-			byte* params = (byte*)malloc(36);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(ASValue*)(params + 12) = Arg;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(GFxMoviePlayer::ASValue*)&params[12] = Arg;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetBool(ScriptArray<wchar_t> Member, bool B)
+		void SetBool(ScriptString* Member, bool B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetBool");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(bool*)(params + 12) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(bool*)&params[12] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetFloat(ScriptArray<wchar_t> Member, float F)
+		void SetFloat(ScriptString* Member, float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetFloat");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(float*)(params + 12) = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(float*)&params[12] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetString(ScriptArray<wchar_t> Member, ScriptArray<wchar_t> S, class TranslationContext* InContext)
+		void SetString(ScriptString* Member, ScriptString* S, class TranslationContext* InContext)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetString");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(ScriptArray<wchar_t>*)(params + 12) = S;
-			*(class TranslationContext**)(params + 24) = InContext;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(ScriptString**)&params[12] = S;
+			*(class TranslationContext**)&params[24] = InContext;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetObject(ScriptArray<wchar_t> Member, class GFxObject* val)
+		void SetObject(ScriptString* Member, class GFxObject* val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetObject");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(class GFxObject**)(params + 12) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(class GFxObject**)&params[12] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetFunction(ScriptArray<wchar_t> Member, class Object* context, ScriptName fname)
+		void SetFunction(ScriptString* Member, class Object* context, ScriptName fname)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetFunction");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(class Object**)(params + 12) = context;
-			*(ScriptName*)(params + 16) = fname;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(class Object**)&params[12] = context;
+			*(ScriptName*)&params[16] = fname;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> TranslateString(ScriptArray<wchar_t> StringToTranslate, class TranslationContext* InContext)
+		ScriptString* TranslateString(ScriptString* StringToTranslate, class TranslationContext* InContext)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.TranslateString");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = StringToTranslate;
-			*(class TranslationContext**)(params + 12) = InContext;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = StringToTranslate;
+			*(class TranslationContext**)&params[12] = InContext;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[16];
 		}
-		ASDisplayInfo GetDisplayInfo()
+		GFxObject::ASDisplayInfo GetDisplayInfo()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetDisplayInfo");
-			byte* params = (byte*)malloc(44);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASDisplayInfo*)params;
-			free(params);
-			return returnVal;
+			byte params[44] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxObject::ASDisplayInfo*)&params[0];
 		}
 		bool GetPosition(float& X, float& Y)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetPosition");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			X = *(float*)params;
-			Y = *(float*)(params + 4);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			X = *(float*)&params[0];
+			Y = *(float*)&params[4];
+			return *(bool*)&params[8];
 		}
-		ASColorTransform GetColorTransform()
+		GFxObject::ASColorTransform GetColorTransform()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetColorTransform");
-			byte* params = (byte*)malloc(32);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASColorTransform*)params;
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxObject::ASColorTransform*)&params[0];
 		}
-		Matrix GetDisplayMatrix()
+		Object::Matrix GetDisplayMatrix()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetDisplayMatrix");
-			byte* params = (byte*)malloc(64);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Matrix*)params;
-			free(params);
-			return returnVal;
+			byte params[64] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Matrix*)&params[0];
 		}
-		void SetDisplayInfo(ASDisplayInfo D)
+		void SetDisplayInfo(GFxObject::ASDisplayInfo D)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetDisplayInfo");
-			byte* params = (byte*)malloc(44);
-			*(ASDisplayInfo*)params = D;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[44] = { NULL };
+			*(GFxObject::ASDisplayInfo*)&params[0] = D;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPosition(float X, float Y)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetPosition");
-			byte* params = (byte*)malloc(8);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetColorTransform(ASColorTransform cxform)
+		void SetColorTransform(GFxObject::ASColorTransform cxform)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetColorTransform");
-			byte* params = (byte*)malloc(32);
-			*(ASColorTransform*)params = cxform;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(GFxObject::ASColorTransform*)&params[0] = cxform;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetDisplayMatrix(Matrix M)
+		void SetDisplayMatrix(Object::Matrix M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetDisplayMatrix");
-			byte* params = (byte*)malloc(64);
-			*(Matrix*)params = M;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[64] = { NULL };
+			*(Object::Matrix*)&params[0] = M;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetDisplayMatrix3D(Matrix M)
+		void SetDisplayMatrix3D(Object::Matrix M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetDisplayMatrix3D");
-			byte* params = (byte*)malloc(64);
-			*(Matrix*)params = M;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[64] = { NULL };
+			*(Object::Matrix*)&params[0] = M;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVisible(bool Visible)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetVisible");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = Visible;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = Visible;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetText()
+		ScriptString* GetText()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetText");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
-		void SetText(ScriptArray<wchar_t> Text, class TranslationContext* InContext)
+		void SetText(ScriptString* Text, class TranslationContext* InContext)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetText");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Text;
-			*(class TranslationContext**)(params + 12) = InContext;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Text;
+			*(class TranslationContext**)&params[12] = InContext;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ASValue GetElement(int Index)
+		GFxMoviePlayer::ASValue GetElement(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElement");
-			byte* params = (byte*)malloc(28);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASValue*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxMoviePlayer::ASValue*)&params[4];
 		}
 		class GFxObject* GetElementObject(int Index, ScriptClass* Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementObject");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = Index;
-			*(ScriptClass**)(params + 4) = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptClass**)&params[4] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[8];
 		}
 		bool GetElementBool(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementBool");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		float GetElementFloat(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementFloat");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
-		ScriptArray<wchar_t> GetElementString(int Index)
+		ScriptString* GetElementString(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementString");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[4];
 		}
-		void SetElement(int Index, ASValue Arg)
+		void SetElement(int Index, GFxMoviePlayer::ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElement");
-			byte* params = (byte*)malloc(28);
-			*(int*)params = Index;
-			*(ASValue*)(params + 4) = Arg;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(int*)&params[0] = Index;
+			*(GFxMoviePlayer::ASValue*)&params[4] = Arg;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetElementObject(int Index, class GFxObject* val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementObject");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			*(class GFxObject**)(params + 4) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			*(class GFxObject**)&params[4] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetElementBool(int Index, bool B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementBool");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			*(bool*)(params + 4) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			*(bool*)&params[4] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetElementFloat(int Index, float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementFloat");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			*(float*)(params + 4) = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			*(float*)&params[4] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementString(int Index, ScriptArray<wchar_t> S)
+		void SetElementString(int Index, ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementString");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ASDisplayInfo GetElementDisplayInfo(int Index)
+		GFxObject::ASDisplayInfo GetElementDisplayInfo(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementDisplayInfo");
-			byte* params = (byte*)malloc(48);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASDisplayInfo*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[48] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxObject::ASDisplayInfo*)&params[4];
 		}
-		Matrix GetElementDisplayMatrix(int Index)
+		Object::Matrix GetElementDisplayMatrix(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementDisplayMatrix");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Index;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Matrix*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Index;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Matrix*)&params[16];
 		}
-		void SetElementDisplayInfo(int Index, ASDisplayInfo D)
+		void SetElementDisplayInfo(int Index, GFxObject::ASDisplayInfo D)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementDisplayInfo");
-			byte* params = (byte*)malloc(48);
-			*(int*)params = Index;
-			*(ASDisplayInfo*)(params + 4) = D;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[48] = { NULL };
+			*(int*)&params[0] = Index;
+			*(GFxObject::ASDisplayInfo*)&params[4] = D;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementDisplayMatrix(int Index, Matrix M)
+		void SetElementDisplayMatrix(int Index, Object::Matrix M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementDisplayMatrix");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Index;
-			*(Matrix*)(params + 16) = M;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Index;
+			*(Object::Matrix*)&params[16] = M;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetElementVisible(int Index, bool Visible)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementVisible");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			*(bool*)(params + 4) = Visible;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			*(bool*)&params[4] = Visible;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetElementPosition(int Index, float X, float Y)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementPosition");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = Index;
-			*(float*)(params + 4) = X;
-			*(float*)(params + 8) = Y;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(int*)&params[0] = Index;
+			*(float*)&params[4] = X;
+			*(float*)&params[8] = Y;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementColorTransform(int Index, ASColorTransform cxform)
+		void SetElementColorTransform(int Index, GFxObject::ASColorTransform cxform)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementColorTransform");
-			byte* params = (byte*)malloc(36);
-			*(int*)params = Index;
-			*(ASColorTransform*)(params + 4) = cxform;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(int*)&params[0] = Index;
+			*(GFxObject::ASColorTransform*)&params[4] = cxform;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ASValue GetElementMember(int Index, ScriptArray<wchar_t> Member)
+		GFxMoviePlayer::ASValue GetElementMember(int Index, ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementMember");
-			byte* params = (byte*)malloc(40);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASValue*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[40] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxMoviePlayer::ASValue*)&params[16];
 		}
-		class GFxObject* GetElementMemberObject(int Index, ScriptArray<wchar_t> Member, ScriptClass* Type)
+		class GFxObject* GetElementMemberObject(int Index, ScriptString* Member, ScriptClass* Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementMemberObject");
-			byte* params = (byte*)malloc(24);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(ScriptClass**)(params + 16) = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			*(ScriptClass**)&params[16] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[20];
 		}
-		bool GetElementMemberBool(int Index, ScriptArray<wchar_t> Member)
+		bool GetElementMemberBool(int Index, ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementMemberBool");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
-		float GetElementMemberFloat(int Index, ScriptArray<wchar_t> Member)
+		float GetElementMemberFloat(int Index, ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementMemberFloat");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[16];
 		}
-		ScriptArray<wchar_t> GetElementMemberString(int Index, ScriptArray<wchar_t> Member)
+		ScriptString* GetElementMemberString(int Index, ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementMemberString");
-			byte* params = (byte*)malloc(28);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[16];
 		}
-		void SetElementMember(int Index, ScriptArray<wchar_t> Member, ASValue Arg)
+		void SetElementMember(int Index, ScriptString* Member, GFxMoviePlayer::ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementMember");
-			byte* params = (byte*)malloc(40);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(ASValue*)(params + 16) = Arg;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[40] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			*(GFxMoviePlayer::ASValue*)&params[16] = Arg;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementMemberObject(int Index, ScriptArray<wchar_t> Member, class GFxObject* val)
+		void SetElementMemberObject(int Index, ScriptString* Member, class GFxObject* val)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementMemberObject");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(class GFxObject**)(params + 16) = val;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			*(class GFxObject**)&params[16] = val;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementMemberBool(int Index, ScriptArray<wchar_t> Member, bool B)
+		void SetElementMemberBool(int Index, ScriptString* Member, bool B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementMemberBool");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(bool*)(params + 16) = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			*(bool*)&params[16] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementMemberFloat(int Index, ScriptArray<wchar_t> Member, float F)
+		void SetElementMemberFloat(int Index, ScriptString* Member, float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementMemberFloat");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(float*)(params + 16) = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			*(float*)&params[16] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetElementMemberString(int Index, ScriptArray<wchar_t> Member, ScriptArray<wchar_t> S)
+		void SetElementMemberString(int Index, ScriptString* Member, ScriptString* S)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementMemberString");
-			byte* params = (byte*)malloc(28);
-			*(int*)params = Index;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(ScriptArray<wchar_t>*)(params + 16) = S;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(int*)&params[0] = Index;
+			*(ScriptString**)&params[4] = Member;
+			*(ScriptString**)&params[16] = S;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ActionScriptSetFunction(ScriptArray<wchar_t> Member)
+		void ActionScriptSetFunction(ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptSetFunction");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ActionScriptSetFunctionOn(class GFxObject* Target, ScriptArray<wchar_t> Member)
+		void ActionScriptSetFunctionOn(class GFxObject* Target, ScriptString* Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptSetFunctionOn");
-			byte* params = (byte*)malloc(16);
-			*(class GFxObject**)params = Target;
-			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class GFxObject**)&params[0] = Target;
+			*(ScriptString**)&params[4] = Member;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ASValue Invoke(ScriptArray<wchar_t> Member, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* args)
+		GFxMoviePlayer::ASValue Invoke(ScriptString* Member, ScriptArray<GFxMoviePlayer::ASValue> args)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.Invoke");
-			byte* params = (byte*)malloc(48);
-			*(ScriptArray<wchar_t>*)params = Member;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12) = args;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ASValue*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[48] = { NULL };
+			*(ScriptString**)&params[0] = Member;
+			*(ScriptArray<GFxMoviePlayer::ASValue>*)&params[12] = args;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(GFxMoviePlayer::ASValue*)&params[24];
 		}
-		void ActionScriptVoid(ScriptArray<wchar_t> method)
+		void ActionScriptVoid(ScriptString* method)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptVoid");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = method;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = method;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		int ActionScriptInt(ScriptArray<wchar_t> method)
+		int ActionScriptInt(ScriptString* method)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptInt");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = method;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = method;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
-		float ActionScriptFloat(ScriptArray<wchar_t> method)
+		float ActionScriptFloat(ScriptString* method)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptFloat");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = method;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = method;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
-		ScriptArray<wchar_t> ActionScriptString(ScriptArray<wchar_t> method)
+		ScriptString* ActionScriptString(ScriptString* method)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptString");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = method;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = method;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[12];
 		}
-		class GFxObject* ActionScriptObject(ScriptArray<wchar_t> Path)
+		class GFxObject* ActionScriptObject(ScriptString* Path)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptObject");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Path;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Path;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[12];
 		}
-		
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* ActionScriptArray(ScriptArray<wchar_t> Path)
+		ScriptArray<class GFxObject*> ActionScriptArray(ScriptString* Path)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.ActionScriptArray");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Path;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Path;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptArray<class GFxObject*>*)&params[12];
 		}
-		void GotoAndPlay(ScriptArray<wchar_t> frame)
+		void GotoAndPlay(ScriptString* frame)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GotoAndPlay");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = frame;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = frame;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GotoAndPlayI(int frame)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GotoAndPlayI");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = frame;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = frame;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GotoAndStop(ScriptArray<wchar_t> frame)
+		void GotoAndStop(ScriptString* frame)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GotoAndStop");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = frame;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = frame;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GotoAndStopI(int frame)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GotoAndStopI");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = frame;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = frame;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		class GFxObject* CreateEmptyMovieClip(ScriptArray<wchar_t> instancename, int Depth, ScriptClass* Type)
+		class GFxObject* CreateEmptyMovieClip(ScriptString* instancename, int Depth, ScriptClass* Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.CreateEmptyMovieClip");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = instancename;
-			*(int*)(params + 12) = Depth;
-			*(ScriptClass**)(params + 16) = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = instancename;
+			*(int*)&params[12] = Depth;
+			*(ScriptClass**)&params[16] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[20];
 		}
-		class GFxObject* AttachMovie(ScriptArray<wchar_t> symbolname, ScriptArray<wchar_t> instancename, int Depth, ScriptClass* Type)
+		class GFxObject* AttachMovie(ScriptString* symbolname, ScriptString* instancename, int Depth, ScriptClass* Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.AttachMovie");
-			byte* params = (byte*)malloc(36);
-			*(ScriptArray<wchar_t>*)params = symbolname;
-			*(ScriptArray<wchar_t>*)(params + 12) = instancename;
-			*(int*)(params + 24) = Depth;
-			*(ScriptClass**)(params + 28) = Type;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class GFxObject**)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(ScriptString**)&params[0] = symbolname;
+			*(ScriptString**)&params[12] = instancename;
+			*(int*)&params[24] = Depth;
+			*(ScriptClass**)&params[28] = Type;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class GFxObject**)&params[32];
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 		bool WidgetUnloaded(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.WidgetUnloaded");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

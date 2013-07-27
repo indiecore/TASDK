@@ -1,60 +1,56 @@
 #pragma once
-#include "Engine.Actor.h"
 #include "Engine.Controller.h"
-#include "Engine.Actor.PhysEffectInfo.h"
+#include "Engine.Actor.h"
+#include "Core.Object.h"
 #include "Engine.DynamicSMActor.h"
-#include "Core.Object.Rotator.h"
-#include "Core.Object.Vector.h"
-#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.PhysicalMaterial.h"
-#include "Engine.Actor.RigidBodyState.h"
 #include "Engine.SeqAct_Toggle.h"
 #include "Engine.SeqAct_Teleport.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.KActor." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.KActor." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class KActor : public DynamicSMActor
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, InitialRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitialLocation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ReplicatedDrawScale3D, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AngErrorAccumulator, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RigidBodyState>, RBState, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxPhysicsVelocity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, StayUprightMaxTorque, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, StayUprightTorqueFactor, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<PhysEffectInfo>, SlideEffectInfo, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastSlideTime, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<PhysEffectInfo>, ImpactEffectInfo, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastImpactTime, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bDisableClientSidePawnInteractions, 0x80)
-		ADD_VAR(::BoolProperty, bNeedsRBStateReplication, 0x40)
-		ADD_VAR(::BoolProperty, bLimitMaxPhysicsVelocity, 0x20)
-		ADD_VAR(::BoolProperty, bEnableStayUprightSpring, 0x10)
-		ADD_VAR(::BoolProperty, bSlideActive, 0x8)
-		ADD_VAR(::BoolProperty, bCurrentSlide, 0x4)
-		ADD_VAR(::BoolProperty, bWakeOnLevelStart, 0x2)
-		ADD_VAR(::BoolProperty, bDamageAppliesImpulse, 0x1)
+		ADD_STRUCT(Object::Rotator, InitialRotation, 700)
+		ADD_STRUCT(Object::Vector, InitialLocation, 688)
+		ADD_STRUCT(Object::Vector, ReplicatedDrawScale3D, 676)
+		ADD_STRUCT(float, AngErrorAccumulator, 672)
+		ADD_STRUCT(Actor::RigidBodyState, RBState, 608)
+		ADD_STRUCT(float, MaxPhysicsVelocity, 604)
+		ADD_STRUCT(float, StayUprightMaxTorque, 600)
+		ADD_STRUCT(float, StayUprightTorqueFactor, 596)
+		ADD_STRUCT(Actor::PhysEffectInfo, SlideEffectInfo, 580)
+		ADD_STRUCT(float, LastSlideTime, 576)
+		ADD_STRUCT(Actor::PhysEffectInfo, ImpactEffectInfo, 552)
+		ADD_STRUCT(float, LastImpactTime, 548)
+		ADD_BOOL(bDisableClientSidePawnInteractions, 532, 0x80)
+		ADD_BOOL(bNeedsRBStateReplication, 532, 0x40)
+		ADD_BOOL(bLimitMaxPhysicsVelocity, 532, 0x20)
+		ADD_BOOL(bEnableStayUprightSpring, 532, 0x10)
+		ADD_BOOL(bSlideActive, 532, 0x8)
+		ADD_BOOL(bCurrentSlide, 532, 0x4)
+		ADD_BOOL(bWakeOnLevelStart, 532, 0x2)
+		ADD_BOOL(bDamageAppliesImpulse, 532, 0x1)
 		class PhysicalMaterial* GetKActorPhysMaterial()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.GetKActorPhysMaterial");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PhysicalMaterial**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PhysicalMaterial**)&params[0];
 		}
 		void ResolveRBState()
 		{
@@ -69,10 +65,9 @@ namespace UnrealScript
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.FellOutOfWorld");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = dmgType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
@@ -92,68 +87,62 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, TraceHitInfo HitInfo, ScriptClass* DamageType)
+		void ApplyImpulse(Object::Vector ImpulseDir, float ImpulseMag, Object::Vector HitLocation, Actor::TraceHitInfo HitInfo, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.ApplyImpulse");
-			byte* params = (byte*)malloc(60);
-			*(Vector*)params = ImpulseDir;
-			*(float*)(params + 12) = ImpulseMag;
-			*(Vector*)(params + 16) = HitLocation;
-			*(TraceHitInfo*)(params + 28) = HitInfo;
-			*(ScriptClass**)(params + 56) = DamageType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[60] = { NULL };
+			*(Object::Vector*)&params[0] = ImpulseDir;
+			*(float*)&params[12] = ImpulseMag;
+			*(Object::Vector*)&params[16] = HitLocation;
+			*(Actor::TraceHitInfo*)&params[28] = HitInfo;
+			*(ScriptClass**)&params[56] = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Damage;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Damage;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.TakeRadiusDamage");
-			byte* params = (byte*)malloc(44);
-			*(class Controller**)params = InstigatedBy;
-			*(float*)(params + 4) = BaseDamage;
-			*(float*)(params + 8) = DamageRadius;
-			*(ScriptClass**)(params + 12) = DamageType;
-			*(float*)(params + 16) = Momentum;
-			*(Vector*)(params + 20) = HurtOrigin;
-			*(bool*)(params + 32) = bFullDamage;
-			*(class Actor**)(params + 36) = DamageCauser;
-			*(float*)(params + 40) = DamageFalloffExponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[44] = { NULL };
+			*(class Controller**)&params[0] = InstigatedBy;
+			*(float*)&params[4] = BaseDamage;
+			*(float*)&params[8] = DamageRadius;
+			*(ScriptClass**)&params[12] = DamageType;
+			*(float*)&params[16] = Momentum;
+			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(bool*)&params[32] = bFullDamage;
+			*(class Actor**)&params[36] = DamageCauser;
+			*(float*)&params[40] = DamageFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.OnToggle");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Toggle**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Toggle**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnTeleport(class SeqAct_Teleport* inAction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.OnTeleport");
-			byte* params = (byte*)malloc(4);
-			*(class SeqAct_Teleport**)params = inAction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class SeqAct_Teleport**)&params[0] = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Reset()
 		{
@@ -162,5 +151,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

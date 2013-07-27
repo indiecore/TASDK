@@ -1,37 +1,26 @@
 #pragma once
 #include "Engine.SequenceAction.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_GetLocationAndRotation." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SeqAct_GetLocationAndRotation." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqAct_GetLocationAndRotation : public SequenceAction
 	{
 	public:
-		ADD_VAR(::NameProperty, SocketOrBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptName, SocketOrBoneName, 268)
+		ADD_STRUCT(Object::Vector, Rotation, 256)
+		ADD_STRUCT(Object::Vector, RotationVector, 244)
+		ADD_STRUCT(Object::Vector, Location, 232)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_GetLocationAndRotation.GetObjClassVersion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

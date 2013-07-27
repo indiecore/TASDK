@@ -1,27 +1,20 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "UTGame.UTReplicatedEmitter.h"
+#include "Core.Object.h"
 #include "Engine.ParticleSystem.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTWillowWhisp." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTWillowWhisp." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTWillowWhisp : public UTReplicatedEmitter
 	{
 	public:
-		ADD_VAR(::IntProperty, Position, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumPoints, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, WayPoints, 0xFFFFFFFF)
+		static const auto MAX_WAYPOINTS = 15;
+		ADD_STRUCT(int, Position, 680)
+		ADD_STRUCT(int, NumPoints, 676)
+		ADD_STRUCT(Object::Vector, WayPoints, 496)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.PostBeginPlay");
@@ -35,19 +28,17 @@ namespace UnrealScript
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.SetTemplate");
-			byte* params = (byte*)malloc(8);
-			*(class ParticleSystem**)params = NewTemplate;
-			*(bool*)(params + 4) = bDestroyOnFinish;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class ParticleSystem**)&params[0] = NewTemplate;
+			*(bool*)&params[4] = bDestroyOnFinish;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartNextPath()
 		{
@@ -56,5 +47,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

@@ -1,52 +1,46 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "TribesGame.TrDevice.h"
 #include "Engine.AnimNodePlayCustomAnim.h"
-#include "Engine.Actor.ImpactInfo.h"
+#include "Engine.Actor.h"
+#include "Core.Object.h"
 #include "Engine.AnimNodeSequence.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_Shotgun." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDevice_Shotgun." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrDevice_Shotgun : public TrDevice
 	{
 	public:
-		ADD_OBJECT(AnimNodePlayCustomAnim, ReloadCustomAnimNode)
-		ADD_VAR(::IntProperty, m_nConsumeShotsFired, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nShotsFired, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fInnerDefaultAccuracy, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, m_fConsumeAmmoTimeStamp, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nImpactCounter, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nMinShotCount, 0xFFFFFFFF)
+		ADD_OBJECT(AnimNodePlayCustomAnim, ReloadCustomAnimNode, 2172)
+		ADD_STRUCT(int, m_nConsumeShotsFired, 2168)
+		ADD_STRUCT(int, m_nShotsFired, 2164)
+		ADD_STRUCT(float, m_fInnerDefaultAccuracy, 2160)
+		ADD_STRUCT(float, m_fConsumeAmmoTimeStamp, 2156)
+		ADD_STRUCT(int, m_nImpactCounter, 2152)
+		ADD_STRUCT(int, m_nMinShotCount, 2148)
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.PostInitAnimTree");
-			byte* params = (byte*)malloc(4);
+			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = SkelComp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetFlashLocation(Vector HitLocation)
+		void SetFlashLocation(Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.SetFlashLocation");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PerformInactiveReload()
 		{
@@ -66,48 +60,43 @@ void**)params = SkelComp;
 		void StartFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.StartFire");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsumeAmmo(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ConsumeAmmo");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsumeAmmo_Internal(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ConsumeAmmo_Internal");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessInstantHit_Internal(byte FiringMode, ImpactInfo Impact, bool bHeadShot)
+		void ProcessInstantHit_Internal(byte FiringMode, Actor::ImpactInfo Impact, bool bHeadShot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ProcessInstantHit_Internal");
-			byte* params = (byte*)malloc(85);
-			*params = FiringMode;
-			*(ImpactInfo*)(params + 4) = Impact;
-			*(bool*)(params + 84) = bHeadShot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[85] = { NULL };
+			params[0] = FiringMode;
+			*(Actor::ImpactInfo*)&params[4] = Impact;
+			*(bool*)&params[84] = bHeadShot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.OnAnimEnd");
-			byte* params = (byte*)malloc(12);
-			*(class AnimNodeSequence**)params = SeqNode;
-			*(float*)(params + 4) = PlayedTime;
-			*(float*)(params + 8) = ExcessTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(float*)&params[4] = PlayedTime;
+			*(float*)&params[8] = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

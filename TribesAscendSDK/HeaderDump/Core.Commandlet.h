@@ -1,34 +1,43 @@
 #pragma once
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Core.Commandlet." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class Commandlet : public Object
 	{
 	public:
-		ADD_VAR(::BoolProperty, ShowErrorCount, 0x10)
-		ADD_VAR(::BoolProperty, LogToConsole, 0x8)
-		ADD_VAR(::BoolProperty, IsEditor, 0x4)
-		ADD_VAR(::BoolProperty, IsClient, 0x2)
-		ADD_VAR(::BoolProperty, IsServer, 0x1)
-		ADD_VAR(::StrProperty, HelpWebLink, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpUsage, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, HelpDescription, 0xFFFFFFFF)
-		int Main(ScriptArray<wchar_t> Params)
+		ADD_STRUCT(ScriptArray<ScriptString*>, HelpParamNames, 96)
+		ADD_STRUCT(ScriptArray<ScriptString*>, HelpParamDescriptions, 108)
+		ADD_BOOL(ShowErrorCount, 120, 0x10)
+		ADD_BOOL(LogToConsole, 120, 0x8)
+		ADD_BOOL(IsEditor, 120, 0x4)
+		ADD_BOOL(IsClient, 120, 0x2)
+		ADD_BOOL(IsServer, 120, 0x1)
+		ADD_STRUCT(ScriptString*, HelpWebLink, 84)
+		ADD_STRUCT(ScriptString*, HelpUsage, 72)
+		ADD_STRUCT(ScriptString*, HelpDescription, 60)
+		int Main(ScriptString* Params)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Commandlet.Main");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Params;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Params;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT

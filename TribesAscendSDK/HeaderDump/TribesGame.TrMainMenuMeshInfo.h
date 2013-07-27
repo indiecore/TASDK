@@ -1,34 +1,37 @@
 #pragma once
 #include "Core.Object.h"
-#include "TribesGame.TrObject.PaperDollInfo.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrMainMenuMeshInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrMainMenuMeshInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "TribesGame.TrObject.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrMainMenuMeshInfo : public Object
 	{
 	public:
-		ADD_VAR(::NameProperty, ParentSocketName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, MeshInfo, 0xFFFFFFFF)
+		class ParticleSystemInfo
+		{
+		public:
+			ADD_STRUCT(ScriptName, SocketName, 4)
+			ADD_OBJECT(ParticleSystem, ParticleSystem, 0)
+		};
+		ADD_STRUCT(ScriptArray<class TrMainMenuMeshInfo*>, Children, 116)
+		ADD_STRUCT(ScriptArray<TrMainMenuMeshInfo::ParticleSystemInfo>, AttachedParticleSystems, 136)
+		ADD_STRUCT(ScriptName, ParentSocketName, 128)
+		ADD_STRUCT(TrObject::PaperDollInfo, MeshInfo, 60)
 		void PreloadTextures(float ForceDuration)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMainMenuMeshInfo.PreloadTextures");
-			byte* params = (byte*)malloc(4);
-			*(float*)params = ForceDuration;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(float*)&params[0] = ForceDuration;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
+#undef ADD_OBJECT

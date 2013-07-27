@@ -2,27 +2,23 @@
 #include "Engine.SequenceEvent.h"
 #include "GFxUI.GFxFSCmdHandler_Kismet.h"
 #include "GFxUI.SwfMovie.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxEvent_FSCommand." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GFxUI.GFxEvent_FSCommand." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxEvent_FSCommand : public SequenceEvent
 	{
 	public:
-		ADD_OBJECT(GFxFSCmdHandler_Kismet, Handler)
-		ADD_VAR(::StrProperty, FSCommand, 0xFFFFFFFF)
-		ADD_OBJECT(SwfMovie, Movie)
+		ADD_OBJECT(GFxFSCmdHandler_Kismet, Handler, 272)
+		ADD_STRUCT(ScriptString*, FSCommand, 260)
+		ADD_OBJECT(SwfMovie, Movie, 256)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

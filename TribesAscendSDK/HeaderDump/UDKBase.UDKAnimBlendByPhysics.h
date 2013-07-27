@@ -1,21 +1,19 @@
 #pragma once
 #include "UDKBase.UDKAnimBlendBase.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimBlendByPhysics." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKAnimBlendByPhysics : public UDKAnimBlendBase
 	{
 	public:
-		ADD_VAR(::FloatProperty, PendingTimeToGo, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PendingChildIndex, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LandBlendDelay, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastPhysics, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PhysicsMap, 0xFFFFFFFF)
+		ADD_STRUCT(float, PendingTimeToGo, 356)
+		ADD_STRUCT(int, PendingChildIndex, 352)
+		ADD_STRUCT(float, LandBlendDelay, 348)
+		ADD_STRUCT(int, LastPhysics, 344)
+		ADD_STRUCT(int, PhysicsMap, 296)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

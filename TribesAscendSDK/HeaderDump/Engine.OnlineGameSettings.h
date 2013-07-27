@@ -1,49 +1,51 @@
 #pragma once
-#include "Core.Object.QWord.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.Settings.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Engine.OnlineSubsystem.h"
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineGameSettings." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.OnlineGameSettings." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class OnlineGameSettings : public Settings
 	{
 	public:
-		ADD_VAR(::BoolProperty, bUsesArbitration, 0x100)
-		ADD_VAR(::IntProperty, NumOpenPrivateConnections, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumOpenPublicConnections, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, GameState, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UniqueNetId>, OwningPlayerId, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bIsLanMatch, 0x2)
-		ADD_VAR(::BoolProperty, bUsesStats, 0x4)
-		ADD_VAR(::IntProperty, NumPublicConnections, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, BuildUniqueId, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MatchQuality, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, PingInMs, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, OwningPlayerName, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bHasSkillUpdateInProgress, 0x1000)
-		ADD_VAR(::BoolProperty, bIsDedicated, 0x800)
-		ADD_VAR(::BoolProperty, bWasFromInvite, 0x400)
-		ADD_VAR(::BoolProperty, bAntiCheatProtected, 0x200)
-		ADD_VAR(::BoolProperty, bAllowJoinViaPresenceFriendsOnly, 0x80)
-		ADD_VAR(::BoolProperty, bAllowJoinViaPresence, 0x40)
-		ADD_VAR(::BoolProperty, bUsesPresence, 0x20)
-		ADD_VAR(::BoolProperty, bAllowInvites, 0x10)
-		ADD_VAR(::BoolProperty, bAllowJoinInProgress, 0x8)
-		ADD_VAR(::BoolProperty, bShouldAdvertise, 0x1)
-		ADD_STRUCT(::QWordProperty, ServerNonce, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, NumPrivateConnections, 0xFFFFFFFF)
+		ADD_BOOL(bUsesArbitration, 132, 0x100)
+		ADD_STRUCT(int, NumOpenPrivateConnections, 120)
+		ADD_STRUCT(int, NumOpenPublicConnections, 116)
+		ADD_STRUCT(OnlineSubsystem::EOnlineGameState, GameState, 164)
+		ADD_STRUCT(OnlineSubsystem::UniqueNetId, OwningPlayerId, 148)
+		ADD_BOOL(bIsLanMatch, 132, 0x2)
+		ADD_BOOL(bUsesStats, 132, 0x4)
+		ADD_STRUCT(int, NumPublicConnections, 108)
+		ADD_STRUCT(int, BuildUniqueId, 168)
+		ADD_STRUCT(float, MatchQuality, 160)
+		ADD_STRUCT(int, PingInMs, 156)
+		ADD_STRUCT(ScriptString*, OwningPlayerName, 136)
+		ADD_BOOL(bHasSkillUpdateInProgress, 132, 0x1000)
+		ADD_BOOL(bIsDedicated, 132, 0x800)
+		ADD_BOOL(bWasFromInvite, 132, 0x400)
+		ADD_BOOL(bAntiCheatProtected, 132, 0x200)
+		ADD_BOOL(bAllowJoinViaPresenceFriendsOnly, 132, 0x80)
+		ADD_BOOL(bAllowJoinViaPresence, 132, 0x40)
+		ADD_BOOL(bUsesPresence, 132, 0x20)
+		ADD_BOOL(bAllowInvites, 132, 0x10)
+		ADD_BOOL(bAllowJoinInProgress, 132, 0x8)
+		ADD_BOOL(bShouldAdvertise, 132, 0x1)
+		ADD_STRUCT(Object::QWord, ServerNonce, 124)
+		ADD_STRUCT(int, NumPrivateConnections, 112)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

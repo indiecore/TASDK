@@ -1,32 +1,61 @@
 #pragma once
 #include "Engine.GameReplicationInfo.h"
+#include "Engine.MaterialInterface.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "UTGame.UTPlayerController.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTGameReplicationInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTGameReplicationInfo : public GameReplicationInfo
 	{
 	public:
-		ADD_VAR(::BoolProperty, bStoryMode, 0x4)
-		ADD_VAR(::BoolProperty, bAnnouncementsDisabled, 0x20)
-		ADD_VAR(::StrProperty, MessageOfTheDay, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bConsoleServer, 0x8)
-		ADD_VAR(::BoolProperty, bAllowKeyboardAndMouse, 0x10)
-		ADD_VAR(::IntProperty, BotDifficulty, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MinNetPlayers, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bRequireReady, 0x40)
-		ADD_VAR(::StrProperty, MutatorList, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, RulesString, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bWarmupRound, 0x1)
-		ADD_VAR(::ByteProperty, FlagState, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WeaponBerserk, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bForceDefaultCharacter, 0x2)
+		enum EFlagState : byte
+		{
+			FLAG_Home = 0,
+			FLAG_HeldFriendly = 1,
+			FLAG_HeldEnemy = 2,
+			FLAG_Down = 3,
+			FLAG_MAX = 4,
+		};
+		class MeshEffect
+		{
+		public:
+			ADD_OBJECT(StaticMesh, Mesh, 0)
+			ADD_OBJECT(MaterialInterface, Material, 4)
+		};
+		ADD_BOOL(bStoryMode, 568, 0x4)
+		ADD_BOOL(bAnnouncementsDisabled, 568, 0x20)
+		ADD_STRUCT(ScriptString*, MessageOfTheDay, 624)
+		ADD_STRUCT(ScriptArray<UTGameReplicationInfo::MeshEffect>, VehicleWeaponEffects, 612)
+		ADD_BOOL(bConsoleServer, 568, 0x8)
+		ADD_STRUCT(ScriptArray<class MaterialInterface*>, WeaponOverlays, 600)
+		ADD_BOOL(bAllowKeyboardAndMouse, 568, 0x10)
+		ADD_STRUCT(int, BotDifficulty, 564)
+		ADD_STRUCT(int, MinNetPlayers, 560)
+		ADD_BOOL(bRequireReady, 568, 0x40)
+		ADD_STRUCT(ScriptString*, MutatorList, 576)
+		ADD_STRUCT(ScriptString*, RulesString, 588)
+		ADD_BOOL(bWarmupRound, 568, 0x1)
+		ADD_STRUCT(UTGameReplicationInfo::EFlagState, FlagState, 572)
+		ADD_STRUCT(float, WeaponBerserk, 556)
+		ADD_BOOL(bForceDefaultCharacter, 568, 0x2)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.PostBeginPlay");
@@ -35,13 +64,11 @@ namespace UnrealScript
 		bool InOrder(class PlayerReplicationInfo* P1, class PlayerReplicationInfo* P2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.InOrder");
-			byte* params = (byte*)malloc(12);
-			*(class PlayerReplicationInfo**)params = P1;
-			*(class PlayerReplicationInfo**)(params + 4) = P2;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = P1;
+			*(class PlayerReplicationInfo**)&params[4] = P2;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void SortPRIArray()
 		{
@@ -56,83 +83,69 @@ namespace UnrealScript
 		void SetFlagHome(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagHome");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool FlagIsHome(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsHome");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool FlagsAreHome()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagsAreHome");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void SetFlagHeldFriendly(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagHeldFriendly");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool FlagIsHeldFriendly(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsHeldFriendly");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void SetFlagHeldEnemy(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagHeldEnemy");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool FlagIsHeldEnemy(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsHeldEnemy");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void SetFlagDown(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagDown");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool FlagIsDown(int TeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsDown");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = TeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void Timer()
 		{
@@ -142,29 +155,28 @@ namespace UnrealScript
 		void ShowMidGameMenu(class UTPlayerController* InstigatorPC, ScriptName TabTag, bool bEnableInput)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.ShowMidGameMenu");
-			byte* params = (byte*)malloc(16);
-			*(class UTPlayerController**)params = InstigatorPC;
-			*(ScriptName*)(params + 4) = TabTag;
-			*(bool*)(params + 12) = bEnableInput;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class UTPlayerController**)&params[0] = InstigatorPC;
+			*(ScriptName*)&params[4] = TabTag;
+			*(bool*)&params[12] = bEnableInput;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetHudShowScores(bool bShow)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetHudShowScores");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bShow;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bShow;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddGameRule(ScriptArray<wchar_t> Rule)
+		void AddGameRule(ScriptString* Rule)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.AddGameRule");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = Rule;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = Rule;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
+#undef ADD_OBJECT

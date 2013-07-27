@@ -1,52 +1,52 @@
 #pragma once
 #include "Engine.SequenceAction.h"
-#include "Core.Object.Vector2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_CameraLookAt." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SeqAct_CameraLookAt." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqAct_CameraLookAt : public SequenceAction
 	{
 	public:
-		ADD_VAR(::FloatProperty, RemainingTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CameraFOV, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TotalTime, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, TextDisplay, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, FocusBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InFocusFOV, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InterpSpeedRange, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bCheckLineOfSight, 0x800)
-		ADD_VAR(::BoolProperty, bUsedTimer, 0x400)
-		ADD_VAR(::BoolProperty, bDisableInput, 0x200)
-		ADD_VAR(::BoolProperty, bLeaveCameraRotation, 0x100)
-		ADD_VAR(::BoolProperty, bToggleGodMode, 0x80)
-		ADD_VAR(::BoolProperty, bRotatePlayerWithCamera, 0x40)
-		ADD_VAR(::BoolProperty, bAffectHead, 0x20)
-		ADD_VAR(::BoolProperty, bIgnoreTrace, 0x10)
-		ADD_VAR(::BoolProperty, bTurnInPlace, 0x8)
-		ADD_VAR(::BoolProperty, bAdjustCamera, 0x4)
-		ADD_VAR(::BoolProperty, bAlwaysFocus, 0x2)
-		ADD_VAR(::BoolProperty, bAffectCamera, 0x1)
+		ADD_STRUCT(float, RemainingTime, 280)
+		ADD_STRUCT(float, CameraFOV, 276)
+		ADD_STRUCT(float, TotalTime, 272)
+		ADD_STRUCT(ScriptString*, TextDisplay, 260)
+		ADD_STRUCT(ScriptName, FocusBoneName, 252)
+		ADD_STRUCT(Object::Vector2D, InFocusFOV, 244)
+		ADD_STRUCT(Object::Vector2D, InterpSpeedRange, 236)
+		ADD_BOOL(bCheckLineOfSight, 232, 0x800)
+		ADD_BOOL(bUsedTimer, 232, 0x400)
+		ADD_BOOL(bDisableInput, 232, 0x200)
+		ADD_BOOL(bLeaveCameraRotation, 232, 0x100)
+		ADD_BOOL(bToggleGodMode, 232, 0x80)
+		ADD_BOOL(bRotatePlayerWithCamera, 232, 0x40)
+		ADD_BOOL(bAffectHead, 232, 0x20)
+		ADD_BOOL(bIgnoreTrace, 232, 0x10)
+		ADD_BOOL(bTurnInPlace, 232, 0x8)
+		ADD_BOOL(bAdjustCamera, 232, 0x4)
+		ADD_BOOL(bAlwaysFocus, 232, 0x2)
+		ADD_BOOL(bAffectCamera, 232, 0x1)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_CameraLookAt.GetObjClassVersion");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

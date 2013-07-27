@@ -1,64 +1,54 @@
 #pragma once
 #include "TribesGame.TrProj_Grenade.h"
-#include "Core.Object.Rotator.h"
-#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_MIRVLauncher." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrProj_MIRVLauncher." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrProj_MIRVLauncher : public TrProj_Grenade
 	{
 	public:
-		ADD_VAR(::IntProperty, m_nSecondaryExplosions, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, m_SecondaryProjectile)
-		Rotator GetRandomSpread(Rotator BaseDirection)
+		ADD_STRUCT(int, m_nSecondaryExplosions, 888)
+		ADD_OBJECT(ScriptClass, m_SecondaryProjectile, 884)
+		Object::Rotator GetRandomSpread(Object::Rotator BaseDirection)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.GetRandomSpread");
-			byte* params = (byte*)malloc(24);
-			*(Rotator*)params = BaseDirection;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(Object::Rotator*)&params[0] = BaseDirection;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[12];
 		}
-		void SpawnSecondaryProjectile(Vector Direction)
+		void SpawnSecondaryProjectile(Object::Vector Direction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.SpawnSecondaryProjectile");
-			byte* params = (byte*)malloc(12);
-			*(Vector*)params = Direction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(Object::Vector*)&params[0] = Direction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Vector HitLocation, Vector HitNormal)
+		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.Explode");
-			byte* params = (byte*)malloc(24);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Bounce(class Actor* Other, Vector WallNormal)
+		void Bounce(class Actor* Other, Object::Vector WallNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.Bounce");
-			byte* params = (byte*)malloc(16);
-			*(class Actor**)params = Other;
-			*(Vector*)(params + 4) = WallNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			*(Object::Vector*)&params[4] = WallNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

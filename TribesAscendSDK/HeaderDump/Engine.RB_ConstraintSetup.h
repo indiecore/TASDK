@@ -1,61 +1,67 @@
 #pragma once
 #include "Core.Object.h"
-#include "Engine.RB_ConstraintSetup.LinearDOFSetup.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_ConstraintSetup." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.RB_ConstraintSetup." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class RB_ConstraintSetup : public Object
 	{
 	public:
-		ADD_VAR(::NameProperty, JointName, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, ConstraintBone1, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, ConstraintBone2, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PulleyRatio, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, AngularBreakThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TwistLimitDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TwistLimitStiffness, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SwingLimitDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SwingLimitStiffness, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TwistLimitAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Swing2LimitAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Swing1LimitAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearBreakThreshold, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearLimitDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LinearLimitStiffness, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearDOFSetup>, LinearZSetup, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearDOFSetup>, LinearYSetup, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<LinearDOFSetup>, LinearXSetup, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bMaintainMinDistance, 0x200)
-		ADD_VAR(::BoolProperty, bIsPulley, 0x100)
-		ADD_VAR(::BoolProperty, bAngularBreakable, 0x80)
-		ADD_VAR(::BoolProperty, bTwistLimitSoft, 0x40)
-		ADD_VAR(::BoolProperty, bSwingLimitSoft, 0x20)
-		ADD_VAR(::BoolProperty, bTwistLimited, 0x10)
-		ADD_VAR(::BoolProperty, bSwingLimited, 0x8)
-		ADD_VAR(::BoolProperty, bLinearBreakable, 0x4)
-		ADD_VAR(::BoolProperty, bLinearLimitSoft, 0x2)
-		ADD_VAR(::BoolProperty, bEnableProjection, 0x1)
-		ADD_STRUCT(::VectorProperty, PulleyPivot2, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PulleyPivot1, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SecAxis2, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PriAxis2, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Pos2, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SecAxis1, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PriAxis1, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Pos1, 0xFFFFFFFF)
+		class LinearDOFSetup
+		{
+		public:
+			ADD_STRUCT(float, LimitSize, 4)
+			ADD_STRUCT(byte, bLimited, 0)
+		};
+		ADD_STRUCT(ScriptName, JointName, 60)
+		ADD_STRUCT(ScriptName, ConstraintBone1, 68)
+		ADD_STRUCT(ScriptName, ConstraintBone2, 76)
+		ADD_STRUCT(float, PulleyRatio, 252)
+		ADD_STRUCT(float, AngularBreakThreshold, 248)
+		ADD_STRUCT(float, TwistLimitDamping, 244)
+		ADD_STRUCT(float, TwistLimitStiffness, 240)
+		ADD_STRUCT(float, SwingLimitDamping, 236)
+		ADD_STRUCT(float, SwingLimitStiffness, 232)
+		ADD_STRUCT(float, TwistLimitAngle, 228)
+		ADD_STRUCT(float, Swing2LimitAngle, 224)
+		ADD_STRUCT(float, Swing1LimitAngle, 220)
+		ADD_STRUCT(float, LinearBreakThreshold, 216)
+		ADD_STRUCT(float, LinearLimitDamping, 212)
+		ADD_STRUCT(float, LinearLimitStiffness, 208)
+		ADD_STRUCT(RB_ConstraintSetup::LinearDOFSetup, LinearZSetup, 200)
+		ADD_STRUCT(RB_ConstraintSetup::LinearDOFSetup, LinearYSetup, 192)
+		ADD_STRUCT(RB_ConstraintSetup::LinearDOFSetup, LinearXSetup, 184)
+		ADD_BOOL(bMaintainMinDistance, 180, 0x200)
+		ADD_BOOL(bIsPulley, 180, 0x100)
+		ADD_BOOL(bAngularBreakable, 180, 0x80)
+		ADD_BOOL(bTwistLimitSoft, 180, 0x40)
+		ADD_BOOL(bSwingLimitSoft, 180, 0x20)
+		ADD_BOOL(bTwistLimited, 180, 0x10)
+		ADD_BOOL(bSwingLimited, 180, 0x8)
+		ADD_BOOL(bLinearBreakable, 180, 0x4)
+		ADD_BOOL(bLinearLimitSoft, 180, 0x2)
+		ADD_BOOL(bEnableProjection, 180, 0x1)
+		ADD_STRUCT(Object::Vector, PulleyPivot2, 168)
+		ADD_STRUCT(Object::Vector, PulleyPivot1, 156)
+		ADD_STRUCT(Object::Vector, SecAxis2, 144)
+		ADD_STRUCT(Object::Vector, PriAxis2, 132)
+		ADD_STRUCT(Object::Vector, Pos2, 120)
+		ADD_STRUCT(Object::Vector, SecAxis1, 108)
+		ADD_STRUCT(Object::Vector, PriAxis1, 96)
+		ADD_STRUCT(Object::Vector, Pos1, 84)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

@@ -1,26 +1,16 @@
 #pragma once
 #include "Core.Object.h"
-#include "Core.Object.IntPoint.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.BookMark2D." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.BookMark2D." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class BookMark2D : public Object
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<IntPoint>, Location, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Zoom2D, 0xFFFFFFFF)
+		ADD_STRUCT(Object::IntPoint, Location, 64)
+		ADD_STRUCT(float, Zoom2D, 60)
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

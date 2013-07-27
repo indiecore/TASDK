@@ -1,22 +1,20 @@
 #pragma once
 #include "Engine.ParticleModuleAttractorBase.h"
-#include "Core.DistributionFloat.RawDistributionFloat.h"
-#include "Core.Object.Vector.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleAttractorLine." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.DistributionFloat.h"
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class ParticleModuleAttractorLine : public ParticleModuleAttractorBase
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Strength, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Range, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EndPoint1, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EndPoint0, 0xFFFFFFFF)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Strength, 124)
+		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Range, 96)
+		ADD_STRUCT(Object::Vector, EndPoint1, 84)
+		ADD_STRUCT(Object::Vector, EndPoint0, 72)
 	};
 }
 #undef ADD_STRUCT

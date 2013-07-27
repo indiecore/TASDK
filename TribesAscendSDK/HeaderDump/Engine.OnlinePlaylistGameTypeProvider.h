@@ -1,20 +1,18 @@
 #pragma once
 #include "Engine.UIResourceDataProvider.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlinePlaylistGameTypeProvider." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class OnlinePlaylistGameTypeProvider : public UIResourceDataProvider
 	{
 	public:
-		ADD_VAR(::IntProperty, GameTypeId, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, DisplayName, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, PlaylistGameTypeName, 0xFFFFFFFF)
+		ADD_STRUCT(int, GameTypeId, 156)
+		ADD_STRUCT(ScriptString*, Description, 144)
+		ADD_STRUCT(ScriptString*, DisplayName, 132)
+		ADD_STRUCT(ScriptName, PlaylistGameTypeName, 124)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

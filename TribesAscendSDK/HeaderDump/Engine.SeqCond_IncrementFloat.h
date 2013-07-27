@@ -1,19 +1,17 @@
 #pragma once
 #include "Engine.SequenceCondition.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqCond_IncrementFloat." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqCond_IncrementFloat : public SequenceCondition
 	{
 	public:
-		ADD_VAR(::FloatProperty, ValueB, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ValueA, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, IncrementAmount, 0xFFFFFFFF)
+		ADD_STRUCT(float, ValueB, 216)
+		ADD_STRUCT(float, ValueA, 212)
+		ADD_STRUCT(float, IncrementAmount, 208)
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

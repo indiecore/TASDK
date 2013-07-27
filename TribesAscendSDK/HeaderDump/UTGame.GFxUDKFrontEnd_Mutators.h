@@ -1,50 +1,55 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
-#include "GFxUI.GFxClikWidget.EventData.h"
+#include "UTGame.UTUIDataProvider_Mutator.h"
 #include "UTGame.UTUIDataStore_MenuItems.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_Mutators." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_Mutators." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class GFxUDKFrontEnd_Mutators : public GFxUDKFrontEnd_Screen
 	{
 	public:
-		ADD_VAR(::BoolProperty, bFirstUpdateAfterActivation, 0x1)
-		ADD_OBJECT(GFxObject, ConfigListDataProvider)
-		ADD_OBJECT(GFxClikWidget, ConfigListMC)
-		ADD_OBJECT(GFxObject, ListDataProvider)
-		ADD_OBJECT(GFxObject, MenuMC)
-		ADD_OBJECT(GFxClikWidget, ListMC)
-		ADD_OBJECT(UTUIDataStore_MenuItems, MenuDataStore)
+		ADD_STRUCT(ScriptArray<class UTUIDataProvider_Mutator*>, AllMutatorsList, 220)
+		ADD_STRUCT(ScriptArray<class UTUIDataProvider_Mutator*>, AvailableMutatorList, 232)
+		ADD_STRUCT(ScriptArray<int>, EnabledList, 248)
+		ADD_BOOL(bFirstUpdateAfterActivation, 280, 0x1)
+		ADD_OBJECT(GFxObject, ConfigListDataProvider, 276)
+		ADD_OBJECT(GFxClikWidget, ConfigListMC, 272)
+		ADD_OBJECT(GFxObject, ListDataProvider, 268)
+		ADD_OBJECT(GFxObject, MenuMC, 264)
+		ADD_OBJECT(GFxClikWidget, ListMC, 260)
+		ADD_OBJECT(UTUIDataStore_MenuItems, MenuDataStore, 244)
 		int GetNumEnabledMutators()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.GetNumEnabledMutators");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
-		ScriptArray<wchar_t> GetEnabledMutators()
+		ScriptString* GetEnabledMutators()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.GetEnabledMutators");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void OnViewLoaded()
 		{
@@ -64,49 +69,43 @@ namespace UnrealScript
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.OnTopMostView");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bPlayOpenAnimation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.DisableSubComponents");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bDisableComponents;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayOpenAnimation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.PlayOpenAnimation");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnListItemPress(EventData ev)
+		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.OnListItemPress");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		byte FindMutatorIndexByClass(ScriptArray<wchar_t> MutatorClass)
+		byte FindMutatorIndexByClass(ScriptString* MutatorClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.FindMutatorIndexByClass");
-			byte* params = (byte*)malloc(13);
-			*(ScriptArray<wchar_t>*)params = MutatorClass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(params + 12);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(ScriptString**)&params[0] = MutatorClass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[12];
 		}
-		void OnListChange(EventData ev)
+		void OnListChange(GFxClikWidget::EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.OnListChange");
-			byte* params = (byte*)malloc(36);
-			*(EventData*)params = ev;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(GFxClikWidget::EventData*)&params[0] = ev;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
@@ -126,18 +125,16 @@ namespace UnrealScript
 		void SetMutatorEnabled(int MutatorId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.SetMutatorEnabled");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = MutatorId;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = MutatorId;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddMutatorAndFilterList(int NewMutator)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.AddMutatorAndFilterList");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = NewMutator;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = NewMutator;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyGameModeFilter()
 		{
@@ -147,41 +144,36 @@ namespace UnrealScript
 		bool IsCurrentMutatorConfigurable()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.IsCurrentMutatorConfigurable");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void SetList(class GFxObject* List)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.SetList");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = List;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = List;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetConfigList(class GFxObject* ConfigList)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.SetConfigList");
-			byte* params = (byte*)malloc(4);
-			*(class GFxObject**)params = ConfigList;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class GFxObject**)&params[0] = ConfigList;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Mutators.WidgetInitialized");
-			byte* params = (byte*)malloc(24);
-			*(ScriptName*)params = WidgetName;
-			*(ScriptName*)(params + 8) = WidgetPath;
-			*(class GFxObject**)(params + 16) = Widget;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)&params[8] = WidgetPath;
+			*(class GFxObject**)&params[16] = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

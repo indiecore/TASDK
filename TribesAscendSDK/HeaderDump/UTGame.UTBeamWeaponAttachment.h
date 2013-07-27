@@ -2,27 +2,23 @@
 #include "Engine.ParticleSystem.h"
 #include "UTGame.UTPawn.h"
 #include "UTGame.UTWeaponAttachment.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTBeamWeaponAttachment." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTBeamWeaponAttachment." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTBeamWeaponAttachment : public UTWeaponAttachment
 	{
 	public:
-		ADD_VAR(::NameProperty, EndPointParamName, 0xFFFFFFFF)
-		ADD_OBJECT(UTPawn, PawnOwner)
-		ADD_VAR(::NameProperty, BeamSockets, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, BeamTemplate)
+		ADD_STRUCT(ScriptName, EndPointParamName, 740)
+		ADD_OBJECT(UTPawn, PawnOwner, 736)
+		ADD_STRUCT(ScriptName, BeamSockets, 720)
+		ADD_OBJECT(ParticleSystem, BeamTemplate, 704)
 		void AddBeamEmitter()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeaponAttachment.AddBeamEmitter");
@@ -31,21 +27,19 @@ namespace UnrealScript
 		void HideEmitter(int Index, bool bHide)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeaponAttachment.HideEmitter");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Index;
-			*(bool*)(params + 4) = bHide;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Index;
+			*(bool*)&params[4] = bHide;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateBeam(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeaponAttachment.UpdateBeam");
-			byte* params = (byte*)malloc(1);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

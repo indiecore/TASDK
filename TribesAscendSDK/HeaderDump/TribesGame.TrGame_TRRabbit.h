@@ -5,30 +5,31 @@
 #include "Engine.PlayerStart.h"
 #include "Engine.Controller.h"
 #include "UTGame.UTTeamInfo.h"
-#include "TribesGame.TrGame_TRRabbit.ScoreStruct.h"
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGame_TRRabbit." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrGame_TRRabbit." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrGame_TRRabbit : public TrGame
 	{
 	public:
-		ADD_OBJECT(PlayerReplicationInfo, m_HolderPRI)
-		ADD_OBJECT(PlayerReplicationInfo, m_Leader)
-		ADD_VAR(::FloatProperty, m_fScoreInterval, 0xFFFFFFFF)
-		ADD_OBJECT(TrFlagRabbit, m_Flag)
+		class ScoreStruct
+		{
+		public:
+			ADD_STRUCT(float, Score, 4)
+			ADD_OBJECT(TrPlayerController, C, 0)
+		};
+		ADD_OBJECT(PlayerReplicationInfo, m_HolderPRI, 1464)
+		ADD_OBJECT(PlayerReplicationInfo, m_Leader, 1468)
+		ADD_STRUCT(float, m_fScoreInterval, 1460)
+		ADD_OBJECT(TrFlagRabbit, m_Flag, 1456)
 		void ApplyServerSettings()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.ApplyServerSettings");
@@ -37,18 +38,16 @@ namespace UnrealScript
 		void RegisterFlag(class TrFlagRabbit* F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.RegisterFlag");
-			byte* params = (byte*)malloc(4);
-			*(class TrFlagRabbit**)params = F;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrFlagRabbit**)&params[0] = F;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PickedUpFlag(class Controller* Holder)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.PickedUpFlag");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = Holder;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = Holder;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DroppedFlag()
 		{
@@ -58,12 +57,11 @@ namespace UnrealScript
 		void SetTeam(class Controller* Other, class UTTeamInfo* NewTeam, bool bNewTeam)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.SetTeam");
-			byte* params = (byte*)malloc(12);
-			*(class Controller**)params = Other;
-			*(class UTTeamInfo**)(params + 4) = NewTeam;
-			*(bool*)(params + 8) = bNewTeam;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class Controller**)&params[0] = Other;
+			*(class UTTeamInfo**)&params[4] = NewTeam;
+			*(bool*)&params[8] = bNewTeam;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ScoreFlagTimer()
 		{
@@ -73,87 +71,73 @@ namespace UnrealScript
 		void ScoreFlagHold(bool firstPass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.ScoreFlagHold");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = firstPass;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = firstPass;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ScoreKill(class Controller* Killer, class Controller* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.ScoreKill");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = Killer;
-			*(class Controller**)(params + 4) = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)&params[4] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangePreviousRabbitTeam()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.ChangePreviousRabbitTeam");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScoreStruct MakeScoreStruct(class TrPlayerController* C, float Score)
+		TrGame_TRRabbit::ScoreStruct MakeScoreStruct(class TrPlayerController* C, float Score)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.MakeScoreStruct");
-			byte* params = (byte*)malloc(16);
-			*(class TrPlayerController**)params = C;
-			*(float*)(params + 4) = Score;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScoreStruct*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class TrPlayerController**)&params[0] = C;
+			*(float*)&params[4] = Score;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(TrGame_TRRabbit::ScoreStruct*)&params[8];
 		}
 		bool SortPlayerScores(class PlayerReplicationInfo* Scorer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.SortPlayerScores");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerReplicationInfo**)params = Scorer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool CheckScore(class PlayerReplicationInfo* Scorer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.CheckScore");
-			byte* params = (byte*)malloc(8);
-			*(class PlayerReplicationInfo**)params = Scorer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.CheckEndGame");
-			byte* params = (byte*)malloc(20);
-			*(class PlayerReplicationInfo**)params = Winner;
-			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(ScriptString**)&params[4] = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		byte PickTeam(byte Num, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.PickTeam");
-			byte* params = (byte*)malloc(6);
-			*params = Num;
-			*(class Controller**)(params + 4) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(params + 8);
-			free(params);
-			return returnVal;
+			byte params[6] = { NULL };
+			params[0] = Num;
+			*(class Controller**)&params[4] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[8];
 		}
 		byte PickTeamForMigration(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.PickTeamForMigration");
-			byte* params = (byte*)malloc(5);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return params[4];
 		}
 		void PlayEndOfMatchMessage()
 		{
@@ -163,34 +147,29 @@ namespace UnrealScript
 		void DiscardInventory(class Pawn* Other, class Controller* Killer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.DiscardInventory");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = Other;
-			*(class Controller**)(params + 4) = Killer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			*(class Controller**)&params[4] = Killer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float RatePlayerStart(class PlayerStart* P, byte Team, class Controller* Player)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.RatePlayerStart");
-			byte* params = (byte*)malloc(13);
-			*(class PlayerStart**)params = P;
-			*(params + 4) = Team;
-			*(class Controller**)(params + 8) = Player;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[13] = { NULL };
+			*(class PlayerStart**)&params[0] = P;
+			params[4] = Team;
+			*(class Controller**)&params[8] = Player;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
 		int GetGameTypeId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.GetGameTypeId");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

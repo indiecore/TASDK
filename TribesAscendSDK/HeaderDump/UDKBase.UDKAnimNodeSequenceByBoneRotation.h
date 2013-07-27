@@ -1,18 +1,24 @@
 #pragma once
 #include "Engine.AnimNodeSequence.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimNodeSequenceByBoneRotation." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UDKAnimNodeSequenceByBoneRotation : public AnimNodeSequence
 	{
 	public:
-		ADD_VAR(::ByteProperty, BoneAxis, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
+		class AnimByRotation
+		{
+		public:
+			ADD_STRUCT(ScriptName, AnimName, 12)
+			ADD_STRUCT(Object::Rotator, DesiredRotation, 0)
+		};
+		ADD_STRUCT(ScriptArray<UDKAnimNodeSequenceByBoneRotation::AnimByRotation>, AnimList, 332)
+		ADD_STRUCT(Object::EAxis, BoneAxis, 328)
+		ADD_STRUCT(ScriptName, BoneName, 320)
 		void OnBecomeRelevant()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimNodeSequenceByBoneRotation.OnBecomeRelevant");
@@ -20,4 +26,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

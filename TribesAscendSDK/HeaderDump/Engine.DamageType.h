@@ -2,48 +2,53 @@
 #include "Core.Object.h"
 #include "Engine.ForceFeedbackWaveform.h"
 #include "Engine.Vehicle.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DamageType." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.DamageType." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class DamageType : public Object
 	{
 	public:
-		ADD_OBJECT(ForceFeedbackWaveform, DamagedFFWaveform)
-		ADD_VAR(::FloatProperty, FracturedMeshDamage, 0xFFFFFFFF)
-		ADD_OBJECT(ForceFeedbackWaveform, KilledFFWaveform)
-		ADD_VAR(::FloatProperty, VehicleMomentumScaling, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VehicleDamageScaling, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RadialDamageImpulse, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, KDeathUpKick, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, KDeathVel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, KDamageImpulse, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bRadialDamageVelChange, 0x10)
-		ADD_VAR(::BoolProperty, bCausesFracture, 0x8)
-		ADD_VAR(::BoolProperty, bExtraMomentumZ, 0x4)
-		ADD_VAR(::BoolProperty, bCausedByWorld, 0x2)
-		ADD_VAR(::BoolProperty, bArmorStops, 0x1)
+		ADD_OBJECT(ForceFeedbackWaveform, DamagedFFWaveform, 88)
+		ADD_STRUCT(float, FracturedMeshDamage, 96)
+		ADD_OBJECT(ForceFeedbackWaveform, KilledFFWaveform, 92)
+		ADD_STRUCT(float, VehicleMomentumScaling, 84)
+		ADD_STRUCT(float, VehicleDamageScaling, 80)
+		ADD_STRUCT(float, RadialDamageImpulse, 76)
+		ADD_STRUCT(float, KDeathUpKick, 72)
+		ADD_STRUCT(float, KDeathVel, 68)
+		ADD_STRUCT(float, KDamageImpulse, 64)
+		ADD_BOOL(bRadialDamageVelChange, 60, 0x10)
+		ADD_BOOL(bCausesFracture, 60, 0x8)
+		ADD_BOOL(bExtraMomentumZ, 60, 0x4)
+		ADD_BOOL(bCausedByWorld, 60, 0x2)
+		ADD_BOOL(bArmorStops, 60, 0x1)
 		float VehicleDamageScalingFor(class Vehicle* V)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DamageType.VehicleDamageScalingFor");
-			byte* params = (byte*)malloc(8);
-			*(class Vehicle**)params = V;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Vehicle**)&params[0] = V;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -5,15 +5,14 @@ namespace UnrealScript
 	class UTMutator_WeaponsRespawn : public UTMutator
 	{
 	public:
-		void InitMutator(ScriptArray<wchar_t> Options, ScriptArray<wchar_t>& ErrorMessage)
+		void InitMutator(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_WeaponsRespawn.InitMutator");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Options;
-			*(ScriptArray<wchar_t>*)(params + 12) = ErrorMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)&params[12] = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ErrorMessage = *(ScriptString**)&params[12];
 		}
 	};
 }

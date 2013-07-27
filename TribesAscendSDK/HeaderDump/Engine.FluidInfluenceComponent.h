@@ -1,50 +1,65 @@
 #pragma once
 #include "Engine.PrimitiveComponent.h"
 #include "Engine.FluidSurfaceActor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FluidInfluenceComponent." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.FluidInfluenceComponent." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class FluidInfluenceComponent : public PrimitiveComponent
 	{
 	public:
-		ADD_OBJECT(FluidSurfaceActor, CurrentFluidActor)
-		ADD_VAR(::FloatProperty, CurrentTimer, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CurrentAngle, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SphereStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SphereInnerRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SphereOuterRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FlowFrequency, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FlowStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FlowWaveRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FlowSideMotionRadius, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, FlowNumRipples, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, FlowSpeed, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RaindropRate, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RaindropStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RaindropRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RaindropAreaRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WaveRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WavePhase, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WaveFrequency, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, WaveStrength, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxDistance, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, InfluenceType, 0xFFFFFFFF)
-		ADD_OBJECT(FluidSurfaceActor, FluidActor)
-		ADD_VAR(::BoolProperty, bIsToggleTriggered, 0x4)
-		ADD_VAR(::BoolProperty, RaindropFillEntireFluid, 0x2)
-		ADD_VAR(::BoolProperty, bActive, 0x1)
+		enum EInfluenceType : byte
+		{
+			Fluid_Flow = 0,
+			Fluid_Raindrops = 1,
+			Fluid_Wave = 2,
+			Fluid_Sphere = 3,
+			Fluid_MAX = 4,
+		};
+		ADD_OBJECT(FluidSurfaceActor, CurrentFluidActor, 580)
+		ADD_STRUCT(float, CurrentTimer, 576)
+		ADD_STRUCT(float, CurrentAngle, 572)
+		ADD_STRUCT(float, SphereStrength, 568)
+		ADD_STRUCT(float, SphereInnerRadius, 564)
+		ADD_STRUCT(float, SphereOuterRadius, 560)
+		ADD_STRUCT(float, FlowFrequency, 556)
+		ADD_STRUCT(float, FlowStrength, 552)
+		ADD_STRUCT(float, FlowWaveRadius, 548)
+		ADD_STRUCT(float, FlowSideMotionRadius, 544)
+		ADD_STRUCT(int, FlowNumRipples, 540)
+		ADD_STRUCT(float, FlowSpeed, 536)
+		ADD_STRUCT(float, RaindropRate, 532)
+		ADD_STRUCT(float, RaindropStrength, 528)
+		ADD_STRUCT(float, RaindropRadius, 524)
+		ADD_STRUCT(float, RaindropAreaRadius, 520)
+		ADD_STRUCT(float, WaveRadius, 516)
+		ADD_STRUCT(float, WavePhase, 512)
+		ADD_STRUCT(float, WaveFrequency, 508)
+		ADD_STRUCT(float, WaveStrength, 504)
+		ADD_STRUCT(float, MaxDistance, 500)
+		ADD_STRUCT(FluidInfluenceComponent::EInfluenceType, InfluenceType, 496)
+		ADD_OBJECT(FluidSurfaceActor, FluidActor, 492)
+		ADD_BOOL(bIsToggleTriggered, 488, 0x4)
+		ADD_BOOL(RaindropFillEntireFluid, 488, 0x2)
+		ADD_BOOL(bActive, 488, 0x1)
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

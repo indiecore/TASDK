@@ -1,54 +1,62 @@
 #pragma once
-#include "Core.Object.Pointer.h"
 #include "Engine.Info.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FileWriter." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.FileWriter." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class FileWriter : public Info
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ArchivePtr, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, Filename, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, FileType, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bFlushEachWrite, 0x1)
-		ADD_VAR(::BoolProperty, bWantsAsyncWrites, 0x2)
-		bool OpenFile(ScriptArray<wchar_t> InFilename, byte InFileType, ScriptArray<wchar_t> InExtension, bool bUnique, bool bIncludeTimeStamp)
+		enum FWFileType : byte
+		{
+			FWFT_Log = 0,
+			FWFT_Stats = 1,
+			FWFT_HTML = 2,
+			FWFT_User = 3,
+			FWFT_Debug = 4,
+			FWFT_MAX = 5,
+		};
+		ADD_STRUCT(Object::Pointer, ArchivePtr, 476)
+		ADD_STRUCT(ScriptString*, Filename, 480)
+		ADD_STRUCT(FileWriter::FWFileType, FileType, 492)
+		ADD_BOOL(bFlushEachWrite, 496, 0x1)
+		ADD_BOOL(bWantsAsyncWrites, 496, 0x2)
+		bool OpenFile(ScriptString* InFilename, FileWriter::FWFileType InFileType, ScriptString* InExtension, bool bUnique, bool bIncludeTimeStamp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.OpenFile");
-			byte* params = (byte*)malloc(37);
-			*(ScriptArray<wchar_t>*)params = InFilename;
-			*(params + 12) = InFileType;
-			*(ScriptArray<wchar_t>*)(params + 16) = InExtension;
-			*(bool*)(params + 28) = bUnique;
-			*(bool*)(params + 32) = bIncludeTimeStamp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 36);
-			free(params);
-			return returnVal;
+			byte params[37] = { NULL };
+			*(ScriptString**)&params[0] = InFilename;
+			*(FileWriter::FWFileType*)&params[12] = InFileType;
+			*(ScriptString**)&params[16] = InExtension;
+			*(bool*)&params[28] = bUnique;
+			*(bool*)&params[32] = bIncludeTimeStamp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[36];
 		}
 		void CloseFile()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.CloseFile");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Logf(ScriptArray<wchar_t> logString)
+		void Logf(ScriptString* logString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.Logf");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = logString;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = logString;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
@@ -57,5 +65,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT

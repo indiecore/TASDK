@@ -1,40 +1,50 @@
 #pragma once
 #include "Engine.UIDataStore_Remote.h"
 #include "Engine.OnlineStatsRead.h"
-#include "Engine.UIDataStore_OnlineStats.RankMetaData.h"
-#include "Engine.UIDataStore_OnlineStats.PlayerNickMetaData.h"
-#include "Core.Object.Pointer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlineStats." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataStore_OnlineStats." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.UIDataStore_OnlineStats." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UIDataStore_OnlineStats : public UIDataStore_Remote
 	{
 	public:
-		ADD_VAR(::ByteProperty, CurrentReadType, 0xFFFFFFFF)
-		ADD_OBJECT(OnlineStatsRead, StatsRead)
-		ADD_VAR(::NameProperty, TotalRowsName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<RankMetaData>, RankNameMetaData, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<PlayerNickMetaData>, PlayerNickData, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, StatsReadName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
+		enum EStatsFetchType : byte
+		{
+			SFT_Player = 0,
+			SFT_CenteredOnPlayer = 1,
+			SFT_Friends = 2,
+			SFT_TopRankings = 3,
+			SFT_MAX = 4,
+		};
+		class RankMetaData
+		{
+		public:
+			ADD_STRUCT(ScriptString*, RankColumnName, 8)
+			ADD_STRUCT(ScriptName, RankName, 0)
+		};
+		class PlayerNickMetaData
+		{
+		public:
+			ADD_STRUCT(ScriptString*, PlayerNickColumnName, 8)
+			ADD_STRUCT(ScriptName, PlayerNickName, 0)
+		};
+		ADD_STRUCT(ScriptArray<ScriptClass*>, StatsReadClasses, 128)
+		ADD_STRUCT(ScriptArray<class OnlineStatsRead*>, StatsReadObjects, 196)
+		ADD_STRUCT(UIDataStore_OnlineStats::EStatsFetchType, CurrentReadType, 212)
+		ADD_OBJECT(OnlineStatsRead, StatsRead, 208)
+		ADD_STRUCT(ScriptName, TotalRowsName, 188)
+		ADD_STRUCT(UIDataStore_OnlineStats::RankMetaData, RankNameMetaData, 168)
+		ADD_STRUCT(UIDataStore_OnlineStats::PlayerNickMetaData, PlayerNickData, 148)
+		ADD_STRUCT(ScriptName, StatsReadName, 140)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 124)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		void Init()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.Init");
@@ -48,31 +58,26 @@ namespace UnrealScript
 		bool RefreshStats(byte ControllerIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.RefreshStats");
-			byte* params = (byte*)malloc(5);
-			*params = ControllerIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			params[0] = ControllerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool ShowGamercard(byte ConrollerIndex, int ListIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.ShowGamercard");
-			byte* params = (byte*)malloc(9);
-			*params = ConrollerIndex;
-			*(int*)(params + 4) = ListIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[9] = { NULL };
+			params[0] = ConrollerIndex;
+			*(int*)&params[4] = ListIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void OnReadComplete(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.OnReadComplete");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SortResultsByRank()
 		{
@@ -81,6 +86,5 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

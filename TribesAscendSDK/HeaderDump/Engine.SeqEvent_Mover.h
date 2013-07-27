@@ -1,18 +1,16 @@
 #pragma once
 #include "Engine.SequenceEvent.h"
 #include "Engine.Actor.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqEvent_Mover." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class SeqEvent_Mover : public SequenceEvent
 	{
 	public:
-		ADD_VAR(::FloatProperty, StayOpenTime, 0xFFFFFFFF)
+		ADD_STRUCT(float, StayOpenTime, 256)
 		void RegisterEvent()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.RegisterEvent");
@@ -21,26 +19,23 @@ namespace UnrealScript
 		void NotifyEncroachingOn(class Actor* Hit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyEncroachingOn");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = Hit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = Hit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyAttached(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyAttached");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyDetached(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyDetached");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyFinishedOpen()
 		{
@@ -49,4 +44,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

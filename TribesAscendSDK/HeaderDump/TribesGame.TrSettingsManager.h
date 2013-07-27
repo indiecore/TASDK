@@ -7,24 +7,22 @@
 #include "TribesGame.TrHUDSettings.h"
 #include "TribesGame.TrControlSettings.h"
 #include "TribesGame.TrKeyBindings.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrSettingsManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrSettingsManager : public Object
 	{
 	public:
-		ADD_OBJECT(TrRegionSettings, RegionSettings)
-		ADD_OBJECT(TrAudioSettings, AudioSettings)
-		ADD_OBJECT(TrControlSettings, ControlSettings)
-		ADD_OBJECT(TrKeyBindings, KeyBindings)
-		ADD_OBJECT(TrHUDSettings, HUDSettings)
-		ADD_OBJECT(TrVideoSettings, VideoSettings)
-		ADD_OBJECT(GFxTrMenuMoviePlayer, MP)
+		ADD_OBJECT(TrRegionSettings, RegionSettings, 76)
+		ADD_OBJECT(TrAudioSettings, AudioSettings, 68)
+		ADD_OBJECT(TrControlSettings, ControlSettings, 80)
+		ADD_OBJECT(TrKeyBindings, KeyBindings, 64)
+		ADD_OBJECT(TrHUDSettings, HUDSettings, 60)
+		ADD_OBJECT(TrVideoSettings, VideoSettings, 72)
+		ADD_OBJECT(GFxTrMenuMoviePlayer, MP, 84)
 		void Initialize()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSettingsManager.Initialize");

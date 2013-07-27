@@ -3,41 +3,47 @@
 #include "Engine.Pawn.h"
 #include "Engine.SeqAct_Interp.h"
 #include "Engine.InterpGroupInstAI.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MatineeActor." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.MatineeActor." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MatineeActor : public Actor
 	{
 	public:
-		ADD_VAR(::FloatProperty, ClientSidePositionErrorTolerance, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, AIGroupInitStage, 0xFFFFFFFF)
-		ADD_OBJECT(Pawn, AIGroupPawns)
-		ADD_VAR(::NameProperty, AIGroupNames, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, Position, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PlayRate, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, AllAIGroupsInitialized, 0x8)
-		ADD_VAR(::BoolProperty, bPaused, 0x4)
-		ADD_VAR(::BoolProperty, bReversePlayback, 0x2)
-		ADD_VAR(::BoolProperty, bIsPlaying, 0x1)
-		ADD_OBJECT(SeqAct_Interp, InterpAction)
+		static const auto MAX_AIGROUP_NUMBER = 10;
+		ADD_STRUCT(float, ClientSidePositionErrorTolerance, 652)
+		ADD_STRUCT(int, AIGroupInitStage, 612)
+		ADD_OBJECT(Pawn, AIGroupPawns, 572)
+		ADD_STRUCT(ScriptName, AIGroupNames, 492)
+		ADD_STRUCT(float, Position, 488)
+		ADD_STRUCT(float, PlayRate, 484)
+		ADD_BOOL(AllAIGroupsInitialized, 480, 0x8)
+		ADD_BOOL(bPaused, 480, 0x4)
+		ADD_BOOL(bReversePlayback, 480, 0x2)
+		ADD_BOOL(bIsPlaying, 480, 0x1)
+		ADD_OBJECT(SeqAct_Interp, InterpAction, 476)
 		void AddAIGroupActor(class InterpGroupInstAI* AIGroupInst)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.AddAIGroupActor");
-			byte* params = (byte*)malloc(4);
-			*(class InterpGroupInstAI**)params = AIGroupInst;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class InterpGroupInstAI**)&params[0] = AIGroupInst;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Update()
 		{
@@ -51,5 +57,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
 #undef ADD_OBJECT

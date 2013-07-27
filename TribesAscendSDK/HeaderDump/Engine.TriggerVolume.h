@@ -14,12 +14,10 @@ namespace UnrealScript
 		bool StopsProjectile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggerVolume.StopsProjectile");
-			byte* params = (byte*)malloc(8);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 	};
 }

@@ -6,56 +6,48 @@
 #include "TribesGame.TrVehicle.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "TribesGame.TrGame.h"
-#include "Core.Object.Vector.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAccoladeManager." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrAccoladeManager." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrAccoladeManager : public Object
 	{
 	public:
-		ADD_VAR(::IntProperty, m_nLastFlagReturnTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nLastFlagGrabTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MAXIMUM_EMERGENCY_GRAB_DISTANCE, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MAXIMUM_FLAG_DEFENSE_DISTANCE, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MINIMUM_ULTRA_GRAB_SPEED, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MINIMUM_FAST_GRAB_SPEED, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MAXIMUM_LLAMA_GRAB_SPEED, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MINIMUM_TIME_FLAG_CREDITS, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nCurrSpinfusorKillStreak, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nCurrExplosiveKillStreak, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, m_nCurrSnipingKillStreak, 0xFFFFFFFF)
-		ADD_OBJECT(TrStatsInterface, Stats)
-		ADD_OBJECT(TrPlayerController, m_TrPC)
-		ADD_OBJECT(TrGame, m_TrG)
-		int GetFlagDistance(Vector Loc1, Vector Loc2)
+		ADD_STRUCT(int, m_nLastFlagReturnTime, 112)
+		ADD_STRUCT(int, m_nLastFlagGrabTime, 108)
+		ADD_STRUCT(int, MAXIMUM_EMERGENCY_GRAB_DISTANCE, 104)
+		ADD_STRUCT(int, MAXIMUM_FLAG_DEFENSE_DISTANCE, 100)
+		ADD_STRUCT(int, MINIMUM_ULTRA_GRAB_SPEED, 96)
+		ADD_STRUCT(int, MINIMUM_FAST_GRAB_SPEED, 92)
+		ADD_STRUCT(int, MAXIMUM_LLAMA_GRAB_SPEED, 88)
+		ADD_STRUCT(int, MINIMUM_TIME_FLAG_CREDITS, 84)
+		ADD_STRUCT(int, m_nCurrSpinfusorKillStreak, 80)
+		ADD_STRUCT(int, m_nCurrExplosiveKillStreak, 76)
+		ADD_STRUCT(int, m_nCurrSnipingKillStreak, 72)
+		ADD_OBJECT(TrStatsInterface, Stats, 68)
+		ADD_OBJECT(TrPlayerController, m_TrPC, 64)
+		ADD_OBJECT(TrGame, m_TrG, 60)
+		int GetFlagDistance(Object::Vector Loc1, Object::Vector Loc2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.GetFlagDistance");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = Loc1;
-			*(Vector*)(params + 12) = Loc2;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = Loc1;
+			*(Object::Vector*)&params[12] = Loc2;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[24];
 		}
 		void Initialize(class TrPlayerController* TrPC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.Initialize");
-			byte* params = (byte*)malloc(4);
-			*(class TrPlayerController**)params = TrPC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrPlayerController**)&params[0] = TrPC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetStreaks()
 		{
@@ -75,20 +67,18 @@ namespace UnrealScript
 		void KillAsRabbit(class Controller* Killer, class Controller* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.KillAsRabbit");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = Killer;
-			*(class Controller**)(params + 4) = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)&params[4] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KilledTheRabbit(class Controller* Killer, class Controller* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.KilledTheRabbit");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = Killer;
-			*(class Controller**)(params + 4) = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)&params[4] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KilledTheFlagHolder()
 		{
@@ -98,11 +88,10 @@ namespace UnrealScript
 		void UpdateStandardKillingSpree(class UTPlayerReplicationInfo* Other, int currentSpree)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.UpdateStandardKillingSpree");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerReplicationInfo**)params = Other;
-			*(int*)(params + 4) = currentSpree;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = Other;
+			*(int*)&params[4] = currentSpree;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KilledGenerator()
 		{
@@ -142,18 +131,16 @@ namespace UnrealScript
 		void FlagAssist(int AssistCount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.FlagAssist");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = AssistCount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = AssistCount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FlagCapture(bool bUnAssisted)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.FlagCapture");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bUnAssisted;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bUnAssisted;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FlagReturn()
 		{
@@ -178,55 +165,48 @@ namespace UnrealScript
 		void UpdateMultiKills(int MultiKillLevel)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.UpdateMultiKills");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = MultiKillLevel;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = MultiKillLevel;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleDestroyed(class TrVehicle* aVehicle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.VehicleDestroyed");
-			byte* params = (byte*)malloc(4);
-			*(class TrVehicle**)params = aVehicle;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class TrVehicle**)&params[0] = aVehicle;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateSpecialAccolades(class Controller* Victim)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.UpdateSpecialAccolades");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = Victim;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = Victim;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QueueAccolade(ScriptClass* Accolade, int ModifiedCredits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.QueueAccolade");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = Accolade;
-			*(int*)(params + 4) = ModifiedCredits;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = Accolade;
+			*(int*)&params[4] = ModifiedCredits;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CreditsGiven(ScriptClass* Accolade)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.CreditsGiven");
-			byte* params = (byte*)malloc(8);
-			*(ScriptClass**)params = Accolade;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(ScriptClass**)&params[0] = Accolade;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void BroadcastAccolade(ScriptClass* Accolade)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAccoladeManager.BroadcastAccolade");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = Accolade;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = Accolade;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

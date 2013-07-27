@@ -1,38 +1,33 @@
 #pragma once
 #include "Engine.PathConstraint.h"
 #include "Engine.Pawn.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Path_AvoidInEscapableNodes." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class Path_AvoidInEscapableNodes : public PathConstraint
 	{
 	public:
-		ADD_VAR(::IntProperty, MoveFlags, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, MaxFallSpeed, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Height, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, Radius, 0xFFFFFFFF)
+		ADD_STRUCT(int, MoveFlags, 80)
+		ADD_STRUCT(int, MaxFallSpeed, 76)
+		ADD_STRUCT(int, Height, 72)
+		ADD_STRUCT(int, Radius, 68)
 		void CachePawnReacFlags(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.CachePawnReacFlags");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool DontGetStuck(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.DontGetStuck");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void Recycle()
 		{
@@ -41,4 +36,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

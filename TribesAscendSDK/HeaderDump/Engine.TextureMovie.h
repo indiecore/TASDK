@@ -1,45 +1,50 @@
 #pragma once
-#include "Core.Object.UntypedBulkData_Mirror.h"
 #include "Engine.Texture.h"
-#include "Core.Object.Pointer.h"
 #include "Engine.CodecMovie.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TextureMovie." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.TextureMovie." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.TextureMovie." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TextureMovie : public Texture
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseCodecFence, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, Data, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, AutoPlay, 0x8)
-		ADD_VAR(::BoolProperty, Looping, 0x4)
-		ADD_VAR(::BoolProperty, Stopped, 0x2)
-		ADD_VAR(::BoolProperty, Paused, 0x1)
-		ADD_OBJECT(CodecMovie, Decoder)
-		ADD_OBJECT(ScriptClass, DecoderClass)
-		ADD_VAR(::ByteProperty, MovieStreamSource, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, AddressY, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, AddressX, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
+		enum EMovieStreamSource : byte
+		{
+			MovieStream_File = 0,
+			MovieStream_Memory = 1,
+			MovieStream_MAX = 2,
+		};
+		ADD_STRUCT(Object::Pointer, ReleaseCodecFence, 312)
+		ADD_STRUCT(Object::UntypedBulkData_Mirror, Data, 260)
+		ADD_BOOL(AutoPlay, 256, 0x8)
+		ADD_BOOL(Looping, 256, 0x4)
+		ADD_BOOL(Stopped, 256, 0x2)
+		ADD_BOOL(Paused, 256, 0x1)
+		ADD_OBJECT(CodecMovie, Decoder, 252)
+		ADD_OBJECT(ScriptClass, DecoderClass, 248)
+		ADD_STRUCT(TextureMovie::EMovieStreamSource, MovieStreamSource, 247)
+		ADD_STRUCT(int, SizeX, 236)
+		ADD_STRUCT(Texture::TextureAddress, AddressY, 246)
+		ADD_STRUCT(Texture::TextureAddress, AddressX, 245)
+		ADD_STRUCT(Texture::EPixelFormat, Format, 244)
+		ADD_STRUCT(int, SizeY, 240)
 		void Play()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Play");
@@ -57,6 +62,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

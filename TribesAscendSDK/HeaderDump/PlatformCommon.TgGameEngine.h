@@ -1,181 +1,181 @@
 #pragma once
+#include "Core.Object.h"
 #include "Engine.GameEngine.h"
 #include "Engine.PlayerController.h"
-#include "Core.Object.Pointer.h"
-#include "Engine.OnlineSubsystem.UniqueNetId.h"
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
+#include "Engine.OnlineSubsystem.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty PlatformCommon.TgGameEngine." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class TgGameEngine : public GameEngine
 	{
 	public:
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pEventMarshal, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pOutgoingMarshal, 0xFFFFFFFF)
-		void OnMarshalEvent(Pointer pMarEvent)
+		class MAR_EVENT
+		{
+		public:
+			ADD_STRUCT(Object::Pointer, pMarshal, 40)
+			ADD_STRUCT(ScriptString*, fsMessage, 28)
+			ADD_STRUCT(int, nStmMsgId, 24)
+			ADD_STRUCT(Object::QWord, qwInfo, 16)
+			ADD_STRUCT(Object::QWord, qwId, 8)
+			ADD_STRUCT(int, nFunction, 4)
+			ADD_BOOL(bSuccess, 0, 0x1)
+		};
+		ADD_STRUCT(ScriptArray<
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void*>, MarshalEventDelegates, 1808)
+		ADD_STRUCT(Object::Pointer, pEventMarshal, 1824)
+		ADD_STRUCT(Object::Pointer, pOutgoingMarshal, 1820)
+		void OnMarshalEvent(Object::Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.OnMarshalEvent");
-			byte* params = (byte*)malloc(4);
-			*(Pointer*)params = pMarEvent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(Object::Pointer*)&params[0] = pMarEvent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetFunction(int nFunction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SetFunction");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = nFunction;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = nFunction;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool SetFieldInt(int nToken, int IntValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SetFieldInt");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = nToken;
-			*(int*)(params + 4) = IntValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = nToken;
+			*(int*)&params[4] = IntValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		bool SetFieldFloat(int nToken, float FloatValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SetFieldFloat");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = nToken;
-			*(float*)(params + 4) = FloatValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = nToken;
+			*(float*)&params[4] = FloatValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
-		bool SetFieldString(int nToken, ScriptArray<wchar_t> StrValue)
+		bool SetFieldString(int nToken, ScriptString* StrValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SetFieldString");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = nToken;
-			*(ScriptArray<wchar_t>*)(params + 4) = StrValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = nToken;
+			*(ScriptString**)&params[4] = StrValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 		void ClearMarshal()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.ClearMarshal");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SendMarshal(UniqueNetId qwPlayerId, bool bLowPriority)
+		void SendMarshal(OnlineSubsystem::UniqueNetId qwPlayerId, bool bLowPriority)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SendMarshal");
-			byte* params = (byte*)malloc(12);
-			*(UniqueNetId*)params = qwPlayerId;
-			*(bool*)(params + 8) = bLowPriority;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(OnlineSubsystem::UniqueNetId*)&params[0] = qwPlayerId;
+			*(bool*)&params[8] = bLowPriority;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendMarshalAll(bool bLowPriority)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SendMarshalAll");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bLowPriority;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bLowPriority;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetFieldInt(int nToken, int& IntValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.GetFieldInt");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = nToken;
-			*(int*)(params + 4) = IntValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			IntValue = *(int*)(params + 4);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = nToken;
+			*(int*)&params[4] = IntValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			IntValue = *(int*)&params[4];
+			return *(bool*)&params[8];
 		}
 		bool GetFieldFloat(int nToken, float& FloatValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.GetFieldFloat");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = nToken;
-			*(float*)(params + 4) = FloatValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FloatValue = *(float*)(params + 4);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = nToken;
+			*(float*)&params[4] = FloatValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			FloatValue = *(float*)&params[4];
+			return *(bool*)&params[8];
 		}
-		bool GetFieldString(int nToken, ScriptArray<wchar_t>& StrValue)
+		bool GetFieldString(int nToken, ScriptString*& StrValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.GetFieldString");
-			byte* params = (byte*)malloc(20);
-			*(int*)params = nToken;
-			*(ScriptArray<wchar_t>*)(params + 4) = StrValue;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			StrValue = *(ScriptArray<wchar_t>*)(params + 4);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(int*)&params[0] = nToken;
+			*(ScriptString**)&params[4] = StrValue;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			StrValue = *(ScriptString**)&params[4];
+			return *(bool*)&params[16];
 		}
 		void AddMarshalEventDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MarshalEventDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.AddMarshalEventDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = MarshalEventDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = MarshalEventDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearMarshalEventDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MarshalEventDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.ClearMarshalEventDelegate");
-			byte* params = (byte*)malloc(12);
+			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)params = MarshalEventDelegate;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[0] = MarshalEventDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SendCtrlRequest(ScriptArray<wchar_t> fsRequest)
+		void SendCtrlRequest(ScriptString* fsRequest)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SendCtrlRequest");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = fsRequest;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = fsRequest;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SendGameRequest(ScriptArray<wchar_t> fsRequest)
+		void SendGameRequest(ScriptString* fsRequest)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SendGameRequest");
-			byte* params = (byte*)malloc(12);
-			*(ScriptArray<wchar_t>*)params = fsRequest;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptString**)&params[0] = fsRequest;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool HandlePlayerCommandInput(ScriptArray<wchar_t> FSCommand, class PlayerController* PC)
+		bool HandlePlayerCommandInput(ScriptString* FSCommand, class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.HandlePlayerCommandInput");
-			byte* params = (byte*)malloc(20);
-			*(ScriptArray<wchar_t>*)params = FSCommand;
-			*(class PlayerController**)(params + 12) = PC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[20] = { NULL };
+			*(ScriptString**)&params[0] = FSCommand;
+			*(class PlayerController**)&params[12] = PC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[16];
 		}
 	};
 }
+#undef ADD_BOOL
 #undef ADD_STRUCT

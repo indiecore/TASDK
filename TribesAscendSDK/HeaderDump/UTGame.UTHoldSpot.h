@@ -4,19 +4,17 @@
 #include "UTGame.UTVehicle.h"
 #include "Engine.Actor.h"
 #include "Engine.Pawn.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTHoldSpot." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTHoldSpot : public UTDefensePoint
 	{
 	public:
-		ADD_OBJECT(NavigationPoint, LastAnchor)
-		ADD_OBJECT(UTVehicle, HoldVehicle)
+		ADD_OBJECT(NavigationPoint, LastAnchor, 744)
+		ADD_OBJECT(UTVehicle, HoldVehicle, 740)
 		void PreBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.PreBeginPlay");
@@ -25,11 +23,9 @@ namespace UnrealScript
 		class Actor* GetMoveTarget()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.GetMoveTarget");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Actor**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Actor**)&params[0];
 		}
 		void FreePoint()
 		{
@@ -39,21 +35,18 @@ namespace UnrealScript
 		class NavigationPoint* SpecifyEndAnchor(class Pawn* RouteFinder)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.SpecifyEndAnchor");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = RouteFinder;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class NavigationPoint**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class NavigationPoint**)&params[4];
 		}
 		void NotifyAnchorFindingResult(class NavigationPoint* EndAnchor, class Pawn* RouteFinder)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.NotifyAnchorFindingResult");
-			byte* params = (byte*)malloc(8);
-			*(class NavigationPoint**)params = EndAnchor;
-			*(class Pawn**)(params + 4) = RouteFinder;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class NavigationPoint**)&params[0] = EndAnchor;
+			*(class Pawn**)&params[4] = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

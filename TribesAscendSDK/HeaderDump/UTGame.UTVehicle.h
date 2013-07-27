@@ -1,244 +1,263 @@
 #pragma once
-#include "UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.ParticleSystem.h"
 #include "UDKBase.UDKVehicle.h"
+#include "Engine.SoundCue.h"
+#include "Engine.MaterialInterface.h"
+#include "UDKBase.UDKPawn.h"
 #include "UDKBase.UDKProjectile.h"
 #include "UTGame.UTGib.h"
 #include "Engine.StaticMesh.h"
-#include "Core.Object.Vector.h"
-#include "UTGame.UTWeapon.h"
-#include "UTGame.UTHUD.h"
-#include "Engine.UIRoot.TextureCoordinates.h"
-#include "Engine.MaterialInterface.h"
-#include "UTGame.UTMapInfo.h"
-#include "Core.Object.InterpCurveFloat.h"
+#include "Engine.SoundNodeWave.h"
+#include "Core.Object.h"
+#include "Engine.UIRoot.h"
 #include "Engine.Texture2D.h"
-#include "Core.Object.Rotator.h"
-#include "Engine.SoundCue.h"
 #include "Engine.Actor.h"
 #include "UTGame.UTVehicleDeathPiece.h"
 #include "UTGame.UTPlayerController.h"
 #include "Engine.CameraAnim.h"
 #include "UTGame.UTBot.h"
 #include "Engine.Emitter.h"
+#include "UDKBase.UDKPlayerController.h"
 #include "UTGame.UTVehicleFactory.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
 #include "Engine.Canvas.h"
-#include "Core.Object.LinearColor.h"
+#include "UTGame.UTWeapon.h"
+#include "UTGame.UTHUD.h"
+#include "UTGame.UTMapInfo.h"
 #include "Engine.Vehicle.h"
 #include "Engine.Controller.h"
 #include "Engine.AnimNodeSequence.h"
 #include "Engine.PlayerController.h"
-#include "Core.Object.Color.h"
 #include "UTGame.UTCarriedObject.h"
 #include "Engine.Projectile.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "UDKBase.UDKCarriedObject.h"
 #include "UTGame.UTSquadAI.h"
-#include "Engine.Actor.TraceHitInfo.h"
 #include "UTGame.UTVehicleWeapon.h"
 #include "UTGame.UTProjectile.h"
-#include "UDKBase.UDKPawn.MaterialImpactEffect.h"
-#include "Engine.Actor.CollisionImpactData.h"
 #include "UTGame.UTPawn.h"
 #include "UTGame.UTSeqAct_ExitVehicle.h"
-#include "Core.Object.Vector2D.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTVehicle." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTVehicle." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTVehicle." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTVehicle : public UDKVehicle
 	{
 	public:
-		ADD_VAR(::BoolProperty, bCanCarryFlag, 0x2)
-		ADD_VAR(::BoolProperty, bRequestedEntryWithFlag, 0x200000)
-		ADD_VAR(::BoolProperty, bHasCustomEntryRadius, 0x10)
-		ADD_OBJECT(UTVehicle, NextVehicle)
-		ADD_VAR(::FloatProperty, DefaultFOV, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bDropDetailWhenDriving, 0x10000)
-		ADD_VAR(::BoolProperty, bSpectatedView, 0x200)
-		ADD_VAR(::FloatProperty, LastEnemyWarningTime, 0xFFFFFFFF)
-		ADD_OBJECT(StaticMesh, ReferenceMovementMesh)
-		ADD_OBJECT(ParticleSystem, DisabledTemplate)
-		ADD_VAR(::FloatProperty, TimeLastDisabled, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DisabledTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, OldCameraPosition, 0xFFFFFFFF)
-		ADD_OBJECT(UTGib, DeathCameraGib)
-		ADD_VAR(::FloatProperty, MinCameraDistSq, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookForwardDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CameraOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CameraLag, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CameraSmoothingFactor, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OldCamPosZ, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, SeatCameraScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastCollisionDamageTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, CollisionDamageMult, 0xFFFFFFFF)
-		ADD_OBJECT(MaterialInterface, BurnOutMaterial)
-		ADD_VAR(::FloatProperty, SpawnInTime, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, SpawnMaterialParameterCurve, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, SpawnMaterialParameterName, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, HudCoords, 0xFFFFFFFF)
-		ADD_OBJECT(Texture2D, HudIcons)
-		ADD_STRUCT(::VectorProperty, PassengerTeamBeaconOffset, 0xFFFFFFFF)
-		ADD_OBJECT(PlayerReplicationInfo, PassengerPRI)
-		ADD_STRUCT(::VectorProperty, TeamBeaconOffset, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HealthPulseTime, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, LastHealth, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, DropOrbIconCoords, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, DropFlagIconCoords, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, EnterToolTipIconCoords, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, FlipToolTipIconCoords, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, IconCoords, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MapSize, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, FlagBone, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, FlagRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FlagOffset, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, BoostPadSound)
-		ADD_OBJECT(SoundCue, SpawnOutSound)
-		ADD_OBJECT(SoundCue, SpawnInSound)
-		ADD_VAR(::FloatProperty, SpawnRadius, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, BurnTimeParameterName, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, ExplosionSound)
-		ADD_VAR(::FloatProperty, TurretExplosiveForce, 0xFFFFFFFF)
-		ADD_OBJECT(StaticMesh, DestroyedTurretTemplate)
-		ADD_OBJECT(UTVehicleDeathPiece, DestroyedTurret)
-		ADD_STRUCT(::VectorProperty, TurretOffset, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, TurretSocketName, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, TurretScaleControlName, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, OuterExplosionShakeRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, InnerExplosionShakeRadius, 0xFFFFFFFF)
-		ADD_OBJECT(CameraAnim, DeathExplosionShake)
-		ADD_VAR(::FloatProperty, ExplosionInAirAngVel, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExplosionMomentum, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExplosionRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, ExplosionDamage, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DelayedBurnoutCount, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, DeadVehicleLifeSpan, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, BurnOutTime, 0xFFFFFFFF)
-		ADD_VAR(::NameProperty, BigExplosionSocket, 0xFFFFFFFF)
-		ADD_OBJECT(ParticleSystem, SecondaryExplosion)
-		ADD_OBJECT(ParticleSystem, ExplosionTemplate)
-		ADD_VAR(::FloatProperty, MaxFireEffectDistance, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxImpactEffectDistance, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, ExplosionDamageType)
-		ADD_VAR(::FloatProperty, DamageSmokeThreshold, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, VehiclePieceClass)
-		ADD_VAR(::IntProperty, ClientHealth, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TimeTilSecondaryVehicleExplosion, 0xFFFFFFFF)
-		ADD_OBJECT(Emitter, DeathExplosion)
-		ADD_VAR(::FloatProperty, MaxExplosionLightDistance, 0xFFFFFFFF)
-		ADD_OBJECT(ScriptClass, ExplosionLightClass)
-		ADD_OBJECT(ScriptClass, VehicleDrowningDamType)
-		ADD_VAR(::FloatProperty, HUDExtent, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, TeamBeaconPlayerInfoMaxDist, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<ObjectiveAnnouncementInfo>, NeedToPickUpAnnouncement, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, VehicleNameString, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, VehiclePositionString, 0xFFFFFFFF)
-		ADD_OBJECT(UTBot, Reservation)
-		ADD_OBJECT(UTVehicleFactory, ParentFactory)
-		ADD_OBJECT(SoundCue, StolenSound)
-		ADD_VAR(::IntProperty, StolenAnnouncementIndex, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, RanOverSound)
-		ADD_OBJECT(ScriptClass, RanOverDamageType)
-		ADD_OBJECT(SoundCue, LockedOnSound)
-		ADD_VAR(::FloatProperty, ConsoleSteerScale, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookSteerDeadZone, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookSteerDamping, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LookSteerSensitivity, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LeftStickDirDeadZone, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, HornIndex, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, LastHornTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, HornAIRadius, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, MaxDesireability, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, LinkedEndSound)
-		ADD_OBJECT(SoundCue, LinkedToCue)
-		ADD_VAR(::FloatProperty, LinkHealMult, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, InitialSpawnDelay, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, RespawnTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, PlayerStartTime, 0xFFFFFFFF)
-		ADD_VAR(::FloatProperty, VehicleLostTime, 0xFFFFFFFF)
-		ADD_OBJECT(PhysicalMaterial, DefaultPhysicalMaterial)
-		ADD_OBJECT(PhysicalMaterial, DrivingPhysicalMaterial)
-		ADD_VAR(::FloatProperty, DeflectionReverseThresh, 0xFFFFFFFF)
-		ADD_OBJECT(Actor, NoPassengerObjective)
-		ADD_VAR(::ByteProperty, LinkedToCount, 0xFFFFFFFF)
-		ADD_VAR(::ByteProperty, AIPurpose, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bDriverHoldsFlag, 0x1)
-		ADD_OBJECT(SoundCue, VehicleLockedSound)
-		ADD_VAR(::BoolProperty, bIsNecrisVehicle, 0x100)
-		ADD_VAR(::BoolProperty, bHasEnemyVehicleSound, 0x80)
-		ADD_VAR(::BoolProperty, bStealthVehicle, 0x40)
-		ADD_VAR(::BoolProperty, bShowDamageDebug, 0x20)
-		ADD_VAR(::BoolProperty, bAcceptTurretJump, 0x10)
-		ADD_VAR(::BoolProperty, bIsConsoleTurning, 0x8)
-		ADD_VAR(::BoolProperty, bStopDeathCamera, 0x4)
-		ADD_VAR(::BoolProperty, bCameraNeverHidesVehicle, 0x2)
-		ADD_VAR(::BoolProperty, bFixedCamZ, 0x1)
-		ADD_VAR(::BoolProperty, bNoFollowJumpZ, 0x80000000)
-		ADD_VAR(::BoolProperty, bLimitCameraZLookingUp, 0x40000000)
-		ADD_VAR(::BoolProperty, bNoZSmoothing, 0x20000000)
-		ADD_VAR(::BoolProperty, bRotateCameraUnderVehicle, 0x10000000)
-		ADD_VAR(::BoolProperty, bReducedFallingCollisionDamage, 0x8000000)
-		ADD_VAR(::BoolProperty, bPlayingSpawnEffect, 0x4000000)
-		ADD_VAR(::BoolProperty, bPostRenderTraceSucceeded, 0x2000000)
-		ADD_VAR(::BoolProperty, bHasTurretExplosion, 0x1000000)
-		ADD_VAR(::BoolProperty, bRagdollDriverOnDarkwalkerHorn, 0x800000)
-		ADD_VAR(::BoolProperty, bInitializedVehicleEffects, 0x400000)
-		ADD_VAR(::BoolProperty, bFindGroundExit, 0x100000)
-		ADD_VAR(::BoolProperty, bUsingLookSteer, 0x80000)
-		ADD_VAR(::BoolProperty, bLookSteerOnSimpleControls, 0x40000)
-		ADD_VAR(::BoolProperty, bLookSteerOnNormalControls, 0x20000)
-		ADD_VAR(::BoolProperty, bHasBeenDriven, 0x8000)
-		ADD_VAR(::BoolProperty, bDriverCastsShadow, 0x4000)
-		ADD_VAR(::BoolProperty, bDrawHealthOnHUD, 0x2000)
-		ADD_VAR(::BoolProperty, bShouldLeaveForCombat, 0x1000)
-		ADD_VAR(::BoolProperty, bNeverReset, 0x800)
-		ADD_VAR(::BoolProperty, bHasWeaponBar, 0x400)
-		ADD_VAR(::BoolProperty, bShouldAutoCenterViewPitch, 0x200)
-		ADD_VAR(::BoolProperty, bStickDeflectionThrottle, 0x100)
-		ADD_VAR(::BoolProperty, bOverrideAVRiLLocks, 0x80)
-		ADD_VAR(::BoolProperty, bMustBeUpright, 0x40)
-		ADD_VAR(::BoolProperty, bKeyVehicle, 0x20)
-		ADD_VAR(::BoolProperty, bEnteringUnlocks, 0x8)
-		ADD_VAR(::BoolProperty, bValidLinkTarget, 0x4)
+		static const auto UTVEHICLE_UNSET_TEAM = 255;
+		enum EAIVehiclePurpose : byte
+		{
+			AIP_Offensive = 0,
+			AIP_Defensive = 1,
+			AIP_Any = 2,
+			AIP_MAX = 3,
+		};
+		class MaterialList
+		{
+		public:
+			ADD_STRUCT(ScriptArray<class MaterialInterface*>, Materials, 0)
+		};
+		class TimePosition
+		{
+		public:
+			ADD_STRUCT(float, Time, 12)
+			ADD_STRUCT(Object::Vector, Position, 0)
+		};
+		ADD_BOOL(bCanCarryFlag, 1976, 0x2)
+		ADD_BOOL(bRequestedEntryWithFlag, 1976, 0x200000)
+		ADD_BOOL(bHasCustomEntryRadius, 1976, 0x10)
+		ADD_OBJECT(UTVehicle, NextVehicle, 2112)
+		ADD_STRUCT(float, DefaultFOV, 2652)
+		ADD_BOOL(bDropDetailWhenDriving, 1976, 0x10000)
+		ADD_BOOL(bSpectatedView, 1980, 0x200)
+		ADD_STRUCT(ScriptArray<class SoundCue*>, HornSounds, 2048)
+		ADD_STRUCT(ScriptArray<class MaterialInterface*>, TeamMaterials, 2196)
+		ADD_STRUCT(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>, BigExplosionTemplates, 2232)
+		ADD_STRUCT(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>, DistanceTurretExplosionTemplates, 2312)
+		ADD_STRUCT(ScriptArray<class ParticleSystem*>, SpawnInTemplates, 2560)
+		ADD_STRUCT(ScriptArray<UTVehicle::MaterialList>, SpawnMaterialLists, 2572)
+		ADD_STRUCT(ScriptArray<class MaterialInterface*>, OriginalMaterials, 2608)
+		ADD_STRUCT(ScriptArray<UTVehicle::TimePosition>, OldPositions, 2656)
+		ADD_STRUCT(ScriptArray<class SoundNodeWave*>, EnemyVehicleSound, 2732)
+		ADD_STRUCT(ScriptArray<class SoundNodeWave*>, VehicleDestroyedSound, 2744)
+		ADD_STRUCT(float, LastEnemyWarningTime, 2728)
+		ADD_OBJECT(StaticMesh, ReferenceMovementMesh, 2724)
+		ADD_OBJECT(ParticleSystem, DisabledTemplate, 2716)
+		ADD_STRUCT(float, TimeLastDisabled, 2712)
+		ADD_STRUCT(float, DisabledTime, 2708)
+		ADD_STRUCT(Object::Vector, OldCameraPosition, 2696)
+		ADD_OBJECT(UTGib, DeathCameraGib, 2692)
+		ADD_STRUCT(float, MinCameraDistSq, 2688)
+		ADD_STRUCT(float, LookForwardDist, 2684)
+		ADD_STRUCT(Object::Vector, CameraOffset, 2672)
+		ADD_STRUCT(float, CameraLag, 2668)
+		ADD_STRUCT(float, CameraSmoothingFactor, 2648)
+		ADD_STRUCT(float, OldCamPosZ, 2644)
+		ADD_STRUCT(float, SeatCameraScale, 2640)
+		ADD_STRUCT(float, LastCollisionDamageTime, 2636)
+		ADD_STRUCT(float, CollisionDamageMult, 2632)
+		ADD_OBJECT(MaterialInterface, BurnOutMaterial, 2624)
+		ADD_STRUCT(float, SpawnInTime, 2620)
+		ADD_STRUCT(Object::InterpCurveFloat, SpawnMaterialParameterCurve, 2592)
+		ADD_STRUCT(ScriptName, SpawnMaterialParameterName, 2584)
+		ADD_STRUCT(UIRoot::TextureCoordinates, HudCoords, 2544)
+		ADD_OBJECT(Texture2D, HudIcons, 2540)
+		ADD_STRUCT(Object::Vector, PassengerTeamBeaconOffset, 2528)
+		ADD_OBJECT(PlayerReplicationInfo, PassengerPRI, 2512)
+		ADD_STRUCT(Object::Vector, TeamBeaconOffset, 2500)
+		ADD_STRUCT(float, HealthPulseTime, 2496)
+		ADD_STRUCT(int, LastHealth, 2492)
+		ADD_STRUCT(UIRoot::TextureCoordinates, DropOrbIconCoords, 2476)
+		ADD_STRUCT(UIRoot::TextureCoordinates, DropFlagIconCoords, 2460)
+		ADD_STRUCT(UIRoot::TextureCoordinates, EnterToolTipIconCoords, 2444)
+		ADD_STRUCT(UIRoot::TextureCoordinates, FlipToolTipIconCoords, 2428)
+		ADD_STRUCT(UIRoot::TextureCoordinates, IconCoords, 2412)
+		ADD_STRUCT(float, MapSize, 2408)
+		ADD_STRUCT(ScriptName, FlagBone, 2400)
+		ADD_STRUCT(Object::Rotator, FlagRotation, 2388)
+		ADD_STRUCT(Object::Vector, FlagOffset, 2376)
+		ADD_OBJECT(SoundCue, BoostPadSound, 2372)
+		ADD_OBJECT(SoundCue, SpawnOutSound, 2368)
+		ADD_OBJECT(SoundCue, SpawnInSound, 2364)
+		ADD_STRUCT(float, SpawnRadius, 2360)
+		ADD_STRUCT(ScriptName, BurnTimeParameterName, 2352)
+		ADD_OBJECT(SoundCue, ExplosionSound, 2348)
+		ADD_STRUCT(float, TurretExplosiveForce, 2344)
+		ADD_OBJECT(StaticMesh, DestroyedTurretTemplate, 2340)
+		ADD_OBJECT(UTVehicleDeathPiece, DestroyedTurret, 2336)
+		ADD_STRUCT(Object::Vector, TurretOffset, 2324)
+		ADD_STRUCT(ScriptName, TurretSocketName, 2304)
+		ADD_STRUCT(ScriptName, TurretScaleControlName, 2296)
+		ADD_STRUCT(float, OuterExplosionShakeRadius, 2292)
+		ADD_STRUCT(float, InnerExplosionShakeRadius, 2288)
+		ADD_OBJECT(CameraAnim, DeathExplosionShake, 2284)
+		ADD_STRUCT(float, ExplosionInAirAngVel, 2280)
+		ADD_STRUCT(float, ExplosionMomentum, 2276)
+		ADD_STRUCT(float, ExplosionRadius, 2272)
+		ADD_STRUCT(float, ExplosionDamage, 2268)
+		ADD_STRUCT(int, DelayedBurnoutCount, 2264)
+		ADD_STRUCT(float, DeadVehicleLifeSpan, 2260)
+		ADD_STRUCT(float, BurnOutTime, 2256)
+		ADD_STRUCT(ScriptName, BigExplosionSocket, 2248)
+		ADD_OBJECT(ParticleSystem, SecondaryExplosion, 2244)
+		ADD_OBJECT(ParticleSystem, ExplosionTemplate, 2228)
+		ADD_STRUCT(float, MaxFireEffectDistance, 2224)
+		ADD_STRUCT(float, MaxImpactEffectDistance, 2220)
+		ADD_OBJECT(ScriptClass, ExplosionDamageType, 2216)
+		ADD_STRUCT(float, DamageSmokeThreshold, 2212)
+		ADD_OBJECT(ScriptClass, VehiclePieceClass, 2208)
+		ADD_STRUCT(int, ClientHealth, 2192)
+		ADD_STRUCT(float, TimeTilSecondaryVehicleExplosion, 2188)
+		ADD_OBJECT(Emitter, DeathExplosion, 2184)
+		ADD_STRUCT(float, MaxExplosionLightDistance, 2180)
+		ADD_OBJECT(ScriptClass, ExplosionLightClass, 2176)
+		ADD_OBJECT(ScriptClass, VehicleDrowningDamType, 2172)
+		ADD_STRUCT(float, HUDExtent, 2168)
+		ADD_STRUCT(float, TeamBeaconPlayerInfoMaxDist, 2164)
+		ADD_STRUCT(UDKPlayerController::ObjectiveAnnouncementInfo, NeedToPickUpAnnouncement, 2148)
+		ADD_STRUCT(ScriptString*, VehicleNameString, 2136)
+		ADD_STRUCT(ScriptString*, VehiclePositionString, 2124)
+		ADD_OBJECT(UTBot, Reservation, 2120)
+		ADD_OBJECT(UTVehicleFactory, ParentFactory, 2116)
+		ADD_OBJECT(SoundCue, StolenSound, 2108)
+		ADD_STRUCT(int, StolenAnnouncementIndex, 2104)
+		ADD_OBJECT(SoundCue, RanOverSound, 2100)
+		ADD_OBJECT(ScriptClass, RanOverDamageType, 2096)
+		ADD_OBJECT(SoundCue, LockedOnSound, 2092)
+		ADD_STRUCT(float, ConsoleSteerScale, 2088)
+		ADD_STRUCT(float, LookSteerDeadZone, 2084)
+		ADD_STRUCT(float, LookSteerDamping, 2080)
+		ADD_STRUCT(float, LookSteerSensitivity, 2076)
+		ADD_STRUCT(float, LeftStickDirDeadZone, 2072)
+		ADD_STRUCT(int, HornIndex, 2068)
+		ADD_STRUCT(float, LastHornTime, 2064)
+		ADD_STRUCT(float, HornAIRadius, 2060)
+		ADD_STRUCT(float, MaxDesireability, 2044)
+		ADD_OBJECT(SoundCue, LinkedEndSound, 2040)
+		ADD_OBJECT(SoundCue, LinkedToCue, 2036)
+		ADD_STRUCT(float, LinkHealMult, 2028)
+		ADD_STRUCT(float, InitialSpawnDelay, 2024)
+		ADD_STRUCT(float, RespawnTime, 2020)
+		ADD_STRUCT(float, PlayerStartTime, 2016)
+		ADD_STRUCT(float, VehicleLostTime, 2012)
+		ADD_OBJECT(PhysicalMaterial, DefaultPhysicalMaterial, 2004)
+		ADD_OBJECT(PhysicalMaterial, DrivingPhysicalMaterial, 2000)
+		ADD_STRUCT(float, DeflectionReverseThresh, 1996)
+		ADD_OBJECT(Actor, NoPassengerObjective, 1992)
+		ADD_STRUCT(byte, LinkedToCount, 1989)
+		ADD_STRUCT(UTVehicle::EAIVehiclePurpose, AIPurpose, 1988)
+		ADD_BOOL(bDriverHoldsFlag, 1976, 0x1)
+		ADD_OBJECT(SoundCue, VehicleLockedSound, 1984)
+		ADD_BOOL(bIsNecrisVehicle, 1980, 0x100)
+		ADD_BOOL(bHasEnemyVehicleSound, 1980, 0x80)
+		ADD_BOOL(bStealthVehicle, 1980, 0x40)
+		ADD_BOOL(bShowDamageDebug, 1980, 0x20)
+		ADD_BOOL(bAcceptTurretJump, 1980, 0x10)
+		ADD_BOOL(bIsConsoleTurning, 1980, 0x8)
+		ADD_BOOL(bStopDeathCamera, 1980, 0x4)
+		ADD_BOOL(bCameraNeverHidesVehicle, 1980, 0x2)
+		ADD_BOOL(bFixedCamZ, 1980, 0x1)
+		ADD_BOOL(bNoFollowJumpZ, 1976, 0x80000000)
+		ADD_BOOL(bLimitCameraZLookingUp, 1976, 0x40000000)
+		ADD_BOOL(bNoZSmoothing, 1976, 0x20000000)
+		ADD_BOOL(bRotateCameraUnderVehicle, 1976, 0x10000000)
+		ADD_BOOL(bReducedFallingCollisionDamage, 1976, 0x8000000)
+		ADD_BOOL(bPlayingSpawnEffect, 1976, 0x4000000)
+		ADD_BOOL(bPostRenderTraceSucceeded, 1976, 0x2000000)
+		ADD_BOOL(bHasTurretExplosion, 1976, 0x1000000)
+		ADD_BOOL(bRagdollDriverOnDarkwalkerHorn, 1976, 0x800000)
+		ADD_BOOL(bInitializedVehicleEffects, 1976, 0x400000)
+		ADD_BOOL(bFindGroundExit, 1976, 0x100000)
+		ADD_BOOL(bUsingLookSteer, 1976, 0x80000)
+		ADD_BOOL(bLookSteerOnSimpleControls, 1976, 0x40000)
+		ADD_BOOL(bLookSteerOnNormalControls, 1976, 0x20000)
+		ADD_BOOL(bHasBeenDriven, 1976, 0x8000)
+		ADD_BOOL(bDriverCastsShadow, 1976, 0x4000)
+		ADD_BOOL(bDrawHealthOnHUD, 1976, 0x2000)
+		ADD_BOOL(bShouldLeaveForCombat, 1976, 0x1000)
+		ADD_BOOL(bNeverReset, 1976, 0x800)
+		ADD_BOOL(bHasWeaponBar, 1976, 0x400)
+		ADD_BOOL(bShouldAutoCenterViewPitch, 1976, 0x200)
+		ADD_BOOL(bStickDeflectionThrottle, 1976, 0x100)
+		ADD_BOOL(bOverrideAVRiLLocks, 1976, 0x80)
+		ADD_BOOL(bMustBeUpright, 1976, 0x40)
+		ADD_BOOL(bKeyVehicle, 1976, 0x20)
+		ADD_BOOL(bEnteringUnlocks, 1976, 0x8)
+		ADD_BOOL(bValidLinkTarget, 1976, 0x4)
 		bool TryToDrive(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TryToDrive");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool InCustomEntryRadius(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.InCustomEntryRadius");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
@@ -248,10 +267,9 @@ namespace UnrealScript
 		void UpdateShadowSettings(bool bWantShadow)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.UpdateShadowSettings");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWantShadow;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWantShadow;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReattachMesh()
 		{
@@ -271,29 +289,25 @@ namespace UnrealScript
 		void SetInputs(float InForward, float InStrafe, float InUp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetInputs");
-			byte* params = (byte*)malloc(12);
-			*(float*)params = InForward;
-			*(float*)(params + 4) = InStrafe;
-			*(float*)(params + 8) = InUp;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(float*)&params[0] = InForward;
+			*(float*)&params[4] = InStrafe;
+			*(float*)&params[8] = InUp;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.FellOutOfWorld");
-			byte* params = (byte*)malloc(4);
-			*(ScriptClass**)params = dmgType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(ScriptClass**)&params[0] = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetChargePower()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetChargePower");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		void PlaySpawnEffect()
 		{
@@ -308,108 +322,91 @@ namespace UnrealScript
 		void EjectSeat(int SeatIdx)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.EjectSeat");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SeatIdx;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SeatIdx;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptClass* GetRanOverDamageType()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetRanOverDamageType");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptClass**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptClass**)&params[0];
 		}
 		void DisplayWeaponBar(class Canvas* Canvas, class UTHUD* HUD)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DisplayWeaponBar");
-			byte* params = (byte*)malloc(8);
-			*(class Canvas**)params = Canvas;
-			*(class UTHUD**)(params + 4) = HUD;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			*(class UTHUD**)&params[4] = HUD;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawKillIcon(class Canvas* Canvas, float ScreenX, float ScreenY, float HUDScaleX, float HUDScaleY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DrawKillIcon");
-			byte* params = (byte*)malloc(20);
-			*(class Canvas**)params = Canvas;
-			*(float*)(params + 4) = ScreenX;
-			*(float*)(params + 8) = ScreenY;
-			*(float*)(params + 12) = HUDScaleX;
-			*(float*)(params + 16) = HUDScaleY;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class Canvas**)&params[0] = Canvas;
+			*(float*)&params[4] = ScreenX;
+			*(float*)&params[8] = ScreenY;
+			*(float*)&params[12] = HUDScaleX;
+			*(float*)&params[16] = HUDScaleY;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, LinearColor FinalColor)
+		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, Object::LinearColor FinalColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.RenderMapIcon");
-			byte* params = (byte*)malloc(28);
-			*(class UTMapInfo**)params = MP;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(class UTPlayerController**)(params + 8) = PlayerOwner;
-			*(LinearColor*)(params + 12) = FinalColor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class UTMapInfo**)&params[0] = MP;
+			*(class Canvas**)&params[4] = Canvas;
+			*(class UTPlayerController**)&params[8] = PlayerOwner;
+			*(Object::LinearColor*)&params[12] = FinalColor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float AdjustedStrength()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.AdjustedStrength");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
 		bool ContinueOnFoot()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ContinueOnFoot");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool IsDriverSeat(class Vehicle* TestSeatPawn)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.IsDriverSeat");
-			byte* params = (byte*)malloc(8);
-			*(class Vehicle**)params = TestSeatPawn;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Vehicle**)&params[0] = TestSeatPawn;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool RecommendCharge(class UTBot* B, class Pawn* Enemy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.RecommendCharge");
-			byte* params = (byte*)malloc(12);
-			*(class UTBot**)params = B;
-			*(class Pawn**)(params + 4) = Enemy;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class UTBot**)&params[0] = B;
+			*(class Pawn**)&params[4] = Enemy;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		bool CriticalChargeAttack(class UTBot* B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CriticalChargeAttack");
-			byte* params = (byte*)malloc(8);
-			*(class UTBot**)params = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class UTBot**)&params[0] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void CreateVehicleEffect(int EffectIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CreateVehicleEffect");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = EffectIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = EffectIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitializeEffects()
 		{
@@ -421,108 +418,95 @@ namespace UnrealScript
 void* PSC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetVehicleEffectParms");
-			byte* params = (byte*)malloc(12);
-			*(ScriptName*)params = TriggerName;
+			byte params[12] = { NULL };
+			*(ScriptName*)&params[0] = TriggerName;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 8) = PSC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+void**)&params[8] = PSC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TriggerVehicleEffect(ScriptName EventTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TriggerVehicleEffect");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = EventTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = EventTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayVehicleSound(ScriptName SoundTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PlayVehicleSound");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = SoundTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = SoundTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayVehicleAnimation(ScriptName EventTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PlayVehicleAnimation");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = EventTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = EventTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleEvent(ScriptName EventTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = EventTag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = EventTag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EntryAnnouncement(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.EntryAnnouncement");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Rotator ExitRotation()
+		Object::Rotator ExitRotation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ExitRotation");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[0];
 		}
 		bool FindAutoExit(class Pawn* ExitingDriver)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.FindAutoExit");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = ExitingDriver;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = ExitingDriver;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void RanInto(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.RanInto");
-			byte* params = (byte*)malloc(4);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PancakeOther(class Pawn* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PancakeOther");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TakeWaterDamage()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TakeWaterDamage");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DriverRadiusDamage(float DamageAmount, float DamageRadius, class Controller* EventInstigator, ScriptClass* DamageType, float Momentum, Vector HitLocation, class Actor* DamageCauser, float DamageFalloffExponent)
+		void DriverRadiusDamage(float DamageAmount, float DamageRadius, class Controller* EventInstigator, ScriptClass* DamageType, float Momentum, Object::Vector HitLocation, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DriverRadiusDamage");
-			byte* params = (byte*)malloc(40);
-			*(float*)params = DamageAmount;
-			*(float*)(params + 4) = DamageRadius;
-			*(class Controller**)(params + 8) = EventInstigator;
-			*(ScriptClass**)(params + 12) = DamageType;
-			*(float*)(params + 16) = Momentum;
-			*(Vector*)(params + 20) = HitLocation;
-			*(class Actor**)(params + 32) = DamageCauser;
-			*(float*)(params + 36) = DamageFalloffExponent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[40] = { NULL };
+			*(float*)&params[0] = DamageAmount;
+			*(float*)&params[4] = DamageRadius;
+			*(class Controller**)&params[8] = EventInstigator;
+			*(ScriptClass**)&params[12] = DamageType;
+			*(float*)&params[16] = Momentum;
+			*(Object::Vector*)&params[20] = HitLocation;
+			*(class Actor**)&params[32] = DamageCauser;
+			*(float*)&params[36] = DamageFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
@@ -532,19 +516,16 @@ void**)(params + 8) = PSC;
 		void SetTexturesToBeResident(bool bActive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetTexturesToBeResident");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bActive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool DisableVehicle()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DisableVehicle");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void EnableVehicle()
 		{
@@ -556,78 +537,66 @@ void**)(params + 8) = PSC;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TakeFireDamage");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		int GetSeatIndexFromPrefix(ScriptArray<wchar_t> Prefix)
+		int GetSeatIndexFromPrefix(ScriptString* Prefix)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetSeatIndexFromPrefix");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = Prefix;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = Prefix;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[12];
 		}
 		void ServerSetConsoleTurning(bool bNewConsoleTurning)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ServerSetConsoleTurning");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bNewConsoleTurning;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bNewConsoleTurning;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessViewRotation(float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		void ProcessViewRotation(float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ProcessViewRotation");
-			byte* params = (byte*)malloc(28);
-			*(float*)params = DeltaTime;
-			*(Rotator*)(params + 4) = out_ViewRotation;
-			*(Rotator*)(params + 16) = out_DeltaRot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_ViewRotation = *(Rotator*)(params + 4);
-			out_DeltaRot = *(Rotator*)(params + 16);
-			free(params);
+			byte params[28] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			*(Object::Rotator*)&params[4] = out_ViewRotation;
+			*(Object::Rotator*)&params[16] = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_ViewRotation = *(Object::Rotator*)&params[4];
+			out_DeltaRot = *(Object::Rotator*)&params[16];
 		}
-		Rotator GetClampedViewRotation()
+		Object::Rotator GetClampedViewRotation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetClampedViewRotation");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[0];
 		}
 		bool ShouldClamp()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ShouldClamp");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		Rotator GetViewRotation()
+		Object::Rotator GetViewRotation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetViewRotation");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[0];
 		}
 		void WeaponRotationChanged(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.WeaponRotationChanged");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetKeyVehicle()
 		{
@@ -642,90 +611,75 @@ void**)(params + 8) = PSC;
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OnAnimEnd");
-			byte* params = (byte*)malloc(12);
-			*(class AnimNodeSequence**)params = SeqNode;
-			*(float*)(params + 4) = PlayedTime;
-			*(float*)(params + 8) = ExcessTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(float*)&params[4] = PlayedTime;
+			*(float*)&params[8] = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SeatAvailable(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SeatAvailable");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool AnySeatAvailable()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.AnySeatAvailable");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		int GetSeatIndexForController(class Controller* ControllerToMove)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetSeatIndexForController");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = ControllerToMove;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = ControllerToMove;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		class Controller* GetControllerForSeatIndex(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetControllerForSeatIndex");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Controller**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Controller**)&params[4];
 		}
 		void ServerAdjacentSeat(int Direction, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ServerAdjacentSeat");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = Direction;
-			*(class Controller**)(params + 4) = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = Direction;
+			*(class Controller**)&params[4] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerChangeSeat(int RequestedSeat)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ServerChangeSeat");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = RequestedSeat;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = RequestedSeat;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool HasPriority(class Controller* first, class Controller* Second)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.HasPriority");
-			byte* params = (byte*)malloc(12);
-			*(class Controller**)params = first;
-			*(class Controller**)(params + 4) = Second;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Controller**)&params[0] = first;
+			*(class Controller**)&params[4] = Second;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		bool ChangeSeat(class Controller* ControllerToMove, int RequestedSeat)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ChangeSeat");
-			byte* params = (byte*)malloc(12);
-			*(class Controller**)params = ControllerToMove;
-			*(int*)(params + 4) = RequestedSeat;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Controller**)&params[0] = ControllerToMove;
+			*(int*)&params[4] = RequestedSeat;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void TornOff()
 		{
@@ -735,23 +689,19 @@ void**)(params + 8) = PSC;
 		class Controller* GetCollisionDamageInstigator()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetCollisionDamageInstigator");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Controller**)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Controller**)&params[0];
 		}
-		bool Died(class Controller* Killer, ScriptClass* DamageType, Vector HitLocation)
+		bool Died(class Controller* Killer, ScriptClass* DamageType, Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.Died");
-			byte* params = (byte*)malloc(24);
-			*(class Controller**)params = Killer;
-			*(ScriptClass**)(params + 4) = DamageType;
-			*(Vector*)(params + 8) = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(class Controller**)&params[0] = Killer;
+			*(ScriptClass**)&params[4] = DamageType;
+			*(Object::Vector*)&params[8] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[20];
 		}
 		void BlowupVehicle()
 		{
@@ -761,104 +711,89 @@ void**)(params + 8) = PSC;
 		class PlayerReplicationInfo* GetSeatPRI(int SeatNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetSeatPRI");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class PlayerReplicationInfo**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class PlayerReplicationInfo**)&params[4];
 		}
 		bool CanEnterVehicle(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CanEnterVehicle");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool KickOutBot()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.KickOutBot");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void VehicleLocked(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleLocked");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldShowUseable(class PlayerController* PC, float Dist)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ShouldShowUseable");
-			byte* params = (byte*)malloc(12);
-			*(class PlayerController**)params = PC;
-			*(float*)(params + 4) = Dist;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(float*)&params[4] = Dist;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PostRenderFor");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector*)(params + 8) = CameraPosition;
-			*(Vector*)(params + 20) = CameraDir;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector*)&params[8] = CameraPosition;
+			*(Object::Vector*)&params[20] = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetDisplayedHealth()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetDisplayedHealth");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[0];
 		}
-		void RenderPassengerBeacons(class PlayerController* PC, class Canvas* Canvas, LinearColor TeamColor, Color TextColor, class UTWeapon* Weap)
+		void RenderPassengerBeacons(class PlayerController* PC, class Canvas* Canvas, Object::LinearColor TeamColor, Object::Color TextColor, class UTWeapon* Weap)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.RenderPassengerBeacons");
-			byte* params = (byte*)malloc(32);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(LinearColor*)(params + 8) = TeamColor;
-			*(Color*)(params + 24) = TextColor;
-			*(class UTWeapon**)(params + 28) = Weap;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[32] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::LinearColor*)&params[8] = TeamColor;
+			*(Object::Color*)&params[24] = TextColor;
+			*(class UTWeapon**)&params[28] = Weap;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderPassengerBeacon(class PlayerController* PC, class Canvas* Canvas, LinearColor TeamColor, Color TextColor, class UTWeapon* Weap, class PlayerReplicationInfo* InPassengerPRI, Vector InPassengerTeamBeaconOffset)
+		void PostRenderPassengerBeacon(class PlayerController* PC, class Canvas* Canvas, Object::LinearColor TeamColor, Object::Color TextColor, class UTWeapon* Weap, class PlayerReplicationInfo* InPassengerPRI, Object::Vector InPassengerTeamBeaconOffset)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PostRenderPassengerBeacon");
-			byte* params = (byte*)malloc(48);
-			*(class PlayerController**)params = PC;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(LinearColor*)(params + 8) = TeamColor;
-			*(Color*)(params + 24) = TextColor;
-			*(class UTWeapon**)(params + 28) = Weap;
-			*(class PlayerReplicationInfo**)(params + 32) = InPassengerPRI;
-			*(Vector*)(params + 36) = InPassengerTeamBeaconOffset;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[48] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::LinearColor*)&params[8] = TeamColor;
+			*(Object::Color*)&params[24] = TextColor;
+			*(class UTWeapon**)&params[28] = Weap;
+			*(class PlayerReplicationInfo**)&params[32] = InPassengerPRI;
+			*(Object::Vector*)&params[36] = InPassengerTeamBeaconOffset;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTeamNum(byte T)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetTeamNum");
-			byte* params = (byte*)malloc(1);
-			*params = T;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = T;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamChanged()
 		{
@@ -870,68 +805,58 @@ void**)(params + 8) = PSC;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TeamChanged_VehicleEffects");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool Dodge(byte DoubleClickMove)
+		bool Dodge(Actor::EDoubleClickDir DoubleClickMove)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.Dodge");
-			byte* params = (byte*)malloc(5);
-			*params = DoubleClickMove;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			*(Actor::EDoubleClickDir*)&params[0] = DoubleClickMove;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void IncomingMissile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.IncomingMissile");
-			byte* params = (byte*)malloc(4);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShootMissile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ShootMissile");
-			byte* params = (byte*)malloc(4);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendLockOnMessage(int Switch)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SendLockOnMessage");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Switch;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Switch;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LockOnWarning(class UDKProjectile* IncomingMissile)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.LockOnWarning");
-			byte* params = (byte*)malloc(4);
-			*(class UDKProjectile**)params = IncomingMissile;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UDKProjectile**)&params[0] = IncomingMissile;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool TooCloseToAttack(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TooCloseToAttack");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool CheckTurretPitchLimit(int NeededPitch, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CheckTurretPitchLimit");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = NeededPitch;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(int*)&params[0] = NeededPitch;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void PlayHorn()
 		{
@@ -941,75 +866,63 @@ void**)(params + 8) = PSC;
 		bool DriverLeave(bool bForceLeave)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DriverLeave");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bForceLeave;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bForceLeave;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void UpdateControllerOnPossess(bool bVehicleTransition)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.UpdateControllerOnPossess");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bVehicleTransition;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bVehicleTransition;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int NumPassengers()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.NumPassengers");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[0];
 		}
 		class UTVehicle* GetMoveTargetFor(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetMoveTargetFor");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTVehicle**)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTVehicle**)&params[4];
 		}
 		void HandleEnteringFlag(class UTPlayerReplicationInfo* EnteringPRI, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.HandleEnteringFlag");
-			byte* params = (byte*)malloc(8);
-			*(class UTPlayerReplicationInfo**)params = EnteringPRI;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPlayerReplicationInfo**)&params[0] = EnteringPRI;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool DriverEnter(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DriverEnter");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void HoldGameObject(class UDKCarriedObject* GameObj)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.HoldGameObject");
-			byte* params = (byte*)malloc(4);
-			*(class UDKCarriedObject**)params = GameObj;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UDKCarriedObject**)&params[0] = GameObj;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AttachFlag(class UTCarriedObject* FlagActor, class Pawn* NewDriver)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.AttachFlag");
-			byte* params = (byte*)malloc(8);
-			*(class UTCarriedObject**)params = FlagActor;
-			*(class Pawn**)(params + 4) = NewDriver;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTCarriedObject**)&params[0] = FlagActor;
+			*(class Pawn**)&params[4] = NewDriver;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DriverLeft()
 		{
@@ -1019,31 +932,26 @@ void**)(params + 8) = PSC;
 		int GetFirstAvailableSeat(bool bSeatMustAllowFlag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetFirstAvailableSeat");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bSeatMustAllowFlag;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bSeatMustAllowFlag;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
 		bool PassengerEnter(class Pawn* P, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PassengerEnter");
-			byte* params = (byte*)malloc(12);
-			*(class Pawn**)params = P;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[8];
 		}
 		void PassengerLeave(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PassengerLeave");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckReset()
 		{
@@ -1053,103 +961,84 @@ void**)(params + 8) = PSC;
 		bool Occupied()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.Occupied");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		bool OpenPositionFor(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OpenPositionFor");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		float BotDesireability(class UTSquadAI* S, int TeamIndex, class Actor* Objective)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.BotDesireability");
-			byte* params = (byte*)malloc(16);
-			*(class UTSquadAI**)params = S;
-			*(int*)(params + 4) = TeamIndex;
-			*(class Actor**)(params + 8) = Objective;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class UTSquadAI**)&params[0] = S;
+			*(int*)&params[4] = TeamIndex;
+			*(class Actor**)&params[8] = Objective;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
 		float ReservationCostMultiplier(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ReservationCostMultiplier");
-			byte* params = (byte*)malloc(8);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[4];
 		}
 		bool SpokenFor(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SpokenFor");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.StopsProjectile");
-			byte* params = (byte*)malloc(8);
-			*(class Projectile**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Projectile**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void SetReservation(class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetReservation");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = C;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = C;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool TeamLink(int TeamNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TeamLink");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = TeamNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool AllowLinkThroughOwnedActor(class Actor* OwnedActor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.AllowLinkThroughOwnedActor");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = OwnedActor;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = OwnedActor;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool HealDamage(int Amount, class Controller* Healer, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.HealDamage");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = Amount;
-			*(class Controller**)(params + 4) = Healer;
-			*(ScriptClass**)(params + 8) = DamageType;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = Amount;
+			*(class Controller**)&params[4] = Healer;
+			*(ScriptClass**)&params[8] = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
 		void IncrementLinkedToCount()
 		{
@@ -1171,69 +1060,62 @@ void**)(params + 8) = PSC;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.StopLinkedEffect");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayHit(float Damage, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, Vector Momentum, TraceHitInfo HitInfo)
+		void PlayHit(float Damage, class Controller* InstigatedBy, Object::Vector HitLocation, ScriptClass* DamageType, Object::Vector Momentum, Actor::TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PlayHit");
-			byte* params = (byte*)malloc(64);
-			*(float*)params = Damage;
-			*(class Controller**)(params + 4) = InstigatedBy;
-			*(Vector*)(params + 8) = HitLocation;
-			*(ScriptClass**)(params + 20) = DamageType;
-			*(Vector*)(params + 24) = Momentum;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[64] = { NULL };
+			*(float*)&params[0] = Damage;
+			*(class Controller**)&params[4] = InstigatedBy;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(ScriptClass**)&params[20] = DamageType;
+			*(Object::Vector*)&params[24] = Momentum;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayTakeHitEffects()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PlayTakeHitEffects");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void NotifyTakeHit(class Controller* InstigatedBy, Vector HitLocation, int Damage, ScriptClass* DamageType, Vector Momentum)
+		void NotifyTakeHit(class Controller* InstigatedBy, Object::Vector HitLocation, int Damage, ScriptClass* DamageType, Object::Vector Momentum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.NotifyTakeHit");
-			byte* params = (byte*)malloc(36);
-			*(class Controller**)params = InstigatedBy;
-			*(Vector*)(params + 4) = HitLocation;
-			*(int*)(params + 16) = Damage;
-			*(ScriptClass**)(params + 20) = DamageType;
-			*(Vector*)(params + 24) = Momentum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[36] = { NULL };
+			*(class Controller**)&params[0] = InstigatedBy;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(int*)&params[16] = Damage;
+			*(ScriptClass**)&params[20] = DamageType;
+			*(Object::Vector*)&params[24] = Momentum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.TakeDamage");
-			byte* params = (byte*)malloc(68);
-			*(int*)params = Damage;
-			*(class Controller**)(params + 4) = EventInstigator;
-			*(Vector*)(params + 8) = HitLocation;
-			*(Vector*)(params + 20) = Momentum;
-			*(ScriptClass**)(params + 32) = DamageType;
-			*(TraceHitInfo*)(params + 36) = HitInfo;
-			*(class Actor**)(params + 64) = DamageCauser;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[68] = { NULL };
+			*(int*)&params[0] = Damage;
+			*(class Controller**)&params[4] = EventInstigator;
+			*(Object::Vector*)&params[8] = HitLocation;
+			*(Object::Vector*)&params[20] = Momentum;
+			*(ScriptClass**)&params[32] = DamageType;
+			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
+			*(class Actor**)&params[64] = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Actor* GetHomingTarget(class UTProjectile* Seeker, class Controller* InstigatedBy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetHomingTarget");
-			byte* params = (byte*)malloc(12);
-			*(class UTProjectile**)params = Seeker;
-			*(class Controller**)(params + 4) = InstigatedBy;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class Actor**)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			*(class UTProjectile**)&params[0] = Seeker;
+			*(class Controller**)&params[4] = InstigatedBy;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class Actor**)&params[8];
 		}
 		bool ImportantVehicle()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ImportantVehicle");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
 		void InitializeSeats()
 		{
@@ -1253,327 +1135,286 @@ void**)(params + 8) = PSC;
 		void PossessedBy(class Controller* C, bool bVehicleTransition)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.PossessedBy");
-			byte* params = (byte*)malloc(8);
-			*(class Controller**)params = C;
-			*(bool*)(params + 4) = bVehicleTransition;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Controller**)&params[0] = C;
+			*(bool*)&params[4] = bVehicleTransition;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFiringMode(class Weapon* Weap, byte FiringModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetFiringMode");
-			byte* params = (byte*)malloc(5);
-			*(class Weapon**)params = Weap;
-			*(params + 4) = FiringModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			*(class Weapon**)&params[0] = Weap;
+			params[4] = FiringModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearFlashCount(class Weapon* Who)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ClearFlashCount");
-			byte* params = (byte*)malloc(4);
-			*(class Weapon**)params = Who;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Weapon**)&params[0] = Who;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void IncrementFlashCount(class Weapon* Who, byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.IncrementFlashCount");
-			byte* params = (byte*)malloc(5);
-			*(class Weapon**)params = Who;
-			*(params + 4) = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[5] = { NULL };
+			*(class Weapon**)&params[0] = Who;
+			params[4] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetFlashLocation(class Weapon* Who, byte FireModeNum, Vector NewLoc)
+		void SetFlashLocation(class Weapon* Who, byte FireModeNum, Object::Vector NewLoc)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetFlashLocation");
-			byte* params = (byte*)malloc(17);
-			*(class Weapon**)params = Who;
-			*(params + 4) = FireModeNum;
-			*(Vector*)(params + 8) = NewLoc;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[17] = { NULL };
+			*(class Weapon**)&params[0] = Who;
+			params[4] = FireModeNum;
+			*(Object::Vector*)&params[8] = NewLoc;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearFlashLocation(class Weapon* Who)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ClearFlashLocation");
-			byte* params = (byte*)malloc(4);
-			*(class Weapon**)params = Who;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Weapon**)&params[0] = Who;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetBarrelLocationAndRotation(int SeatIndex, Vector& SocketLocation, Rotator& SocketRotation)
+		void GetBarrelLocationAndRotation(int SeatIndex, Object::Vector& SocketLocation, Object::Rotator& SocketRotation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetBarrelLocationAndRotation");
-			byte* params = (byte*)malloc(28);
-			*(int*)params = SeatIndex;
-			*(Vector*)(params + 4) = SocketLocation;
-			*(Rotator*)(params + 16) = SocketRotation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			SocketLocation = *(Vector*)(params + 4);
-			SocketRotation = *(Rotator*)(params + 16);
-			free(params);
+			byte params[28] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(Object::Vector*)&params[4] = SocketLocation;
+			*(Object::Rotator*)&params[16] = SocketRotation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			SocketLocation = *(Object::Vector*)&params[4];
+			SocketRotation = *(Object::Rotator*)&params[16];
 		}
-		Vector GetEffectLocation(int SeatIndex)
+		Object::Vector GetEffectLocation(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetEffectLocation");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
-		Vector GetPhysicalFireStartLoc(class UTWeapon* ForWeapon)
+		Object::Vector GetPhysicalFireStartLoc(class UTWeapon* ForWeapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetPhysicalFireStartLoc");
-			byte* params = (byte*)malloc(16);
-			*(class UTWeapon**)params = ForWeapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class UTWeapon**)&params[0] = ForWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
-		Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
+		Object::Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetWeaponAim");
-			byte* params = (byte*)malloc(16);
-			*(class UTVehicleWeapon**)params = VWeapon;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Rotator*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(class UTVehicleWeapon**)&params[0] = VWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Rotator*)&params[4];
 		}
 		bool OverrideBeginFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OverrideBeginFire");
-			byte* params = (byte*)malloc(5);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		bool OverrideEndFire(byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OverrideEndFire");
-			byte* params = (byte*)malloc(5);
-			*params = FireModeNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[5] = { NULL };
+			params[0] = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
-		void GetWeaponViewAxes(class UTWeapon* WhichWeapon, Vector& XAxis, Vector& YAxis, Vector& ZAxis)
+		void GetWeaponViewAxes(class UTWeapon* WhichWeapon, Object::Vector& XAxis, Object::Vector& YAxis, Object::Vector& ZAxis)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetWeaponViewAxes");
-			byte* params = (byte*)malloc(40);
-			*(class UTWeapon**)params = WhichWeapon;
-			*(Vector*)(params + 4) = XAxis;
-			*(Vector*)(params + 16) = YAxis;
-			*(Vector*)(params + 28) = ZAxis;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			XAxis = *(Vector*)(params + 4);
-			YAxis = *(Vector*)(params + 16);
-			ZAxis = *(Vector*)(params + 28);
-			free(params);
+			byte params[40] = { NULL };
+			*(class UTWeapon**)&params[0] = WhichWeapon;
+			*(Object::Vector*)&params[4] = XAxis;
+			*(Object::Vector*)&params[16] = YAxis;
+			*(Object::Vector*)&params[28] = ZAxis;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			XAxis = *(Object::Vector*)&params[4];
+			YAxis = *(Object::Vector*)&params[16];
+			ZAxis = *(Object::Vector*)&params[28];
 		}
 		void CauseMuzzleFlashLight(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CauseMuzzleFlashLight");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
+		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Object::Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.WeaponFired");
-			byte* params = (byte*)malloc(20);
-			*(class Weapon**)params = InWeapon;
-			*(bool*)(params + 4) = bViaReplication;
-			*(Vector*)(params + 8) = HitLocation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class Weapon**)&params[0] = InWeapon;
+			*(bool*)&params[4] = bViaReplication;
+			*(Object::Vector*)&params[8] = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void VehicleWeaponFired(bool bViaReplication, Vector HitLocation, int SeatIndex)
+		void VehicleWeaponFired(bool bViaReplication, Object::Vector HitLocation, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleWeaponFired");
-			byte* params = (byte*)malloc(20);
-			*(bool*)params = bViaReplication;
-			*(Vector*)(params + 4) = HitLocation;
-			*(int*)(params + 16) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(bool*)&params[0] = bViaReplication;
+			*(Object::Vector*)&params[4] = HitLocation;
+			*(int*)&params[16] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WeaponStoppedFiring(class Weapon* InWeapon, bool bViaReplication)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.WeaponStoppedFiring");
-			byte* params = (byte*)malloc(8);
-			*(class Weapon**)params = InWeapon;
-			*(bool*)(params + 4) = bViaReplication;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class Weapon**)&params[0] = InWeapon;
+			*(bool*)&params[4] = bViaReplication;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleWeaponStoppedFiring(bool bViaReplication, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleWeaponStoppedFiring");
-			byte* params = (byte*)malloc(8);
-			*(bool*)params = bViaReplication;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(bool*)&params[0] = bViaReplication;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void VehicleWeaponFireEffects(Vector HitLocation, int SeatIndex)
+		void VehicleWeaponFireEffects(Object::Vector HitLocation, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleWeaponFireEffects");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitLocation;
-			*(int*)(params + 12) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(int*)&params[12] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		class Actor* FindWeaponHitNormal(Vector& HitLocation, Vector& HitNormal, Vector End, Vector Start, TraceHitInfo& HitInfo)
+		class Actor* FindWeaponHitNormal(Object::Vector& HitLocation, Object::Vector& HitNormal, Object::Vector End, Object::Vector Start, Actor::TraceHitInfo& HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.FindWeaponHitNormal");
-			byte* params = (byte*)malloc(80);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			*(Vector*)(params + 24) = End;
-			*(Vector*)(params + 36) = Start;
-			*(TraceHitInfo*)(params + 48) = HitInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			HitLocation = *(Vector*)params;
-			HitNormal = *(Vector*)(params + 12);
-			HitInfo = *(TraceHitInfo*)(params + 48);
-			auto returnVal = *(class Actor**)(params + 76);
-			free(params);
-			return returnVal;
+			byte params[80] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			*(Object::Vector*)&params[24] = End;
+			*(Object::Vector*)&params[36] = Start;
+			*(Actor::TraceHitInfo*)&params[48] = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			HitLocation = *(Object::Vector*)&params[0];
+			HitNormal = *(Object::Vector*)&params[12];
+			HitInfo = *(Actor::TraceHitInfo*)&params[48];
+			return *(class Actor**)&params[76];
 		}
-		void VehicleWeaponImpactEffects(Vector HitLocation, int SeatIndex)
+		void VehicleWeaponImpactEffects(Object::Vector HitLocation, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleWeaponImpactEffects");
-			byte* params = (byte*)malloc(16);
-			*(Vector*)params = HitLocation;
-			*(int*)(params + 12) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[16] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(int*)&params[12] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SpawnImpactEmitter(Vector HitLocation, Vector HitNormal, MaterialImpactEffect& ImpactEffect, int SeatIndex)
+		void SpawnImpactEmitter(Object::Vector HitLocation, Object::Vector HitNormal, UDKPawn::MaterialImpactEffect& ImpactEffect, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SpawnImpactEmitter");
-			byte* params = (byte*)malloc(76);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			*(MaterialImpactEffect*)(params + 24) = ImpactEffect;
-			*(int*)(params + 72) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ImpactEffect = *(MaterialImpactEffect*)(params + 24);
-			free(params);
+			byte params[76] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			*(UDKPawn::MaterialImpactEffect*)&params[24] = ImpactEffect;
+			*(int*)&params[72] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ImpactEffect = *(UDKPawn::MaterialImpactEffect*)&params[24];
 		}
 		void VehicleAdjustFlashCount(int SeatIndex, byte FireModeNum, bool bClear)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleAdjustFlashCount");
-			byte* params = (byte*)malloc(9);
-			*(int*)params = SeatIndex;
-			*(params + 4) = FireModeNum;
-			*(bool*)(params + 8) = bClear;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[9] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			params[4] = FireModeNum;
+			*(bool*)&params[8] = bClear;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void VehicleAdjustFlashLocation(int SeatIndex, byte FireModeNum, Vector NewLocation, bool bClear)
+		void VehicleAdjustFlashLocation(int SeatIndex, byte FireModeNum, Object::Vector NewLocation, bool bClear)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleAdjustFlashLocation");
-			byte* params = (byte*)malloc(21);
-			*(int*)params = SeatIndex;
-			*(params + 4) = FireModeNum;
-			*(Vector*)(params + 8) = NewLocation;
-			*(bool*)(params + 20) = bClear;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[21] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			params[4] = FireModeNum;
+			*(Object::Vector*)&params[8] = NewLocation;
+			*(bool*)&params[20] = bClear;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void FindGoodEndView(class PlayerController* PC, Rotator& GoodRotation)
+		void FindGoodEndView(class PlayerController* PC, Object::Rotator& GoodRotation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.FindGoodEndView");
-			byte* params = (byte*)malloc(16);
-			*(class PlayerController**)params = PC;
-			*(Rotator*)(params + 4) = GoodRotation;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			GoodRotation = *(Rotator*)(params + 4);
-			free(params);
+			byte params[16] = { NULL };
+			*(class PlayerController**)&params[0] = PC;
+			*(Object::Rotator*)&params[4] = GoodRotation;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			GoodRotation = *(Object::Rotator*)&params[4];
 		}
-		bool CalcCamera(float DeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		bool CalcCamera(float DeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CalcCamera");
-			byte* params = (byte*)malloc(36);
-			*(float*)params = DeltaTime;
-			*(Vector*)(params + 4) = out_CamLoc;
-			*(Rotator*)(params + 16) = out_CamRot;
-			*(float*)(params + 28) = out_FOV;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 4);
-			out_CamRot = *(Rotator*)(params + 16);
-			out_FOV = *(float*)(params + 28);
-			auto returnVal = *(bool*)(params + 32);
-			free(params);
-			return returnVal;
+			byte params[36] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			*(Object::Vector*)&params[4] = out_CamLoc;
+			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)&params[28] = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[4];
+			out_CamRot = *(Object::Rotator*)&params[16];
+			out_FOV = *(float*)&params[28];
+			return *(bool*)&params[32];
 		}
-		Vector GetCameraFocus(int SeatIndex)
+		Object::Vector GetCameraFocus(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetCameraFocus");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
-		Vector GetCameraStart(int SeatIndex)
+		Object::Vector GetCameraStart(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetCameraStart");
-			byte* params = (byte*)malloc(16);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Vector*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Vector*)&params[4];
 		}
 		float LimitCameraZ(float CurrentCamZ, float OriginalCamZ, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.LimitCameraZ");
-			byte* params = (byte*)malloc(16);
-			*(float*)params = CurrentCamZ;
-			*(float*)(params + 4) = OriginalCamZ;
-			*(int*)(params + 8) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(float*)&params[0] = CurrentCamZ;
+			*(float*)&params[4] = OriginalCamZ;
+			*(int*)&params[8] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(float*)&params[12];
 		}
-		void VehicleCalcCamera(float DeltaTime, int SeatIndex, Vector& out_CamLoc, Rotator& out_CamRot, Vector& CamStart, bool bPivotOnly)
+		void VehicleCalcCamera(float DeltaTime, int SeatIndex, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, Object::Vector& CamStart, bool bPivotOnly)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.VehicleCalcCamera");
-			byte* params = (byte*)malloc(48);
-			*(float*)params = DeltaTime;
-			*(int*)(params + 4) = SeatIndex;
-			*(Vector*)(params + 8) = out_CamLoc;
-			*(Rotator*)(params + 20) = out_CamRot;
-			*(Vector*)(params + 32) = CamStart;
-			*(bool*)(params + 44) = bPivotOnly;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_CamLoc = *(Vector*)(params + 8);
-			out_CamRot = *(Rotator*)(params + 20);
-			CamStart = *(Vector*)(params + 32);
-			free(params);
+			byte params[48] = { NULL };
+			*(float*)&params[0] = DeltaTime;
+			*(int*)&params[4] = SeatIndex;
+			*(Object::Vector*)&params[8] = out_CamLoc;
+			*(Object::Rotator*)&params[20] = out_CamRot;
+			*(Object::Vector*)&params[32] = CamStart;
+			*(bool*)&params[44] = bPivotOnly;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			out_CamLoc = *(Object::Vector*)&params[8];
+			out_CamRot = *(Object::Rotator*)&params[20];
+			CamStart = *(Object::Vector*)&params[32];
 		}
 		void AdjustCameraScale(bool bMoveCameraIn)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.AdjustCameraScale");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bMoveCameraIn;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bMoveCameraIn;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartBurnOut()
 		{
@@ -1600,16 +1441,14 @@ void**)(params + 8) = PSC;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetBurnOut");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool ShouldSpawnExplosionLight(Vector HitLocation, Vector HitNormal)
+		bool ShouldSpawnExplosionLight(Object::Vector HitLocation, Object::Vector HitNormal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ShouldSpawnExplosionLight");
-			byte* params = (byte*)malloc(28);
-			*(Vector*)params = HitLocation;
-			*(Vector*)(params + 12) = HitNormal;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 24);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(Object::Vector*)&params[0] = HitLocation;
+			*(Object::Vector*)&params[12] = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[24];
 		}
 		void RBPenetrationDestroy()
 		{
@@ -1620,21 +1459,20 @@ void**)(params + 8) = PSC;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComponent, CollisionImpactData& Collision, int ContactIndex)
+void* OtherComponent, Actor::CollisionImpactData& Collision, int ContactIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.RigidBodyCollision");
-			byte* params = (byte*)malloc(48);
+			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)params = HitComponent;
+void**)&params[0] = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)(params + 4) = OtherComponent;
-			*(CollisionImpactData*)(params + 8) = Collision;
-			*(int*)(params + 44) = ContactIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Collision = *(CollisionImpactData*)(params + 8);
-			free(params);
+void**)&params[4] = OtherComponent;
+			*(Actor::CollisionImpactData*)&params[8] = Collision;
+			*(int*)&params[44] = ContactIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			Collision = *(Actor::CollisionImpactData*)&params[8];
 		}
 		void TurretExplosion()
 		{
@@ -1654,71 +1492,55 @@ void**)(params + 4) = OtherComponent;
 		void AttachDriver(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.AttachDriver");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SitDriver(class UTPawn* UTP, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SitDriver");
-			byte* params = (byte*)malloc(8);
-			*(class UTPawn**)params = UTP;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(class UTPawn**)&params[0] = UTP;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnDriverPhysicsAssetChanged(class UTPawn* UTP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OnDriverPhysicsAssetChanged");
-			byte* params = (byte*)malloc(4);
-			*(class UTPawn**)params = UTP;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTPawn**)&params[0] = UTP;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetHumanReadableName()
+		ScriptString* GetHumanReadableName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetHumanReadableName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void OnPropertyChange(ScriptName PropName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OnPropertyChange");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = PropName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = PropName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetHealth(int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetHealth");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(int*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(int*)&params[4];
 		}
-		float GetCollisionDamageModifier(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& ContactInfos)
+		float GetCollisionDamageModifier(ScriptArray<Actor::RigidBodyContactInfo>& ContactInfos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetCollisionDamageModifier");
-			byte* params = (byte*)malloc(16);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = ContactInfos;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ContactInfos = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			auto returnVal = *(float*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptArray<Actor::RigidBodyContactInfo>*)&params[0] = ContactInfos;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ContactInfos = *(ScriptArray<Actor::RigidBodyContactInfo>*)&params[0];
+			return *(float*)&params[12];
 		}
 		void InitializeMorphs()
 		{
@@ -1733,197 +1555,168 @@ void**)params;
 		void ApplyMorphHeal(int Amount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ApplyMorphHeal");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Amount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyRandomMorphDamage(int Amount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ApplyRandomMorphDamage");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = Amount;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		class UTGib* SpawnGibVehicle(Vector SpawnLocation, Rotator SpawnRotation, class StaticMesh* TheMesh, Vector HitLocation, bool bSpinGib, Vector ImpulseDirection, class ParticleSystem* PS_OnBreak, class ParticleSystem* PS_Trail)
+		class UTGib* SpawnGibVehicle(Object::Vector SpawnLocation, Object::Rotator SpawnRotation, class StaticMesh* TheMesh, Object::Vector HitLocation, bool bSpinGib, Object::Vector ImpulseDirection, class ParticleSystem* PS_OnBreak, class ParticleSystem* PS_Trail)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SpawnGibVehicle");
-			byte* params = (byte*)malloc(68);
-			*(Vector*)params = SpawnLocation;
-			*(Rotator*)(params + 12) = SpawnRotation;
-			*(class StaticMesh**)(params + 24) = TheMesh;
-			*(Vector*)(params + 28) = HitLocation;
-			*(bool*)(params + 40) = bSpinGib;
-			*(Vector*)(params + 44) = ImpulseDirection;
-			*(class ParticleSystem**)(params + 56) = PS_OnBreak;
-			*(class ParticleSystem**)(params + 60) = PS_Trail;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(class UTGib**)(params + 64);
-			free(params);
-			return returnVal;
+			byte params[68] = { NULL };
+			*(Object::Vector*)&params[0] = SpawnLocation;
+			*(Object::Rotator*)&params[12] = SpawnRotation;
+			*(class StaticMesh**)&params[24] = TheMesh;
+			*(Object::Vector*)&params[28] = HitLocation;
+			*(bool*)&params[40] = bSpinGib;
+			*(Object::Vector*)&params[44] = ImpulseDirection;
+			*(class ParticleSystem**)&params[56] = PS_OnBreak;
+			*(class ParticleSystem**)&params[60] = PS_Trail;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(class UTGib**)&params[64];
 		}
-		void GetSVehicleDebug(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& DebugInfo)
+		void GetSVehicleDebug(ScriptArray<ScriptString*>& DebugInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetSVehicleDebug");
-			byte* params = (byte*)malloc(12);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = DebugInfo;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DebugInfo = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[12] = { NULL };
+			*(ScriptArray<ScriptString*>*)&params[0] = DebugInfo;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			DebugInfo = *(ScriptArray<ScriptString*>*)&params[0];
 		}
 		void OnExitVehicle(class UTSeqAct_ExitVehicle* Action)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.OnExitVehicle");
-			byte* params = (byte*)malloc(4);
-			*(class UTSeqAct_ExitVehicle**)params = Action;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTSeqAct_ExitVehicle**)&params[0] = Action;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetShieldActive(int SeatIndex, bool bActive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetShieldActive");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			*(bool*)(params + 4) = bActive;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(bool*)&params[4] = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSeatStoragePawn(int SeatIndex, class Pawn* PawnToSit)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetSeatStoragePawn");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = SeatIndex;
-			*(class Pawn**)(params + 4) = PawnToSit;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(class Pawn**)&params[4] = PawnToSit;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMovementEffect(int SeatIndex, bool bSetActive, class UTPawn* UTP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.SetMovementEffect");
-			byte* params = (byte*)malloc(12);
-			*(int*)params = SeatIndex;
-			*(bool*)(params + 4) = bSetActive;
-			*(class UTPawn**)(params + 8) = UTP;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(bool*)&params[4] = bSetActive;
+			*(class UTPawn**)&params[8] = UTP;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachDriver(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DetachDriver");
-			byte* params = (byte*)malloc(4);
-			*(class Pawn**)params = P;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Pawn**)&params[0] = P;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanAttack(class Actor* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.CanAttack");
-			byte* params = (byte*)malloc(8);
-			*(class Actor**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class Actor**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		ScriptName GetVehicleKillStatName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetVehicleKillStatName");
-			byte* params = (byte*)malloc(8);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptName*)params;
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptName*)&params[0];
 		}
-		void DisplayHud(class UTHUD* HUD, class Canvas* Canvas, Vector2D HudPOS, int SeatIndex)
+		void DisplayHud(class UTHUD* HUD, class Canvas* Canvas, Object::Vector2D HudPOS, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DisplayHud");
-			byte* params = (byte*)malloc(20);
-			*(class UTHUD**)params = HUD;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector2D*)(params + 8) = HudPOS;
-			*(int*)(params + 16) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[20] = { NULL };
+			*(class UTHUD**)&params[0] = HUD;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector2D*)&params[8] = HudPOS;
+			*(int*)&params[16] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DrawBarGraph");
-			byte* params = (byte*)malloc(24);
-			*(float*)params = X;
-			*(float*)(params + 4) = Y;
-			*(float*)(params + 8) = Width;
-			*(float*)(params + 12) = MaxWidth;
-			*(float*)(params + 16) = Height;
-			*(class Canvas**)(params + 20) = DrawCanvas;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[24] = { NULL };
+			*(float*)&params[0] = X;
+			*(float*)&params[4] = Y;
+			*(float*)&params[8] = Width;
+			*(float*)&params[12] = MaxWidth;
+			*(float*)&params[16] = Height;
+			*(class Canvas**)&params[20] = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DisplayExtraHud(class UTHUD* HUD, class Canvas* Canvas, Vector2D pos, float Width, float Height, int SIndex)
+		void DisplayExtraHud(class UTHUD* HUD, class Canvas* Canvas, Object::Vector2D pos, float Width, float Height, int SIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DisplayExtraHud");
-			byte* params = (byte*)malloc(28);
-			*(class UTHUD**)params = HUD;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(Vector2D*)(params + 8) = pos;
-			*(float*)(params + 16) = Width;
-			*(float*)(params + 20) = Height;
-			*(int*)(params + 24) = SIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class UTHUD**)&params[0] = HUD;
+			*(class Canvas**)&params[4] = Canvas;
+			*(Object::Vector2D*)&params[8] = pos;
+			*(float*)&params[16] = Width;
+			*(float*)&params[20] = Height;
+			*(int*)&params[24] = SIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplaySeats(class UTHUD* HUD, class Canvas* Canvas, float PosX, float PosY, float Width, float Height, int SIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.DisplaySeats");
-			byte* params = (byte*)malloc(28);
-			*(class UTHUD**)params = HUD;
-			*(class Canvas**)(params + 4) = Canvas;
-			*(float*)(params + 8) = PosX;
-			*(float*)(params + 12) = PosY;
-			*(float*)(params + 16) = Width;
-			*(float*)(params + 20) = Height;
-			*(int*)(params + 24) = SIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[28] = { NULL };
+			*(class UTHUD**)&params[0] = HUD;
+			*(class Canvas**)&params[4] = Canvas;
+			*(float*)&params[8] = PosX;
+			*(float*)&params[12] = PosY;
+			*(float*)&params[16] = Width;
+			*(float*)&params[20] = Height;
+			*(int*)&params[24] = SIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		LinearColor GetSeatColor(int SeatIndex, bool bIsPlayersSeat)
+		Object::LinearColor GetSeatColor(int SeatIndex, bool bIsPlayersSeat)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.GetSeatColor");
-			byte* params = (byte*)malloc(24);
-			*(int*)params = SeatIndex;
-			*(bool*)(params + 4) = bIsPlayersSeat;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(LinearColor*)(params + 8);
-			free(params);
-			return returnVal;
+			byte params[24] = { NULL };
+			*(int*)&params[0] = SeatIndex;
+			*(bool*)&params[4] = bIsPlayersSeat;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::LinearColor*)&params[8];
 		}
 		void ApplyWeaponEffects(int OverlayFlags, int SeatIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ApplyWeaponEffects");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = OverlayFlags;
-			*(int*)(params + 4) = SeatIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(int*)&params[0] = OverlayFlags;
+			*(int*)&params[4] = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldLeaveForCombat(class UTBot* B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicle.ShouldLeaveForCombat");
-			byte* params = (byte*)malloc(8);
-			*(class UTBot**)params = B;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class UTBot**)&params[0] = B;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
 #undef ADD_STRUCT
 #undef ADD_OBJECT

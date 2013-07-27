@@ -4,57 +4,49 @@
 #include "Engine.SoundCue.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPromptMessage." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrPromptMessage." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrPromptMessage : public UTLocalMessage
 	{
 	public:
-		ADD_VAR(::StrProperty, YourJackalGrenadesHaveBeenDestroyed, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EnterVehicle, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ObjectiveUpgradeDeniedMaxLevel, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, ObjectiveUpgradeDeniedNoCredits, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, KickWarning, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, UpgradeObjective, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, EquipRepairGun, 0xFFFFFFFF)
-		ADD_OBJECT(SoundCue, UpgradeDeniedSound)
-		ScriptArray<wchar_t> GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ADD_STRUCT(ScriptString*, YourJackalGrenadesHaveBeenDestroyed, 176)
+		ADD_STRUCT(ScriptString*, EnterVehicle, 164)
+		ADD_STRUCT(ScriptString*, ObjectiveUpgradeDeniedMaxLevel, 152)
+		ADD_STRUCT(ScriptString*, ObjectiveUpgradeDeniedNoCredits, 140)
+		ADD_STRUCT(ScriptString*, KickWarning, 128)
+		ADD_STRUCT(ScriptString*, UpgradeObjective, 116)
+		ADD_STRUCT(ScriptString*, EquipRepairGun, 104)
+		ADD_OBJECT(SoundCue, UpgradeDeniedSound, 100)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPromptMessage.GetString");
-			byte* params = (byte*)malloc(32);
-			*(int*)params = Switch;
-			*(bool*)(params + 4) = bPRI1HUD;
-			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
-			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
-			*(class Object**)(params + 16) = OptionalObject;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
-			free(params);
-			return returnVal;
+			byte params[32] = { NULL };
+			*(int*)&params[0] = Switch;
+			*(bool*)&params[4] = bPRI1HUD;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class Object**)&params[16] = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[20];
 		}
-		ScriptArray<wchar_t> FormatText(ScriptArray<wchar_t> InString, class TrPlayerController* TrPC)
+		ScriptString* FormatText(ScriptString* InString, class TrPlayerController* TrPC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPromptMessage.FormatText");
-			byte* params = (byte*)malloc(28);
-			*(ScriptArray<wchar_t>*)params = InString;
-			*(class TrPlayerController**)(params + 12) = TrPC;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)(params + 16);
-			free(params);
-			return returnVal;
+			byte params[28] = { NULL };
+			*(ScriptString**)&params[0] = InString;
+			*(class TrPlayerController**)&params[12] = TrPC;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[16];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT
 #undef ADD_OBJECT

@@ -1,27 +1,24 @@
 #pragma once
 #include "UTGame.UTMutator.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTMutator_SpeedFreak." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UTMutator_SpeedFreak : public UTMutator
 	{
 	public:
-		ADD_VAR(::FloatProperty, GameSpeed, 0xFFFFFFFF)
-		void InitMutator(ScriptArray<wchar_t> Options, ScriptArray<wchar_t>& ErrorMessage)
+		ADD_STRUCT(float, GameSpeed, 496)
+		void InitMutator(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_SpeedFreak.InitMutator");
-			byte* params = (byte*)malloc(24);
-			*(ScriptArray<wchar_t>*)params = Options;
-			*(ScriptArray<wchar_t>*)(params + 12) = ErrorMessage;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 12);
-			free(params);
+			byte params[24] = { NULL };
+			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)&params[12] = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ErrorMessage = *(ScriptString**)&params[12];
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_STRUCT

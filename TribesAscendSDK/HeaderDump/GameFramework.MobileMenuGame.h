@@ -2,25 +2,22 @@
 #include "Engine.GameInfo.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Controller.h"
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty GameFramework.MobileMenuGame." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class MobileMenuGame : public GameInfo
 	{
 	public:
-		ADD_OBJECT(ScriptClass, InitialSceneToDisplayClass)
+		ADD_OBJECT(ScriptClass, InitialSceneToDisplayClass, 884)
 		void PostLogin(class PlayerController* NewPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.PostLogin");
-			byte* params = (byte*)malloc(4);
-			*(class PlayerController**)params = NewPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class PlayerController**)&params[0] = NewPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartMatch()
 		{
@@ -30,10 +27,9 @@ namespace UnrealScript
 		void RestartPlayer(class Controller* NewPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.RestartPlayer");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = NewPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = NewPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

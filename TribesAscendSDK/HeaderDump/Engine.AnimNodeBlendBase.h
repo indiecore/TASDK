@@ -1,27 +1,51 @@
 #pragma once
 #include "Engine.AnimNode.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
+#include "Core.Object.h"
+#define ADD_BOOL(name, offset, mask) \
+bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \
+void set_##name(bool val) \
 { \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeBlendBase." #y); \
-	return (##x(this, script_property->offset, z)); \
+	if (val) \
+		*(DWORD*)(this + offset) |= mask; \
+	else \
+		*(DWORD*)(this + offset) &= ~mask; \
 } \
-__declspec(property(get=get_##y)) x y;
+__declspec(property(get=get_##name, put=set_##name)) bool name;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class AnimNodeBlendBase : public AnimNode
 	{
 	public:
-		ADD_VAR(::ByteProperty, BlendType, 0xFFFFFFFF)
-		ADD_VAR(::BoolProperty, bFixNumChildren, 0x1)
+		class AnimBlendChild
+		{
+		public:
+			ADD_OBJECT(AnimNode, Anim, 8)
+			ADD_STRUCT(int, DrawY, 24)
+			ADD_BOOL(bIsAdditive, 20, 0x2)
+			ADD_BOOL(bMirrorSkeleton, 20, 0x1)
+			ADD_STRUCT(float, BlendWeight, 16)
+			ADD_STRUCT(float, Weight, 12)
+			ADD_STRUCT(ScriptName, Name, 0)
+		};
+		ADD_STRUCT(ScriptArray<AnimNodeBlendBase::AnimBlendChild>, Children, 224)
+		ADD_STRUCT(Object::AlphaBlendType, BlendType, 240)
+		ADD_BOOL(bFixNumChildren, 236, 0x1)
 		void PlayAnim(bool bLoop, float Rate, float StartTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.PlayAnim");
-			byte* params = (byte*)malloc(12);
-			*(bool*)params = bLoop;
-			*(float*)(params + 4) = Rate;
-			*(float*)(params + 8) = StartTime;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[12] = { NULL };
+			*(bool*)&params[0] = bLoop;
+			*(float*)&params[4] = Rate;
+			*(float*)&params[8] = StartTime;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopAnim()
 		{
@@ -35,4 +59,6 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
+#undef ADD_BOOL
+#undef ADD_STRUCT
+#undef ADD_OBJECT

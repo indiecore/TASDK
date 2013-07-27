@@ -13,28 +13,24 @@ namespace UnrealScript
 		bool IsFallThruEnabled(int ValueIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchBase.IsFallThruEnabled");
-			byte* params = (byte*)malloc(8);
-			*(int*)params = ValueIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(int*)&params[0] = ValueIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void InsertValueEntry(int InsertIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchBase.InsertValueEntry");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = InsertIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = InsertIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveValueEntry(int RemoveIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchBase.RemoveValueEntry");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = RemoveIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = RemoveIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};
 }

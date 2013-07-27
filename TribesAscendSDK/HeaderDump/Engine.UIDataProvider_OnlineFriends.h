@@ -1,46 +1,39 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlinePlayerDataBase.h"
-#include "Core.Object.Pointer.h"
+#include "Engine.OnlineSubsystem.h"
+#include "Core.Object.h"
 #include "Engine.LocalPlayer.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_OnlineFriends." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDataProvider_OnlineFriends." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
 namespace UnrealScript
 {
 	class UIDataProvider_OnlineFriends : public UIDataProvider_OnlinePlayerDataBase
 	{
 	public:
-		ADD_VAR(::StrProperty, BusyText, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, AwayText, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, OnlineText, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, OfflineText, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bHasInvitedYouCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bHaveInvitedCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bHasVoiceSupportCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bIsJoinableCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bIsPlayingThisGameCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bIsPlayingCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, bIsOnlineCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, FriendStateCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, PresenceInfoCol, 0xFFFFFFFF)
-		ADD_VAR(::StrProperty, NickNameCol, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(ScriptArray<OnlineSubsystem::OnlineFriend>, FriendsList, 96)
+		ADD_STRUCT(ScriptString*, BusyText, 264)
+		ADD_STRUCT(ScriptString*, AwayText, 252)
+		ADD_STRUCT(ScriptString*, OnlineText, 240)
+		ADD_STRUCT(ScriptString*, OfflineText, 228)
+		ADD_STRUCT(ScriptString*, bHasInvitedYouCol, 216)
+		ADD_STRUCT(ScriptString*, bHaveInvitedCol, 204)
+		ADD_STRUCT(ScriptString*, bHasVoiceSupportCol, 192)
+		ADD_STRUCT(ScriptString*, bIsJoinableCol, 180)
+		ADD_STRUCT(ScriptString*, bIsPlayingThisGameCol, 168)
+		ADD_STRUCT(ScriptString*, bIsPlayingCol, 156)
+		ADD_STRUCT(ScriptString*, bIsOnlineCol, 144)
+		ADD_STRUCT(ScriptString*, FriendStateCol, 132)
+		ADD_STRUCT(ScriptString*, PresenceInfoCol, 120)
+		ADD_STRUCT(ScriptString*, NickNameCol, 108)
+		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 92)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnRegister");
-			byte* params = (byte*)malloc(4);
-			*(class LocalPlayer**)params = InPlayer;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class LocalPlayer**)&params[0] = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
@@ -50,18 +43,16 @@ namespace UnrealScript
 		void OnFriendsReadComplete(bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnFriendsReadComplete");
-			byte* params = (byte*)malloc(4);
-			*(bool*)params = bWasSuccessful;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(bool*)&params[0] = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnLoginChange");
-			byte* params = (byte*)malloc(1);
-			*params = LocalUserNum;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[1] = { NULL };
+			params[0] = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshFriendsList()
 		{
@@ -70,5 +61,4 @@ namespace UnrealScript
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT

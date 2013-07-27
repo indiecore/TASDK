@@ -1,86 +1,67 @@
 #pragma once
-#include "Core.Object.Color.h"
 #include "UTGame.UTCarriedObject.h"
 #include "Engine.TeamInfo.h"
+#include "UTGame.UTCharInfo.h"
 #include "UTGame.UTTeamAI.h"
 #include "UTGame.UTGameObjective.h"
-#include "UTGame.UTCharInfo.CharacterInfo.h"
 #include "Engine.Controller.h"
 #include "UTGame.UTBot.h"
-#define ADD_VAR(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTTeamInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_STRUCT(x, y, z) (x) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTTeamInfo." #y); \
-	return (##x(this, script_property->offset, z)); \
-} \
-__declspec(property(get=get_##y)) x y;
-#define ADD_OBJECT(x, y) (class x*) get_##y() \
-{ \
-	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTTeamInfo." #y); \
-	return *(x**)(this + script_property->offset); \
-} \
-__declspec(property(get=get_##y)) class x* y;
+#include "Core.Object.h"
+#define ADD_STRUCT(x, y, offset) \
+x get_##y() { return *(x*)(this + offset); } \
+void set_##y(x val) { *(x*)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) x y;
+#define ADD_OBJECT(x, y, offset) \
+class x* get_##y() { return *(class x**)(this + offset); } \
+void set_##y(x* val) { *(class x**)(this + offset) = val; } \
+__declspec(property(get=get_##y, put=set_##y)) class x* y;
 namespace UnrealScript
 {
 	class UTTeamInfo : public TeamInfo
 	{
 	public:
-		ADD_VAR(::StrProperty, Faction, 0xFFFFFFFF)
-		ADD_OBJECT(UTCarriedObject, TeamFlag)
-		ADD_OBJECT(UTTeamAI, AI)
-		ADD_OBJECT(UTGameObjective, HomeBase)
-		ADD_VAR(::StrProperty, TeamColorNames, 0xFFFFFFFF)
-		ADD_STRUCT(::NonArithmeticProperty<Color>, BaseTeamColor, 0xFFFFFFFF)
-		ADD_VAR(::IntProperty, DesiredTeamSize, 0xFFFFFFFF)
-		CharacterInfo GetBotInfo(ScriptArray<wchar_t> BotName)
+		ADD_STRUCT(ScriptString*, Faction, 520)
+		ADD_OBJECT(UTCarriedObject, TeamFlag, 516)
+		ADD_OBJECT(UTTeamAI, AI, 508)
+		ADD_OBJECT(UTGameObjective, HomeBase, 512)
+		ADD_STRUCT(ScriptString*, TeamColorNames, 548)
+		ADD_STRUCT(Object::Color, BaseTeamColor, 532)
+		ADD_STRUCT(int, DesiredTeamSize, 504)
+		UTCharInfo::CharacterInfo GetBotInfo(ScriptString* BotName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetBotInfo");
-			byte* params = (byte*)malloc(124);
-			*(ScriptArray<wchar_t>*)params = BotName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(CharacterInfo*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[124] = { NULL };
+			*(ScriptString**)&params[0] = BotName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(UTCharInfo::CharacterInfo*)&params[12];
 		}
 		bool AllBotsSpawned()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.AllBotsSpawned");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[0];
 		}
-		Color GetHUDColor()
+		Object::Color GetHUDColor()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetHUDColor");
-			byte* params = (byte*)malloc(4);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(Color*)params;
-			free(params);
-			return returnVal;
+			byte params[4] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(Object::Color*)&params[0];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.ReplicatedEvent");
-			byte* params = (byte*)malloc(8);
-			*(ScriptName*)params = VarName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[8] = { NULL };
+			*(ScriptName*)&params[0] = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptArray<wchar_t> GetHumanReadableName()
+		ScriptString* GetHumanReadableName()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetHumanReadableName");
-			byte* params = (byte*)malloc(12);
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(ScriptArray<wchar_t>*)params;
-			free(params);
-			return returnVal;
+			byte params[12] = { NULL };
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(ScriptString**)&params[0];
 		}
 		void Reset()
 		{
@@ -90,63 +71,49 @@ namespace UnrealScript
 		void Initialize(int NewTeamIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.Initialize");
-			byte* params = (byte*)malloc(4);
-			*(int*)params = NewTeamIndex;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(int*)&params[0] = NewTeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool NeedsBotMoreThan(class UTTeamInfo* T)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.NeedsBotMoreThan");
-			byte* params = (byte*)malloc(8);
-			*(class UTTeamInfo**)params = T;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 4);
-			free(params);
-			return returnVal;
+			byte params[8] = { NULL };
+			*(class UTTeamInfo**)&params[0] = T;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[4];
 		}
 		void SetBotOrders(class UTBot* NewBot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.SetBotOrders");
-			byte* params = (byte*)malloc(4);
-			*(class UTBot**)params = NewBot;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class UTBot**)&params[0] = NewBot;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveFromTeam(class Controller* Other)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.RemoveFromTeam");
-			byte* params = (byte*)malloc(4);
-			*(class Controller**)params = Other;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			free(params);
+			byte params[4] = { NULL };
+			*(class Controller**)&params[0] = Other;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool BotNameTaken(ScriptArray<wchar_t> BotName)
+		bool BotNameTaken(ScriptString* BotName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.BotNameTaken");
-			byte* params = (byte*)malloc(16);
-			*(ScriptArray<wchar_t>*)params = BotName;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(bool*)(params + 12);
-			free(params);
-			return returnVal;
+			byte params[16] = { NULL };
+			*(ScriptString**)&params[0] = BotName;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			return *(bool*)&params[12];
 		}
-		void GetAvailableBotList(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& AvailableBots, ScriptArray<wchar_t> FactionFilter, bool bMalesOnly)
+		void GetAvailableBotList(ScriptArray<int>& AvailableBots, ScriptString* FactionFilter, bool bMalesOnly)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetAvailableBotList");
-			byte* params = (byte*)malloc(28);
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params = AvailableBots;
-			*(ScriptArray<wchar_t>*)(params + 12) = FactionFilter;
-			*(bool*)(params + 24) = bMalesOnly;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			AvailableBots = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)params;
-			free(params);
+			byte params[28] = { NULL };
+			*(ScriptArray<int>*)&params[0] = AvailableBots;
+			*(ScriptString**)&params[12] = FactionFilter;
+			*(bool*)&params[24] = bMalesOnly;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			AvailableBots = *(ScriptArray<int>*)&params[0];
 		}
 		void Destroyed()
 		{
@@ -155,6 +122,5 @@ void**)params;
 		}
 	};
 }
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

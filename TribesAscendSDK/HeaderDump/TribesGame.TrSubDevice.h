@@ -1,7 +1,7 @@
 #pragma once
-#include "Core.Object.Vector.h"
 #include "TribesGame.TrDevice.h"
-#include "Engine.Actor.ImpactInfo.h"
+#include "Core.Object.h"
+#include "Engine.Actor.h"
 namespace UnrealScript
 {
 	class TrSubDevice : public TrDevice
@@ -12,25 +12,17 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSubDevice.Reset");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ImpactInfo CalcWeaponFire(Vector StartTrace, Vector EndTrace, 
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& ImpactList, Vector Extent)
+		Actor::ImpactInfo CalcWeaponFire(Object::Vector StartTrace, Object::Vector EndTrace, ScriptArray<Actor::ImpactInfo>& ImpactList, Object::Vector Extent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSubDevice.CalcWeaponFire");
-			byte* params = (byte*)malloc(128);
-			*(Vector*)params = StartTrace;
-			*(Vector*)(params + 12) = EndTrace;
-			*(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 24) = ImpactList;
-			*(Vector*)(params + 36) = Extent;
-			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ImpactList = *(
-// ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void**)(params + 24);
-			auto returnVal = *(ImpactInfo*)(params + 48);
-			free(params);
-			return returnVal;
+			byte params[128] = { NULL };
+			*(Object::Vector*)&params[0] = StartTrace;
+			*(Object::Vector*)&params[12] = EndTrace;
+			*(ScriptArray<Actor::ImpactInfo>*)&params[24] = ImpactList;
+			*(Object::Vector*)&params[36] = Extent;
+			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
+			ImpactList = *(ScriptArray<Actor::ImpactInfo>*)&params[24];
+			return *(Actor::ImpactInfo*)&params[48];
 		}
 	};
 }
