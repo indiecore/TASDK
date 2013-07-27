@@ -79,13 +79,13 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.DrawHUD");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptString* CriticalString, int Switch, float Position, float Lifetime, int FontSize, Object::Color DrawColor, class Object* OptionalObject)
+		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, ScriptString* CriticalString, int Switch, float Position, float Lifetime, int FontSize, Object::Color DrawColor, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.LocalizedMessage");
 			byte params[48] = { NULL };
 			*(ScriptClass**)&params[0] = InMessageClass;
-			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(ScriptString**)&params[12] = CriticalString;
 			*(int*)&params[24] = Switch;
 			*(float*)&params[28] = Position;

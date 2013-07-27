@@ -19,14 +19,14 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(SoundNodeWave, FlagAnnouncement, 112)
 		ADD_STRUCT(ScriptString*, FlagMessage, 100)
-		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleCantCarryFlagMessage.ClientReceive");
 			byte params[20] = { NULL };
 			*(class PlayerController**)&params[0] = P;
 			*(int*)&params[4] = Switch;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -48,14 +48,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[1];
 		}
-		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleCantCarryFlagMessage.GetString");
 			byte params[32] = { NULL };
 			*(int*)&params[0] = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[20];

@@ -880,14 +880,14 @@ void*>, HearSoundPoolComponents, 1396)
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.CleanupPRI");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ReceiveLocalizedMessage(ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void ReceiveLocalizedMessage(ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ReceiveLocalizedMessage");
 			byte params[20] = { NULL };
 			*(ScriptClass**)&params[0] = Message;
 			*(int*)&params[4] = Switch;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

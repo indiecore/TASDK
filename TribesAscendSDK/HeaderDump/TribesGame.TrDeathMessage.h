@@ -25,34 +25,34 @@ namespace UnrealScript
 		ADD_BOOL(bNoConsoleDeathMessages, 124, 0x1)
 		ADD_STRUCT(ScriptString*, SomeoneString, 112)
 		ADD_STRUCT(ScriptString*, KilledString, 100)
-		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI_1)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeathMessage.GetConsoleColor");
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI_1;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[4];
 		}
-		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeathMessage.GetString");
 			byte params[32] = { NULL };
 			*(int*)&params[0] = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[20];
 		}
-		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeathMessage.ClientReceive");
 			byte params[20] = { NULL };
 			*(class PlayerController**)&params[0] = P;
 			*(int*)&params[4] = Switch;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

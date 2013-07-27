@@ -106,29 +106,7 @@ public:
 		OutputLog( "Name Array: 0x%X\n", new_name_array );
 	}
 
-	char *GetName()
-	{
-		if(index_ >= name_array()->count())
-		{
-			return "Failed to get name";
-		}
-
-		if (instance_number_ == -1)
-			return (*name_array())(index_)->name();
-		else
-		{
-			auto fName = (*name_array())(index_)->name();
-			char buf[16] = { NULL };
-			itoa(instance_number_, buf, 10);
-			auto sLen = strlen(fName) + strlen(buf) + 2;
-			char* nm = (char*)malloc(sLen);
-			nm[sLen - 1] = '\0';
-			strcpy_s(nm, sLen, fName);
-			nm[strlen(fName)] = '_';
-			strcpy_s(nm + strlen(fName) + 1, sLen - strlen(fName) - 1, buf);
-			return nm;
-		}
-	}
+	char *GetName();
 };
 
 class ScriptObject

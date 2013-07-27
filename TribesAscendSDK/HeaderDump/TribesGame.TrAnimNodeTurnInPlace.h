@@ -30,8 +30,8 @@ namespace UnrealScript
 		enum ForcedTransitionAngle : byte
 		{
 			FTA_NONE = 0,
-			FTA = 1,
-			FTA = 2,
+			FTA_90 = 1,
+			FTA_180 = 2,
 			FTA_MAX = 3,
 		};
 		class RotTransitionInfo

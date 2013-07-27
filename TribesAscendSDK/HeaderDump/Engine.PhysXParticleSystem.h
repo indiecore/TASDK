@@ -29,12 +29,12 @@ namespace UnrealScript
 		};
 		enum EPacketSizeMultiplier : byte
 		{
-			EPSM = 0,
-			EPSM = 1,
-			EPSM = 2,
-			EPSM = 3,
-			EPSM = 4,
-			EPSM = 5,
+			EPSM_4 = 0,
+			EPSM_8 = 1,
+			EPSM_16 = 2,
+			EPSM_32 = 3,
+			EPSM_64 = 4,
+			EPSM_128 = 5,
 			EPSM_MAX = 6,
 		};
 		ADD_STRUCT(Object::Pointer, PSys, 156)

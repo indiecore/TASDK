@@ -50,7 +50,7 @@ namespace UnrealScript
 			*(ScriptName*)&params[20] = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void BroadcastLocalized(class Actor* Sender, class PlayerController* Receiver, ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void BroadcastLocalized(class Actor* Sender, class PlayerController* Receiver, ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.BroadcastHandler.BroadcastLocalized");
 			byte params[28] = { NULL };
@@ -58,8 +58,8 @@ namespace UnrealScript
 			*(class PlayerController**)&params[4] = Receiver;
 			*(ScriptClass**)&params[8] = Message;
 			*(int*)&params[12] = Switch;
-			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI_2;
 			*(class Object**)&params[24] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -81,19 +81,19 @@ namespace UnrealScript
 			*(ScriptName*)&params[16] = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AllowBroadcastLocalized(class Actor* Sender, ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void AllowBroadcastLocalized(class Actor* Sender, ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.BroadcastHandler.AllowBroadcastLocalized");
 			byte params[24] = { NULL };
 			*(class Actor**)&params[0] = Sender;
 			*(ScriptClass**)&params[4] = Message;
 			*(int*)&params[8] = Switch;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI_2;
 			*(class Object**)&params[20] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AllowBroadcastLocalizedTeam(int TeamIndex, class Actor* Sender, ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void AllowBroadcastLocalizedTeam(int TeamIndex, class Actor* Sender, ScriptClass* Message, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.BroadcastHandler.AllowBroadcastLocalizedTeam");
 			byte params[28] = { NULL };
@@ -101,8 +101,8 @@ namespace UnrealScript
 			*(class Actor**)&params[4] = Sender;
 			*(ScriptClass**)&params[8] = Message;
 			*(int*)&params[12] = Switch;
-			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI_2;
 			*(class Object**)&params[24] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

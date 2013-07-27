@@ -32,11 +32,11 @@ namespace UnrealScript
 		ADD_STRUCT(float, PosY, 72)
 		ADD_STRUCT(Object::Color, DrawColor, 68)
 		ADD_BOOL(bIsConsoleMessage, 60, 0x8)
-		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI_1)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalMessage.GetConsoleColor");
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI_1;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[4];
 		}
@@ -51,36 +51,36 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
-		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalMessage.ClientReceive");
 			byte params[20] = { NULL };
 			*(class PlayerController**)&params[0] = P;
 			*(int*)&params[4] = Switch;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalMessage.GetString");
 			byte params[32] = { NULL };
 			*(int*)&params[0] = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[20];
 		}
-		Object::Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		Object::Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalMessage.GetColor");
 			byte params[20] = { NULL };
 			*(int*)&params[0] = Switch;
-			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(class Object**)&params[12] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[16];

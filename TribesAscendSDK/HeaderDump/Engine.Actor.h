@@ -1658,26 +1658,26 @@ void**)&params[4];
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.PreBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void BroadcastLocalizedMessage(ScriptClass* InMessageClass, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void BroadcastLocalizedMessage(ScriptClass* InMessageClass, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.BroadcastLocalizedMessage");
 			byte params[20] = { NULL };
 			*(ScriptClass**)&params[0] = InMessageClass;
 			*(int*)&params[4] = Switch;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
 			*(class Object**)&params[16] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void BroadcastLocalizedTeamMessage(int TeamIndex, ScriptClass* InMessageClass, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void BroadcastLocalizedTeamMessage(int TeamIndex, ScriptClass* InMessageClass, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.BroadcastLocalizedTeamMessage");
 			byte params[24] = { NULL };
 			*(int*)&params[0] = TeamIndex;
 			*(ScriptClass**)&params[4] = InMessageClass;
 			*(int*)&params[8] = Switch;
-			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[16] = RelatedPRI_2;
 			*(class Object**)&params[20] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -1865,13 +1865,13 @@ void**)&params[28] = FallBackComponent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Text = *(ScriptString**)&params[0];
 		}
-		ScriptString* GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI)
+		ScriptString* GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.GetLocalString");
 			byte params[24] = { NULL };
 			*(int*)&params[0] = Switch;
-			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}

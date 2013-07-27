@@ -33,7 +33,7 @@ namespace UnrealScript
 			GC_CC_PARTY = 4,
 			GC_CC_CITY = 5,
 			GC_CC_PERSONAL = 6,
-			GC_CC_PRIVATE = 7,
+			GC_CC_PRIVATE_1 = 7,
 			GC_CC_EOM_LOBBY = 8,
 			GC_CC_SYSTEM = 9,
 			GC_CC_TRADE = 10,

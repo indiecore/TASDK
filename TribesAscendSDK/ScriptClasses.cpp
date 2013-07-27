@@ -741,6 +741,27 @@ void ScriptObject::GenerateHeaders()
 	OutputLog("Finished.\n");
 }
 
+char* ScriptName::GetName()
+{
+	if(index_ >= name_array()->count())
+	{
+		return "Failed to get name";
+	}
+
+	if (instance_number_ <= 0)
+		return (*name_array())(index_)->name();
+	else
+	{
+		static std::string nm;
+		nm = (*name_array())(index_)->name();
+		nm += "_";
+		char buf[16] = { NULL };
+		sprintf_s(buf, "%i", instance_number_ - 1); // Because UE is just weird like that.
+		nm += buf;
+		return (char*)nm.c_str();
+	}
+}
+
 char *ScriptObject::GetName()
 {
 	return name().GetName();

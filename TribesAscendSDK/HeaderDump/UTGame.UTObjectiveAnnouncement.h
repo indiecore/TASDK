@@ -30,15 +30,15 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		void SetHUDDisplay(class PlayerController* P, int Switch, ScriptString* Text, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		void SetHUDDisplay(class PlayerController* P, int Switch, ScriptString* Text, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTObjectiveAnnouncement.SetHUDDisplay");
 			byte params[32] = { NULL };
 			*(class PlayerController**)&params[0] = P;
 			*(int*)&params[4] = Switch;
 			*(ScriptString**)&params[8] = Text;
-			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[24] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[24] = RelatedPRI_2;
 			*(class Object**)&params[28] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

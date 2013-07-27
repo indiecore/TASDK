@@ -13,11 +13,11 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(Object::Color, BlueTeamColor, 104)
 		ADD_STRUCT(Object::Color, RedTeamColor, 100)
-		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI_1)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSayMsg.GetConsoleColor");
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI_1;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[4];
 		}

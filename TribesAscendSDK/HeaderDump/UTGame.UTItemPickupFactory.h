@@ -26,13 +26,13 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.InitializePickup");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		ScriptString* GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI)
+		ScriptString* GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.GetLocalString");
 			byte params[24] = { NULL };
 			*(int*)&params[0] = Switch;
-			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI;
-			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI;
+			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
