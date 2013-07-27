@@ -5,7 +5,7 @@ class NameProperty
 
 public:
 
-	NameProperty( void *thisptr, DWORD offset, DWORD bit_mask )
+	NameProperty( void *thisptr, DWORD offset )
 	{
 		thisptr_ = ( uintptr_t )( thisptr );
 		offset_ = offset;
@@ -22,7 +22,7 @@ class StrProperty
 
 public:
 
-	StrProperty( void *thisptr, DWORD offset, DWORD bit_mask )
+	StrProperty( void *thisptr, DWORD offset )
 	{
 		thisptr_ = ( uintptr_t )( thisptr );
 		offset_ = offset;
@@ -39,7 +39,7 @@ template< class T > class ArithmeticProperty
 
 public:
 
-	ArithmeticProperty( void *thisptr, DWORD offset, DWORD bit_mask )
+	ArithmeticProperty( void *thisptr, DWORD offset )
 	{
 		thisptr_ = ( uintptr_t )( thisptr );
 		offset_ = offset;
@@ -77,7 +77,7 @@ template< class T > class NonArithmeticProperty
 
 public:
 
-	NonArithmeticProperty( void *thisptr, DWORD offset, DWORD bit_mask )
+	NonArithmeticProperty( void *thisptr, DWORD offset )
 	{
 		thisptr_ = ( uintptr_t )( thisptr );
 		offset_ = offset;
@@ -134,7 +134,7 @@ class RotatorProperty
 
 public:
 
-	RotatorProperty( void *thisptr, DWORD offset, DWORD bit_mask )
+	RotatorProperty( void *thisptr, DWORD offset )
 	{
 		thisptr_ = ( uintptr_t )( thisptr );
 		offset_ = offset;
@@ -226,7 +226,7 @@ class VectorProperty
 
 public:
 
-	VectorProperty( void *thisptr, DWORD offset, DWORD bit_mask )
+	VectorProperty( void *thisptr, DWORD offset )
 	{
 		thisptr_ = ( uintptr_t )( thisptr );
 		offset_ = offset;

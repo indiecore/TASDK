@@ -84,7 +84,7 @@ std::string GetTypeNameForProperty(ScriptObject* prop)
 	else if (!strcmp(prop->object_class()->GetName(), "BoolProperty"))
 		return "bool";
 	else if (!strcmp(prop->object_class()->GetName(), "StrProperty"))
-		return "ScriptArray<wchar_t>";
+		return "ScriptString*";
 	else if (!strcmp(prop->object_class()->GetName(), "StringRefProperty"))
 		return "void*";
 	else if (!strcmp(prop->object_class()->GetName(), "NameProperty"))
@@ -174,13 +174,17 @@ struct PropertyDescription
 
 	// TODO: Add support for DelegateProperty, ArrayProperty, MapProperty, FixedArrayProperty, PointerProperty, InterfaceProperty, and ComponentProperty
 
+	bool IsBoolProperty()
+	{
+		return !strcmp(originalProperty->object_class()->GetName(), "BoolProperty");
+	}
+
 	bool IsPrimitiveProperty()
 	{
 		return
 			   !strcmp(originalProperty->object_class()->GetName(), "ByteProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "IntProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "FloatProperty")
-			|| !strcmp(originalProperty->object_class()->GetName(), "BoolProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "StrProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
 		;
@@ -207,35 +211,24 @@ struct PropertyDescription
 
 	void WriteToStream(IndentedStreamWriter* writer)
 	{
-		if (
-			   !strcmp(originalProperty->object_class()->GetName(), "ByteProperty")
+		if (!strcmp(originalProperty->object_class()->GetName(), "BoolProperty"))
+			writer->WriteLine("ADD_BOOL(%s, %i, 0x%X)", originalProperty->GetName(), originalProperty->offset, ((ScriptBoolProperty*)originalProperty)->bit_mask);
+		else if (!strcmp(originalProperty->object_class()->GetName(), "ObjectProperty"))
+			writer->WriteLine("ADD_OBJECT(%s, %s, %i)", ((ScriptObjectProperty*)originalProperty)->property_class->GetName(), originalProperty->GetName(), originalProperty->offset);
+		else if (!strcmp(originalProperty->object_class()->GetName(), "StringRefProperty"))
+			writer->WriteLine("ADD_OBJECT(void, %s, %i)", originalProperty->GetName(), originalProperty->offset);
+		else if (!strcmp(originalProperty->object_class()->GetName(), "ClassProperty"))
+			writer->WriteLine("ADD_OBJECT(ScriptClass, %s, %i)", originalProperty->GetName(), originalProperty->offset);
+		else if (
+			   !strcmp(originalProperty->object_class()->GetName(), "StructProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "ByteProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "IntProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "FloatProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "StrProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
 		)
 		{
-			writer->WriteLine("ADD_VAR(::%s, %s, 0)", originalProperty->object_class()->GetName(), originalProperty->GetName());
-		}
-		else if (!strcmp(originalProperty->object_class()->GetName(), "BoolProperty"))
-			writer->WriteLine("ADD_VAR(::%s, %s, 0x%X)", originalProperty->object_class()->GetName(), originalProperty->GetName(), ((ScriptBoolProperty*)originalProperty)->bit_mask);
-		else if (!strcmp(originalProperty->object_class()->GetName(), "ObjectProperty"))
-			writer->WriteLine("ADD_OBJECT(%s, %s)", ((ScriptObjectProperty*)originalProperty)->property_class->GetName(), originalProperty->GetName());
-		else if (!strcmp(originalProperty->object_class()->GetName(), "StringRefProperty"))
-			writer->WriteLine("ADD_OBJECT(void, %s)", originalProperty->GetName());
-		else if (!strcmp(originalProperty->object_class()->GetName(), "ClassProperty"))
-			writer->WriteLine("ADD_OBJECT(ScriptClass, %s)", originalProperty->GetName());
-		else if (!strcmp(originalProperty->object_class()->GetName(), "StructProperty"))
-		{
-			auto objectProperty = (ScriptObjectProperty*)originalProperty;
-			if (!strcmp(objectProperty->property_class->GetName(), "Vector"))
-				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0)", originalProperty->GetName());
-			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
-				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0)", originalProperty->GetName());
-			else if (!strcmp(objectProperty->property_class->GetFullName(), "ScriptStruct Core.Object.QWord"))
-				writer->WriteLine("ADD_STRUCT(::QWordProperty, %s, 0)", originalProperty->GetName());
-			else
-				writer->WriteLine("ADD_STRUCT(::NonArithmeticProperty<%s>, %s, 0)", GetTypeNameForProperty(objectProperty).c_str(), originalProperty->GetName());
+			writer->WriteLine("ADD_STRUCT(%s, %s, %i)", GetTypeNameForProperty(originalProperty).c_str(), originalProperty->GetName(), originalProperty->offset);
 		}
 		else
 			writer->WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
@@ -477,6 +470,7 @@ struct ClassDescription
 	std::vector<ConstDescription> nestedConstants;
 	std::vector<EnumDescription> nestedEnums;
 	std::vector<ClassDescription> nestedStructs;
+	int boolPropertyCount;
 	int primitivePropertyCount;
 	int structPropertyCount;
 	int objectPropertyCount;
@@ -487,6 +481,7 @@ struct ClassDescription
 	ClassDescription(ScriptStruct* originalClass_)
 	{
 		originalClass = originalClass_; 
+		boolPropertyCount = 0;
 		primitivePropertyCount = 0;
 		structPropertyCount = 0;
 		objectPropertyCount = 0;
@@ -510,7 +505,9 @@ struct ClassDescription
 				{
 					auto prop = PropertyDescription((ScriptProperty*)object);
 					bool unknownProperty = false;
-					if (prop.IsPrimitiveProperty())
+					if (prop.IsBoolProperty())
+						boolPropertyCount++;
+					else if (prop.IsPrimitiveProperty())
 						primitivePropertyCount++;
 					else if (prop.IsStructProperty())
 						structPropertyCount++;
@@ -550,53 +547,39 @@ struct ClassDescription
 		
 			dependencyManager.WriteToStream(wtr);
 
-			if (primitivePropertyCount > 0)
+			if (boolPropertyCount > 0)
 			{
-				wtr->WriteLine("#define ADD_VAR(x, y, z) x get_##y() \\");
+				wtr->WriteLine("#define ADD_BOOL(name, offset, mask) \\");
+				wtr->WriteLine("bool get_##name() { return (*(DWORD*)(this + offset) & mask) != 0; } \\");
+				wtr->WriteLine("void set_##name(bool val) \\");
 				wtr->WriteLine("{ \\");
 				wtr->Indent++;
-				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" \" OBJECT_CONTEXT \".\" #y); \\");
-				wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
+				wtr->WriteLine("if (val) \\");
+				wtr->Indent++;
+				wtr->WriteLine("*(DWORD*)(this + offset) |= mask; \\");
+				wtr->Indent--;
+				wtr->WriteLine("else \\");
+				wtr->Indent++;
+				wtr->WriteLine("*(DWORD*)(this + offset) &= ~mask; \\");
+				wtr->Indent--;
 				wtr->Indent--;
 				wtr->WriteLine("} \\");
-				wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
+				wtr->WriteLine("__declspec(property(get_##name, put=set_##name)) bool name;");
 			}
 
-			if (structPropertyCount > 0)
+			if (structPropertyCount > 0 || primitivePropertyCount > 0)
 			{
-				wtr->WriteLine("#define ADD_STRUCT(x, y, z) x get_##y() \\");
-				wtr->WriteLine("{ \\");
-				wtr->Indent++;
-				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty \" OBJECT_CONTEXT \".\" #y); \\");
-				wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
-				wtr->Indent--;
-				wtr->WriteLine("} \\");
-				wtr->WriteLine("void set_##y(x val) \\");
-				wtr->WriteLine("{ \\");
-				wtr->Indent++;
-				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty \" OBJECT_CONTEXT \".\" #y); \\");
-				wtr->WriteLine("*(x*)(this + script_property->offset) = val; \\");
-				wtr->Indent--;
-				wtr->WriteLine("} \\");
+				wtr->WriteLine("#define ADD_STRUCT(x, y, offset) \\");
+				wtr->WriteLine("x get_##y() { return *(x*)(this + offset); } \\");
+				wtr->WriteLine("void set_##y(x val) { *(x*)(this + offset) = val; } \\");
 				wtr->WriteLine("__declspec(property(get=get_##y, put=set_##y)) x y;");
 			}
 
 			if (objectPropertyCount > 0)
 			{
-				wtr->WriteLine("#define ADD_OBJECT(x, y) x* get_##y() \\");
-				wtr->WriteLine("{ \\");
-				wtr->Indent++;
-				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty \" OBJECT_CONTEXT \".\" #y); \\");
-				wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
-				wtr->Indent--;
-				wtr->WriteLine("} \\");
-				wtr->WriteLine("void set_##y(x* val) \\");
-				wtr->WriteLine("{ \\");
-				wtr->Indent++;
-				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty \" OBJECT_CONTEXT \".\" #y); \\");
-				wtr->WriteLine("*(x**)(this + script_property->offset) = val; \\");
-				wtr->Indent--;
-				wtr->WriteLine("} \\");
+				wtr->WriteLine("#define ADD_OBJECT(x, y, offset) \\");
+				wtr->WriteLine("x* get_##y() { return *(x**)(this + offset); } \\");
+				wtr->WriteLine("void set_##y(x* val) { *(x**)(this + offset) = val; } \\");
 				wtr->WriteLine("__declspec(property(get=get_##y, put=set_##y)) x* y;");
 			}
 
@@ -621,25 +604,11 @@ struct ClassDescription
 			nestedEnums[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
 			nestedStructs[i].Write(wtr);
-		
-		if (properties.size() > 0)
-		{
-			std::string propertyPrefix = originalClass->GetName();
-			for (auto outer = originalClass->outer(); outer; outer = outer->outer())
-			{
-				propertyPrefix.insert(0, ".");
-				propertyPrefix.insert(0, outer->GetName());
-			}
-			wtr->WriteLine("#define OBJECT_CONTEXT \"%s\"", propertyPrefix.c_str());
-		}
 
 		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < functions.size(); i++)
 			functions[i].WriteToStream(wtr);
-
-		if (properties.size() > 0)
-			wtr->WriteLine("#undef OBJECT_CONTEXT");
 
 		wtr->Indent--;
 		wtr->WriteLine("};");
@@ -652,9 +621,9 @@ struct ClassDescription
 			wtr->Indent--;
 			wtr->WriteLine("}");
 			
-			if (primitivePropertyCount > 0)
-				wtr->WriteLine("#undef ADD_VAR");
-			if (structPropertyCount > 0)
+			if (boolPropertyCount > 0)
+				wtr->WriteLine("#undef ADD_BOOL");
+			if (structPropertyCount > 0 || primitivePropertyCount > 0)
 				wtr->WriteLine("#undef ADD_STRUCT");
 			if (objectPropertyCount > 0)
 				wtr->WriteLine("#undef ADD_OBJECT");
