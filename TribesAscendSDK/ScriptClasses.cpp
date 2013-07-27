@@ -469,6 +469,11 @@ struct EnumDescription
 		originalEnum = originalEnum_;
 	}
 
+	void WriteDeclaration(IndentedStreamWriter* wtr)
+	{
+		wtr->WriteLine("enum %s;", originalEnum->GetName());
+	}
+
 	void WriteToStream(IndentedStreamWriter* wtr)
 	{
 		wtr->WriteLine("enum %s : byte", originalEnum->GetName());
@@ -566,11 +571,47 @@ struct ClassDescription
 			functions[i].RequireTypes(classDepMgr);
 	}
 
+	void WriteDeclaration(IndentedStreamWriter* wtr)
+	{
+		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		{
+			wtr->WriteLine("namespace UnrealScript");
+			wtr->WriteLine("{");
+			wtr->Indent++;
+		}
+		
+		wtr->Write("class %s", originalClass->GetName());
+		if (nestedStructs.size() > 0 || nestedEnums.size() > 0)
+		{
+			wtr->WriteLine("");
+			wtr->WriteLine("{");
+			wtr->WriteLine("public:");
+			wtr->Indent++;
+			
+			for (unsigned int i = 0; i < nestedEnums.size(); i++)
+				nestedEnums[i].WriteDeclaration(wtr);
+			for (unsigned int i = 0; i < nestedStructs.size(); i++)
+				nestedStructs[i].WriteDeclaration(wtr);
+
+			wtr->Indent--;
+			wtr->Write("}");
+		}
+		wtr->WriteLine(";");
+		
+		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		{
+			wtr->Indent--;
+			wtr->WriteLine("}");
+		}
+	}
+
 	void Write(IndentedStreamWriter* wtr)
 	{
 		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
 		{
 			wtr->WriteLine("#pragma once");
+
+			WriteDeclaration(wtr);
 		
 			dependencyManager.WriteToStream(wtr);
 
