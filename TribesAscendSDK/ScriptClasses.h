@@ -114,61 +114,56 @@ class ScriptObject
 private:
 	int object_internal_integer_;
 	QWord object_flags_;
-	ScriptObject *hash_next_;
-	ScriptObject *hash_outer_next_;
-	void *state_frame_;
-	ScriptObject *linker_;
-	void *linker_index_;
+	ScriptObject* hash_next_;
+	ScriptObject* hash_outer_next_;
+	void* state_frame_;
+	ScriptObject* linker_;
+	void* linker_index_;
 	int net_index_;
-	ScriptObject *outer_;
+	ScriptObject* outer_;
 	ScriptName name_;
-	class ScriptClass *object_class_;
-	ScriptObject *object_archetype_;
+	class ScriptClass* object_class_;
+	ScriptObject* object_archetype_;
 
-	static ScriptArray< ScriptObject* > *object_array_;
+	static ScriptArray<ScriptObject*>* object_array_;
 
 public:
 
-	static ScriptArray< ScriptObject* > *object_array()
+	static ScriptArray<ScriptObject*>* object_array()
 	{
 		return object_array_;
 	}
 
-	static void set_object_array( ScriptArray< ScriptObject* > *new_object_array )
+	static void set_object_array(ScriptArray<ScriptObject*>* new_object_array)
 	{
 		object_array_ = new_object_array;
-		OutputLog( "Object Array: 0x%X\n", new_object_array );
+		OutputLog("Object Array: 0x%X\n", new_object_array);
 	}
 
-	template< class T > static T* Find( char *object_name )
+	template<class T> static T* Find(char* object_name)
 	{
-		if( *object_name == ':' ) //hack for global namespace in the generated headers
-			object_name += 2;
-
-		for( int i = 0; i < object_array()->count(); i++ )
+		for(int i = 0; i < object_array()->count(); i++)
 		{
-			ScriptObject *object = ( *object_array() )( i );
-			if( !strcmp( object->GetFullName(), object_name ) )
-			{
-				return ( T* )( object );
-			}
+			ScriptObject* object = (*object_array())(i);
+			if(!strcmp(object->GetFullName(), object_name))
+				return (T*)object;
 		}
 		return NULL;
 	}
 
 	static void LogAll();
-	bool IsA( ScriptClass *script_class );
+	bool IsA(ScriptClass* script_class);
 	void GenerateHeader();
 	static void GenerateHeaders();
-	char *GetName();
-	const char *GetFullName();
+	char* GetName();
+	const char* GetFullName();
 
 	inline QWord object_flags()
 	{
 		return object_flags_;
 	}
 
-	inline ScriptObject *outer()
+	inline ScriptObject* outer()
 	{
 		return outer_;
 	}
@@ -178,7 +173,7 @@ public:
 		return name_;
 	}
 
-	inline ScriptClass *object_class()
+	inline ScriptClass* object_class()
 	{
 		return object_class_;
 	}
@@ -260,7 +255,7 @@ private:
 	virtual void Vfunc64();
 	virtual void Vfunc65();
 public:
-	virtual void ProcessEvent( class ScriptFunction* function, void *params, void *result );
+	virtual void ProcessEvent(class ScriptFunction* function, void* params, void* result);
 };
 
 class ScriptField : public ScriptObject
