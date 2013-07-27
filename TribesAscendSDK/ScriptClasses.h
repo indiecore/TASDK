@@ -158,6 +158,11 @@ public:
 	char* GetName();
 	const char* GetFullName();
 
+	inline int object_internal_integer()
+	{
+		return object_internal_integer_;
+	}
+
 	inline QWord object_flags()
 	{
 		return object_flags_;
