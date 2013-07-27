@@ -611,7 +611,7 @@ struct ClassDescription
 		{
 			wtr->WriteLine("#pragma once");
 
-			WriteDeclaration(wtr);
+			//WriteDeclaration(wtr);
 		
 			dependencyManager.WriteToStream(wtr);
 
