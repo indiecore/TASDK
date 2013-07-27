@@ -699,6 +699,7 @@ struct ClassDescription
 					)
 					{
 						wtr->WriteLine("// struct %s is manually defined", ns->originalClass->GetName());
+						definedStructsTable[ns->originalClass->GetName()] = 1;
 						continue;
 					}
 				}
