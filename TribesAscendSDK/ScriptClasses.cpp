@@ -41,8 +41,16 @@ std::string GetTypeNameForProperty(ScriptObject* prop)
 {
 	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 	{
-		std::string tp = ((ScriptObjectProperty*)prop)->property_class->GetName();
-		for (auto outer = ((ScriptObjectProperty*)prop)->property_class->outer(); outer->outer(); outer = outer->outer())
+		auto objProp = (ScriptObjectProperty*)prop;
+		std::string tp = objProp->property_class->GetName();
+		if (
+			   !strcmp(tp.c_str(), "Rotator")
+			|| !strcmp(tp.c_str(), "Vector")
+		)
+		{
+			return tp;
+		}
+		for (auto outer = objProp->property_class->outer(); outer->outer(); outer = outer->outer())
 		{
 			tp.insert(0, "::");
 			tp.insert(0, outer->GetName());
@@ -678,11 +686,22 @@ struct ClassDescription
 			std::unordered_map<const char*, int> definedStructsTable;
 			std::vector<ClassDescription*> definedStructs;
 			std::deque<ClassDescription*> delayedStructs;
-
+			bool inCoreObject = !strcmp(originalClass->GetName(), "Object");
 			for (unsigned int i = 0; i < nestedStructs.size(); i++)
 			{
 				auto ns = &nestedStructs[i];
 				bool add = true;
+				if (inCoreObject)
+				{
+					if (
+						   !strcmp(ns->originalClass->GetName(), "Rotator")
+						|| !strcmp(ns->originalClass->GetName(), "Vector")
+					)
+					{
+						wtr->WriteLine("// struct %s is manually defined", ns->originalClass->GetName());
+						continue;
+					}
+				}
 				for each (auto rc in ns->dependencyManager.requiredChildren)
 				{
 					if (!strcmp(rc->outer()->GetName(), originalClass->GetName()))
