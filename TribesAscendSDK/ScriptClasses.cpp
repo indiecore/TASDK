@@ -44,7 +44,8 @@ std::string GetTypeNameForProperty(ScriptObject* prop)
 		auto objProp = (ScriptObjectProperty*)prop;
 		std::string tp = objProp->property_class->GetName();
 		if (
-			   !strcmp(tp.c_str(), "Rotator")
+			   !strcmp(tp.c_str(), "QWord")
+			|| !strcmp(tp.c_str(), "Rotator")
 			|| !strcmp(tp.c_str(), "Vector")
 		)
 		{
@@ -694,7 +695,8 @@ struct ClassDescription
 				if (inCoreObject)
 				{
 					if (
-						   !strcmp(ns->originalClass->GetName(), "Rotator")
+						   !strcmp(ns->originalClass->GetName(), "QWord")
+						|| !strcmp(ns->originalClass->GetName(), "Rotator")
 						|| !strcmp(ns->originalClass->GetName(), "Vector")
 					)
 					{
