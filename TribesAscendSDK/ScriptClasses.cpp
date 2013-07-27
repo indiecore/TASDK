@@ -124,6 +124,7 @@ std::string GetHeaderName(ScriptObject* obj)
 
 struct ClassDependencyManager
 {
+	std::vector<ScriptObject*> requiredChildren;
 	std::unordered_map<std::string, int> requiredHeaders;
 	ScriptObject* parentClass;
 
@@ -156,6 +157,7 @@ struct ClassDependencyManager
 		{
 			// Ensure that we only require the class-level
 			// include.
+			requiredChildren.push_back(objType);
 			RequireType(objType->outer());
 			return;
 		}
@@ -623,8 +625,64 @@ struct ClassDescription
 			nestedConstants[i].WriteDeclaration(wtr);
 		for (unsigned int i = 0; i < nestedEnums.size(); i++)
 			nestedEnums[i].WriteToStream(wtr);
-		for (unsigned int i = 0; i < nestedStructs.size(); i++)
-			nestedStructs[i].Write(wtr);
+		if (nestedStructs.size() > 0)
+		{
+			std::unordered_map<const char*, int> definedStructsTable;
+			std::vector<ClassDescription*> definedStructs;
+			std::deque<ClassDescription*> delayedStructs;
+
+			for (unsigned int i = 0; i < nestedStructs.size(); i++)
+			{
+				auto ns = &nestedStructs[i];
+				bool add = true;
+				for each (auto rc in ns->dependencyManager.requiredChildren)
+				{
+					if (!strcmp(rc->outer()->GetName(), originalClass->GetName()))
+					{
+						if (definedStructsTable.count(rc->GetName()) == 0)
+						{
+							add = false;
+							delayedStructs.push_back(ns);
+							break;
+						}
+					}
+				}
+				
+				if (add)
+				{
+					definedStructs.push_back(ns);
+					definedStructsTable[ns->originalClass->GetName()] = 1;
+				}
+			}
+
+			while (delayedStructs.size() > 0)
+			{
+				auto ns = delayedStructs.front();
+				delayedStructs.pop_front();
+				bool add = true;
+				for each (auto rc in ns->dependencyManager.requiredChildren)
+				{
+					if (!strcmp(rc->outer()->GetName(), originalClass->GetName()))
+					{
+						if (definedStructsTable.count(rc->GetName()) == 0)
+						{
+							add = false;
+							delayedStructs.push_back(ns);
+							break;
+						}
+					}
+				}
+				
+				if (add)
+				{
+					definedStructs.push_back(ns);
+					definedStructsTable[ns->originalClass->GetName()] = 1;
+				}
+			}
+
+			for (unsigned int i = 0; i < definedStructs.size(); i++)
+				definedStructs[i]->Write(wtr);
+		}
 
 		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
