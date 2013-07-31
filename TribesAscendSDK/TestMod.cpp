@@ -1,5 +1,6 @@
 #include "TASDK.h"
-#include "Armor.h"
+#include "HeaderDump/TribesGame.TrEquipInterface.h"
+//#include "Armor.h"
 
 const char *kLogName = "SDKTest.log";
 
@@ -222,5 +223,5 @@ void ModInit()
 
 	//script_hooks::AddHook( "Function TribesGame.TrPlayerController.PlayerWalking.PlayerMove", PlayerMove );
 
-	//ScriptObject::GenerateHeaders();
+	ScriptObject::GenerateHeaders();
 }

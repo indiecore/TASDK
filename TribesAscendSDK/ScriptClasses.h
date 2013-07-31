@@ -60,6 +60,14 @@ public:
 		wcscpy_s( string.data_, wcslen( string_ ) + 1, string_ );
 	}
 
+	char* c_str()
+	{
+		char* buf = (char*)calloc(1, string.count());
+		size_t convLen = 0;
+		wcstombs_s(&convLen, buf, string.count(), string.data(), string.count());
+		return buf;
+	}
+
 	operator ScriptArray< wchar_t >()
 	{
 		return string;
@@ -82,7 +90,7 @@ public:
 class ScriptName
 {
 	int index_;
-	int __padding__;
+	int instance_number_;
 
 	static ScriptArray< ScriptNameEntry* > *name_array_;
 
@@ -98,15 +106,7 @@ public:
 		OutputLog( "Name Array: 0x%X\n", new_name_array );
 	}
 
-	char *GetName()
-	{
-		if( index_ >= name_array()->count() )
-		{
-			return "Failed to get name";
-		}
-
-		return ( *name_array() )( index_ )->name();
-	}
+	char *GetName();
 };
 
 class ScriptObject
@@ -114,61 +114,61 @@ class ScriptObject
 private:
 	int object_internal_integer_;
 	QWord object_flags_;
-	void *hash_next_;
-	void *hash_outer_next_;
-	void *state_frame_;
-	ScriptObject *linker_;
-	void *linker_index_;
+	ScriptObject* hash_next_;
+	ScriptObject* hash_outer_next_;
+	void* state_frame_;
+	ScriptObject* linker_;
+	void* linker_index_;
 	int net_index_;
-	ScriptObject *outer_;
+	ScriptObject* outer_;
 	ScriptName name_;
-	class ScriptClass *object_class_;
-	ScriptObject *object_archetype_;
+	class ScriptClass* object_class_;
+	ScriptObject* object_archetype_;
 
-	static ScriptArray< ScriptObject* > *object_array_;
+	static ScriptArray<ScriptObject*>* object_array_;
 
 public:
 
-	static ScriptArray< ScriptObject* > *object_array()
+	static ScriptArray<ScriptObject*>* object_array()
 	{
 		return object_array_;
 	}
 
-	static void set_object_array( ScriptArray< ScriptObject* > *new_object_array )
+	static void set_object_array(ScriptArray<ScriptObject*>* new_object_array)
 	{
 		object_array_ = new_object_array;
-		OutputLog( "Object Array: 0x%X\n", new_object_array );
+		OutputLog("Object Array: 0x%X\n", new_object_array);
 	}
 
-	template< class T > static T* Find( char *object_name )
+	template<class T> static T* Find(char* object_name)
 	{
-		if( *object_name == ':' ) //hack for global namespace in the generated headers
-			object_name += 2;
-
-		for( int i = 0; i < object_array()->count(); i++ )
+		for(int i = 0; i < object_array()->count(); i++)
 		{
-			ScriptObject *object = ( *object_array() )( i );
-			if( !strcmp( object->GetFullName(), object_name ) )
-			{
-				return ( T* )( object );
-			}
+			ScriptObject* object = (*object_array())(i);
+			if(!strcmp(object->GetFullName(), object_name))
+				return (T*)object;
 		}
 		return NULL;
 	}
 
 	static void LogAll();
-	bool IsA( ScriptClass *script_class );
+	bool IsA(ScriptClass* script_class);
 	void GenerateHeader();
 	static void GenerateHeaders();
-	char *GetName();
-	const char *GetFullName();
+	char* GetName();
+	const char* GetFullName();
+
+	inline int object_internal_integer()
+	{
+		return object_internal_integer_;
+	}
 
 	inline QWord object_flags()
 	{
 		return object_flags_;
 	}
 
-	inline ScriptObject *outer()
+	inline ScriptObject* outer()
 	{
 		return outer_;
 	}
@@ -178,7 +178,7 @@ public:
 		return name_;
 	}
 
-	inline ScriptClass *object_class()
+	inline ScriptClass* object_class()
 	{
 		return object_class_;
 	}
@@ -260,7 +260,7 @@ private:
 	virtual void Vfunc64();
 	virtual void Vfunc65();
 public:
-	virtual void ProcessEvent( class ScriptFunction* function, void *params, void *result );
+	virtual void ProcessEvent(class ScriptFunction* function, void* params, void* result);
 };
 
 class ScriptField : public ScriptObject
@@ -272,6 +272,30 @@ public:
 	inline ScriptField *next()
 	{
 		return next_;
+	}
+};
+
+class ScriptEnum : public ScriptField
+{
+private:
+	ScriptArray<ScriptName> value_names_;
+
+public:
+	inline ScriptArray<ScriptName> value_names()
+	{
+		return value_names_;
+	}
+};
+
+class ScriptConst : public ScriptField
+{
+private:
+	ScriptString value_;
+
+public:
+	inline ScriptString value()
+	{
+		return value_;
 	}
 };
 
@@ -418,9 +442,19 @@ struct ScriptObjectProperty : public ScriptProperty
 	ScriptClass *property_class;
 };
 
+struct ScriptArrayProperty : public ScriptProperty
+{
+	ScriptProperty* inner_property;
+};
+
 struct ScriptBoolProperty : public ScriptProperty
 {
 	DWORD bit_mask;
+};
+
+struct ScriptByteProperty : public ScriptProperty
+{
+	ScriptEnum* enum_type;
 };
 
 struct Vector

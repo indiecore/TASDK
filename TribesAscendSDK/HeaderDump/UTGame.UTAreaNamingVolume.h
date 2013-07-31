@@ -1,0 +1,8 @@
+#pragma once
+#include "Engine.Volume.h"
+namespace UnrealScript
+{
+	class UTAreaNamingVolume : public Volume
+	{
+	};
+}

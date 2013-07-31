@@ -4,6 +4,4 @@
 #include "ScriptClasses.h"
 #include "ScriptHooks.h"
 
-#include "DynamicClasses.h"
-
-#include "HeaderDump\HeaderDump.h"
+//#include "HeaderDump\HeaderDump.h"
